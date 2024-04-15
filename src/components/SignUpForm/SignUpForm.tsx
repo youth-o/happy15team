@@ -2,12 +2,10 @@ import { AxiosError } from "axios";
 import axios from "@/lib/axios";
 import { useMutation } from "react-query";
 import styles from "./SignUpForm.module.css";
-import useUserStore from "@/hooks/useUserStore";
 import { UserData } from "@/types/interface";
 import { useState } from "react";
 
 function SignUpForm() {
-  const { setUserData } = useUserStore();
   const [inputData, setInputData] = useState<UserData>({
     email: "",
     nickname: "",
@@ -15,26 +13,38 @@ function SignUpForm() {
     confirmPassword: "",
   });
 
-  const signUpMutation = useMutation<void, AxiosError>(
-    () => axios.post("/users", inputData),
-    {
-      onSuccess: () => {
-        // 회원가입 성공
-        console.log("회원가입 성공!");
-      },
-    }
-  );
+  // const signUpMutation = useMutation<void, AxiosError>(
+  //   () => axios.post("/users", { email, nickname, password }),
+  //   {
+  //     onSuccess: () => {
+  //       // 회원가입 성공
+  //       console.log("회원가입 성공!");
+  //     },
+  //   }
+  // );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setInputData((prevInputData) => ({ ...inputData, [id]: value }));
+    setInputData((prevInputData) => ({
+      ...prevInputData,
+      [id]: value,
+    }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setUserData(inputData);
-    signUpMutation.mutate();
-  };
+    const { email, password, nickname } = inputData;
+    // signUpMutation.mutate(inputData);
+    await axios.post("/users", {
+      email,
+      nickname,
+      password,
+    });
+    // await axios.post("/auth/login", {
+    //   email,
+    //   password,
+    // });
+  }
 
   return (
     <form onSubmit={handleSubmit}>
