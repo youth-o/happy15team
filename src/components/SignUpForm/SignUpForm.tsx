@@ -3,14 +3,41 @@ import styles from "./SignUpForm.module.css";
 // import { useMutation } from "react-query";
 // import { AxiosError } from "axios";
 import { UserData } from "@/types/interface";
-import { useState } from "react";
+import { Resolver, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 function SignUpForm() {
-  const [inputData, setInputData] = useState<UserData>({
-    email: "",
-    nickname: "",
-    password: "",
-    confirmPassword: "",
+  // react-hook-form, yup 라이브러리를 통해 유효성 검사
+  const formSchema = yup.object({
+    email: yup
+      .string()
+      .required("이메일을 입력해 주세요.")
+      .email("이메일 형식으로 작성해 주세요."),
+    nickname: yup
+      .string()
+      .required("닉네임을 입력해 주세요.")
+      .max(10, "열 자 이하로 작성해 주세요."),
+    password: yup
+      .string()
+      .required("8자 이상 입력해 주세요.")
+      .min(8, "8자 이상 입력해 주세요.")
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/,
+        "비밀번호는 영문, 숫자 조합 8자 이상 입력해 주세요."
+      ),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password")], "비밀번호가 일치하지 않습니다."),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "onBlur",
+    resolver: yupResolver(formSchema) as Resolver<UserData, any>,
   });
 
   // const signUpMutation = useMutation<void, AxiosError>(
@@ -27,24 +54,11 @@ function SignUpForm() {
   //   }
   // );
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setInputData((prevInputData) => ({
-      ...prevInputData,
-      [id]: value,
-    }));
-  };
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function onSubmit(data: UserData) {
     try {
-      const { email, password, nickname } = inputData;
       // signUpMutation.mutate({ data: inputData });
-      await axios.post("/users", {
-        email,
-        nickname,
-        password,
-      });
+      await axios.post("/users", data);
+      console.log("회원가입 성공:", data);
     } catch (error) {
       console.error("회원가입 실패:", error);
     }
@@ -56,50 +70,54 @@ function SignUpForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.inputContainer}>
         <label htmlFor="email">이메일</label>
         <input
           type="text"
           placeholder="이메일을 입력해 주세요"
-          value={inputData.email}
           id="email"
-          onChange={handleInputChange}
+          {...register("email")}
         />
-        <div className={styles.error}></div>
+        {errors.email && (
+          <div className={styles.error}>{errors.email.message}</div>
+        )}
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="nickname">닉네임</label>
         <input
           type="text"
           placeholder="닉네임을 입력해 주세요"
-          value={inputData.nickname}
           id="nickname"
-          onChange={handleInputChange}
+          {...register("nickname")}
         />
-        <div className={styles.error}></div>
+        {errors.nickname && (
+          <div className={styles.error}>{errors.nickname.message}</div>
+        )}
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="password">비밀번호</label>
         <input
           type="password"
           placeholder="8자 이상 입력해 주세요"
-          value={inputData.password}
           id="password"
-          onChange={handleInputChange}
+          {...register("password")}
         />
-        <div className={styles.error}></div>
+        {errors.password && (
+          <div className={styles.error}>{errors.password.message}</div>
+        )}
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="passwordRep">비밀번호 확인</label>
         <input
           type="password"
           placeholder="비밀번호를 한 번 더 입력해 주세요"
-          value={inputData.confirmPassword}
           id="confirmPassword"
-          onChange={handleInputChange}
+          {...register("confirmPassword")}
         />
-        <div className={styles.error}></div>
+        {errors.confirmPassword && (
+          <div className={styles.error}>{errors.confirmPassword.message}</div>
+        )}
       </div>
       <div className={styles.checkBox}>
         <input type="checkbox" />
