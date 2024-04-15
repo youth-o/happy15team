@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Sidebar.module.css";
 import Image from "next/image";
+import DashboardList from "./DashboardList/DashboardList";
 
 // interface Item {
 //   title: string;
@@ -16,12 +17,13 @@ import Image from "next/image";
 // 위의 주석처리된 부분은 API 연결 후 다시 살릴 코드
 
 const Sidebar: React.FC = () => {
-  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  // 클릭 및 마우스 오버 상태를 관리할 상태 추가
+  const [clickedIndex, setClickedIndex] = React.useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
 
+  // 클릭 및 마우스 오버 이벤트 핸들러 함수
   const handleClick = (index: number) => {
     setClickedIndex(index);
-      alert(index);
   };
 
   const handleMouseEnter = (index: number) => {
@@ -32,7 +34,7 @@ const Sidebar: React.FC = () => {
     setHoveredIndex(null);
   };
 
-  //아래는 테스트를 위한 items 생성 , API 연결후 지울 예정
+  // 아래는 테스트를 위한 items 생성, API 연결 후 지울 예정
   const items = [
     { text: "박우혁", color: "blue", crown: true },
     { text: "백승아", color: "yellow", crown: false },
@@ -58,29 +60,16 @@ const Sidebar: React.FC = () => {
         />
       </div>
       {items.map((item, index) => (
-        <div
+        <DashboardList
           key={index}
-          className={`${styles.dashboardContainer} ${
-            clickedIndex === index && styles.clicked
-          } ${hoveredIndex === index && styles.hovered}`}
-          onClick={() => handleClick(index)}
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div
-            className={styles.circle}
-            style={{ backgroundColor: item.color }}
-          ></div>
-          <span>{item.text}</span>
-          {item.crown && (
-            <Image
-              src="/images/crown.svg"
-              alt="Crown Icon"
-              width={17.5}
-              height={14}
-            />
-          )}
-        </div>
+          item={item}
+          index={index}
+          clickedIndex={clickedIndex}
+          hoveredIndex={hoveredIndex}
+          handleClick={handleClick}
+          handleMouseEnter={handleMouseEnter}
+          handleMouseLeave={handleMouseLeave}
+        />
       ))}
     </div>
   );
