@@ -36,7 +36,7 @@ const DashboardItem: React.FC<DashboardListProps> = ({
       onClick={() => handleClick(index)}
       onMouseEnter={() => handleMouseEnter(index)}
       onMouseLeave={handleMouseLeave}
-    > 
+    >
       <div
         className={styles.circle}
         style={{ backgroundColor: item.color }}

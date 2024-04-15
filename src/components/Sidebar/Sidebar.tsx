@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./Sidebar.module.css";
 import Image from "next/image";
 import DashboardList from "./DashboardList/DashboardList";
+import Link from "next/link";
 
 // interface Item {
 //   title: string;
@@ -17,11 +18,21 @@ import DashboardList from "./DashboardList/DashboardList";
 // 위의 주석처리된 부분은 API 연결 후 다시 살릴 코드
 
 const Sidebar: React.FC = () => {
-  // 클릭 및 마우스 오버 상태를 관리할 상태 추가
+  const [showModal, setShowModal] = useState(false);
   const [clickedIndex, setClickedIndex] = React.useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
+  
+  // 아래 2개의 함수는 모달창 껐다 켰다 하는 셋팅 (모달창 끄는 셋팅은 나중에 모달창 구현 후 설정)
+  const handleModal = () => {
+    setShowModal(true);
+    alert("곧 모달이 구현될 예정");
+  };
 
-  // 클릭 및 마우스 오버 이벤트 핸들러 함수
+  // const handleCloseModal = () => {
+  //   setShowModal(false);
+  // };
+
+  //아래 3개의 함수는 클릭된 div, 호버된 div를 위한 함수
   const handleClick = (index: number) => {
     setClickedIndex(index);
   };
@@ -44,12 +55,14 @@ const Sidebar: React.FC = () => {
 
   return (
     <div className={styles.sidebar}>
-      <Image
-        src="/images/sidebarLogo.svg"
-        alt="Taskify Logo"
-        width={109}
-        height={33}
-      />
+      <Link href="/">
+        <Image
+          src="/images/sidebarLogo.svg"
+          alt="Taskify Logo"
+          width={109}
+          height={33}
+        />
+      </Link>
       <div className={styles.title}>
         Dash Boards
         <Image
@@ -57,6 +70,8 @@ const Sidebar: React.FC = () => {
           alt="Plus Icon"
           width={20}
           height={20}
+          onClick={handleModal}
+          className={styles.cursorPointer}
         />
       </div>
       {items.map((item, index) => (

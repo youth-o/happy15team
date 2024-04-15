@@ -11,6 +11,7 @@
 
 .hovered {
   background-color: var(--Violet10);
+  cursor: pointer;
 }
 
 .clicked {
