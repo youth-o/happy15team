@@ -5,3 +5,10 @@ export interface UserData {
   password: string;
   confirmPassword: string;
 }
+
+//사이드바
+export interface Item {
+  title: string;
+  color: string;
+  createdByMe: boolean;
+}
