@@ -1,0 +1,19 @@
+.inputContainer {
+  width: 32.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.inputContainer input {
+  width: 100%;
+  display: flex;
+  padding: 0.94rem 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1px solid var(--Gray-20);
+  margin-bottom: 12px;
+}
