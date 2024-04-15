@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Sidebar.module.css";
 import Image from "next/image";
 
@@ -16,6 +16,22 @@ import Image from "next/image";
 // 위의 주석처리된 부분은 API 연결 후 다시 살릴 코드
 
 const Sidebar: React.FC = () => {
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const handleClick = (index: number) => {
+    setClickedIndex(index);
+      alert(index);
+  };
+
+  const handleMouseEnter = (index: number) => {
+    setHoveredIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
   //아래는 테스트를 위한 items 생성 , API 연결후 지울 예정
   const items = [
     { text: "박우혁", color: "blue", crown: true },
@@ -33,16 +49,24 @@ const Sidebar: React.FC = () => {
         height={33}
       />
       <div className={styles.title}>
-      Dash Boards
-      <Image
-        src="/images/plusIcon.svg"
-        alt="Plus Icon"
-        width={20}
-        height={20}
-      />
+        Dash Boards
+        <Image
+          src="/images/plusIcon.svg"
+          alt="Plus Icon"
+          width={20}
+          height={20}
+        />
       </div>
       {items.map((item, index) => (
-        <div key={index} className={styles.dashboardContainer}>
+        <div
+          key={index}
+          className={`${styles.dashboardContainer} ${
+            clickedIndex === index && styles.clicked
+          } ${hoveredIndex === index && styles.hovered}`}
+          onClick={() => handleClick(index)}
+          onMouseEnter={() => handleMouseEnter(index)}
+          onMouseLeave={handleMouseLeave}
+        >
           <div
             className={styles.circle}
             style={{ backgroundColor: item.color }}
