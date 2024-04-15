@@ -3,18 +3,24 @@ import NavParticipants from "./NavParticipants/NavParticipants";
 import NavTitle from "./NavTitle/NavTitle";
 import NavUserProfile from "./NavUserProfile/NavUserProfile";
 import { useRouter } from "next/router";
+import styles from "./Nav.module.css";
 
 const Nav = () => {
   const router = useRouter();
   const PATH = router.pathname;
 
   return (
-    <>
-      <NavTitle pathName={PATH} />
-      <NavButtons pathName={PATH} />
-      {/* <NavParticipants/> */}
-      <NavUserProfile />
-    </>
+    <div className={styles.navWrapper}>
+      <div className={styles.section1}>
+        <NavTitle pathName={PATH} />
+      </div>
+      <div className={styles.section2}>
+        <NavButtons pathName={PATH} />
+        <NavParticipants />
+        <div className={styles.vr} />
+        <NavUserProfile />
+      </div>
+    </div>
   );
 };
 

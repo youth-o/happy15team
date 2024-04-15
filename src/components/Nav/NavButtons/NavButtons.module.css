@@ -4,12 +4,15 @@
 
 .navButtons {
   display: flex;
-  gap: 3.2rem;
+  gap: 1.3rem;
+  margin-right: 3rem;
+  flex-shrink: 0;
 }
 
 .navButtons button {
   display: flex;
   background-color: transparent;
+  align-items: center;
   gap: 0.5rem;
   color: var(--Gray-40);
   font-size: 1.6rem;

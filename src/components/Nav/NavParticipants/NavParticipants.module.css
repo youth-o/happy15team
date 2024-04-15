@@ -1,0 +1,21 @@
+.navParticipants {
+  display: flex;
+  margin: -3.5rem;
+  flex-shrink: 0;
+}
+
+.restUser {
+  display: flex;
+  width: 3.8rem;
+  height: 3.8rem;
+  flex-shrink: 0;
+  background-color: #f4d7da;
+  border-radius: 20px;
+  border: 2px solid white;
+  margin-left: -3.5rem;
+  font-size: 1.5rem;
+  color: var(--Pink);
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+}

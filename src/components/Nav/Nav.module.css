@@ -1,0 +1,20 @@
+.navWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 30rem;
+  padding: 1.5rem 4rem;
+  border: 1px solid var(--Gray-20);
+}
+
+.section2 {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+}
+
+.vr {
+  height: 3.8rem;
+  width: 0.1rem;
+  background-color: var(--Gray-20);
+}
