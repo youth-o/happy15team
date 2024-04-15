@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function SignUpHeader() {
   return (
-    <div className="headerContainer">
+    <div className={styles.headerContainer}>
       <Link href="/">
         <Image
           className={styles.logo}

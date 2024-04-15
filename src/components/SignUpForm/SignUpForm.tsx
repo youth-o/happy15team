@@ -74,6 +74,7 @@ function SignUpForm() {
       <div className={styles.inputContainer}>
         <label htmlFor="email">이메일</label>
         <input
+          className={errors.email ? styles.errorFocus : styles.notError}
           type="text"
           placeholder="이메일을 입력해 주세요"
           id="email"
@@ -86,6 +87,7 @@ function SignUpForm() {
       <div className={styles.inputContainer}>
         <label htmlFor="nickname">닉네임</label>
         <input
+          className={errors.nickname ? styles.errorFocus : styles.notError}
           type="text"
           placeholder="닉네임을 입력해 주세요"
           id="nickname"
@@ -98,6 +100,7 @@ function SignUpForm() {
       <div className={styles.inputContainer}>
         <label htmlFor="password">비밀번호</label>
         <input
+          className={errors.password ? styles.errorFocus : styles.notError}
           type="password"
           placeholder="8자 이상 입력해 주세요"
           id="password"
@@ -110,6 +113,9 @@ function SignUpForm() {
       <div className={styles.inputContainer}>
         <label htmlFor="passwordRep">비밀번호 확인</label>
         <input
+          className={
+            errors.confirmPassword ? styles.errorFocus : styles.notError
+          }
           type="password"
           placeholder="비밀번호를 한 번 더 입력해 주세요"
           id="confirmPassword"

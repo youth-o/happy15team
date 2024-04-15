@@ -8,7 +8,7 @@ function SignUp() {
     <div className={styles.body}>
       <SignUpHeader />
       <SignUpForm />
-      <div className={styles.question}>
+      <div className={styles.alreadyRegistered}>
         <p>이미 가입하셨나요?</p>
         <Link className={styles.link} href="/login">
           로그인하기
