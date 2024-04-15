@@ -2,15 +2,12 @@ import Link from "next/link";
 import styles from "./NavButtons.module.css";
 import Image from "next/image";
 
-const NavButtons = ({ pathName }: any) => {
+const NavButtons = () => {
   // TODO
   // 관리버튼 누를시 관리페이지로 이동 & 초대하기 버튼 누를시 초대하기 모달
 
-  console.log(pathName);
   return (
-    <div
-      className={pathName === "/test" ? styles.myDashBoard : styles.navButtons}
-    >
+    <div className={styles.navButtons}>
       <Link href="/setting">
         <button>
           <Image

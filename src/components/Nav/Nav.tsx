@@ -14,10 +14,14 @@ const Nav = () => {
       <div className={styles.section1}>
         <NavTitle pathName={PATH} />
       </div>
-      <div className={styles.section2}>
-        <NavButtons pathName={PATH} />
-        <NavParticipants />
-        <div className={styles.vr} />
+      <div className={styles.sectionWrapper}>
+        <div
+          className={PATH === "/test" ? styles.myDashBoard : styles.section2}
+        >
+          <NavButtons />
+          <NavParticipants />
+          <div className={styles.vr} />
+        </div>
         <NavUserProfile />
       </div>
     </div>

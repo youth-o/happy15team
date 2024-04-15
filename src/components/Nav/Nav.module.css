@@ -5,16 +5,29 @@
   margin-left: 30rem;
   padding: 1.5rem 4rem;
   border: 1px solid var(--Gray-20);
+  flex-shrink: 0;
+}
+
+.sectionWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
 }
 
 .section2 {
   display: flex;
   align-items: center;
   gap: 6rem;
+  justify-content: right;
+  flex-shrink: 0;
 }
 
 .vr {
   height: 3.8rem;
   width: 0.1rem;
   background-color: var(--Gray-20);
+}
+
+.myDashBoard {
+  display: none;
 }
