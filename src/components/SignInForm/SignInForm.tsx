@@ -2,7 +2,7 @@ import { useState } from "react";
 import eyeOn from "../../../public/images/eyeOn.svg";
 import eyeOff from "../../../public/images/eyeOff.svg";
 
-export default function signIn() {
+export default function SignIn() {
   const [showEmailError, setShowEmailError] = useState<string | null>(null); //이메일 입력 에러 처리
   const [showPasswordError, setShowPasswordError] = useState<string | null>(
     null
