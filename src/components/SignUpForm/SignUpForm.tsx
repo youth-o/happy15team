@@ -1,16 +1,22 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
+import axios from "@/lib/axios";
 import { useMutation } from "react-query";
 import styles from "./SignUpForm.module.css";
-import useUserStore, { UserData } from "@/hooks/useUserStore";
+import useUserStore from "@/hooks/useUserStore";
+import { UserData } from "@/types/interface";
+import { useState } from "react";
 
 function SignUpForm() {
-  const userData = useUserStore((state) => state.userData);
-  const setUserData: (data: UserData) => void = useUserStore(
-    (state) => state.setUserData
-  );
+  const { setUserData } = useUserStore();
+  const [inputData, setInputData] = useState<UserData>({
+    email: "",
+    nickname: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const signUpMutation = useMutation<void, AxiosError>(
-    () => axios.post("/users", userData),
+    () => axios.post("/users", inputData),
     {
       onSuccess: () => {
         // 회원가입 성공
@@ -20,18 +26,13 @@ function SignUpForm() {
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUserData(
-      (prevUserData: UserData) =>
-        ({
-          ...prevUserData,
-          [name]: value,
-        } as UserData)
-    );
+    const { id, value } = e.target;
+    setInputData((prevInputData) => ({ ...inputData, [id]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setUserData(inputData);
     signUpMutation.mutate();
   };
 
@@ -42,7 +43,7 @@ function SignUpForm() {
         <input
           type="text"
           placeholder="이메일을 입력해 주세요"
-          value={userData.email}
+          value={inputData.email}
           id="email"
           onChange={handleInputChange}
         />
@@ -53,7 +54,7 @@ function SignUpForm() {
         <input
           type="text"
           placeholder="닉네임을 입력해 주세요"
-          value={userData.nickname}
+          value={inputData.nickname}
           id="nickname"
           onChange={handleInputChange}
         />
@@ -64,7 +65,7 @@ function SignUpForm() {
         <input
           type="password"
           placeholder="8자 이상 입력해 주세요"
-          value={userData.password}
+          value={inputData.password}
           id="password"
           onChange={handleInputChange}
         />
@@ -75,7 +76,7 @@ function SignUpForm() {
         <input
           type="password"
           placeholder="비밀번호를 한 번 더 입력해 주세요"
-          value={userData.confirmPassowrd}
+          value={inputData.confirmPassword}
           id="confirmPassword"
           onChange={handleInputChange}
         />

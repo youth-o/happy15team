@@ -1,26 +1,14 @@
 import { create } from "zustand";
-
-export interface UserData {
-  email: string;
-  nickname: string;
-  password: string;
-  confirmPassowrd: string;
-}
+import { UserData } from "@/types/interface";
 
 interface UserStore {
-  userData: UserData;
-  setUserData: (data: UserData) => void;
+  userData: UserData | null;
+  setUserData: (userData: UserData) => void;
 }
 
 const useUserStore = create<UserStore>((set) => ({
-  userData: {
-    email: "",
-    nickname: "",
-    password: "",
-    confirmPassowrd: "",
-  },
-  setUserData: (data) =>
-    set((state) => ({ userData: { ...state.userData, ...data } })),
+  userData: null,
+  setUserData: (userData) => set((state) => ({ ...state, userData })),
 }));
 
 export default useUserStore;
