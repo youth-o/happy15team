@@ -82,13 +82,13 @@ function SignUpForm() {
         />
         <div className={styles.error}></div>
       </div>
-      <input type="checkbox" />
-      이용약관에 동의합니다.
-      <div className={styles.btnContainer}>
-        <button className={styles.loginBtn} type="submit">
-          회원가입
-        </button>
+      <div className={styles.checkBox}>
+        <input type="checkbox" />
+        <p>이용약관에 동의합니다.</p>
       </div>
+      <button className={styles.loginBtn} type="submit">
+        회원가입
+      </button>
     </form>
   );
 }
