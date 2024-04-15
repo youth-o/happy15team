@@ -1,7 +1,7 @@
-import { AxiosError } from "axios";
 import axios from "@/lib/axios";
-import { useMutation } from "react-query";
 import styles from "./SignUpForm.module.css";
+// import { useMutation } from "react-query";
+// import { AxiosError } from "axios";
 import { UserData } from "@/types/interface";
 import { useState } from "react";
 
@@ -14,11 +14,15 @@ function SignUpForm() {
   });
 
   // const signUpMutation = useMutation<void, AxiosError>(
-  //   () => axios.post("/users", { email, nickname, password }),
+  //   () => axios.post("/users", inputData),
   //   {
   //     onSuccess: () => {
   //       // 회원가입 성공
   //       console.log("회원가입 성공!");
+  //     },
+  //     onError: (error) => {
+  //       // 회원가입 실패
+  //       console.error("회원가입 실패:", error);
   //     },
   //   }
   // );
@@ -33,13 +37,18 @@ function SignUpForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { email, password, nickname } = inputData;
-    // signUpMutation.mutate(inputData);
-    await axios.post("/users", {
-      email,
-      nickname,
-      password,
-    });
+    try {
+      const { email, password, nickname } = inputData;
+      // signUpMutation.mutate({ data: inputData });
+      await axios.post("/users", {
+        email,
+        nickname,
+        password,
+      });
+    } catch (error) {
+      console.error("회원가입 실패:", error);
+    }
+    // 로그인 구현됐을 때 주석 풀 예정
     // await axios.post("/auth/login", {
     //   email,
     //   password,
