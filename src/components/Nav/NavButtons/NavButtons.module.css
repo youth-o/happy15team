@@ -1,0 +1,20 @@
+.myDashBoard {
+  display: none;
+}
+
+.navButtons {
+  display: flex;
+  gap: 3.2rem;
+}
+
+.navButtons button {
+  display: flex;
+  background-color: transparent;
+  gap: 0.5rem;
+  color: var(--Gray-40);
+  font-size: 1.6rem;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-20);
+  padding: 0.5rem;
+}
