@@ -3,9 +3,9 @@ import styles from "./Sidebar.module.css";
 import Image from "next/image";
 
 // interface Item {
-//   text: string;
+//   title: string;
 //   color: string;
-//   crown: boolean;
+//   createdByMe: boolean;
 // }
 
 // interface SidebarProps {
