@@ -27,11 +27,11 @@
 .dashboardContainer {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
-  width: 276px;
-  height: 45px;
+  margin-bottom: 0.8rem;
+  width: 27.6rem;
+  height: 4.5rem;
   color: var(--Gray-40);
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: 500;
 }
 
