@@ -4,7 +4,7 @@
   justify-content: space-between;
   margin-left: 30rem;
   padding: 1.5rem 4rem;
-  border: 1px solid var(--Gray-20);
+  border-bottom: 1px solid var(--Gray-20);
   flex-shrink: 0;
 }
 

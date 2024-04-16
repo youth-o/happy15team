@@ -4,27 +4,34 @@ import NavTitle from "./NavTitle/NavTitle";
 import NavUserProfile from "./NavUserProfile/NavUserProfile";
 import { useRouter } from "next/router";
 import styles from "./Nav.module.css";
+import setModals from "@/lib/zustand";
+import InviteModal from "../Modals/InviteModal/InviteModal";
+import { Fragment } from "react";
 
 const Nav = () => {
   const router = useRouter();
   const PATH = router.pathname;
+  const { modalState }: any = setModals();
 
   return (
-    <div className={styles.navWrapper}>
-      <div className={styles.section1}>
-        <NavTitle pathName={PATH} />
-      </div>
-      <div className={styles.sectionWrapper}>
-        <div
-          className={PATH === "/test" ? styles.myDashBoard : styles.section2}
-        >
-          <NavButtons />
-          <NavParticipants />
-          <div className={styles.vr} />
+    <Fragment>
+      <div className={styles.navWrapper}>
+        <div className={styles.section1}>
+          <NavTitle pathName={PATH} />
         </div>
-        <NavUserProfile />
+        <div className={styles.sectionWrapper}>
+          <div
+            className={PATH === "/test" ? styles.myDashBoard : styles.section2}
+          >
+            <NavButtons />
+            <NavParticipants />
+            <div className={styles.vr} />
+          </div>
+          <NavUserProfile />
+        </div>
       </div>
-    </div>
+      {modalState && <InviteModal />}
+    </Fragment>
   );
 };
 
