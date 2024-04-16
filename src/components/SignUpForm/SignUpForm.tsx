@@ -9,6 +9,7 @@ import Image from "next/image";
 import * as yup from "yup";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import setModals from "@/lib/zustand";
 
 function SignUpForm() {
   const [passwordType, setPasswordType] = useState({
@@ -21,6 +22,7 @@ function SignUpForm() {
   });
   const [agreeTerms, setAgreeTerms] = useState(false);
   const router = useRouter();
+  const { openModal }: any = setModals();
 
   const handlePasswordType = () => {
     setPasswordType(() => {
@@ -91,7 +93,7 @@ function SignUpForm() {
       // signUpMutation.mutate({ data: inputData });
       const res = await axios.post("/users", data);
       if (res.status === 201) {
-        alert("가입이 완료되었습니다.");
+        openModal();
         console.log("회원가입 성공:", data);
         // 원래는 /signin으로 navigate 해야하는 건데,
         // 로그인 페이지 구현 전까지 /auth/login으로 post 보내도록 설정
@@ -100,7 +102,7 @@ function SignUpForm() {
       }
     } catch (error: any) {
       if (error.response && error.response.status === 409) {
-        alert("이미 사용중인 이메일입니다.");
+        openModal();
       }
       console.error("회원가입 실패:", error);
     }
