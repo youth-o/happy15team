@@ -10,7 +10,7 @@ function SignUp() {
       <SignUpForm />
       <div className={styles.alreadyRegistered}>
         <p>이미 가입하셨나요?</p>
-        <Link className={styles.link} href="/login">
+        <Link className={styles.link} href="/signin">
           로그인하기
         </Link>
       </div>

@@ -93,10 +93,10 @@ function SignUpForm() {
       if (res.status === 201) {
         alert("가입이 완료되었습니다.");
         console.log("회원가입 성공:", data);
-        // 원래는 /login으로 navigate 해야하는 건데,
+        // 원래는 /signin으로 navigate 해야하는 건데,
         // 로그인 페이지 구현 전까지 /auth/login으로 post 보내도록 설정
         await axios.post("/auth/login", data);
-        // router.push("/login");
+        // router.push("/signin");
       }
     } catch (error: any) {
       if (error.response && error.response.status === 409) {
