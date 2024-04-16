@@ -22,3 +22,8 @@
 .cursorPointer {
   cursor: pointer;
 }
+
+.hover>div:hover {
+  background-color: var(--Violet10);
+  cursor: pointer;
+}

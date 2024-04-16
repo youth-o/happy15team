@@ -11,15 +11,15 @@ interface Item {
 interface DashboardListProps {
   item: Item;
   index: number;
-  clickedIndex: number | null;
-  handleClick: (index: number) => void;
+  clickedIndex?: number | null;
+  handleClick?: (index: number) => void;
 }
 
 const DashboardList: React.FC<DashboardListProps> = ({
   item,
   index,
-  clickedIndex,
-  handleClick,
+  clickedIndex = null,
+  handleClick = () => {},
 }) => {
   return (
     <div

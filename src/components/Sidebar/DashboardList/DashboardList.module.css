@@ -9,11 +9,6 @@
   padding: 0 1.4rem
 }
 
-.dashboardContainer:hover {
-  background-color: var(--Violet10);
-  cursor: pointer;
-}
-
 .clicked {
   background-color: var(--Violet10);
 }

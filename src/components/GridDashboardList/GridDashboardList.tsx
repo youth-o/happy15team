@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from "./GridDashboardList.module.css";
+import DashboardList from "../Sidebar/DashboardList/DashboardList";
 
-interface DashboardListProps {
+interface GridDashboardListProps {
   text: string;
   color: string;
   crown: boolean;
@@ -15,8 +16,9 @@ const items = [
   { text: "코드잇", color: "var(--Pink)", crown: true },
 ];
 
-const DashboardList: React.FC<DashboardListProps> = ({ data }) => {
+const GridDashboardList: React.FC<GridDashboardListProps> = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
+
   const itemsPerPage: number = 6;
 
   const startIndex: number = currentPage * itemsPerPage;
@@ -34,12 +36,14 @@ const DashboardList: React.FC<DashboardListProps> = ({ data }) => {
   return (
     <div>
       <div className={styles.gridContainer}>
-        <div className={styles.gridItem}>새로운 대시보드</div>
+        <div>새로운 대시보드</div>
         {items.map((item, index) => (
-          <div key={index} className={styles.gridItem}>
-            {item.text}
-          </div>
-        ))}
+        <DashboardList
+          key={index}
+          item={item}
+          index={index}
+        />
+      ))}
       </div>
       <div className="page">
         <button>이전</button>
@@ -49,4 +53,4 @@ const DashboardList: React.FC<DashboardListProps> = ({ data }) => {
   );
 };
 
-export default DashboardList;
+export default GridDashboardList;

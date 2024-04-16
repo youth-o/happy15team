@@ -5,7 +5,7 @@
   gap: 1.3rem;
 }
 
-.gridItem {
+.gridContainer>div {
   width: 33rem;
   height: 7rem;
   border: 1px solid var(--Gray-20);

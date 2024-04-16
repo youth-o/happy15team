@@ -64,6 +64,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setShowModal }) => {
           className={styles.cursorPointer}
         />
       </div>
+      <div className={styles.hover}>
       {items.map((item, index) => (
         <DashboardList
           key={index}
@@ -73,6 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setShowModal }) => {
           handleClick={handleClick}
         />
       ))}
+      </div>
     </div>
   );
 };
