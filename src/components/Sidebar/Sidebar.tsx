@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import styles from "./Sidebar.module.css";
-import Image from "next/image";
-import DashboardList from "./DashboardList/DashboardList";
 import Link from "next/link";
+import Image from "next/image";
+import styles from "./Sidebar.module.css";
+import DashboardList from "./DashboardList/DashboardList";
 
-// interface Item {
+
+//사이드바
+// export interface SidebarData {
 //   title: string;
 //   color: string;
 //   createdByMe: boolean;
@@ -17,20 +19,17 @@ import Link from "next/link";
 // const Sidebar: React.FC<SidebarProps> = ({ items }) => {
 // 위의 주석처리된 부분은 API 연결 후 다시 살릴 코드
 
-const Sidebar: React.FC = () => {
-  const [showModal, setShowModal] = useState(false);
+interface SidebarProps {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ setShowModal }) => {
   const [clickedIndex, setClickedIndex] = React.useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
   
-  // 아래 2개의 함수는 모달창 껐다 켰다 하는 셋팅 (모달창 끄는 셋팅은 나중에 모달창 구현 후 설정)
   const handleModal = () => {
     setShowModal(true);
-    alert("곧 모달이 구현될 예정");
   };
-
-  // const handleCloseModal = () => {
-  //   setShowModal(false);
-  // };
 
   //아래 3개의 함수는 클릭된 div, 호버된 div를 위한 함수
   const handleClick = (index: number) => {
@@ -47,10 +46,11 @@ const Sidebar: React.FC = () => {
 
   // 아래는 테스트를 위한 items 생성, API 연결 후 지울 예정
   const items = [
-    { text: "박우혁", color: "blue", crown: true },
-    { text: "백승아", color: "yellow", crown: false },
-    { text: "유승재", color: "black", crown: false },
-    { text: "이유승", color: "red", crown: true },
+    { text: "박우혁", color: "var(--Green)", crown: true },
+    { text: "백승아", color: "var(--Violet20)", crown: false },
+    { text: "유승재", color: "var(--Orange)", crown: false },
+    { text: "이유승", color: "var(--Blue)", crown: false },
+    { text: "코드잇", color: "var(--Pink)", crown: true },
   ];
 
   return (
