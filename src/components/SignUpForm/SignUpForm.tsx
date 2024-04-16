@@ -14,11 +14,11 @@ function SignUpForm() {
     type: "password",
     visible: false,
   });
-
   const [passwordRepType, setPasswordRepType] = useState({
     type: "password",
     visible: false,
   });
+  const [agreeTerms, setAgreeTerms] = useState(false);
 
   const handlePasswordType = () => {
     setPasswordType(() => {
@@ -64,7 +64,7 @@ function SignUpForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: "onBlur",
     resolver: yupResolver(formSchema) as Resolver<UserData, any>,
@@ -181,10 +181,17 @@ function SignUpForm() {
         )}
       </div>
       <div className={styles.checkBox}>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          onChange={(e) => setAgreeTerms(e.target.checked)}
+        />
         <p>이용약관에 동의합니다.</p>
       </div>
-      <button className={styles.loginBtn} type="submit">
+      <button
+        className={styles.loginBtn}
+        type="submit"
+        disabled={!isValid || !agreeTerms}
+      >
         회원가입
       </button>
     </form>

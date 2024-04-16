@@ -83,6 +83,11 @@
   margin-bottom: 1.625rem;
 }
 
+.loginBtn:disabled {
+  cursor: unset;
+  background: var(--Gray-30);
+}
+
 .alreadyRegistered {
   display: flex;
   margin-bottom: 1.625rem;
