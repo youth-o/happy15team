@@ -1,13 +1,14 @@
 import axios from "@/lib/axios";
 import styles from "./SignUpForm.module.css";
 // import { useMutation } from "react-query";
-// import { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { UserData } from "@/types/interface";
 import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import * as yup from "yup";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 function SignUpForm() {
   const [passwordType, setPasswordType] = useState({
@@ -19,6 +20,7 @@ function SignUpForm() {
     visible: false,
   });
   const [agreeTerms, setAgreeTerms] = useState(false);
+  const router = useRouter();
 
   const handlePasswordType = () => {
     setPasswordType(() => {
@@ -87,13 +89,21 @@ function SignUpForm() {
   async function onSubmit(data: UserData) {
     try {
       // signUpMutation.mutate({ data: inputData });
-      await axios.post("/users", data);
-      console.log("회원가입 성공:", data);
-    } catch (error) {
+      const res = await axios.post("/users", data);
+      if (res.status === 201) {
+        alert("가입이 완료되었습니다.");
+        console.log("회원가입 성공:", data);
+        // 원래는 /login으로 navigate 해야하는 건데,
+        // 로그인 페이지 구현 전까지 /auth/login으로 post 보내도록 설정
+        await axios.post("/auth/login", data);
+        // router.push("/login");
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 409) {
+        alert("이미 사용중인 이메일입니다.");
+      }
       console.error("회원가입 실패:", error);
     }
-    // 로그인 구현됐을 때 주석 풀 예정
-    await axios.post("/auth/login", data);
   }
 
   return (
