@@ -2,12 +2,6 @@ import React, { useState } from "react";
 import styles from "./GridDashboardList.module.css";
 import DashboardList from "../Sidebar/DashboardList/DashboardList";
 
-interface GridDashboardListProps {
-  text: string;
-  color: string;
-  crown: boolean;
-}
-
 const colors = [
   "var(--Green)",
   "var(--Violet20)",
@@ -23,7 +17,7 @@ const items = Array.from({ length: 24 }, (_, index) => ({
   key: index + 1,
 }));
 
-const GridDashboardList: React.FC<GridDashboardListProps> = () => {
+const GridDashboardList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const itemsPerPage: number = currentPage === 0 ? 5 : 6;
@@ -34,12 +28,6 @@ const GridDashboardList: React.FC<GridDashboardListProps> = () => {
       : currentPage * itemsPerPage;
   const endIndex: number = startIndex + itemsPerPage;
   const displayItems = items.slice(startIndex, endIndex);
-
-  //current 0     1      2
-  //start 0       6      12
-  //end   6       12     18
-  //finally 0~5  6~11    12~17
-  //0~4  5~10    11~16
 
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -52,12 +40,14 @@ const GridDashboardList: React.FC<GridDashboardListProps> = () => {
   return (
     <div>
       <div className={styles.gridContainer}>
-        {currentPage === 0 && <div>새로운 대시보드</div>}
+        {currentPage === 0 && (
+          <div className={styles.addDashboard}>새로운 대시보드</div>
+        )}
         {displayItems.map((item, index) => (
           <DashboardList key={item.key} item={item} index={index} />
         ))}
       </div>
-      <div className="page">
+      <div className="pageBtn">
         <button
           onClick={handlePrevPage}
           style={{ display: currentPage === 0 ? "none" : "block" }}

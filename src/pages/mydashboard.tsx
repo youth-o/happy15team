@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Nav from "@/components/Nav/Nav";
 import Modal from "@/components/Modal/CreateDashboardModal/CreateDashboardModal";
-import DashboardList from "@/components/GridDashboardList/GridDashboardList";
+import GridDashboardList from "@/components/GridDashboardList/GridDashboardList";
 import MyListLayout from "@/components/MyListLayout/MyListLayout";
 
 const MyDashboard: React.FC = () => {
@@ -14,7 +14,7 @@ const MyDashboard: React.FC = () => {
       <Sidebar setShowModal={setShowModal} />
       {showModal && <Modal onClose={() => setShowModal(false)} />}
       <MyListLayout>
-        <DashboardList />
+        <GridDashboardList />
         {/* <InviteList /> */}
       </MyListLayout>
     </div>

@@ -5,9 +5,19 @@
   gap: 1.3rem;
 }
 
-.gridContainer>div {
+.gridContainer > div {
   width: 33rem;
   height: 7rem;
   border: 1px solid var(--Gray-20);
   border-radius: 8px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--Black-20);
+  padding: 0 2rem;
+}
+
+.addDashboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
