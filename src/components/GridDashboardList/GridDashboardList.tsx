@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./DashboardList.module.css";
+import styles from "./GridDashboardList.module.css";
 
 const DashboardList = () => {
   return <div className={styles.listContainer}>

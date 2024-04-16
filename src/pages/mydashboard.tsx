@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar/Sidebar'
 import Nav from '@/components/Nav/Nav';
 import Modal from '@/components/Modal/CreateDashboardModal/CreateDashboardModal';
-import DashboardList from '@/components/DashboardList/DashboardList';
+import DashboardList from '@/components/GridDashboardList/GridDashboardList';
 
 
-const DashboardMain: React.FC = () => {
+const MyDashboard: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -14,8 +14,9 @@ const DashboardMain: React.FC = () => {
       <Sidebar setShowModal={setShowModal} />
       {showModal && <Modal onClose={() => setShowModal(false)} />}
       <DashboardList />
+      {/* <InviteList /> */}
     </div>
   );
 };
 
-export default DashboardMain;
+export default MyDashboard;
