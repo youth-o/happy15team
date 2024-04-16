@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar/Sidebar'
-import Nav from "@/components/Nav/Nav";
+import Nav from '@/components/Nav/Nav';
 import Modal from '@/components/Modal/CreateDashboardModal/CreateDashboardModal';
+import DashboardList from '@/components/DashboardList/DashboardList';
 
-const SidebarTest: React.FC = () => {
+
+const DashboardMain: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -11,8 +13,9 @@ const SidebarTest: React.FC = () => {
       <Nav />
       <Sidebar setShowModal={setShowModal} />
       {showModal && <Modal onClose={() => setShowModal(false)} />}
+      <DashboardList />
     </div>
   );
 };
 
-export default SidebarTest;
+export default DashboardMain;
