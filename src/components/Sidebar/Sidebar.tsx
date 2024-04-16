@@ -3,16 +3,23 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
 import DashboardList from "./DashboardList/DashboardList";
+import Modal from "@/components/Modals/CreateDashboardModal/CreateDashboardModal";
 
-  // 아래는 테스트를 위한 items 생성, API 연결 후 지울 예정
-  const colors = ["var(--Green)", "var(--Violet20)", "var(--Orange)", "var(--Blue)", "var(--Pink)"];
+// 아래는 테스트를 위한 items 생성, API 연결 후 지울 예정
+const colors = [
+  "var(--Green)",
+  "var(--Violet20)",
+  "var(--Orange)",
+  "var(--Blue)",
+  "var(--Pink)",
+];
 
-  const items = Array.from({ length: 20 }, (_, index) => ({
-    text: `코드잇${index + 1}`,
-    color: colors[index % colors.length], // 순환하여 색상 선택
-    crown: true,
-    key: index + 1,
-  }));
+const items = Array.from({ length: 20 }, (_, index) => ({
+  text: `코드잇${index + 1}`,
+  color: colors[index % colors.length], // 순환하여 색상 선택
+  crown: true,
+  key: index + 1,
+}));
 
 //사이드바
 // export interface SidebarData {
@@ -28,13 +35,10 @@ import DashboardList from "./DashboardList/DashboardList";
 // const Sidebar: React.FC<SidebarProps> = ({ items }) => {
 // 위의 주석처리된 부분은 API 연결 후 다시 살릴 코드
 
-interface SidebarProps {
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Sidebar: React.FC<SidebarProps> = ({ setShowModal }) => {
+const Sidebar: React.FC = () => {
   const [clickedIndex, setClickedIndex] = React.useState<number | null>(null);
-  
+  const [showModal, setShowModal] = useState(false);
+
   const handleModal = () => {
     setShowModal(true);
   };
@@ -45,38 +49,41 @@ const Sidebar: React.FC<SidebarProps> = ({ setShowModal }) => {
   };
 
   return (
-    <div className={styles.sidebar}>
-      <Link href="/mydashboard">
-        <Image
-          src="/images/sidebarLogo.svg"
-          alt="Taskify Logo"
-          width={109}
-          height={33}
-        />
-      </Link>
-      <div className={styles.title}>
-        Dash Boards
-        <Image
-          src="/images/plusIcon.svg"
-          alt="Plus Icon"
-          width={20}
-          height={20}
-          onClick={handleModal}
-          className={styles.cursorPointer}
-        />
+    <>
+      <div className={styles.sidebar}>
+        <Link href="/mydashboard">
+          <Image
+            src="/images/sidebarLogo.svg"
+            alt="Taskify Logo"
+            width={109}
+            height={33}
+          />
+        </Link>
+        <div className={styles.title}>
+          Dash Boards
+          <Image
+            src="/images/plusIcon.svg"
+            alt="Plus Icon"
+            width={20}
+            height={20}
+            onClick={handleModal}
+            className={styles.cursorPointer}
+          />
+        </div>
+        <div className={styles.hover}>
+          {items.map((item, index) => (
+            <DashboardList
+              key={item.key}
+              item={item}
+              index={index}
+              clickedIndex={clickedIndex}
+              handleClick={handleClick}
+            />
+          ))}
+        </div>
       </div>
-      <div className={styles.hover}>
-      {items.map((item, index) => (
-        <DashboardList
-          key={item.key}
-          item={item}
-          index={index}
-          clickedIndex={clickedIndex}
-          handleClick={handleClick}
-        />
-      ))}
-      </div>
-    </div>
+      {showModal && <Modal onClose={() => setShowModal(false)} />}
+    </>
   );
 };
 
