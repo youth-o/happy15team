@@ -4,6 +4,14 @@ import Image from "next/image";
 import styles from "./Sidebar.module.css";
 import DashboardList from "./DashboardList/DashboardList";
 
+  // 아래는 테스트를 위한 items 생성, API 연결 후 지울 예정
+  const items = [
+    { text: "박우혁", color: "var(--Green)", crown: true },
+    { text: "백승아", color: "var(--Violet20)", crown: false },
+    { text: "유승재", color: "var(--Orange)", crown: false },
+    { text: "이유승", color: "var(--Blue)", crown: false },
+    { text: "코드잇", color: "var(--Pink)", crown: true },
+  ];
 
 //사이드바
 // export interface SidebarData {
@@ -25,7 +33,6 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ setShowModal }) => {
   const [clickedIndex, setClickedIndex] = React.useState<number | null>(null);
-  const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
   
   const handleModal = () => {
     setShowModal(true);
@@ -35,23 +42,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setShowModal }) => {
   const handleClick = (index: number) => {
     setClickedIndex(index);
   };
-
-  const handleMouseEnter = (index: number) => {
-    setHoveredIndex(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-  };
-
-  // 아래는 테스트를 위한 items 생성, API 연결 후 지울 예정
-  const items = [
-    { text: "박우혁", color: "var(--Green)", crown: true },
-    { text: "백승아", color: "var(--Violet20)", crown: false },
-    { text: "유승재", color: "var(--Orange)", crown: false },
-    { text: "이유승", color: "var(--Blue)", crown: false },
-    { text: "코드잇", color: "var(--Pink)", crown: true },
-  ];
 
   return (
     <div className={styles.sidebar}>
@@ -80,10 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setShowModal }) => {
           item={item}
           index={index}
           clickedIndex={clickedIndex}
-          hoveredIndex={hoveredIndex}
           handleClick={handleClick}
-          handleMouseEnter={handleMouseEnter}
-          handleMouseLeave={handleMouseLeave}
         />
       ))}
     </div>
