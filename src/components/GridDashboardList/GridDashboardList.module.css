@@ -1,0 +1,13 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.3rem;
+}
+
+.gridItem {
+  width: 33rem;
+  height: 7rem;
+  border: 1px solid var(--Gray-20);
+  border-radius: 8px;
+}

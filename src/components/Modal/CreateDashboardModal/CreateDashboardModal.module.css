@@ -15,7 +15,7 @@
   background-color: var(--White);
   width: 51.2rem;
   height: 30.6rem;
-  border: 1px solid #888;
+  border: 1px solid var(--Gray-20);
   border-radius: 8px;
   padding: 2.8rem;
 }
