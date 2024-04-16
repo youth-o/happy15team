@@ -1,14 +1,14 @@
 import setModals from "@/lib/zustand";
 import { useRef, MouseEvent } from "react";
-import styles from "./EmailExisted.module.css";
+import styles from "./RegisterSuccessModal.module.css";
 
-function EmailExisted() {
-  const { closeModal }: any = setModals();
+function RegisterSuccessModal() {
+  const { closeRegisterSuccessModal }: any = setModals();
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleClickModalOutside = (e: MouseEvent) => {
     if (modalRef.current === e.target) {
-      closeModal();
+      closeRegisterSuccessModal();
     }
   };
 
@@ -20,7 +20,7 @@ function EmailExisted() {
     >
       <div className={styles.modalWrapper}>
         <div className={styles.modalText}>가입이 완료되었습니다!</div>
-        <button className={styles.modalBtn} onClick={closeModal}>
+        <button className={styles.modalBtn} onClick={closeRegisterSuccessModal}>
           확인
         </button>
       </div>
@@ -28,4 +28,4 @@ function EmailExisted() {
   );
 }
 
-export default EmailExisted;
+export default RegisterSuccessModal;

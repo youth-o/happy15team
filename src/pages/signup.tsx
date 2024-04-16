@@ -3,10 +3,11 @@ import SignUpHeader from "@/components/SignUpHeader/SignUpHeader";
 import styles from "@/components/SignUpForm/SignUpForm.module.css";
 import Link from "next/link";
 import setModals from "@/lib/zustand";
-import EmailExisted from "@/components/Modals/SignUpModal/EmailExisted";
+import EmailExistedModal from "@/components/Modals/EmailExistedModal/EmailExistedModal";
+import RegisterSuccessModal from "@/components/Modals/RegisterSuccessModal/RegisterSuccessModal";
 
 function SignUp() {
-  const { modalState }: any = setModals();
+  const { emailExisted, registerSuccess }: any = setModals();
 
   return (
     <div className={styles.body}>
@@ -18,7 +19,8 @@ function SignUp() {
           로그인하기
         </Link>
       </div>
-      {modalState && <EmailExisted />}
+      {registerSuccess && <RegisterSuccessModal />}
+      {emailExisted && <EmailExistedModal />}
     </div>
   );
 }

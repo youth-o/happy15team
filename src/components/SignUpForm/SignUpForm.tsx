@@ -22,7 +22,7 @@ function SignUpForm() {
   });
   const [agreeTerms, setAgreeTerms] = useState(false);
   const router = useRouter();
-  const { openModal }: any = setModals();
+  const { openEmailExistedModal, openRegisterSuccessModal }: any = setModals();
 
   const handlePasswordType = () => {
     setPasswordType(() => {
@@ -93,7 +93,7 @@ function SignUpForm() {
       // signUpMutation.mutate({ data: inputData });
       const res = await axios.post("/users", data);
       if (res.status === 201) {
-        openModal();
+        openRegisterSuccessModal();
         console.log("회원가입 성공:", data);
         // 원래는 /signin으로 navigate 해야하는 건데,
         // 로그인 페이지 구현 전까지 /auth/login으로 post 보내도록 설정
@@ -102,7 +102,7 @@ function SignUpForm() {
       }
     } catch (error: any) {
       if (error.response && error.response.status === 409) {
-        openModal();
+        openEmailExistedModal();
       }
       console.error("회원가입 실패:", error);
     }
