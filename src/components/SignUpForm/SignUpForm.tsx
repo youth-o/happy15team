@@ -5,9 +5,39 @@ import styles from "./SignUpForm.module.css";
 import { UserData } from "@/types/interface";
 import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Image from "next/image";
 import * as yup from "yup";
+import { useState } from "react";
 
 function SignUpForm() {
+  const [passwordType, setPasswordType] = useState({
+    type: "password",
+    visible: false,
+  });
+
+  const [passwordRepType, setPasswordRepType] = useState({
+    type: "password",
+    visible: false,
+  });
+
+  const handlePasswordType = () => {
+    setPasswordType(() => {
+      if (!passwordType.visible) {
+        return { type: "text", visible: true };
+      }
+      return { type: "password", visible: false };
+    });
+  };
+
+  const handlePasswordRepType = () => {
+    setPasswordRepType(() => {
+      if (!passwordRepType.visible) {
+        return { type: "text", visible: true };
+      }
+      return { type: "password", visible: false };
+    });
+  };
+
   // react-hook-form, yup 라이브러리를 통해 유효성 검사
   const formSchema = yup.object({
     email: yup
@@ -63,10 +93,7 @@ function SignUpForm() {
       console.error("회원가입 실패:", error);
     }
     // 로그인 구현됐을 때 주석 풀 예정
-    // await axios.post("/auth/login", {
-    //   email,
-    //   password,
-    // });
+    await axios.post("/auth/login", data);
   }
 
   return (
@@ -99,28 +126,56 @@ function SignUpForm() {
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="password">비밀번호</label>
-        <input
-          className={errors.password ? styles.errorFocus : styles.notError}
-          type="password"
-          placeholder="8자 이상 입력해 주세요"
-          id="password"
-          {...register("password")}
-        />
+        <div className={styles.pwContainer}>
+          <input
+            className={errors.password ? styles.errorFocus : styles.notError}
+            type={passwordType.type}
+            placeholder="8자 이상 입력해 주세요"
+            id="password"
+            {...register("password")}
+          />
+          <Image
+            className={styles.eye}
+            src={
+              passwordType.visible
+                ? "/images/eye-on.svg"
+                : "/images/eye-off.svg"
+            }
+            width={15}
+            height={15}
+            onClick={handlePasswordType}
+            alt="닫힌눈"
+          />
+        </div>
         {errors.password && (
           <div className={styles.error}>{errors.password.message}</div>
         )}
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="passwordRep">비밀번호 확인</label>
-        <input
-          className={
-            errors.confirmPassword ? styles.errorFocus : styles.notError
-          }
-          type="password"
-          placeholder="비밀번호를 한 번 더 입력해 주세요"
-          id="confirmPassword"
-          {...register("confirmPassword")}
-        />
+        <div className={styles.pwContainer}>
+          <input
+            className={
+              errors.confirmPassword ? styles.errorFocus : styles.notError
+            }
+            type={passwordRepType.type}
+            placeholder="비밀번호를 한 번 더 입력해 주세요"
+            id="confirmPassword"
+            {...register("confirmPassword")}
+          />
+          <Image
+            className={styles.eye}
+            src={
+              passwordRepType.visible
+                ? "/images/eye-on.svg"
+                : "/images/eye-off.svg"
+            }
+            width={15}
+            height={15}
+            onClick={handlePasswordRepType}
+            alt="닫힌눈"
+          />
+        </div>
         {errors.confirmPassword && (
           <div className={styles.error}>{errors.confirmPassword.message}</div>
         )}
