@@ -1,12 +1,10 @@
-import React from "react";
-import Sidebar from "@/components/Sidebar/Sidebar";
-import Nav from "@/components/Nav/Nav";
+import React from 'react';
+
 
 const Home: React.FC = () => {
   return (
     <div>
-      <Sidebar />
-      <Nav />
+      홈
     </div>
   );
 };
