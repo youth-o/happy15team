@@ -9,6 +9,7 @@ import * as yup from "yup";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import setModals from "@/lib/zustand";
+import UserService from "@/api/UserService";
 
 function SignUpForm() {
   const [passwordType, setPasswordType] = useState({
@@ -42,7 +43,7 @@ function SignUpForm() {
   };
 
   // react-query useMutation 사용.. 이렇게 간단한 게 맞나?
-  const mutation = useMutation((data: UserData) => axios.post("/users", data));
+  const mutation = useMutation(UserService.signUp);
 
   // react-hook-form, yup 라이브러리를 통해 유효성 검사
   const formSchema = yup.object({
@@ -83,7 +84,7 @@ function SignUpForm() {
       console.log("회원가입 성공:", data);
       // 원래는 /signin으로 navigate 해야하는 건데,
       // 로그인 페이지 구현 전까지 /auth/login으로 post 보내도록 설정
-      await axios.post("/auth/login", data);
+      await UserService.login(data);
       // router.push("/signin");
     } catch (error: any) {
       if (error.response && error.response.status === 409) {
