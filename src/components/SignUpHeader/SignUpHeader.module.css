@@ -1,9 +1,11 @@
 .headerContainer {
-  margin-bottom: 38px;
+  margin-top: 1rem;
 }
 
 .logo {
   margin-bottom: 10px;
+  width: 12.5rem;
+  height: 17.5rem;
 }
 
 .welcome {
