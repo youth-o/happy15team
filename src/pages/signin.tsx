@@ -1,7 +1,7 @@
 import SignInForm from "@/components/SignInForm/SignInForm";
 import Link from "next/link";
 
-function signIn() {
+function SignIn() {
   return (
     <div>
       <title>Taskify 로그인</title>
@@ -14,4 +14,4 @@ function signIn() {
   );
 }
 
-export default signIn;
+export default SignIn;
