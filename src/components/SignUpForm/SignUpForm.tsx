@@ -1,7 +1,6 @@
 import axios from "@/lib/axios";
 import styles from "./SignUpForm.module.css";
-// import { useMutation } from "react-query";
-import { AxiosError } from "axios";
+import { useMutation } from "react-query";
 import { UserData } from "@/types/interface";
 import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -42,6 +41,9 @@ function SignUpForm() {
     });
   };
 
+  // react-query useMutation 사용.. 이렇게 간단한 게 맞나?
+  const mutation = useMutation((data: UserData) => axios.post("/users", data));
+
   // react-hook-form, yup 라이브러리를 통해 유효성 검사
   const formSchema = yup.object({
     email: yup
@@ -74,32 +76,15 @@ function SignUpForm() {
     resolver: yupResolver(formSchema) as Resolver<UserData, any>,
   });
 
-  // const signUpMutation = useMutation<void, AxiosError>(
-  //   () => axios.post("/users", inputData),
-  //   {
-  //     onSuccess: () => {
-  //       // 회원가입 성공
-  //       console.log("회원가입 성공!");
-  //     },
-  //     onError: (error) => {
-  //       // 회원가입 실패
-  //       console.error("회원가입 실패:", error);
-  //     },
-  //   }
-  // );
-
   async function onSubmit(data: UserData) {
     try {
-      // signUpMutation.mutate({ data: inputData });
-      const res = await axios.post("/users", data);
-      if (res.status === 201) {
-        openRegisterSuccessModal();
-        console.log("회원가입 성공:", data);
-        // 원래는 /signin으로 navigate 해야하는 건데,
-        // 로그인 페이지 구현 전까지 /auth/login으로 post 보내도록 설정
-        await axios.post("/auth/login", data);
-        // router.push("/signin");
-      }
+      await mutation.mutateAsync(data);
+      openRegisterSuccessModal();
+      console.log("회원가입 성공:", data);
+      // 원래는 /signin으로 navigate 해야하는 건데,
+      // 로그인 페이지 구현 전까지 /auth/login으로 post 보내도록 설정
+      await axios.post("/auth/login", data);
+      // router.push("/signin");
     } catch (error: any) {
       if (error.response && error.response.status === 409) {
         openEmailExistedModal();
