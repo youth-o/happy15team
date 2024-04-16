@@ -55,7 +55,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setShowModal }) => {
 
   return (
     <div className={styles.sidebar}>
-      <Link href="/">
+      <Link href="/mydashboard">
         <Image
           src="/images/sidebarLogo.svg"
           alt="Taskify Logo"

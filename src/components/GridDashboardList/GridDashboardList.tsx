@@ -6,9 +6,6 @@ const DashboardList = () => {
     <div>
       대시보드 리스트
     </div>
-    <div>
-      초대받은 리스트
-    </div>
   </div>;
 };
 
