@@ -49,10 +49,8 @@ function SignInForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label htmlFor="email" className={styles.emailText}>
-          이메일
-        </label>
+      <div className={styles.inputContainer}>
+        <label htmlFor="email">이메일</label>
         <input
           id="email"
           type="email"
@@ -64,12 +62,19 @@ function SignInForm() {
           <div className={styles.error}>{errors.email.message}</div>
         )}
       </div>
-      <div>
-        <label htmlFor="password" className={styles.passwordText}>
-          비밀번호
+      <div className={styles.inputContainer}>
+        <label htmlFor="password">비밀번호</label>
+        <div className={styles.passwordContainer}>
+          <input
+            id="password"
+            type={seePassword ? "text" : "password"}
+            placeholder="비밀번호를 입력해 주세요"
+            {...register("password")}
+            className={errors.password ? styles.errorFocus : styles.notError}
+          />
           <button
             type="button"
-            className="eyeButton"
+            className={styles.eye}
             onClick={seePasswordHandler}
           >
             {!seePassword ? (
@@ -88,19 +93,14 @@ function SignInForm() {
               />
             )}
           </button>
-        </label>
-        <input
-          id="password"
-          type={seePassword ? "text" : "password"}
-          placeholder="비밀번호를 입력해 주세요"
-          {...register("password")}
-          className={errors.password ? styles.errorFocus : styles.notError}
-        />
+        </div>
         {errors.password && (
           <div className={styles.error}>{errors.password.message}</div>
         )}
       </div>
-      <button type="submit">로그인</button>
+      <button type="submit" className={styles.loginBtn}>
+        로그인
+      </button>
     </form>
   );
 }

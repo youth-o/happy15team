@@ -1,16 +1,19 @@
 import SignInForm from "@/components/SignInForm/SignInForm";
 import Link from "next/link";
 import SignInHeader from "@/components/SignInHeader/SignInHeader";
+import styles from "@/pages/signin/SignIn.module.css";
 
 function SignIn() {
   return (
-    <div>
+    <div className={styles.body}>
       <title>Taskify 로그인</title>
       <SignInHeader />
       <SignInForm />
-      <div>
-        회원이 아니신가요?
-        <Link href="/signup">회원가입 하기</Link>
+      <div className={styles.noMember}>
+        <p>회원이 아니신가요?</p>
+        <Link href="/signup" className={styles.link}>
+          회원가입 하기
+        </Link>
       </div>
     </div>
   );
