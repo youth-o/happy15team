@@ -21,3 +21,34 @@
   align-items: center;
   justify-content: center;
 }
+
+.pageBtn {
+  margin-top: 1.2rem;
+  display: flex;
+  justify-content: end;
+}
+
+.pageBtn button {
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--White);
+  border: 1px solid var(--Gray-20);
+  font-size: 2rem;
+  border-radius: 8px;
+}
+
+.open {
+  color: var(--Black-10);
+}
+
+.close {
+  color: var(--Gray-20);
+  cursor: default;
+}
+
+.pageDisplay {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  margin-right: 2.5rem;
+}

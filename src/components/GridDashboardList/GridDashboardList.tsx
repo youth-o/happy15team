@@ -10,7 +10,7 @@ const colors = [
   "var(--Pink)",
 ];
 
-const items = Array.from({ length: 24 }, (_, index) => ({
+const items = Array.from({ length: 18 }, (_, index) => ({
   text: `코드잇${index + 1}`,
   color: colors[index % colors.length], // 순환하여 색상 선택
   crown: true,
@@ -47,20 +47,29 @@ const GridDashboardList: React.FC = () => {
           <DashboardList key={item.key} item={item} index={index} />
         ))}
       </div>
-      <div className="pageBtn">
+      <div className={styles.pageBtn}>
+        <div className={styles.pageDisplay}>
+          {currentPage + 1} 페이지 중 {Math.floor(items.length / 6 + 1)}
+        </div>
         <button
-          onClick={handlePrevPage}
-          style={{ display: currentPage === 0 ? "none" : "block" }}
+          onClick={currentPage !== 0 ? handlePrevPage : undefined}
+          className={currentPage !== 0 ? styles.open : styles.close}
         >
-          이전
+          {"<"}
         </button>
         <button
-          onClick={handleNextPage}
-          style={{
-            display: currentPage + 1 > items.length / 6 ? "none" : "block",
-          }}
+          onClick={
+            currentPage + 1 < (items.length + 1) / 6
+              ? handleNextPage
+              : undefined
+          }
+          className={
+            currentPage + 1 < (items.length + 1) / 6
+              ? styles.open
+              : styles.close
+          }
         >
-          다음
+          {">"}
         </button>
       </div>
     </div>
