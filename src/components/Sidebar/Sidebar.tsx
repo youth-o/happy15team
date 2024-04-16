@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
 import DashboardList from "./DashboardList/DashboardList";
-import Modal from "@/components/Modals/CreateDashboardModal/CreateDashboardModal";
+import CreateModal from "@/components/Modals/CreateDashboardModal/CreateModal";
 
 // 아래는 테스트를 위한 items 생성, API 연결 후 지울 예정
 const colors = [
@@ -16,34 +16,19 @@ const colors = [
 
 const items = Array.from({ length: 20 }, (_, index) => ({
   text: `코드잇${index + 1}`,
-  color: colors[index % colors.length], // 순환하여 색상 선택
+  color: colors[index % colors.length],
   crown: true,
   key: index + 1,
 }));
 
-//사이드바
-// export interface SidebarData {
-//   title: string;
-//   color: string;
-//   createdByMe: boolean;
-// }
-
-// interface SidebarProps {
-//   items: Item[];
-// }
-
-// const Sidebar: React.FC<SidebarProps> = ({ items }) => {
-// 위의 주석처리된 부분은 API 연결 후 다시 살릴 코드
-
 const Sidebar: React.FC = () => {
   const [clickedIndex, setClickedIndex] = React.useState<number | null>(null);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleModal = () => {
     setShowModal(true);
   };
 
-  //아래 3개의 함수는 클릭된 div, 호버된 div를 위한 함수
   const handleClick = (index: number) => {
     setClickedIndex(index);
   };
@@ -82,7 +67,7 @@ const Sidebar: React.FC = () => {
           ))}
         </div>
       </div>
-      {showModal && <Modal onClose={() => setShowModal(false)} />}
+      {showModal && <CreateModal onClose={() => setShowModal(false)} />}
     </>
   );
 };

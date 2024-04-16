@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./GridDashboardList.module.css";
 import DashboardList from "../Sidebar/DashboardList/DashboardList";
 
+// 아래 colors 와 items 배열은 api 연결 전 테스트를 위한 임시 데이터 값입니다.
 const colors = [
   "var(--Green)",
   "var(--Violet20)",
@@ -12,12 +13,13 @@ const colors = [
 
 const items = Array.from({ length: 18 }, (_, index) => ({
   text: `코드잇${index + 1}`,
-  color: colors[index % colors.length], // 순환하여 색상 선택
+  color: colors[index % colors.length],
   crown: true,
   key: index + 1,
 }));
 
 const GridDashboardList: React.FC = () => {
+  //여기서부터 return 바로 위까지 page당 6개 보여주고, 페이지 넘길수 있는 로직인데 좀더 구독성 좋고 깔끔하게 짜고 싶습니다.
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const itemsPerPage: number = currentPage === 0 ? 5 : 6;
