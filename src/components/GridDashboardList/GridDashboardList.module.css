@@ -13,6 +13,7 @@
   font-weight: 600;
   color: var(--Black-20);
   padding: 0 2rem;
+  background-color: var(--White);
 }
 
 .addDashboard {
