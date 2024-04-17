@@ -1,0 +1,26 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 62rem;
+  height: 35.5rem;
+  padding: 3.2rem 2.8rem;
+  margin-left: 32rem;
+  margin-top: 6.4rem;
+  background-color: var(--White);
+}
+
+.profileLabel {
+  color: var(--Black-20);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.inputContainer {
+  display: flex;
+}
+
+.editContainer {
+  display: flex;
+  flex-direction: column;
+}
