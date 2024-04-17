@@ -2,40 +2,34 @@ import React from "react";
 import Image from "next/image";
 import styles from "./DashboardList.module.css";
 
-interface List {
+//인터페이스 나중에 한번에 인터페이스 모아놓는 곳으로 뺄 예정입니다
+interface Item {
   text: string;
   color: string;
   crown: boolean;
 }
 
+//현재 DashboardList는 Sidebar 와 GridDashboardList 두 곳에서 쓰여서 clickedIndex와 handleClick은 선택적으로 받게 해놨습니다.
 interface DashboardListProps {
-  item: List;
+  item: Item;
   index: number;
-  clickedIndex: number | null;
-  hoveredIndex: number | null;
-  handleClick: (index: number) => void;
-  handleMouseEnter: (index: number) => void;
-  handleMouseLeave: () => void;
+  clickedIndex?: number | null;
+  handleClick?: (index: number) => void;
 }
 
-const DashboardItem: React.FC<DashboardListProps> = ({
+const DashboardList: React.FC<DashboardListProps> = ({
   item,
   index,
-  clickedIndex,
-  hoveredIndex,
-  handleClick,
-  handleMouseEnter,
-  handleMouseLeave,
+  clickedIndex = null,
+  handleClick = () => {},
 }) => {
   return (
     <div
       key={index}
       className={`${styles.dashboardContainer} ${
         clickedIndex === index ? styles.clicked : ""
-      } ${hoveredIndex === index ? styles.hovered : ""}`}
+      }`}
       onClick={() => handleClick(index)}
-      onMouseEnter={() => handleMouseEnter(index)}
-      onMouseLeave={handleMouseLeave}
     >
       <div
         className={styles.circle}
@@ -54,4 +48,4 @@ const DashboardItem: React.FC<DashboardListProps> = ({
   );
 };
 
-export default DashboardItem;
+export default DashboardList;

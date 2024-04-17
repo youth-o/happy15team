@@ -9,9 +9,10 @@ const NavParticipants = () => {
     { profileImage: "/images/profileImageTest.svg" },
     { profileImage: "/images/profileImageTest.svg" },
     { profileImage: "/images/profileImageTest.svg" },
+    { profileImage: "/images/profileImageTest.svg" },
   ];
 
-  const totalCount = 6;
+  const totalCount = users.length;
   const slicedUsers = users.slice(0, 4);
   const restUser = totalCount - 4;
 
@@ -40,7 +41,7 @@ const NavParticipants = () => {
               />
             </div>
           ))}
-      <div className={styles.restUser}>+{restUser}</div>
+      {users.length > 4 && <div className={styles.restUser}>+{restUser}</div>}
     </Fragment>
   );
 };

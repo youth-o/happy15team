@@ -11,28 +11,30 @@
   justify-content: center;
 }
 
-.modal {
+.modalWrapper {
   background-color: var(--White);
   width: 51.2rem;
   height: 30.6rem;
   border: 1px solid #888;
   border-radius: 8px;
   padding: 2.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.modal h1 {
+.modalWrapper h1 {
   margin-top: 0.4rem;
   font-size: 2.4rem;
   font-weight: 700;
 }
 
-.modal h2 {
-  margin-top: 3.2rem;
-  font-size: 1.8rem;
-  font-weight: 500;
+.modalWrapper label {
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
-.modal input {
+.modalWrapper input {
   margin-top: 1rem;
   padding: 1.5rem;
   width: 100%;
@@ -41,41 +43,27 @@
   border: 1px solid var(--Gray-20);
 }
 
-.circleContainer {
-  margin-top: 2rem;
+.modalButtons {
   display: flex;
+  gap: 2rem;
+  justify-content: end;
 }
 
-.circle {
-  width: 2.4rem;
-  height: 2.4rem;
-  border-radius: 50%;
-  margin-right: 1rem;
-}
-
-.buttonContainer {
-  margin-top: 2rem;
+.modalWrapper button {
   display: flex;
-  justify-content: flex-end;
-  gap: 1.2rem;
-  width: 100%;
-}
-
-.modal button {
-  display: flex;
-  width: 120px;
-  height: 48px;
+  width: 12rem;
+  height: 4.8rem;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
   border: 1px solid var(--Gray-20);
   background: var(--White);
   color: var(--Gray-40);
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 500;
 }
 
-.modal button:last-child {
+.modalWrapper button:last-child {
   background: var(--Violet20);
   color: var(--White);
 }
