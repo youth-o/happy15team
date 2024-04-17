@@ -7,6 +7,8 @@ import axios from "axios";
 import styles from "./SignInForm.module.css";
 import Image from "next/image";
 import { LoginData } from "@/types/interface";
+import postSignIn from "../../../api/postSignIn";
+import { useRouter } from "next/router";
 
 const formSchema = yup.object({
   email: yup
@@ -25,6 +27,7 @@ const formSchema = yup.object({
 
 function SignInForm() {
   const [seePassword, setSeePassword] = useState<boolean>(false);
+  const router = useRouter();
 
   const seePasswordHandler = () => {
     setSeePassword(!seePassword);
@@ -39,14 +42,26 @@ function SignInForm() {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmit = async (data: LoginData) => {
-    try {
-      await axios.post("/users", data);
-      console.log("로그인 성공:", data);
-    } catch (error) {
+  const { mutate } = useMutation({
+    mutationFn: postSignIn,
+    onSuccess: (data) => {
+      // 로그인 성공 시 로컬 스토리지에 토큰 저장
+      localStorage.setItem("accessToken", data.accessToken);
+      // /mydashboard로 이동
+      router.push("/mydashboard");
+    },
+    onError: (error) => {
+      // 에러 처리
       console.error("로그인 실패:", error);
-    }
+    },
+  });
+
+  // 폼 제출 함수
+  const onSubmit = (data: LoginData) => {
+    mutate(data);
   };
+
+  //이게 맞나..?
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
