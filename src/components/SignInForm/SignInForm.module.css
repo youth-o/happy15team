@@ -1,0 +1,110 @@
+.inputContainer {
+  width: 52rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.inputContainer label {
+  color: var(--Black-20);
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.inputContainer input {
+  width: 100%;
+  display: flex;
+  padding: 15px 16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--White);
+}
+
+.notError {
+  border: 1px solid var(--Gray-20);
+}
+
+.notError:focus {
+  border: 1px solid #5c73db;
+}
+
+.checkBox {
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1.3125rem;
+}
+
+.checkBox input {
+  margin-right: 0.5rem;
+}
+
+.checkBox p {
+  color: var(--Black-20);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.loginBtn {
+  width: 52rem;
+  border-radius: 8px;
+  padding: 15px 0px 14px 0px;
+  background: var(--Violet20);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 2.6rem;
+}
+
+.loginBtn:disabled {
+  cursor: unset;
+  background: var(--Gray-30);
+}
+
+.alreadyRegistered {
+  display: flex;
+  margin-bottom: 1.625rem;
+}
+
+.alreadyRegistered p {
+  color: var(--Black-20);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.link {
+  color: var(--Violet20);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+}
+
+.error {
+  color: var(--Red);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.errorFocus {
+  border: 1px solid var(--Red);
+}
+
+.eye {
+  position: absolute;
+  bottom: 1.8rem;
+  right: 1.8rem;
+  cursor: pointer;
+}
+
+.passwordContainer {
+  position: relative;
+}
