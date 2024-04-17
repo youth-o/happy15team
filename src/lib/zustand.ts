@@ -1,12 +1,14 @@
-import zustand from "zustand";
 import { create } from "zustand";
 
 //타입 지정 ( interface )
 
 interface ModalState {
   modalState: boolean;
+  passwordMismatch: boolean;
   openModal: () => void;
   closeModal: () => void;
+  openPasswordMismatchModal: () => void;
+  closePasswordMismatchModal: () => void;
 }
 
 const useModalStore = create<ModalState>((set) => ({

@@ -1,0 +1,19 @@
+.headerContainer {
+  margin-top: 1rem;
+}
+
+.logo {
+  margin-bottom: 10px;
+  width: 20rem;
+  height: 28rem;
+}
+
+.welcome {
+  color: var(--Black-20);
+  text-align: center;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 3.8rem;
+}

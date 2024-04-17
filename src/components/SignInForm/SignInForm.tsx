@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "react-query";
 import * as yup from "yup";
-import axios from "axios";
+import { AxiosError } from "axios";
 import styles from "./SignInForm.module.css";
 import Image from "next/image";
 import { LoginData } from "@/types/interface";
 import postSignIn from "../../../api/postSignIn";
 import { useRouter } from "next/router";
+import useModalStore from "@/lib/zustand";
 
 const formSchema = yup.object({
   email: yup
@@ -31,6 +32,7 @@ const formSchema = yup.object({
 function SignInForm() {
   const [seePassword, setSeePassword] = useState<boolean>(false);
   const router = useRouter();
+  const { openPasswordMismatchModal } = useModalStore(); // zustand 스토어에서 함수 불러오기
 
   const seePasswordHandler = () => {
     setSeePassword(!seePassword);
@@ -53,9 +55,21 @@ function SignInForm() {
       // /mydashboard로 이동
       router.push("/mydashboard");
     },
-    onError: (error) => {
-      // 에러 처리
+    onError: (error: unknown) => {
       console.error("로그인 실패:", error);
+
+      // error가 AxiosError인지 체크
+      if (error instanceof AxiosError) {
+        // AxiosError인 경우, 에러 응답을 확인
+        if (error.response && error.response.data) {
+          const errorMessage = error.response.data.message;
+
+          // 비밀번호 불일치 오류를 체크
+          if (errorMessage === "passwordMismatch") {
+            openPasswordMismatchModal();
+          }
+        }
+      }
     },
   });
 
@@ -65,6 +79,8 @@ function SignInForm() {
   };
 
   //이게 맞나..?
+
+  //회원이 아닌 오류
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
