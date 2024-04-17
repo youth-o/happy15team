@@ -78,9 +78,7 @@ function SignInForm() {
     mutate(data);
   };
 
-  //이게 맞나..?
-
-  //회원이 아닌 오류
+  //테스트
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
