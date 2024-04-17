@@ -78,9 +78,7 @@ function SignInForm() {
     mutate(data);
   };
 
-  //이게 맞나..?
-
-  //회원이 아닌 오류
+  //테스트
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -114,14 +112,14 @@ function SignInForm() {
           >
             {!seePassword ? (
               <Image
-                src="/images/eyeOn.svg"
+                src="/images/eye-on.svg"
                 width={15}
                 height={15}
                 alt="eyeOn"
               />
             ) : (
               <Image
-                src="/images/eyeOff.svg"
+                src="/images/eye-off.svg"
                 width={15}
                 height={15}
                 alt="eyeOff"
