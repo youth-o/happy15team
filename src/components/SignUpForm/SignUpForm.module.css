@@ -1,5 +1,4 @@
 .body {
-  background-color: #fafafa;
   margin: 0;
   height: 100%;
   display: flex;
@@ -33,6 +32,10 @@
   align-items: center;
   border-radius: 8px;
   background: var(--White);
+  color: var(--Black-20);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .pwContainer {
