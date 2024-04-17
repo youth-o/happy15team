@@ -1,13 +1,50 @@
 import axios from "@/lib/axios";
 import styles from "./SignUpForm.module.css";
-// import { useMutation } from "react-query";
-// import { AxiosError } from "axios";
+import { useMutation } from "react-query";
 import { UserData } from "@/types/interface";
 import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Image from "next/image";
 import * as yup from "yup";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import setModals from "@/lib/zustand";
+import UserService from "@/api/UserService";
 
 function SignUpForm() {
+  const [passwordType, setPasswordType] = useState({
+    type: "password",
+    visible: false,
+  });
+  const [passwordRepType, setPasswordRepType] = useState({
+    type: "password",
+    visible: false,
+  });
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const router = useRouter();
+  const { openEmailExistedModal, openRegisterSuccessModal }: any = setModals();
+
+  const handlePasswordType = () => {
+    setPasswordType(() => {
+      if (!passwordType.visible) {
+        return { type: "text", visible: true };
+      }
+      return { type: "password", visible: false };
+    });
+  };
+
+  const handlePasswordRepType = () => {
+    setPasswordRepType(() => {
+      if (!passwordRepType.visible) {
+        return { type: "text", visible: true };
+      }
+      return { type: "password", visible: false };
+    });
+  };
+
+  // react-query useMutation 사용.. 이렇게 간단한 게 맞나?
+  const mutation = useMutation(UserService.signUp);
+
   // react-hook-form, yup 라이브러리를 통해 유효성 검사
   const formSchema = yup.object({
     email: yup
@@ -34,39 +71,27 @@ function SignUpForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: "onBlur",
     resolver: yupResolver(formSchema) as Resolver<UserData, any>,
   });
 
-  // const signUpMutation = useMutation<void, AxiosError>(
-  //   () => axios.post("/users", inputData),
-  //   {
-  //     onSuccess: () => {
-  //       // 회원가입 성공
-  //       console.log("회원가입 성공!");
-  //     },
-  //     onError: (error) => {
-  //       // 회원가입 실패
-  //       console.error("회원가입 실패:", error);
-  //     },
-  //   }
-  // );
-
   async function onSubmit(data: UserData) {
     try {
-      // signUpMutation.mutate({ data: inputData });
-      await axios.post("/users", data);
+      await mutation.mutateAsync(data);
+      openRegisterSuccessModal();
       console.log("회원가입 성공:", data);
-    } catch (error) {
+      // 원래는 /signin으로 navigate 해야하는 건데,
+      // 로그인 페이지 구현 전까지 /auth/login으로 post 보내도록 설정
+      await UserService.login(data);
+      // router.push("/signin");
+    } catch (error: any) {
+      if (error.response && error.response.status === 409) {
+        openEmailExistedModal();
+      }
       console.error("회원가입 실패:", error);
     }
-    // 로그인 구현됐을 때 주석 풀 예정
-    // await axios.post("/auth/login", {
-    //   email,
-    //   password,
-    // });
   }
 
   return (
@@ -99,37 +124,72 @@ function SignUpForm() {
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="password">비밀번호</label>
-        <input
-          className={errors.password ? styles.errorFocus : styles.notError}
-          type="password"
-          placeholder="8자 이상 입력해 주세요"
-          id="password"
-          {...register("password")}
-        />
+        <div className={styles.pwContainer}>
+          <input
+            className={errors.password ? styles.errorFocus : styles.notError}
+            type={passwordType.type}
+            placeholder="8자 이상 입력해 주세요"
+            id="password"
+            {...register("password")}
+          />
+          <Image
+            className={styles.eye}
+            src={
+              passwordType.visible
+                ? "/images/eye-on.svg"
+                : "/images/eye-off.svg"
+            }
+            width={15}
+            height={15}
+            onClick={handlePasswordType}
+            alt="닫힌눈"
+          />
+        </div>
         {errors.password && (
           <div className={styles.error}>{errors.password.message}</div>
         )}
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="passwordRep">비밀번호 확인</label>
-        <input
-          className={
-            errors.confirmPassword ? styles.errorFocus : styles.notError
-          }
-          type="password"
-          placeholder="비밀번호를 한 번 더 입력해 주세요"
-          id="confirmPassword"
-          {...register("confirmPassword")}
-        />
+        <div className={styles.pwContainer}>
+          <input
+            className={
+              errors.confirmPassword ? styles.errorFocus : styles.notError
+            }
+            type={passwordRepType.type}
+            placeholder="비밀번호를 한 번 더 입력해 주세요"
+            id="confirmPassword"
+            {...register("confirmPassword")}
+          />
+          <Image
+            className={styles.eye}
+            src={
+              passwordRepType.visible
+                ? "/images/eye-on.svg"
+                : "/images/eye-off.svg"
+            }
+            width={15}
+            height={15}
+            onClick={handlePasswordRepType}
+            alt="닫힌눈"
+          />
+        </div>
         {errors.confirmPassword && (
           <div className={styles.error}>{errors.confirmPassword.message}</div>
         )}
       </div>
       <div className={styles.checkBox}>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          onChange={(e) => setAgreeTerms(e.target.checked)}
+        />
         <p>이용약관에 동의합니다.</p>
       </div>
-      <button className={styles.loginBtn} type="submit">
+      <button
+        className={styles.loginBtn}
+        type="submit"
+        disabled={!isValid || !agreeTerms}
+      >
         회원가입
       </button>
     </form>
