@@ -23,6 +23,9 @@ const formSchema = yup.object({
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/,
       "비밀번호는 영문, 숫자 조합 8자 이상 입력해 주세요."
     ),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "비밀번호가 일치하지 않습니다."),
 });
 
 function SignInForm() {
