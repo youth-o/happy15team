@@ -22,6 +22,8 @@
 .inputContainer {
   display: flex;
   gap: 1.6rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .fileInput {
@@ -31,6 +33,8 @@
 .fileAddImg {
   border-radius: 6px;
   cursor: pointer;
+  position: relative;
+  object-fit: cover;
 }
 
 .editContainer {

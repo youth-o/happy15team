@@ -37,6 +37,7 @@ function ProfileForm() {
           width={182}
           height={182}
           alt="추가아이콘"
+          objectFit="cover"
           onClick={handleClickImageUpload}
         />
         <input
