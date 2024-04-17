@@ -10,3 +10,6 @@ const Home: React.FC = () => {
       <div style={{fontSize: 50, color: 'pink'}}>완성까지 화이팅합시다!!!!</div>
     </div>
   );
+};
+
+export default Home;
