@@ -9,7 +9,7 @@ import Image from "next/image";
 import { LoginData } from "@/types/interface";
 import postSignIn from "../../../api/postSignIn";
 import { useRouter } from "next/router";
-import useModalStore from "@/lib/zustand";
+import setModal from "@/lib/zustand";
 
 const formSchema = yup.object({
   email: yup
@@ -32,7 +32,7 @@ const formSchema = yup.object({
 function SignInForm() {
   const [seePassword, setSeePassword] = useState<boolean>(false);
   const router = useRouter();
-  const { openPasswordMismatchModal } = useModalStore(); // zustand 스토어에서 함수 불러오기
+  const { openPasswordMismatchModal }: any = setModal(); // zustand 스토어에서 함수 불러오기
 
   const seePasswordHandler = () => {
     setSeePassword(!seePassword);
