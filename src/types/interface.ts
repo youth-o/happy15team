@@ -5,3 +5,9 @@ export interface UserData {
   password: string;
   confirmPassword: string;
 }
+
+//로그인 페이지
+export interface LoginData {
+  email: string;
+  password: string;
+}

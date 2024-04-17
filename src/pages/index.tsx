@@ -8,6 +8,7 @@ const Home: React.FC = () => {
         width={500}
       />
       <div style={{fontSize: 50, color: 'pink'}}>완성까지 화이팅합시다!!!!!</div>
+
     </div>
   );
 };
