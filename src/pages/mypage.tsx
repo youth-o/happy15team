@@ -1,3 +1,4 @@
+import BackButton from "@/components/\bMyPageBackBtn/MyPageBackBtn";
 import PasswordForm from "@/components/MyPagePasswordForm/MyPagePasswordForm";
 import ProfileForm from "@/components/MyPageProfileForm/MyPageProfileForm";
 import Nav from "@/components/Nav/Nav";
@@ -8,6 +9,7 @@ function MyPage() {
     <>
       <Nav />
       <Sidebar />
+      <BackButton />
       <ProfileForm />
       <PasswordForm />
     </>
