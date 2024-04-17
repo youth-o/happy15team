@@ -1,18 +1,24 @@
 import React from "react";
-import styles from "./CreateDashboardModal.module.css";
+import styles from "./CreateModal.module.css";
 
-interface ModalProps {
+interface CreateModalProps {
   onClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ onClose }) => {
-  //아래는 오버레이 클릭했을때 모달에 버블링 전파되는걸 막기위해서 넣은 코드입니다
+const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
+  //아래는 오버레이의 버블링으로 모달 내부를 클릭했을때 꺼지는 것을 방지하기 위한 코드입니다.
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 
-  // 아래는 테스트를 위한 color 생성, API 연결 후 지울 예정
-  const items = ["var(--Green)", "var(--Violet20)", "var(--Orange)", "var(--Blue)", "var(--Pink)"];
+  // 아래는 테스트를 위한 color 배열 생성, API 연결 후 지울 예정
+  const items = [
+    "var(--Green)",
+    "var(--Violet20)",
+    "var(--Orange)",
+    "var(--Blue)",
+    "var(--Pink)",
+  ];
 
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
@@ -41,4 +47,4 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
   );
 };
 
-export default Modal;
+export default CreateModal;
