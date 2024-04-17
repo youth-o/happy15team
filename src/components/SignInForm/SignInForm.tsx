@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "react-query";
 import * as yup from "yup";
 import axios from "axios";
 import styles from "./SignInForm.module.css";
@@ -41,9 +42,9 @@ function SignInForm() {
   const onSubmit = async (data: LoginData) => {
     try {
       await axios.post("/users", data);
-      console.log("회원가입 성공:", data);
+      console.log("로그인 성공:", data);
     } catch (error) {
-      console.error("회원가입 실패:", error);
+      console.error("로그인 실패:", error);
     }
   };
 
