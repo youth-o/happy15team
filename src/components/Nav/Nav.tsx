@@ -10,18 +10,18 @@ import { Fragment } from "react";
 
 const Nav = () => {
   const router = useRouter();
-  const PATH = router.pathname;
+  const path = router.pathname;
   const { modalState }: any = setModals();
 
   return (
     <Fragment>
       <div className={styles.navWrapper}>
         <div className={styles.section1}>
-          <NavTitle pathName={PATH} />
+          <NavTitle pathName={path} />
         </div>
         <div className={styles.sectionWrapper}>
           <div
-            className={PATH === "/test" ? styles.myDashBoard : styles.section2}
+            className={path === "/test" ? styles.myDashBoard : styles.section2}
           >
             <NavButtons />
             <NavParticipants />

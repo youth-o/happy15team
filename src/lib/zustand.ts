@@ -1,5 +1,6 @@
 import { create } from "zustand";
 
+
 //Todo
 //모달 이름 case화 해서 페이지 최상단에 코드 한줄로 적용시키기
 export interface IsetModals {
@@ -24,4 +25,4 @@ const setModals = create((set) => ({
   closeRegisterSuccessModal: () => set({ registerSuccess: false }),
 }));
 
-export default setModals;
+export default setModals
