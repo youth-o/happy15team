@@ -4,15 +4,16 @@
 
 .logo {
   margin-bottom: 10px;
-  width: 12.5rem;
-  height: 17.5rem;
+  width: 20rem;
+  height: 28rem;
 }
 
 .welcome {
   color: var(--Black-20);
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  margin-bottom: 3.8rem;
 }
