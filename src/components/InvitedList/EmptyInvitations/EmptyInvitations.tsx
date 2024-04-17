@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./InvitedZero.module.css";
+import styles from "./EmptyInvitations.module.css";
 import Image from "next/image";
 
-const InvitedZero: React.FC = () => {
+const EmptyInvitations: React.FC = () => {
   return (
       <div className={styles.iconContainer}>
         <Image
@@ -16,4 +16,4 @@ const InvitedZero: React.FC = () => {
   );
 };
 
-export default InvitedZero;
+export default EmptyInvitations;
