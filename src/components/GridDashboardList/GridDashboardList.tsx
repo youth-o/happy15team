@@ -5,7 +5,7 @@ import DashboardList from "../Sidebar/DashboardList/DashboardList";
 // 아래 colors 와 items 배열은 api 연결 전 테스트를 위한 임시 데이터 값입니다.
 const colors = [
   "var(--Green)",
-  "var(--Violet20)",
+  "var(--Violet-20)",
   "var(--Orange)",
   "var(--Blue)",
   "var(--Pink)",

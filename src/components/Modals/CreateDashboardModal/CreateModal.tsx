@@ -14,7 +14,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
   // 아래는 테스트를 위한 color 배열 생성, API 연결 후 지울 예정
   const items = [
     "var(--Green)",
-    "var(--Violet20)",
+    "var(--Violet-20)",
     "var(--Orange)",
     "var(--Blue)",
     "var(--Pink)",

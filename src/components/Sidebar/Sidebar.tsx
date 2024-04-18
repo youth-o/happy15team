@@ -8,7 +8,7 @@ import CreateModal from "@/components/Modals/CreateDashboardModal/CreateModal";
 // 아래는 테스트를 위한 items 생성, API 연결 후 지울 예정
 const colors = [
   "var(--Green)",
-  "var(--Violet20)",
+  "var(--Violet-20)",
   "var(--Orange)",
   "var(--Blue)",
   "var(--Pink)",

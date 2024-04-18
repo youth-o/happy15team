@@ -33,6 +33,7 @@ function SignInForm() {
   const [seePassword, setSeePassword] = useState<boolean>(false);
   const router = useRouter();
   const { openPasswordMismatchModal }: any = setModal(); // zustand 스토어에서 함수 불러오기
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const seePasswordHandler = () => {
     setSeePassword(!seePassword);
@@ -67,6 +68,13 @@ function SignInForm() {
           // 비밀번호 불일치 오류를 체크
           if (errorMessage === "passwordMismatch") {
             openPasswordMismatchModal();
+          }
+          if (error.response) {
+            const statuseCode = error.response.status;
+
+            if (statuseCode === 404) {
+              setErrorMessage("존재하지 않는 회원입니다.");
+            }
           }
         }
       }
@@ -131,6 +139,7 @@ function SignInForm() {
           <div className={styles.error}>{errors.password.message}</div>
         )}
       </div>
+      {errorMessage && <div className={styles.error}>{errorMessage}</div>}
       <button type="submit" className={styles.loginBtn}>
         로그인
       </button>
