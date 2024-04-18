@@ -8,11 +8,11 @@ import { UserData } from "@/types/interface";
 
 function ProfileForm() {
   const imageInput = useRef<HTMLInputElement>(null!);
-  const [image, setImage] = useState<string | null>(null);
-  type UserFormInput = Pick<UserData, "email" | "nickname">;
+  type UserFormInput = Pick<UserData, "email" | "nickname" | "profileImageUrl">;
   const [formData, setFormData] = useState<UserFormInput>({
     email: "",
     nickname: "",
+    profileImageUrl: "",
   });
 
   useEffect(() => {
@@ -27,8 +27,6 @@ function ProfileForm() {
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
-      } else {
-        // 토큰이 없을 경우 로그인 페이지로 리디렉션 또는 인증 필요 메시지 표시
       }
     };
 
@@ -44,38 +42,79 @@ function ProfileForm() {
       reader.onloadend = () => {
         const result = reader.result;
         if (typeof result === "string") {
-          setImage(result);
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            profileImageUrl: result,
+          }));
         }
       };
     }
-    console.log(image);
+  };
+
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      nickname: value,
+    }));
   };
 
   const handleClickImageUpload = () => {
     imageInput.current.click();
   };
 
-  const handleProfileUpload = async () => {
-    if (image) {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem("accessToken");
+    if (token) {
       try {
-        const formData = new FormData();
-        formData.append("image", image);
-        const response = await axios.post("/users/me/image", formData);
-        console.log("Image uploaded successfully!");
-        // 이미지 업로드 후 어떤 작업을 수행할지 추가
+        // 변경된 nickname과 profileImageUrl을 서버로 전송
+        await axios.put(
+          "/users/me",
+          {
+            nickname: formData.nickname,
+            profileImageUrl: formData.profileImageUrl,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        // 변경된 profileImageUrl을 서버로 전송
+        await axios.post(
+          "/users/me/image",
+          {
+            profileImageUrl: formData.profileImageUrl,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        // 서버로의 요청이 성공적으로 이루어졌을 때, 사용자에게 메시지를 표시하거나 다른 작업을 수행할 수 있습니다.
+        alert("저장되었습니다.");
       } catch (error) {
-        console.error("Error uploading image:", error);
+        console.error("Error updating user data:", error);
       }
     }
   };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.profileLabel}>프로필</div>
       <div className={styles.inputContainer}>
         <Image
           className={styles.fileAddImg}
-          src={image ? image : "/images/add.svg"}
+          src={
+            formData.profileImageUrl
+              ? formData.profileImageUrl
+              : "/images/add.svg"
+          }
           width={182}
           height={182}
           alt="추가아이콘"
@@ -107,15 +146,13 @@ function ProfileForm() {
               type="text"
               id="nickname"
               placeholder={formData.nickname}
+              value={formData.nickname}
+              onChange={handleNicknameChange}
             />
           </div>
         </div>
       </div>
-      <button
-        type="submit"
-        className={styles.formBtn}
-        onClick={handleProfileUpload}
-      >
+      <button type="submit" className={styles.formBtn}>
         저장
       </button>
     </form>

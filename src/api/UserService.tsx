@@ -32,6 +32,28 @@ class UserService {
       throw error;
     }
   }
+
+  static async updateProfile(userData: {
+    nickname?: string;
+    profileImage?: string;
+  }) {
+    try {
+      const token = localStorage.getItem("accessToken");
+      if (token) {
+        const response = await axios.put("/users/me", userData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("User data updated successfully!");
+        return response.data;
+      } else {
+        throw new Error("Access token not found");
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default UserService;
