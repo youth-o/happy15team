@@ -21,12 +21,18 @@ const ExistInvitations: React.FC<Props> = ({ items }) => {
         <div>수락여부</div>
       </div>
       {items.map((item) => (
-          <div className={styles.tableDatas} key={item.key}>
+        <div key={item.key}>
+          <div className={styles.tableDatas}>
             <div>{item.dashboardName}</div>
             <div>{item.inviter}</div>
-            <div>수락 거절</div>
+            <div className={styles.btnContainer}>
+              <button>수락</button>
+              <button>거절</button>
+            </div>
           </div>
-        ))}
+          <div className={styles.line} />
+        </div>
+      ))}
     </div>
   );
 };
