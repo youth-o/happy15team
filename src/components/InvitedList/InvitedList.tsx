@@ -3,7 +3,7 @@ import styles from "./InvitedList.module.css";
 import EmptyInvitations from "./EmptyInvitations/EmptyInvitations";
 import ExistInvitations from "./ExistInvitations/ExistInvitations";
 
-const items = Array.from({ length: 18 }, (_, index) => ({
+const items = Array.from({ length: 20 }, (_, index) => ({
   dashboardName: `${index + 2024}년 할 일`,
   inviter: `코드잇${index + 1}`,
   key: index + 1,
