@@ -71,6 +71,10 @@
   color: var(--Gray-30);
 }
 
+.nicknameInput::placeholder {
+  color: var(--Black-20);
+}
+
 .formBtn {
   position: absolute;
   right: 2.8rem;

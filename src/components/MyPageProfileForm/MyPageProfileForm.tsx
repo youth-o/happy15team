@@ -4,11 +4,16 @@ import { useState, useEffect } from "react";
 import UserService from "@/api/UserService";
 import axios from "@/lib/axios";
 import Image from "next/image";
+import { UserData } from "@/types/interface";
 
 function ProfileForm() {
   const imageInput = useRef<HTMLInputElement>(null!);
   const [image, setImage] = useState<string | null>(null);
-  const [email, setEmail] = useState<string>("");
+  type UserFormInput = Pick<UserData, "email" | "nickname">;
+  const [formData, setFormData] = useState<UserFormInput>({
+    email: "",
+    nickname: "",
+  });
 
   useEffect(() => {
     // 회원 정보를 가져와서 이메일 정보를 설정
@@ -17,7 +22,7 @@ function ProfileForm() {
       if (token) {
         try {
           const userData = await UserService.getUserData(token);
-          setEmail(userData.email);
+          setFormData(userData);
           // 사용자 정보를 처리
         } catch (error) {
           console.error("Error fetching user data:", error);
@@ -92,12 +97,17 @@ function ProfileForm() {
               type="text"
               id="email"
               readOnly
-              placeholder={email}
+              placeholder={formData.email}
             />
           </div>
           <div className={styles.editContainer}>
             <label htmlFor="nickname">닉네임</label>
-            <input type="text" id="nickname" />
+            <input
+              className={styles.nicknameInput}
+              type="text"
+              id="nickname"
+              placeholder={formData.nickname}
+            />
           </div>
         </div>
       </div>
