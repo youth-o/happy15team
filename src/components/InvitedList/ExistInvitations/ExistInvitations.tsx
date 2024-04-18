@@ -14,7 +14,8 @@ interface Props {
 const ExistInvitations: React.FC<Props> = ({ items }) => {
   return (
     <div className={styles.container}>
-      <input placeholder="🔍 검색" />
+      <input placeholder="검색" />
+      <div className={styles.searchIcon}>🔍</div>
       <div className={`${styles.tableHeader} ${styles.tableDatas}`}>
         <div>대시보드 이름</div>
         <div>초대자</div>

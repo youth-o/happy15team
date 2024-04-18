@@ -8,11 +8,12 @@
 .container input {
   width: 96.6rem;
   height: 4rem;
-  padding: 0.8rem 1.6rem;
+  padding: 0.8rem 4rem;
   border-radius: 6px;
   border: 1px solid var(--Gray-20);
   background: var(--White);
   font-size: 1.6rem;
+  position: relative;
 }
 
 .tableDatas {
@@ -58,4 +59,12 @@
 .btnContainer {
   display: flex;
   gap: 1rem;
+}
+
+.searchIcon {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 26.8%;
+  left: 8%;
+  transform: translate(-50%, -50%); 
 }
