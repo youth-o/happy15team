@@ -78,7 +78,7 @@
   width: 52rem;
   border-radius: 8px;
   padding: 15px 0px 14px 0px;
-  background: var(--Violet20);
+  background: var(--Violet-20);
   color: #fff;
   font-size: 18px;
   font-weight: 500;
@@ -104,7 +104,7 @@
 }
 
 .link {
-  color: var(--Violet20);
+  color: var(--Violet-20);
   font-size: 1.6rem;
   font-weight: 400;
   line-height: normal;

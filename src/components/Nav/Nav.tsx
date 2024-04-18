@@ -12,7 +12,6 @@ const Nav = () => {
   const router = useRouter();
   const path = router.pathname;
   const { modalState }: any = setModals();
-  //왜 안되는거야...
 
   return (
     <Fragment>
@@ -22,7 +21,7 @@ const Nav = () => {
         </div>
         <div className={styles.sectionWrapper}>
           <div
-            className={path === "/test" ? styles.myDashBoard : styles.section2}
+            className={path === "/mydashboard" ? styles.myDashBoard : styles.section2}
           >
             <NavButtons />
             <NavParticipants />
