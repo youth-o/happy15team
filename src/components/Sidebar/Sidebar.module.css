@@ -50,6 +50,10 @@
   color: var(--Black-10);
 }
 
+.open:hover {
+  background-color: var(--Violet-10);
+}
+
 .close {
   color: var(--Gray-20);
   cursor: default;
