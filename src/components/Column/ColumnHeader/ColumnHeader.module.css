@@ -12,13 +12,13 @@
 .titleTag {
   display: flex;
   align-items: center;
-  gap: 1.8rem;
+  gap: 1.3rem;
 }
 
 .columnTitle {
   color: var(--Black-20);
   font-family: Pretendard;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;

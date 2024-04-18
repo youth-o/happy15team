@@ -1,3 +1,4 @@
+import AddCardButton from "./AddCardButton/AddCardButton";
 import AddColumnButton from "./AddColumnButton/AddColumnButton";
 import styles from "./Column.module.css";
 import ColumnHeader from "./ColumnHeader/ColumnHeader";
@@ -36,10 +37,11 @@ const Column = () => {
         <>
           <div className={styles.columnTemplate}>
             <ColumnHeader titles={[data.title]} />
-            <AddColumnButton />
+            <AddCardButton />
           </div>
         </>
       ))}
+      <AddColumnButton />
     </div>
   );
 };
