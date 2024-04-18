@@ -11,8 +11,8 @@ const colors = [
   "var(--Pink)",
 ];
 
-const items = Array.from({ length: 18 }, (_, index) => ({
-  text: `${index + 2024}년 할 일`,
+const items = Array.from({ length: 25 }, (_, index) => ({
+  text: `${index + 2024}년 계획`,
   color: colors[index % colors.length],
   crown: index % 2 === 0,
   key: index + 1,

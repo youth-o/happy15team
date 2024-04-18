@@ -3,9 +3,9 @@ import styles from "./InvitedList.module.css";
 import EmptyInvitations from "./EmptyInvitations/EmptyInvitations";
 import ExistInvitations from "./ExistInvitations/ExistInvitations";
 
-const items = Array.from({ length: 20 }, (_, index) => ({
-  dashboardName: `${index + 2024}년 할 일`,
-  inviter: `코드잇${index + 1}`,
+const items = Array.from({ length: 12 }, (_, index) => ({
+  dashboardName: `${index + 1}월 데이트`,
+  inviter: `여자친구❣️`,
   key: index + 1,
 }));
 
