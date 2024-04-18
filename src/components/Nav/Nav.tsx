@@ -21,7 +21,7 @@ const Nav = () => {
         </div>
         <div className={styles.sectionWrapper}>
           <div
-            className={path === "/test" ? styles.myDashBoard : styles.section2}
+            className={path === "/mydashboard" ? styles.myDashBoard : styles.section2}
           >
             <NavButtons />
             <NavParticipants />

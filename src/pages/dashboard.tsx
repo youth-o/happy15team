@@ -1,4 +1,5 @@
 import Column from "@/components/Column/Column";
+import DashboardLayout from "@/components/DashboardLayout/DashboardLayout";
 import MyListLayout from "@/components/MyListLayout/MyListLayout";
 import Nav from "@/components/Nav/Nav";
 import Sidebar from "@/components/Sidebar/Sidebar";
@@ -8,9 +9,9 @@ const test = () => {
     <>
       <Nav />
       <Sidebar />
-      <MyListLayout>
+      <DashboardLayout>
         <Column />
-      </MyListLayout>
+      </DashboardLayout>
     </>
   );
 };

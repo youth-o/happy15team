@@ -1,0 +1,18 @@
+.addColumnButton {
+  margin-top: 2rem;
+  width: 100%;
+  padding: 9px 0px;
+  display: flex;
+  justify-content: center;
+  background-color: var(--White);
+  border: 1px solid var(--Gray-20);
+  border-radius: 6px;
+}
+
+.plusButton {
+  font-size: 2rem;
+  color: var(--Violet-20);
+  background-color: var(--Violet-10);
+  width: 2.2rem;
+  border-radius: 5px;
+}

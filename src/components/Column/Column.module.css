@@ -1,3 +1,14 @@
 .columnWrapper {
-  max-width: 35rem;
+  width: 100%;
+  display: flex;
+
+  /* margin-right: 10rem; */
+}
+
+.columnTemplate {
+  width: 20vw;
+  height: 100vh;
+  border-right: 1px solid var(--Gray-20);
+  padding: 2rem;
+  z-index: -10;
 }
