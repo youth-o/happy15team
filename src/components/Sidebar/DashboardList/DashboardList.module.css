@@ -6,11 +6,11 @@
   font-size: 1.8rem;
   font-weight: 500;
   border-radius: 8px;
-  padding: 0 1.4rem
+  padding: 0 1.4rem;
 }
 
 .clicked {
-  background-color: var(--Violet10);
+  background-color: var(--Violet-10);
 }
 
 .dashboardContainer span {

@@ -6,6 +6,7 @@
   padding: 1.5rem 4rem;
   border-bottom: 1px solid var(--Gray-20);
   flex-shrink: 0;
+  background-color: var(--White);
 }
 
 .sectionWrapper {

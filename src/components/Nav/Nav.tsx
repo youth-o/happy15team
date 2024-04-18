@@ -12,7 +12,6 @@ const Nav = () => {
   const router = useRouter();
   const path = router.pathname;
   const { modalState }: any = setModals();
-  //왜 안되는거야...
 
   return (
     <Fragment>

@@ -64,6 +64,6 @@
 }
 
 .modalWrapper button:last-child {
-  background: var(--Violet20);
+  background: var(--Violet-20);
   color: var(--White);
 }
