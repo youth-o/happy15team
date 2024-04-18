@@ -88,9 +88,9 @@ function ProfileForm() {
           <div className={styles.editContainer}>
             <label htmlFor="email">이메일</label>
             <input
+              className={styles.emailInput}
               type="text"
               id="email"
-              value={email}
               readOnly
               placeholder={email}
             />
