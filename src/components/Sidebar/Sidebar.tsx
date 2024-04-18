@@ -15,9 +15,9 @@ const colors = [
 ];
 
 const items = Array.from({ length: 20 }, (_, index) => ({
-  text: `코드잇${index + 1}`,
+  text: `${index + 2024}년 할 일`,
   color: colors[index % colors.length],
-  crown: true,
+  crown: index % 2 === 0,
   key: index + 1,
 }));
 
