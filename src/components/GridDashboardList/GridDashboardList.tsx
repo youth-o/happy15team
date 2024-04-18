@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./GridDashboardList.module.css";
 import DashboardList from "../Sidebar/DashboardList/DashboardList";
+import Image from "next/image";
 
 // 아래 colors 와 items 배열은 api 연결 전 테스트를 위한 임시 데이터 값입니다.
 const colors = [
@@ -15,6 +16,7 @@ const items = Array.from({ length: 25 }, (_, index) => ({
   text: `${index + 2024}년 계획`,
   color: colors[index % colors.length],
   crown: index % 2 === 0,
+  click: true,
   key: index + 1,
 }));
 
@@ -43,7 +45,16 @@ const GridDashboardList: React.FC = () => {
     <div>
       <div className={styles.gridContainer}>
         {currentPage === 0 && (
-          <div className={styles.addDashboard}>새로운 대시보드</div>
+          <div className={styles.addDashboard}>
+            새로운 대시보드
+            <Image
+              src="/images/plusIcon.svg"
+              width={23}
+              height={23}
+              alt="초대버튼이미지"
+            />
+          </div>
+          // <button onClick={openModal}>
         )}
         {displayItems.map((item, index) => (
           <DashboardList key={item.key} item={item} index={index} />

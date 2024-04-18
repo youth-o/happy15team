@@ -16,10 +16,16 @@
   background-color: var(--White);
 }
 
+.gridContainer > div:hover {
+  background-color: var(--Violet-10);
+  cursor: pointer;
+}
+
 .addDashboard {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }
 
 .pageBtn {
@@ -39,6 +45,10 @@
 
 .open {
   color: var(--Black-10);
+}
+
+.open:hover {
+  background-color: var(--Violet-10);
 }
 
 .close {
