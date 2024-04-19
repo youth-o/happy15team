@@ -20,14 +20,17 @@ class UserService {
     }
   }
 
-  static async getUserData(token: string) {
+  static async getUserData() {
     try {
-      const response = await axios.get("/users/me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return response.data;
+      const token = localStorage.getItem("accessToken");
+      if (token) {
+        const response = await axios.get("/users/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response.data;
+      }
     } catch (error) {
       throw error;
     }
@@ -73,14 +76,6 @@ class UserService {
             },
           }
         );
-
-        if (response.status === 204) {
-          // 성공적으로 업데이트된 경우
-          alert("비밀번호가 업데이트되었습니다.");
-        } else {
-          // 업데이트에 실패한 경우
-          console.error("비밀번호 업데이트에 실패했습니다.");
-        }
       } else {
         throw new Error("Access token not found");
       }

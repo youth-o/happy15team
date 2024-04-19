@@ -2,10 +2,20 @@ import styles from "./MyPagePasswordForm.module.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import axios from "@/lib/axios";
 import UserService from "@/api/UserService";
+import setModals from "@/lib/zustand";
+import SamePasswordError from "../Modals/SamePasswordErrorModal/SamePasswordErrorModal";
+import { isAxiosError } from "axios";
+import SuccessChangePassword from "../Modals/SuccessChangePasswordModal/SuccessChangePasswordModal";
 
 function PasswordForm() {
+  const {
+    samePassword,
+    changePassword,
+    openSamePasswordErrorModal,
+    openSuccessChangePasswordModal,
+  }: any = setModals();
+
   // react-hook-form, yup 라이브러리를 통해 유효성 검사
   const formSchema = yup.object({
     password: yup.string().required(""),
@@ -31,12 +41,19 @@ function PasswordForm() {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmit = async (data) => {
-    UserService.updatePassword(data);
-
-    // 비밀번호 변경 로직 실행
-    // 여기서는 간단히 alert로 표시하도록 하겠습니다.
-    // alert("비밀번호가 성공적으로 변경되었습니다.");
+  const onSubmit = async (data: { password: string; newPassword: string }) => {
+    try {
+      // 성공적으로 변경되었을 경우 처리
+      await UserService.updatePassword(data);
+      openSuccessChangePasswordModal();
+    } catch (error) {
+      // 현재 비밀번호가 틀렸을 경우
+      if (isAxiosError(error) && error.response) {
+        if (error.response.status === 400) {
+          openSamePasswordErrorModal();
+        }
+      }
+    }
   };
 
   return (
@@ -44,11 +61,10 @@ function PasswordForm() {
       <div className={styles.profileLabel}>비밀번호 변경</div>
       <div className={styles.inputContainer}>
         <div className={styles.editContainer}>
-          <label htmlFor="nowPassword">현재 비밀번호</label>
+          <label htmlFor="password">현재 비밀번호</label>
           <input
             className={styles.nowPasswordInput}
             type="text"
-            id="nowPassword"
             placeholder="현재 비밀번호 입력"
             {...register("password")}
           />
@@ -58,7 +74,6 @@ function PasswordForm() {
           <input
             className={errors.newPassword ? styles.errorFocus : styles.notError}
             type="text"
-            id="newPassword"
             placeholder="새 비밀번호 입력"
             {...register("newPassword")}
           />
@@ -75,7 +90,6 @@ function PasswordForm() {
               errors.confirmNewPassword ? styles.errorFocus : styles.notError
             }
             type="text"
-            id="confirmNewPassword"
             placeholder="새 비밀번호 입력"
             {...register("confirmNewPassword")}
           />
@@ -89,6 +103,8 @@ function PasswordForm() {
       <button className={styles.formBtn} disabled={!isValid}>
         변경
       </button>
+      {samePassword && <SamePasswordError />}
+      {changePassword && <SuccessChangePassword />}
     </form>
   );
 }

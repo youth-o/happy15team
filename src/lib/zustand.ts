@@ -15,6 +15,8 @@ const setModals = create((set) => ({
   emailExisted: false, // 이메일 중복 모달 상태
   registerSuccess: false, // 회원가입 성공 모달 상태
   nicknameError: false, // 닉네임 10자 이상 에러
+  samePassword: false, // 현재 비밀번호와 새 비밀번호 중복
+  changePassword: false, // 비밀번호 변경 성공
   openModal: () => set({ modalState: true }),
   closeModal: () => set({ modalState: false }),
   openPasswordMismatchModal: () => set({ modalState: true }),
@@ -25,6 +27,10 @@ const setModals = create((set) => ({
   closeRegisterSuccessModal: () => set({ registerSuccess: false }),
   openNicknameErrorModal: () => set({ nicknameError: true }),
   closeNicknameErrorModal: () => set({ nicknameError: false }),
+  openSamePasswordErrorModal: () => set({ samePassword: true }),
+  closeSamePasswordErrorModal: () => set({ samePassword: false }),
+  openSuccessChangePasswordModal: () => set({ changePassword: true }),
+  closeSuccessChangePasswordModal: () => set({ changePassword: false }),
 }));
 
 export default setModals;
