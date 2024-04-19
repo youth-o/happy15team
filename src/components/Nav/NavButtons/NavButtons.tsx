@@ -22,7 +22,7 @@ const NavButtons = () => {
       </Link>
       <button onClick={openModal}>
         <Image
-          src="/images/invite.svg"
+          src="/images/plusIcon.svg"
           width={20}
           height={20}
           alt="초대버튼이미지"

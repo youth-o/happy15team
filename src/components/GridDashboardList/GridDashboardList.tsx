@@ -1,27 +1,30 @@
 import React, { useState } from "react";
 import styles from "./GridDashboardList.module.css";
 import DashboardList from "../Sidebar/DashboardList/DashboardList";
+import Image from "next/image";
+import setModals from "@/lib/zustand";
 
 // 아래 colors 와 items 배열은 api 연결 전 테스트를 위한 임시 데이터 값입니다.
 const colors = [
   "var(--Green)",
-  "var(--Violet20)",
+  "var(--Violet-20)",
   "var(--Orange)",
   "var(--Blue)",
   "var(--Pink)",
 ];
 
-const items = Array.from({ length: 18 }, (_, index) => ({
-  text: `코드잇${index + 1}`,
+const items = Array.from({ length: 25 }, (_, index) => ({
+  text: `${index + 2024}년 계획`,
   color: colors[index % colors.length],
-  crown: true,
+  crown: index % 2 === 0,
+  click: true,
   key: index + 1,
 }));
 
 const GridDashboardList: React.FC = () => {
   //여기서부터 return 바로 위까지 page당 6개 보여주고, 페이지 넘길수 있는 로직인데 좀더 구독성 좋고 깔끔하게 짜고 싶습니다.
   const [currentPage, setCurrentPage] = useState<number>(0);
-
+  const { openCreateModal }: any = setModals();
   const itemsPerPage: number = currentPage === 0 ? 5 : 6;
 
   const startIndex: number =
@@ -43,7 +46,15 @@ const GridDashboardList: React.FC = () => {
     <div>
       <div className={styles.gridContainer}>
         {currentPage === 0 && (
-          <div className={styles.addDashboard}>새로운 대시보드</div>
+          <div className={styles.addDashboard} onClick={openCreateModal}>
+            새로운 대시보드
+            <Image
+              src="/images/plusIcon.svg"
+              width={23}
+              height={23}
+              alt="초대버튼이미지"
+            />
+          </div>
         )}
         {displayItems.map((item, index) => (
           <DashboardList key={item.key} item={item} index={index} />

@@ -1,6 +1,6 @@
 .modalOverlay {
   position: fixed;
-  z-index: 1;
+  z-index: 9999;
   left: 0;
   top: 0;
   width: 100%;
@@ -76,6 +76,6 @@
 }
 
 .modal button:last-child {
-  background: var(--Violet20);
+  background: var(--Violet-20);
   color: var(--White);
 }

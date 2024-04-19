@@ -25,6 +25,8 @@ const setModals = create((set) => ({
   closeEmailExistedModal: () => set({ emailExisted: false }),
   openRegisterSuccessModal: () => set({ registerSuccess: true }),
   closeRegisterSuccessModal: () => set({ registerSuccess: false }),
+  openCreateModal: () => set({ createModalState: true }),
+  closeCreateModal: () => set({ createModalState: false }),
   openNicknameErrorModal: () => set({ nicknameError: true }),
   closeNicknameErrorModal: () => set({ nicknameError: false }),
   openSamePasswordErrorModal: () => set({ samePassword: true }),

@@ -1,0 +1,12 @@
+.columnWrapper {
+  width: 100%;
+  display: flex;
+}
+
+.columnTemplate {
+  width: 25vw;
+  height: 91vh;
+  border-right: 1px solid var(--Gray-20);
+  padding: 2rem;
+  z-index: 0;
+}
