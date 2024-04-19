@@ -19,6 +19,19 @@ class UserService {
       throw error;
     }
   }
+
+  static async getUserData(token: string) {
+    try {
+      const response = await axios.get("/users/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default UserService;

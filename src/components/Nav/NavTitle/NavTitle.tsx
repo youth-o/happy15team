@@ -8,7 +8,7 @@ const NavTitle = ({ pathName }: any) => {
   return (
     <>
       <div className={styles.navTitle}>
-        {pathName === "/test" ? "내 대시보드" : "대시보드이름"}
+        {pathName === "/mydashboard" ? "내 대시보드" : "대시보드"}
       </div>
     </>
   );
