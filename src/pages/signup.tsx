@@ -11,8 +11,6 @@ function SignUp() {
   const { emailExisted, registerSuccess }: any = setModals();
 
   return (
-    // TODO
-    // body div 없애고 Layout 컴포넌트 만들어서 style 적용 (signin 페이지도!)
     <>
       <SignLayout>
         <SignUpHeader />

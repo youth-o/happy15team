@@ -1,6 +1,5 @@
 import { create } from "zustand";
 
-
 //Todo
 //모달 이름 case화 해서 페이지 최상단에 코드 한줄로 적용시키기
 export interface IsetModals {
@@ -15,6 +14,7 @@ const setModals = create((set) => ({
 
   emailExisted: false, // 이메일 중복 모달 상태
   registerSuccess: false, // 회원가입 성공 모달 상태
+  nicknameError: false, // 닉네임 10자 이상 에러
   openModal: () => set({ modalState: true }),
   closeModal: () => set({ modalState: false }),
   openPasswordMismatchModal: () => set({ modalState: true }),
@@ -23,6 +23,8 @@ const setModals = create((set) => ({
   closeEmailExistedModal: () => set({ emailExisted: false }),
   openRegisterSuccessModal: () => set({ registerSuccess: true }),
   closeRegisterSuccessModal: () => set({ registerSuccess: false }),
+  openNicknameErrorModal: () => set({ nicknameError: true }),
+  closeNicknameErrorModal: () => set({ nicknameError: false }),
 }));
 
-export default setModals
+export default setModals;
