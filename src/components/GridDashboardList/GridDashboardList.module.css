@@ -13,12 +13,19 @@
   font-weight: 600;
   color: var(--Black-20);
   padding: 0 2rem;
+  background-color: var(--White);
+}
+
+.gridContainer > div:hover {
+  background-color: var(--Violet-10);
+  cursor: pointer;
 }
 
 .addDashboard {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }
 
 .pageBtn {
@@ -28,16 +35,20 @@
 }
 
 .pageBtn button {
-  width: 4rem;
-  height: 4rem;
+  width: 2.5rem;
+  height: 2.5rem;
   background-color: var(--White);
   border: 1px solid var(--Gray-20);
-  font-size: 2rem;
+  font-size: 1.7rem;
   border-radius: 8px;
 }
 
 .open {
   color: var(--Black-10);
+}
+
+.open:hover {
+  background-color: var(--Violet-10);
 }
 
 .close {

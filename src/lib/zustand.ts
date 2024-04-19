@@ -23,6 +23,8 @@ const setModals = create((set) => ({
   closeEmailExistedModal: () => set({ emailExisted: false }),
   openRegisterSuccessModal: () => set({ registerSuccess: true }),
   closeRegisterSuccessModal: () => set({ registerSuccess: false }),
+  openCreateModal: () => set({ createModalState: true }),
+  closeCreateModal: () => set({ createModalState: false }),
 }));
 
 export default setModals

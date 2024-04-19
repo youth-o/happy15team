@@ -7,6 +7,7 @@ interface Item {
   text: string;
   color: string;
   crown: boolean;
+  click?: boolean;
 }
 
 //현재 DashboardList는 Sidebar 와 GridDashboardList 두 곳에서 쓰여서 clickedIndex와 handleClick은 선택적으로 받게 해놨습니다.
@@ -44,6 +45,7 @@ const DashboardList: React.FC<DashboardListProps> = ({
           height={14}
         />
       )}
+      {item.click && <div className={styles.click}>{">"}</div>}
     </div>
   );
 };
