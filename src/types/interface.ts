@@ -11,3 +11,21 @@ export interface LoginData {
   email: string;
   password: string;
 }
+
+//대시보드 페이지
+export interface DashboardMember {
+  id: number;
+  email: string;
+  nickname: string;
+  profileImageUrl: string | null;
+  createdAt: string;
+  updatedAt: string;
+  isOwner: boolean;
+  userId: number;
+}
+
+//대시보드 페이지
+export interface DashboardMembers {
+  members: DashboardMember[];
+  totalCount: number;
+}
