@@ -25,7 +25,7 @@ function ProfileForm() {
       const token = localStorage.getItem("accessToken");
       if (token) {
         try {
-          const userData = await UserService.getUserData(token);
+          const userData = await UserService.getUserData();
           setFormData(userData);
           // 사용자 정보를 처리
         } catch (error) {
@@ -34,7 +34,6 @@ function ProfileForm() {
       }
     };
     fetchUserData();
-    console.log(formData.profileImageUrl);
   }, []);
 
   // 파일이 선택되었을 때 호출되는 함수
