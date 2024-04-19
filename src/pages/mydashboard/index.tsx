@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Nav from "@/components/Nav/Nav";
 import GridDashboardList from "@/components/GridDashboardList/GridDashboardList";
-import MyListLayout from "@/components/MyListLayout/MyListLayout";
+import styles from "./Mydashboard.module.css";
 import InvitedList from "@/components/InvitedList/InvitedList";
 
 const MyDashboard: React.FC = () => {
@@ -10,10 +10,10 @@ const MyDashboard: React.FC = () => {
     <div>
       <Nav />
       <Sidebar />
-      <MyListLayout>
+      <div className={styles.container}>
         <GridDashboardList />
         <InvitedList />
-      </MyListLayout>
+      </div>
     </div>
   );
 };

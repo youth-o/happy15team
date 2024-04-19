@@ -49,7 +49,7 @@ const Sidebar: React.FC = () => {
   return (
     <>
       <div className={styles.sidebar}>
-        <Link href="/mydashboard">
+        <Link href="/">
           <Image
             src="/images/sidebarLogo.svg"
             alt="Taskify Logo"
