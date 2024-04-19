@@ -73,7 +73,7 @@ function SignUpForm() {
     formState: { errors, isValid },
   } = useForm({
     mode: "onBlur",
-    resolver: yupResolver(formSchema) as Resolver<UserData, any>,
+    resolver: yupResolver(formSchema) as Resolver<UserData>,
   });
 
   async function onSubmit(data: UserData) {
@@ -184,7 +184,7 @@ function SignUpForm() {
       <button
         className={styles.loginBtn}
         type="submit"
-        disabled={!isValid || !agreeTerms}
+        disabled={isValid && agreeTerms}
       >
         회원가입
       </button>
