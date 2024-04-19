@@ -22,25 +22,19 @@
 .inputContainer {
   display: flex;
   gap: 1.6rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.fileContainer {
-  background: #f5f5f5;
-  width: 18.2rem;
-  height: 18.2rem;
-  border-radius: 6px;
-  position: relative;
+.fileInput {
+  display: none;
 }
 
 .fileAddImg {
-  position: absolute;
-  right: 7.6rem;
-  bottom: 7.6rem;
+  border-radius: 6px;
   cursor: pointer;
-}
-
-.fileContainer input {
-  display: none;
+  position: relative;
+  object-fit: cover;
 }
 
 .editContainer {
@@ -71,6 +65,10 @@
 
 .editContainer input:focus {
   border: 1px solid #5c73db;
+}
+
+.emailInput::placeholder {
+  color: var(--Gray-30);
 }
 
 .formBtn {
