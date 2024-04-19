@@ -54,6 +54,40 @@ class UserService {
       throw error;
     }
   }
+
+  static async updatePassword(data: { password: string; newPassword: string }) {
+    const { password, newPassword } = data;
+
+    try {
+      const token = localStorage.getItem("accessToken");
+      if (token) {
+        const response = await axios.put(
+          "/auth/password",
+          {
+            password,
+            newPassword,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.status === 204) {
+          // 성공적으로 업데이트된 경우
+          alert("비밀번호가 업데이트되었습니다.");
+        } else {
+          // 업데이트에 실패한 경우
+          console.error("비밀번호 업데이트에 실패했습니다.");
+        }
+      } else {
+        throw new Error("Access token not found");
+      }
+    } catch (error) {
+      console.error("비밀번호 업데이트 중 오류가 발생했습니다.", error);
+    }
+  }
 }
 
 export default UserService;
