@@ -1,0 +1,12 @@
+.ColorSelectorbody {
+  gap: 0.4rem;
+}
+
+.ColorSelector {
+  width: 3rem;
+  height: 3rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 50%;
+}
