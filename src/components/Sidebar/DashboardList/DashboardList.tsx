@@ -23,7 +23,7 @@ const DashboardList = () => {
       const token = localStorage.getItem("accessToken");
       const page = currentPage;
       try {
-        const dashboardData = await getMyDashboardData(token, page);
+        const dashboardData = await getMyDashboardData(token, page, 12);
         setItems(dashboardData.dashboards);
         setTotalCount(dashboardData.totalCount);
       } catch (error) {
