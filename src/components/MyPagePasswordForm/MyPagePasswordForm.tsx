@@ -35,6 +35,7 @@ function PasswordForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm({
     mode: "onBlur",
@@ -47,6 +48,7 @@ function PasswordForm() {
       data,
       () => {
         openSuccessChangePasswordModal();
+        reset();
       },
       () => {
         openSamePasswordErrorModal();
