@@ -3,20 +3,23 @@ import Nav from "@/components/Nav/Nav";
 import DashboardList from "@/components/DashboardList/DashboardList";
 import styles from "./Mydashboard.module.css";
 import InvitedList from "@/components/InvitedList/InvitedList";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import setModals from "@/lib/zustand";
 
-const MyDashboard: React.FC = () => {
+const MyDashboard = () => {
   const { openCreateModal }: any = setModals();
+  const [dashboardListEmpty, setDashboardListEmpty] = useState(false);
 
   return (
     <div>
       <Nav />
       <Sidebar />
       <div className={styles.container}>
-        <div className={styles.addDashboard}>
-          <div onClick={openCreateModal}>
+        {dashboardListEmpty ? (
+          <div className={styles.empty}>대시보드 리스트가 없어요ㅠㅠ</div>
+        ) : (
+          <div onClick={openCreateModal} className={styles.addDashboard}>
             새로운 대시보드 추가
             <Image
               src="/images/plusIcon.svg"
@@ -25,8 +28,12 @@ const MyDashboard: React.FC = () => {
               alt="초대버튼이미지"
             />
           </div>
-        </div>
-        <DashboardList itemCount={6} myDashboardPage={true} />
+        )}
+        <DashboardList
+          itemCount={6}
+          myDashboardPage={true}
+          onEmpty={setDashboardListEmpty}
+        />
         <InvitedList />
       </div>
     </div>
