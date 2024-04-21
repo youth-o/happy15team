@@ -13,11 +13,13 @@ interface DashboardItem {
 interface DashboardListProps {
   itemCount: number;
   myDashboardPage?: boolean;
+  onEmpty?: (isEmpty: boolean) => void;
 }
 
 const DashboardList = ({
   itemCount,
   myDashboardPage = false,
+  onEmpty,
 }: DashboardListProps) => {
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -31,6 +33,9 @@ const DashboardList = ({
         const dashboardData = await getMyDashboardData(token, page, itemCount);
         setItems(dashboardData.dashboards);
         setTotalCount(dashboardData.totalCount);
+        if (onEmpty) {
+          onEmpty(dashboardData.totalCount === 0);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -86,25 +91,27 @@ const DashboardList = ({
           </div>
         ))}
       </div>
-      <div className={styles.pageContainer}>
-        {myDashboardPage && (
-          <div className={styles.pageDisplay}>
-            {currentPage} 페이지 중 {totalPage}
-          </div>
-        )}
-        <button
-          onClick={currentPage === 1 ? undefined : handlePrevPage}
-          className={currentPage === 1 ? styles.close : styles.open}
-        >
-          {"<"}
-        </button>
-        <button
-          onClick={currentPage < totalPage ? handleNextPage : undefined}
-          className={currentPage < totalPage ? styles.open : styles.close}
-        >
-          {">"}
-        </button>
-      </div>
+      {totalCount !== 0 ? (
+        <div className={styles.pageContainer}>
+          {myDashboardPage && (
+            <div className={styles.pageDisplay}>
+              {currentPage} 페이지 중 {totalPage}
+            </div>
+          )}
+          <button
+            onClick={currentPage === 1 ? undefined : handlePrevPage}
+            className={currentPage === 1 ? styles.close : styles.open}
+          >
+            {"<"}
+          </button>
+          <button
+            onClick={currentPage < totalPage ? handleNextPage : undefined}
+            className={currentPage < totalPage ? styles.open : styles.close}
+          >
+            {">"}
+          </button>
+        </div>
+      ) : null}
     </>
   );
 };

@@ -8,18 +8,18 @@ import Image from "next/image";
 import setModals from "@/lib/zustand";
 
 const MyDashboard = () => {
-  const { openCreateModal }: any = setModals();
+  const { openCreateDashboardModal }: any = setModals();
   const [dashboardListEmpty, setDashboardListEmpty] = useState(false);
 
   return (
     <div>
       <Nav />
       <Sidebar />
-      <div className={styles.container}>
+      <div className={styles.wrapper}>
         {dashboardListEmpty ? (
           <div className={styles.empty}>대시보드 리스트가 없어요ㅠㅠ</div>
         ) : (
-          <div onClick={openCreateModal} className={styles.addDashboard}>
+          <div onClick={openCreateDashboardModal} className={styles.addDashboard}>
             새로운 대시보드 추가
             <Image
               src="/images/plusIcon.svg"

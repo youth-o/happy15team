@@ -9,10 +9,10 @@ const items = Array.from({ length: 12 }, (_, index) => ({
   key: index + 1,
 }));
 
-const InvitedList: React.FC = () => {
+const InvitedList = () => {
   return (
-    <div className={styles.container}>
-      <h1 className={styles.h1}>초대받은 대시보드</h1>
+    <div className={styles.wrapper}>
+      <div className={styles.title}>초대받은 대시보드</div>
       {items.length ? <ExistInvitations items={items}/> : <EmptyInvitations />}
     </div>
   );

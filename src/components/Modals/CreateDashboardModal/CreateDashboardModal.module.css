@@ -20,13 +20,13 @@
   padding: 2.8rem;
 }
 
-.modal h1 {
+.title {
   margin-top: 0.4rem;
   font-size: 2.4rem;
   font-weight: 700;
 }
 
-.modal h2 {
+.naming {
   margin-top: 3.2rem;
   font-size: 1.8rem;
   font-weight: 500;
@@ -61,7 +61,7 @@
   width: 100%;
 }
 
-.modal button {
+.buttonContainer button {
   display: flex;
   width: 120px;
   height: 48px;
@@ -75,7 +75,7 @@
   font-weight: 500;
 }
 
-.modal button:last-child {
+.buttonContainer button:last-child {
   background: var(--Violet-20);
   color: var(--White);
 }

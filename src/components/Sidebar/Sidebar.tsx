@@ -2,16 +2,16 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
 import DashboardList from "../DashboardList/DashboardList";
-import CreateModal from "@/components/Modals/CreateDashboardModal/CreateModal";
+import CreateDashboardModal from "@/components/Modals/CreateDashboardModal/CreateDashboardModal";
 import setModals from "@/lib/zustand";
 
-const Sidebar: React.FC = () => {
-  const { openCreateModal } = setModals();
-  const { createModalState }: any = setModals();
+const Sidebar = () => {
+  const { openCreateDashboardModal } = setModals();
+  const { createDashboardModalState }: any = setModals();
 
   return (
     <>
-      <div className={styles.sidebar}>
+      <div className={styles.wrapper}>
         <Link href="/">
           <Image
             src="/images/sidebarLogo.svg"
@@ -27,13 +27,13 @@ const Sidebar: React.FC = () => {
             alt="Plus Icon"
             width={20}
             height={20}
-            onClick={openCreateModal}
+            onClick={openCreateDashboardModal}
             className={styles.cursorPointer}
           />
         </div>
         <DashboardList itemCount={13} />
       </div>
-      {createModalState && <CreateModal />}
+      {createDashboardModalState && <CreateDashboardModal />}
     </>
   );
 };
