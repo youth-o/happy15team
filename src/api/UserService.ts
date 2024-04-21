@@ -58,13 +58,17 @@ class UserService {
     }
   }
 
-  static async updatePassword(data: { password: string; newPassword: string }) {
+  static async updatePassword(
+    data: { password: string; newPassword: string },
+    onSuccess: () => void,
+    onFailure: () => void
+  ) {
     const { password, newPassword } = data;
 
     try {
       const token = localStorage.getItem("accessToken");
       if (token) {
-        const response = await axios.put(
+        await axios.put(
           "/auth/password",
           {
             password,
@@ -76,11 +80,14 @@ class UserService {
             },
           }
         );
+        onSuccess();
       } else {
         throw new Error("Access token not found");
       }
     } catch (error) {
       console.error("비밀번호 업데이트 중 오류가 발생했습니다.", error);
+      onFailure();
+      console.log(onFailure);
     }
   }
 }
