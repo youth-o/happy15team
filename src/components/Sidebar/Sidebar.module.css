@@ -23,8 +23,3 @@
 .cursorPointer {
   cursor: pointer;
 }
-
-.hover > div:hover {
-  background-color: var(--Violet-10);
-  cursor: pointer;
-}

@@ -4,3 +4,25 @@
   left: 30rem;
   padding: 4rem;
 }
+
+.addDashboard {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-bottom: 1.5rem;
+}
+
+.addDashboard > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.2rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--Black-10);
+  cursor: pointer;
+}
+
+.addDashboard > div:hover {
+  color: var(--Violet-20);
+}

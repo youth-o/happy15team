@@ -31,12 +31,7 @@ const Sidebar: React.FC = () => {
             className={styles.cursorPointer}
           />
         </div>
-        <div className={styles.hover}>
-          <DashboardList />
-        </div>
-        <div className={styles.pageBtn}>
-          
-        </div>
+        <DashboardList itemCount={13} />
       </div>
       {createModalState && <CreateModal />}
     </>
