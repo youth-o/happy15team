@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./DashboardList.module.css";
-import { getMyDashboardData } from "@/api/MyDashboard";
+import { getMyDashboardData } from "@/api/getMyDashboardData";
 
 interface DashboardItem {
   id: string;

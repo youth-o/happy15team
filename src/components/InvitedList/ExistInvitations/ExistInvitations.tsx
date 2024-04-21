@@ -2,9 +2,15 @@ import React from "react";
 import styles from "./ExistInvitations.module.css";
 
 interface Item {
-  dashboardName: string;
-  inviter: string;
-  key: number;
+  dashboard: {
+    title: string;
+    id: number;
+  };
+  inviter: {
+    nickname: string;
+    id: number;
+  };
+  id: number;
 }
 
 interface Props {
@@ -24,10 +30,10 @@ const ExistInvitations = ({ items }: Props) => {
         <div>수락여부</div>
       </div>
       {items.map((item) => (
-        <div key={item.key}>
+        <div key={item.id}>
           <div className={styles.tableItems}>
-            <div>{item.dashboardName}</div>
-            <div>{item.inviter}</div>
+            <div>{item.dashboard.title}</div>
+            <div>{item.inviter.nickname}</div>
             <div className={styles.btnContainer}>
               <button>수락</button>
               <button>거절</button>
