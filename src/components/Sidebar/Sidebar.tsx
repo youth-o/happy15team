@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
-import DashboardList from "./DashboardList/DashboardList";
+import DashboardList from "../DashboardList/DashboardList";
 import CreateModal from "@/components/Modals/CreateDashboardModal/CreateModal";
 import setModals from "@/lib/zustand";
 

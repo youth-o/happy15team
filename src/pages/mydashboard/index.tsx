@@ -1,6 +1,6 @@
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Nav from "@/components/Nav/Nav";
-import DashboardList from "@/components/Sidebar/DashboardList/DashboardList";
+import DashboardList from "@/components/DashboardList/DashboardList";
 import styles from "./Mydashboard.module.css";
 import InvitedList from "@/components/InvitedList/InvitedList";
 import React from "react";

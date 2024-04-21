@@ -65,7 +65,7 @@ const DashboardList = ({
         {items.map((item, index) => (
           <div
             key={item.id}
-            className={`${styles.hover} ${styles.dashboardItems} ${
+            className={`${styles.dashboardItems} ${
               clickedIndex === index ? styles.clicked : ""
             }`}
             onClick={() => handleClick(index)}
