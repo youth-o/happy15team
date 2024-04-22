@@ -1,0 +1,229 @@
+.modalOverlay {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalWrapper {
+  background-color: var(--White);
+  width: 50.2rem;
+  max-height: 90vh;
+  border: 1px solid var(--Gray-20);
+  border-radius: 8px;
+  padding: 2.8rem;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.modalWrapper::-webkit-scrollbar {
+  width: 1.5rem;
+}
+
+.modalWrapper::-webkit-scrollbar-track {
+  background: var(--Gray-10);
+}
+
+.modalWrapper::-webkit-scrollbar-thumb {
+  background: var(--Gray-20);
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  border-radius: 8px;
+}
+
+.modalWrapper h1 {
+  margin-top: 0.4rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.modalWrapper label {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.essentialTag {
+  color: var(--Violet-20);
+}
+
+.modalWrapper input {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  color: var(--Black);
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid var(--Gray-20);
+}
+
+.modalWrapper input::placeholder {
+  color: var(--Gray-20);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.modalWrapper input:focus {
+  border: 2px solid;
+  border-color: var(--Violet-20);
+}
+
+.modalWrapper input:last-child {
+  margin-bottom: 2rem;
+}
+.modalHeader {
+  display: flex;
+  margin-top: 2rem;
+  gap: 3rem;
+}
+
+.managerInput {
+  width: 100%;
+  position: relative;
+}
+.managerInput input {
+  width: 100%;
+}
+
+.dropDownImage {
+  position: absolute;
+  top: 1.5rem;
+  right: 0.8rem;
+}
+
+.managerInput:hover {
+  cursor: pointer;
+}
+
+.descriptionInput {
+  height: 13rem;
+  padding-bottom: 10rem;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  color: var(--Black);
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--Gray-20);
+  font-family: pretendard;
+  resize: none;
+  outline-color: var(--Violet-20);
+}
+
+.descriptionInput::placeholder {
+  color: var(--Gray-20);
+}
+
+.deadlineInput {
+  width: 60%;
+  position: relative;
+}
+
+.deadlineInput input {
+  padding-left: 4rem;
+}
+
+.deadlineInput input:hover {
+  cursor: pointer;
+}
+
+.calendarImage {
+  position: absolute;
+  left: 1rem;
+  top: 2.3rem;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalForm label {
+  margin-bottom: -0.3rem;
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  width: 7.6rem;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.modalWrapper button {
+  display: flex;
+  width: 21rem;
+  height: 4.8rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-20);
+  background: var(--White);
+  color: var(--Gray-40);
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.modalWrapper button:last-child {
+  background: var(--Violet-20);
+  color: var(--White);
+}
+
+.imageInput {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.uploadBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  background-color: rgb(245, 245, 245);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 28px 28px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.noImg {
+  display: none;
+}
+
+.imageSection {
+  display: flex;
+  align-items: center;
+  margin-top: -1rem;
+  margin-bottom: 3rem;
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.previewImg {
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  border: 2px solid var(--Violet-20);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8.4rem;
+  height: 8.3rem;
+}

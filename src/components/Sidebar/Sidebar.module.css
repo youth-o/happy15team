@@ -1,4 +1,4 @@
-.sidebar {
+.wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -22,39 +22,4 @@
 
 .cursorPointer {
   cursor: pointer;
-}
-
-.hover > div:hover {
-  background-color: var(--Violet-10);
-  cursor: pointer;
-}
-
-.pageBtn {
-  position: fixed;
-  margin-top: 1.2rem;
-  display: flex;
-  bottom: 2rem;
-  left: 12.5rem;
-}
-
-.pageBtn button {
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: var(--White);
-  border: 1px solid var(--Gray-20);
-  font-size: 1.7rem;
-  border-radius: 8px;
-}
-
-.open {
-  color: var(--Black-10);
-}
-
-.open:hover {
-  background-color: var(--Violet-10);
-}
-
-.close {
-  color: var(--Gray-20);
-  cursor: default;
 }

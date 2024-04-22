@@ -1,55 +1,18 @@
-import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
-import DashboardList from "./DashboardList/DashboardList";
-import CreateModal from "@/components/Modals/CreateDashboardModal/CreateModal";
+import DashboardList from "../DashboardList/DashboardList";
+import CreateDashboardModal from "@/components/Modals/CreateDashboardModal/CreateDashboardModal";
 import setModals from "@/lib/zustand";
 
-// 아래는 테스트를 위한 items 생성, API 연결 후 지울 예정
-const colors = [
-  "var(--Green)",
-  "var(--Violet-20)",
-  "var(--Orange)",
-  "var(--Blue)",
-  "var(--Pink)",
-];
-
-const items = Array.from({ length: 25 }, (_, index) => ({
-  text: `${index + 2024}년 계획`,
-  color: colors[index % colors.length],
-  crown: index % 2 === 0,
-  key: index + 1,
-}));
-
-const Sidebar: React.FC = () => {
-  const [clickedIndex, setClickedIndex] = React.useState<number | null>(null);
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const { openCreateModal }: any = setModals();
-  const { createModalState }: any = setModals();
-
-  const itemsPerPage: number = 12;
-
-  const startIndex: number = currentPage * itemsPerPage;
-  const endIndex: number = startIndex + itemsPerPage;
-  const displayItems = items.slice(startIndex, endIndex);
-
-  const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const handlePrevPage = () => {
-    setCurrentPage(currentPage - 1);
-  };
-
-  const handleClick = (index: number) => {
-    setClickedIndex(index);
-  };
+const Sidebar = () => {
+  const { openCreateDashboardModal } = setModals();
+  const { createDashboardModalState }: any = setModals();
 
   return (
     <>
-      <div className={styles.sidebar}>
-        <Link href="/mydashboard">
+      <div className={styles.wrapper}>
+        <Link href="/">
           <Image
             src="/images/sidebarLogo.svg"
             alt="Taskify Logo"
@@ -64,41 +27,13 @@ const Sidebar: React.FC = () => {
             alt="Plus Icon"
             width={20}
             height={20}
-            onClick={openCreateModal}
+            onClick={openCreateDashboardModal}
             className={styles.cursorPointer}
           />
         </div>
-        <div className={styles.hover}>
-          {displayItems.map((item, index) => (
-            <DashboardList
-              key={item.key}
-              item={item}
-              index={index}
-              clickedIndex={clickedIndex}
-              handleClick={handleClick}
-            />
-          ))}
-        </div>
-        <div className={styles.pageBtn}>
-          <button
-            onClick={currentPage !== 0 ? handlePrevPage : undefined}
-            className={currentPage !== 0 ? styles.open : styles.close}
-          >
-            {"<"}
-          </button>
-          <button
-            onClick={
-              currentPage + 1 < items.length / 12 ? handleNextPage : undefined
-            }
-            className={
-              currentPage + 1 < items.length / 12 ? styles.open : styles.close
-            }
-          >
-            {">"}
-          </button>
-        </div>
+        <DashboardList itemCount={13} />
       </div>
-      {createModalState && <CreateModal />}
+      {createDashboardModalState && <CreateDashboardModal />}
     </>
   );
 };

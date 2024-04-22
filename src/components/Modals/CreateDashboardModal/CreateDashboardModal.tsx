@@ -1,6 +1,6 @@
 import setModals from "@/lib/zustand";
 import React from "react";
-import styles from "./CreateModal.module.css";
+import styles from "./CreateDashboardModal.module.css";
 
 // 아래는 테스트를 위한 color 배열 생성, API 연결 후 지울 예정
 const items = [
@@ -11,8 +11,8 @@ const items = [
   "var(--Pink)",
 ];
 
-const CreateModal: React.FC = () => {
-  const { closeCreateModal }: any = setModals();
+const CreateDashboardModal = () => {
+  const { closeCreateDashboardModal }: any = setModals();
 
   //아래는 오버레이의 버블링으로 모달 내부를 클릭했을때 꺼지는 것을 방지하기 위한 코드입니다.
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -20,15 +20,15 @@ const CreateModal: React.FC = () => {
   };
 
   const handleClickModalOutside = () => {
-    closeCreateModal();
+    closeCreateDashboardModal();
   };
 
   return (
     <div className={styles.modalOverlay} onClick={handleClickModalOutside}>
       <div className={styles.modal} onClick={handleModalClick}>
         <form>
-          <h1>새로운 대시보드</h1>
-          <h2>대시보드 이름</h2>
+          <div className={styles.title}>새로운 대시보드</div>
+          <div className={styles.naming}>대시보드 이름</div>
           <input placeholder="뉴프로젝트"></input>
           <div className={styles.circleContainer}>
             {items.map((color, index) => (
@@ -50,4 +50,4 @@ const CreateModal: React.FC = () => {
   );
 };
 
-export default CreateModal;
+export default CreateDashboardModal;
