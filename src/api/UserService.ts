@@ -36,22 +36,48 @@ class UserService {
     }
   }
 
-  static async updateProfile(userData: {
-    nickname?: string;
-    profileImage?: string;
-  }) {
+  static async uploadProfileImage(file: File, onFailure: () => void) {
     try {
       const token = localStorage.getItem("accessToken");
       if (token) {
-        const response = await axios.put("/users/me", userData, {
+        const formData = new FormData();
+        formData.append("image", file);
+        const response = await axios.post("/users/me/image", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log("User data updated successfully!");
-        return response.data;
-      } else {
-        throw new Error("Access token not found");
+        return response.data.profileImageUrl;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async updateProfile(
+    data: {
+      profileImageUrl: string | undefined;
+      nickname: string;
+    },
+    onSuccess: () => void
+  ) {
+    const { profileImageUrl, nickname } = data;
+
+    try {
+      const token = localStorage.getItem("accessToken");
+      if (token) {
+        await axios.put(
+          "/users/me",
+          {
+            profileImageUrl,
+            nickname,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
       }
     } catch (error) {
       throw error;

@@ -2,7 +2,6 @@ import styles from "./MyPageProfileForm.module.css";
 import { useRef } from "react";
 import { useState, useEffect } from "react";
 import UserService from "@/api/UserService";
-import axios from "@/lib/axios";
 import Image from "next/image";
 import { UserData } from "@/types/interface";
 import setModals from "@/lib/zustand";
@@ -43,15 +42,12 @@ function ProfileForm() {
       try {
         const imageUrl = URL.createObjectURL(file);
         setPreviewImage(imageUrl);
-        const token = localStorage.getItem("accessToken");
-        const formData = new FormData();
-        formData.append("image", file);
-        const response = await axios.post("/users/me/image", formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const { profileImageUrl } = response.data;
+        const profileImageUrl = await UserService.uploadProfileImage(
+          file,
+          () => {
+            openNicknameErrorModal();
+          }
+        );
         setFormData((prevFormData) => ({
           ...prevFormData,
           profileImageUrl: profileImageUrl, // 이미지 URL 업데이트
@@ -77,25 +73,13 @@ function ProfileForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      try {
-        await axios.put(
-          "/users/me",
-          {
-            profileImageUrl: formData.profileImageUrl,
-            nickname: formData.nickname,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        // 성공적으로 업데이트됐음을 사용자에게 알릴 수 있음
-      } catch (error) {
-        console.error("Error updating user data:", error);
-      }
+    try {
+      await UserService.updateProfile({
+        profileImageUrl: formData.profileImageUrl,
+        nickname: formData.nickname,
+      });
+    } catch (error) {
+      console.error("Error updating user data:", error);
     }
   };
 
