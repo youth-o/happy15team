@@ -4,6 +4,7 @@ export interface UserData {
   nickname: string;
   password: string;
   confirmPassword: string;
+  profileImageUrl?: string;
 }
 
 //로그인 페이지

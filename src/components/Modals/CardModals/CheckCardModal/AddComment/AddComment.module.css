@@ -1,0 +1,40 @@
+.wrapper label {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.commentInput {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-color: var(--Gray-20);
+  border-radius: 6px;
+  resize: none;
+  height: 10rem;
+}
+
+.inputHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.submit {
+  background-color: var(--White);
+  color: var(--Purple);
+  border: 1px solid var(--Gray-20);
+  border-radius: 6px;
+  padding: 0.4rem 1.4rem;
+}
+
+.textarea::placeholder {
+  color: var(--Gray-20);
+}

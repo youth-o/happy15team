@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "./ColumnHeader.module.css";
 import Image from "next/image";
+import setModals from "@/lib/zustand";
 
 const ColumnHeader = ({ titles }: { titles: string[] }) => {
+  const { openEditColumnModal } = setModals();
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.titleWrapper}>
@@ -16,7 +18,7 @@ const ColumnHeader = ({ titles }: { titles: string[] }) => {
             {1}
           </div>
         </div>
-        <button className={styles.columnSetting}>
+        <button onClick={openEditColumnModal} className={styles.columnSetting}>
           <Image
             src="/images/setting.svg"
             width={40}
