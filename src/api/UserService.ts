@@ -2,6 +2,10 @@ import axios from "@/lib/axios";
 import { UserData } from "@/types/interface";
 
 class UserService {
+  private static getToken(): string | null {
+    return localStorage.getItem("accessToken");
+  }
+
   static async signUp(userData: UserData) {
     try {
       const response = await axios.post("/users", userData);
@@ -22,7 +26,7 @@ class UserService {
 
   static async getUserData() {
     try {
-      const token = localStorage.getItem("accessToken");
+      const token = this.getToken();
       if (token) {
         const response = await axios.get("/users/me", {
           headers: {
@@ -38,7 +42,7 @@ class UserService {
 
   static async uploadProfileImage(file: File) {
     try {
-      const token = localStorage.getItem("accessToken");
+      const token = this.getToken();
       if (token) {
         const formData = new FormData();
         formData.append("image", file);
@@ -65,7 +69,7 @@ class UserService {
     const { profileImageUrl, nickname } = data;
 
     try {
-      const token = localStorage.getItem("accessToken");
+      const token = this.getToken();
       if (token) {
         await axios.put(
           "/users/me",
@@ -95,7 +99,7 @@ class UserService {
     const { password, newPassword } = data;
 
     try {
-      const token = localStorage.getItem("accessToken");
+      const token = this.getToken();
       if (token) {
         await axios.put(
           "/auth/password",
