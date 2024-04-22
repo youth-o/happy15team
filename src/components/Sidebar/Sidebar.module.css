@@ -1,4 +1,4 @@
-.sidebar {
+.wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,23 +7,19 @@
   height: 100vh;
   background-color: var(--White);
   border-right: 1px solid var(--Gray-20);
+  z-index: 1001;
 }
 
 .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 6rem 1.4rem 1.8rem;
+  margin: 3.8rem 1.4rem 1.8rem;
   color: var(--Gray-40);
   font-size: 12px;
   font-weight: 700;
 }
 
 .cursorPointer {
-  cursor: pointer;
-}
-
-.hover > div:hover {
-  background-color: var(--Violet-10);
   cursor: pointer;
 }
