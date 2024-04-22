@@ -5,13 +5,11 @@ import styles from "./ColorSelector.module.css";
 interface ColorSelectorProps {
   selectedColor: string;
   setSelectedColor: Dispatch<SetStateAction<string>>;
-  customStyle: string;
 }
 
 export default function ColorSelector({
   selectedColor,
   setSelectedColor,
-  customStyle,
 }: ColorSelectorProps) {
   const colors = [
     "var(--Green)",

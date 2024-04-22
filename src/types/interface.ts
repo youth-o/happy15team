@@ -12,6 +12,17 @@ export interface LoginData {
   password: string;
 }
 
+//대시보드
+export interface Dashboard {
+  id: number;
+  title: string;
+  color: string;
+  userId: number;
+  createdAt: string;
+  updatedAt: string;
+  createdByMe: boolean;
+}
+
 //대시보드 페이지
 export interface DashboardMember {
   id: number;
