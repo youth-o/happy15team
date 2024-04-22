@@ -15,7 +15,7 @@ const setModals = create((set) => ({
   emailExisted: false, // 이메일 중복 모달 상태
   registerSuccess: false, // 회원가입 성공 모달 상태
   openModal: () => set({ modalState: true }),
-  closeModal: () => set({ m odalState: false }),
+  closeModal: () => set({ modalState: false }),
   openPasswordMismatchModal: () => set({ PasswordMismatch: true }),
   closePasswordMismatchModal: () => set({ PasswordMismatch: false }),
   openEmailExistedModal: () => set({ emailExisted: true }),
