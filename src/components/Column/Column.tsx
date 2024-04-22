@@ -1,6 +1,7 @@
 import AddCardButton from "./AddCardButton/AddCardButton";
 import AddColumnButton from "./AddColumnButton/AddColumnButton";
 import styles from "./Column.module.css";
+import ColumnCard from "./ColumnCard/ColumnCard";
 import ColumnHeader from "./ColumnHeader/ColumnHeader";
 
 const Column = () => {
@@ -32,17 +33,20 @@ const Column = () => {
 
   if (!columnData) return null;
   return (
-    <div className={styles.columnWrapper}>
-      {columnData.map((data) => (
-        <>
-          <div className={styles.columnTemplate}>
-            <ColumnHeader titles={[data.title]} />
-            <AddCardButton />
-          </div>
-        </>
-      ))}
-      <AddColumnButton />
-    </div>
+    <>
+      <div className={styles.columnWrapper}>
+        {columnData.map((data) => (
+          <>
+            <div className={styles.columnTemplate}>
+              <ColumnHeader titles={[data.title]} />
+              <AddCardButton />
+              <ColumnCard />
+            </div>
+          </>
+        ))}
+        <AddColumnButton />
+      </div>
+    </>
   );
 };
 
