@@ -7,7 +7,6 @@ import Image from "next/image";
 import { UserData } from "@/types/interface";
 import setModals from "@/lib/zustand";
 import NicknameErrorModal from "../Modals/NicknameErrorModal/NicknameErrorModal";
-import { isAxiosError } from "axios";
 
 function ProfileForm() {
   const imageInput = useRef<HTMLInputElement>(null!);
@@ -17,6 +16,7 @@ function ProfileForm() {
     nickname: "",
     profileImageUrl: "",
   });
+  const [previewImage, setPreviewImage] = useState<string | null>("");
   const { nicknameError, openNicknameErrorModal }: any = setModals();
 
   useEffect(() => {
@@ -37,20 +37,28 @@ function ProfileForm() {
   }, []);
 
   // 파일이 선택되었을 때 호출되는 함수
-  const handleFileChange = async (e: React.ChangeEvent) => {
-    const file = imageInput.current?.files?.[0];
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        const result = reader.result;
-        if (typeof result === "string") {
-          setFormData((prevFormData) => ({
-            ...prevFormData,
-            profileImageUrl: result,
-          }));
-        }
-      };
+      try {
+        const imageUrl = URL.createObjectURL(file);
+        setPreviewImage(imageUrl);
+        const token = localStorage.getItem("accessToken");
+        const formData = new FormData();
+        formData.append("image", file);
+        const response = await axios.post("/users/me/image", formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const { profileImageUrl } = response.data;
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          profileImageUrl: profileImageUrl, // 이미지 URL 업데이트
+        }));
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
     }
   };
 
@@ -72,26 +80,11 @@ function ProfileForm() {
     const token = localStorage.getItem("accessToken");
     if (token) {
       try {
-        const file = imageInput.current?.files?.[0];
-        if (file) {
-          const formData = new FormData();
-          formData.append("image", file);
-
-          await axios.post("/users/me/image", formData, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "multipart/form-data",
-            },
-          });
-        }
-        // 변경된 nickname과 profileImageUrl을 서버로 전송
-        // 이 부분에서 자꾸 profileImageUrl 형식이 이상하다고 떠요..
-        // FormData로도 해보고 다 해봤는데 ....
-        const response = await axios.put(
+        await axios.put(
           "/users/me",
           {
-            nickname: formData.nickname,
             profileImageUrl: formData.profileImageUrl,
+            nickname: formData.nickname,
           },
           {
             headers: {
@@ -99,16 +92,9 @@ function ProfileForm() {
             },
           }
         );
-
-        // 임의로 alert 창 뜨게 수정
-        // alert("저장되었습니다.");
+        // 성공적으로 업데이트됐음을 사용자에게 알릴 수 있음
       } catch (error) {
-        if (isAxiosError(error)) {
-          if (error.response?.data === 400) {
-            openNicknameErrorModal();
-          }
-          console.error("Error updating user data:", error);
-        }
+        console.error("Error updating user data:", error);
       }
     }
   };
@@ -117,7 +103,17 @@ function ProfileForm() {
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.profileLabel}>프로필</div>
       <div className={styles.inputContainer}>
-        {formData.profileImageUrl ? (
+        {previewImage ? (
+          <Image
+            className={styles.fileAddImg}
+            src={previewImage}
+            width={182}
+            height={182}
+            alt="프로필 이미지"
+            objectFit="cover"
+            onClick={handleClickImageUpload}
+          />
+        ) : formData.profileImageUrl ? (
           <Image
             className={styles.fileAddImg}
             src={formData.profileImageUrl}
