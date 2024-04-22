@@ -36,7 +36,7 @@ class UserService {
     }
   }
 
-  static async uploadProfileImage(file: File, onFailure: () => void) {
+  static async uploadProfileImage(file: File) {
     try {
       const token = localStorage.getItem("accessToken");
       if (token) {
@@ -59,7 +59,8 @@ class UserService {
       profileImageUrl: string | undefined;
       nickname: string;
     },
-    onSuccess: () => void
+    onSuccess: () => void,
+    onFailure: () => void
   ) {
     const { profileImageUrl, nickname } = data;
 
@@ -79,7 +80,9 @@ class UserService {
           }
         );
       }
+      onSuccess();
     } catch (error) {
+      onFailure();
       throw error;
     }
   }

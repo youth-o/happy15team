@@ -6,6 +6,7 @@ import Image from "next/image";
 import { UserData } from "@/types/interface";
 import setModals from "@/lib/zustand";
 import NicknameErrorModal from "../Modals/NicknameErrorModal/NicknameErrorModal";
+import ChangeProfileModal from "../Modals/ChangeProfileModal/ChangeProfileModal";
 
 function ProfileForm() {
   const imageInput = useRef<HTMLInputElement>(null!);
@@ -16,7 +17,12 @@ function ProfileForm() {
     profileImageUrl: "",
   });
   const [previewImage, setPreviewImage] = useState<string | null>("");
-  const { nicknameError, openNicknameErrorModal }: any = setModals();
+  const {
+    nicknameError,
+    changeProfileModal,
+    openNicknameErrorModal,
+    openChangeProfileModal,
+  }: any = setModals();
 
   useEffect(() => {
     // 회원 정보를 가져와서 이메일 정보를 설정
@@ -42,12 +48,7 @@ function ProfileForm() {
       try {
         const imageUrl = URL.createObjectURL(file);
         setPreviewImage(imageUrl);
-        const profileImageUrl = await UserService.uploadProfileImage(
-          file,
-          () => {
-            openNicknameErrorModal();
-          }
-        );
+        const profileImageUrl = await UserService.uploadProfileImage(file);
         setFormData((prevFormData) => ({
           ...prevFormData,
           profileImageUrl: profileImageUrl, // 이미지 URL 업데이트
@@ -74,10 +75,18 @@ function ProfileForm() {
     e.preventDefault();
 
     try {
-      await UserService.updateProfile({
-        profileImageUrl: formData.profileImageUrl,
-        nickname: formData.nickname,
-      });
+      await UserService.updateProfile(
+        {
+          profileImageUrl: formData.profileImageUrl,
+          nickname: formData.nickname,
+        },
+        () => {
+          openChangeProfileModal();
+        },
+        () => {
+          openNicknameErrorModal();
+        }
+      );
     } catch (error) {
       console.error("Error updating user data:", error);
     }
@@ -152,6 +161,7 @@ function ProfileForm() {
         저장
       </button>
       {nicknameError && <NicknameErrorModal />}
+      {changeProfileModal && <ChangeProfileModal />}
     </form>
   );
 }

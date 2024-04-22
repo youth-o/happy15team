@@ -23,7 +23,7 @@ const setModals = create((set) => ({
   nicknameError: false, // 닉네임 10자 이상 에러
   samePassword: false, // 현재 비밀번호와 새 비밀번호 중복
   changePassword: false, // 비밀번호 변경 성공
-  
+  changeProfileModal: false, // 프로필 수정 성공
   openEditColumnModal: () => set({ editColumnModal: true }),
   closeEditColumnModal: () => set({ editColumnModal: false }),
   openCheckCardModal: () => set({ checkCardModal: true }),
@@ -48,6 +48,8 @@ const setModals = create((set) => ({
   closeSamePasswordErrorModal: () => set({ samePassword: false }),
   openSuccessChangePasswordModal: () => set({ changePassword: true }),
   closeSuccessChangePasswordModal: () => set({ changePassword: false }),
+  openChangeProfileModal: () => set({ changeProfileModal: true }),
+  closeChangeProfileModal: () => set({ changeProfileModal: false }),
 }));
 
 export default setModals;
