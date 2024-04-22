@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./EmptyInvitations.module.css";
 import Image from "next/image";
 
-const EmptyInvitations: React.FC = () => {
+const EmptyInvitations = () => {
   return (
-      <div className={styles.iconContainer}>
+      <div className={styles.Wrapper}>
         <Image
           src="/images/InviteIcon.svg"
           alt="Invited Icon"

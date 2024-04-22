@@ -11,19 +11,21 @@ interface Props {
   items: Item[];
 }
 
-const ExistInvitations: React.FC<Props> = ({ items }) => {
+const ExistInvitations = ({ items }: Props) => {
   return (
-    <div className={styles.container}>
-      <input placeholder="검색" />
-      <div className={styles.searchIcon}>🔍</div>
-      <div className={`${styles.tableHeader} ${styles.tableDatas}`}>
+    <div className={styles.wrapper}>
+      <div className={styles.inputContainer}>
+        <input placeholder="검색" />
+        <div className={styles.searchIcon}>🔍</div>
+      </div>
+      <div className={`${styles.tableHeader} ${styles.tableItems}`}>
         <div>대시보드 이름</div>
         <div>초대자</div>
         <div>수락여부</div>
       </div>
       {items.map((item) => (
         <div key={item.key}>
-          <div className={styles.tableDatas}>
+          <div className={styles.tableItems}>
             <div>{item.dashboardName}</div>
             <div>{item.inviter}</div>
             <div className={styles.btnContainer}>

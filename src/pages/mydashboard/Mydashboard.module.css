@@ -1,0 +1,27 @@
+.wrapper {
+  position: absolute;
+  top: 5.2rem;
+  left: 30rem;
+  padding: 4rem;
+}
+
+.empty {
+  font-size: 8rem;
+}
+
+.addDashboard {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--Black-10);
+  cursor: pointer;
+}
+
+.addDashboard:hover {
+  color: var(--Violet-20);
+}
