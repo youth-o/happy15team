@@ -1,0 +1,46 @@
+.footer {
+  background-color: #111322;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 14rem;
+}
+
+.footerCopyright {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--Gray-30);
+  text-align: center;
+}
+
+.contentsContainer {
+  display: flex;
+  gap: 3.2rem;
+}
+
+.footerContents {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 20.26px;
+  text-align: center;
+  color: var(--Gray-30);
+}
+
+.footerWebsite {
+  display: flex;
+  gap: 24px;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    display: grid;
+    grid-template-areas:
+      "links sns"
+      ". ."
+      "copyRight .";
+    padding: 30px;
+    width: 100%;
+  }
+}
