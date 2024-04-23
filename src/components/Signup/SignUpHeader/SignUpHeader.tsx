@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "@/components/SignUpHeader/SignUpHeader.module.css";
+import styles from "./SignUpHeader.module.css";
 import Link from "next/link";
 
 function SignUpHeader() {
