@@ -1,0 +1,180 @@
+.main {
+  background-color: var(--Black-40);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 9.4rem 0 16rem;
+  height: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4.8rem;
+}
+
+.section button {
+  width: 28rem;
+  height: 5rem;
+  padding: 1.5rem;
+  background-color: var(--Violet-20);
+  color: var(--White);
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 8px;
+  margin-top: 1.8rem;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+}
+
+.text p {
+  color: var(--White);
+  font-size: 7.6rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 10rem;
+  letter-spacing: -0.2rem;
+}
+
+.description {
+  color: var(--White);
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.1rem;
+  text-align: center;
+  margin-top: 2.4rem;
+}
+
+.card {
+  margin-top: 18.4rem;
+}
+
+.cardContainer {
+  position: relative;
+  width: 120rem;
+  height: 60rem;
+  border-radius: 8px;
+  background-color: var(--Black-30);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 9rem;
+}
+
+.imageFirst {
+  flex-direction: row-reverse;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+  margin-top: 12.3rem;
+  margin-bottom: 22.3rem;
+}
+
+.cardText p {
+  color: var(--Gray-30);
+  font-size: 2.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.cardText h2 {
+  color: var(--White);
+  font-size: 4.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 6.4rem;
+}
+
+.firstCard {
+  padding-left: 6rem;
+}
+
+.secondCard {
+  padding-right: 32.6rem;
+}
+
+.firstCardImg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.secondCardImg {
+  position: absolute;
+  bottom: 0;
+  left: 10.8rem;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 3.6rem;
+}
+
+.article h3 {
+  color: var(--White);
+  font-size: 2.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.articleContainer {
+  display: flex;
+  gap: 3.3rem;
+}
+
+.articleCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.articleImgContainer {
+  width: 37.8rem;
+  height: 26rem;
+  background-color: var(--Black-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.articleTextContainer {
+  width: 37.8rem;
+  height: 12.4rem;
+  background-color: var(--Black-30);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 3.3rem 3.2rem;
+}
+
+.articleTextContainer h5 {
+  color: var(--White);
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 1.8rem;
+}
+
+.articleTextContainer p {
+  color: var(--White);
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
