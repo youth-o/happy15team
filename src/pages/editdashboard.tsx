@@ -10,7 +10,7 @@ function EditDashboardPage() {
       <Nav />
       <Sidebar />
       <BackButton />
-      {/* <EditDashboardTitle /> */}
+      <EditDashboardTitle />
       <EditDashboardMembers />
     </>
   );
