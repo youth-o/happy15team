@@ -20,24 +20,26 @@ interface Props {
 
 const ExistInvitations = ({ items }: Props) => {
   const [invitedData, setInvitedData] = useState({
-    invitedid: 0,
+    inviterId: 0,
     inviteAccepted: false,
   });
 
   const handleInviteAccepted = (id: number) => {
-    setInvitedData(prevState => ({
-      ...prevState,
-      invitedid: id,
-      inviteAccepted: true
-    }));
+    const newInvitedData = {
+      inviterId: id,
+      inviteAccepted: true,
+    };
+
+    setInvitedData(newInvitedData);
   };
-  
+
   const handleInviteRejected = (id: number) => {
-    setInvitedData(prevState => ({
-      ...prevState,
-      invitedid: id,
-      inviteAccepted: false
-    }));
+    const newInvitedData = {
+      inviterId: id,
+      inviteAccepted: false,
+    };
+
+    setInvitedData(newInvitedData);
   };
 
   useEffect(() => {
