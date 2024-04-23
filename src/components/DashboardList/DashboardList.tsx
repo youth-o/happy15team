@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./DashboardList.module.css";
 import { getMyDashboardData } from "@/api/getMyDashboardData";
+import useStore from "@/lib/zustand2";
 
 interface DashboardItem {
   id: string;
@@ -25,6 +26,7 @@ const DashboardList = ({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [items, setItems] = useState<DashboardItem[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
+  const { dataChange, setDataChange } = useStore();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +35,7 @@ const DashboardList = ({
         const dashboardData = await getMyDashboardData(token, page, size);
         setItems(dashboardData.dashboards);
         setTotalCount(dashboardData.totalCount);
+        setDataChange(false);
         if (onEmpty) {
           onEmpty(dashboardData.totalCount === 0);
         }
@@ -42,7 +45,7 @@ const DashboardList = ({
     };
 
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, dataChange, setDataChange]);
 
   const handleClick = (index: number) => {
     setClickedIndex(index);

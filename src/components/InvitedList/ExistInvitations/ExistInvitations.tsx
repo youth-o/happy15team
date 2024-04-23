@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ExistInvitations.module.css";
 import { PostInviteData } from "@/api/postInviteData";
+import useStore from "@/lib/zustand2";
 
 interface Item {
   dashboard: {
@@ -19,6 +20,8 @@ interface Props {
 }
 
 const ExistInvitations = ({ items }: Props) => {
+  const { setDataChange } = useStore();
+
   const [invitedData, setInvitedData] = useState({
     inviterId: 0,
     inviteAccepted: false,
@@ -48,6 +51,7 @@ const ExistInvitations = ({ items }: Props) => {
       if (token) {
         try {
           const data = await PostInviteData(token, invitedData);
+          setDataChange(true);
         } catch (error) {
           console.error(error);
         }
