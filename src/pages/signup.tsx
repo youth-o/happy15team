@@ -11,20 +11,18 @@ function SignUp() {
   const { emailExisted, registerSuccess }: any = setModals();
 
   return (
-    <>
-      <SignLayout>
-        <SignUpHeader />
-        <SignUpForm />
-        <div className={styles.alreadyRegistered}>
-          <p>이미 가입하셨나요?</p>
-          <Link className={styles.link} href="/signin">
-            로그인하기
-          </Link>
-        </div>
-        {registerSuccess && <RegisterSuccessModal />}
-        {emailExisted && <EmailExistedModal />}
-      </SignLayout>
-    </>
+    <SignLayout>
+      <SignUpHeader />
+      <SignUpForm />
+      <div className={styles.alreadyRegistered}>
+        <p>이미 가입하셨나요?</p>
+        <Link className={styles.link} href="/signin">
+          로그인하기
+        </Link>
+      </div>
+      {registerSuccess && <RegisterSuccessModal />}
+      {emailExisted && <EmailExistedModal />}
+    </SignLayout>
   );
 }
 
