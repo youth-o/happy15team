@@ -18,12 +18,13 @@ function MainSection() {
             <Image
               src="/images/taskify.svg"
               width={327}
-              height={65}
+              height={100}
               alt="로고이미지"
             />
           </div>
           <p className={styles.description}>
-            메인 설명 들어갑니다 라고만 적혀있고 왜 설명을 안 적어놓죠? 😓
+            피그마에 메인 설명 들어갑니다 라고만 적혀있고 왜 설명을 안 적어놓죠?
+            😓
           </p>
         </div>
         <Link href="/signin">
