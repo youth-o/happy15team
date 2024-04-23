@@ -13,7 +13,6 @@ const InvitedList = () => {
       try {
         const invitedData = await InvitedData(token, 15);
         setItems(invitedData.invitations);
-        console.log(invitedData.invitations)
       } catch (error) {
         console.error(error);
       }
