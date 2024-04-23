@@ -7,17 +7,17 @@ interface DashboardItem {
   id: string;
   title: string;
   color: string;
-  createdAt: string;
+  createdByMe: boolean;
 }
 
 interface DashboardListProps {
-  itemCount: number;
+  size: number;
   myDashboardPage?: boolean;
   onEmpty?: (isEmpty: boolean) => void;
 }
 
 const DashboardList = ({
-  itemCount,
+  size,
   myDashboardPage = false,
   onEmpty,
 }: DashboardListProps) => {
@@ -30,7 +30,7 @@ const DashboardList = ({
     const fetchData = async () => {
       const token = localStorage.getItem("accessToken");
       try {
-        const dashboardData = await getMyDashboardData(token, page, itemCount);
+        const dashboardData = await getMyDashboardData(token, page, size);
         setItems(dashboardData.dashboards);
         setTotalCount(dashboardData.totalCount);
         if (onEmpty) {
@@ -58,13 +58,13 @@ const DashboardList = ({
 
   const page = currentPage;
 
-  const totalPage = Math.ceil(totalCount / itemCount);
+  const totalPage = Math.ceil(totalCount / size);
 
   return (
     <>
       <div
         className={
-          myDashboardPage ? styles.myDashboardStyle : styles.sidebarSyle
+          myDashboardPage ? styles.myDashboardStyle : styles.sidebarStyle
         }
       >
         {items.map((item, index) => (
@@ -80,7 +80,7 @@ const DashboardList = ({
               style={{ backgroundColor: item.color }}
             ></div>
             <span className={styles.title}>{item.title}</span>
-            {item.createdAt && (
+            {item.createdByMe && (
               <Image
                 src="/images/crown.svg"
                 alt="Crown Icon"

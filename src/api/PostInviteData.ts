@@ -2,11 +2,11 @@ import instance from "@/lib/axios";
 
 async function PostInviteData(
   token: any,
-  invitedData: { invitedid: number; inviteAccepted: boolean }
+  invitedData: { inviterId: number; inviteAccepted: boolean }
 ) {
   try {
     const response = await instance.put(
-      `/invitations/${invitedData.invitedid}`,
+      `/invitations/${invitedData.inviterId}`,
       {
         inviteAccepted: invitedData.inviteAccepted,
       },

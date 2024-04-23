@@ -46,7 +46,7 @@
 
 /* 사이드바에서의 스타일 */
 
-.sidebarSyle {
+.sidebarStyle {
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
@@ -57,18 +57,18 @@
   padding: 0 1.4rem;
 }
 
-.sidebarSyle > div {
+.sidebarStyle > div {
   display: flex;
   border-radius: 8px;
   padding: 1.5rem;
   align-items: center;
 }
 
-.sidebarSyle ~ .pageContainer {
+.sidebarStyle ~ .pageContainer {
   position: fixed;
   margin-top: 1.2rem;
   display: flex;
-  bottom: 4rem;
+  bottom: 3rem;
   left: 12.5rem;
 }
 
