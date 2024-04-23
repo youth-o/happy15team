@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import UserService from "@/api/UserService";
 import setModals from "@/lib/zustand";
 import SamePasswordError from "../Modals/SamePasswordErrorModal/SamePasswordErrorModal";
-import { isAxiosError } from "axios";
 import SuccessChangePassword from "../Modals/SuccessChangePasswordModal/SuccessChangePasswordModal";
 
 function PasswordForm() {
@@ -35,6 +34,7 @@ function PasswordForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm({
     mode: "onBlur",
@@ -42,19 +42,17 @@ function PasswordForm() {
   });
 
   const onSubmit = async (data: { password: string; newPassword: string }) => {
-    try {
-      // 성공적으로 변경되었을 경우 처리
-      await UserService.updatePassword(data);
-      // openSuccessChangePasswordModal();
-    } catch (error) {
-      // 현재 비밀번호가 틀렸을 경우
-      if (isAxiosError(error) && error.response) {
-        alert("현재 비밀번호가 틀립니다.");
-        if (error.response.status === 400) {
-          openSamePasswordErrorModal();
-        }
+    // 성공적으로 변경되었을 경우 처리
+    await UserService.updatePassword(
+      data,
+      () => {
+        openSuccessChangePasswordModal();
+        reset();
+      },
+      () => {
+        openSamePasswordErrorModal();
       }
-    }
+    );
   };
 
   return (
@@ -101,7 +99,7 @@ function PasswordForm() {
           </div>
         )}
       </div>
-      <button className={styles.formBtn} disabled={!isValid}>
+      <button type="submit" className={styles.formBtn} disabled={!isValid}>
         변경
       </button>
       {samePassword && <SamePasswordError />}

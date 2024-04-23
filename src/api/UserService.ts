@@ -2,6 +2,10 @@ import axios from "@/lib/axios";
 import { UserData } from "@/types/interface";
 
 class UserService {
+  private static getToken(): string | null {
+    return localStorage.getItem("accessToken");
+  }
+
   static async signUp(userData: UserData) {
     try {
       const response = await axios.post("/users", userData);
@@ -22,7 +26,7 @@ class UserService {
 
   static async getUserData() {
     try {
-      const token = localStorage.getItem("accessToken");
+      const token = this.getToken();
       if (token) {
         const response = await axios.get("/users/me", {
           headers: {
@@ -36,35 +40,68 @@ class UserService {
     }
   }
 
-  static async updateProfile(userData: {
-    nickname?: string;
-    profileImage?: string;
-  }) {
+  static async uploadProfileImage(file: File) {
     try {
-      const token = localStorage.getItem("accessToken");
+      const token = this.getToken();
       if (token) {
-        const response = await axios.put("/users/me", userData, {
+        const formData = new FormData();
+        formData.append("image", file);
+        const response = await axios.post("/users/me/image", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log("User data updated successfully!");
-        return response.data;
-      } else {
-        throw new Error("Access token not found");
+        return response.data.profileImageUrl;
       }
     } catch (error) {
       throw error;
     }
   }
 
-  static async updatePassword(data: { password: string; newPassword: string }) {
+  static async updateProfile(
+    data: {
+      profileImageUrl: string | undefined;
+      nickname: string;
+    },
+    onSuccess: () => void,
+    onFailure: () => void
+  ) {
+    const { profileImageUrl, nickname } = data;
+
+    try {
+      const token = this.getToken();
+      if (token) {
+        await axios.put(
+          "/users/me",
+          {
+            profileImageUrl,
+            nickname,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      }
+      onSuccess();
+    } catch (error) {
+      onFailure();
+      throw error;
+    }
+  }
+
+  static async updatePassword(
+    data: { password: string; newPassword: string },
+    onSuccess: () => void,
+    onFailure: () => void
+  ) {
     const { password, newPassword } = data;
 
     try {
-      const token = localStorage.getItem("accessToken");
+      const token = this.getToken();
       if (token) {
-        const response = await axios.put(
+        await axios.put(
           "/auth/password",
           {
             password,
@@ -76,11 +113,14 @@ class UserService {
             },
           }
         );
+        onSuccess();
       } else {
         throw new Error("Access token not found");
       }
     } catch (error) {
       console.error("비밀번호 업데이트 중 오류가 발생했습니다.", error);
+      onFailure();
+      console.log(onFailure);
     }
   }
 }
