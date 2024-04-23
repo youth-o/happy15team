@@ -84,3 +84,5 @@ export const usePaginationDashboardMembers = () => {
     handleDeleteButtonClick,
   };
 };
+
+export default usePaginationDashboardMembers;

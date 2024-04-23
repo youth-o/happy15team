@@ -2,6 +2,7 @@ import BackButton from "@/components/MyPageBackBtn/MyPageBackBtn";
 import Nav from "@/components/Nav/Nav";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import EditDashboardTitle from "@/components/EditDashboard/EditDashboardTitle/EditDashboardTitle";
+import EditDashboardMembers from "@/components/EditDashboard/EditDashboardMembers/EditDashboardMembers";
 
 function EditDashboardPage() {
   return (
@@ -9,7 +10,8 @@ function EditDashboardPage() {
       <Nav />
       <Sidebar />
       <BackButton />
-      <EditDashboardTitle />
+      {/* <EditDashboardTitle /> */}
+      <EditDashboardMembers />
     </>
   );
 }
