@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "@material-ui/core": "^4.12.4",
     "axios": "^1.6.8",
     "next": "^14.2.1",
     "react": "^18",

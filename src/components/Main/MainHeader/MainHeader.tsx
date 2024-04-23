@@ -1,11 +1,22 @@
 import Link from "next/link";
 import styles from "./MainHeader.module.css";
 import Image from "next/image";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 function MainHeader() {
+  const isMobile = useMediaQuery("(max-width:479px)");
+
   return (
     <div className={styles.nav}>
-      <Link href="/">
+      {isMobile ? (
+        <Image
+          src="/images/logoIcon.svg"
+          className={styles.logo}
+          width={24}
+          height={27}
+          alt="로고이미지"
+        />
+      ) : (
         <Image
           src="/images/smallLogo.svg"
           className={styles.logo}
@@ -13,7 +24,7 @@ function MainHeader() {
           height={35}
           alt="로고이미지"
         />
-      </Link>
+      )}
       <div>
         <Link href="/signin" className={styles.link}>
           로그인
