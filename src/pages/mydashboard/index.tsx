@@ -30,7 +30,7 @@ const MyDashboard = () => {
           </div>
         )}
         <DashboardList
-          itemCount={6}
+          size={6}
           myDashboardPage={true}
           onEmpty={setDashboardListEmpty}
         />
