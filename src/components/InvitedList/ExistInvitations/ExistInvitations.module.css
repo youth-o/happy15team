@@ -27,11 +27,6 @@
   transform: translate(-50%, -50%);
 }
 
-.tableHeader {
-  color: var(--Gray-30);
-  margin: 3rem 0 0.5rem;
-}
-
 .tableItems {
   color: var(--Black-20);
   font-size: 1.6rem;
@@ -39,6 +34,11 @@
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   margin: 2rem 0;
+}
+
+.tableHeader {
+  color: var(--Gray-30);
+  margin: 3rem 0 0.5rem;
 }
 
 .tableItems div {
