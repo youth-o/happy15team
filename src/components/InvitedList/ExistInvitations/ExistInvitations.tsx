@@ -21,6 +21,25 @@ interface Props {
 
 const ExistInvitations = ({ items }: Props) => {
   const { setDataChange } = useStore();
+  const [searchTitle, setSearchTitle] = useState<string>("");
+  const [searchedItems, setSearchedItems] = useState<Item[]>(items);
+  
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchText = e.target.value;
+    setSearchTitle(searchText);
+    const results = searchInArrayOfObjects(items, searchText);
+    setSearchedItems(results);
+  };
+  
+  const searchInArrayOfObjects = (arr: Item[], searchText: string): Item[] => {
+    const foundItems: Item[] = [];
+    for (const obj of arr) {
+      if (obj.dashboard.title.includes(searchText)) {
+        foundItems.push(obj);
+      }
+    }
+    return foundItems;
+  };
 
   const [invitedData, setInvitedData] = useState({
     inviterId: 0,
@@ -66,7 +85,11 @@ const ExistInvitations = ({ items }: Props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.inputContainer}>
-        <input placeholder="검색" />
+        <input
+          placeholder="검색"
+          value={searchTitle}
+          onChange={handleTextChange}
+        />
         <div className={styles.searchIcon}>🔍</div>
       </div>
       <div className={`${styles.tableHeader} ${styles.tableItems}`}>
@@ -74,7 +97,7 @@ const ExistInvitations = ({ items }: Props) => {
         <div>초대자</div>
         <div>수락여부</div>
       </div>
-      {items.map((item) => (
+      {searchedItems.map((item) => (
         <div key={item.id}>
           <div className={styles.tableItems}>
             <div>{item.dashboard.title}</div>
