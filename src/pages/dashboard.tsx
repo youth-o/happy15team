@@ -1,3 +1,4 @@
+import { getDashboardData } from "@/api/DashboardData";
 import Column from "@/components/Column/Column";
 import DashboardLayout from "@/components/DashboardLayout/DashboardLayout";
 import AddColumnModal from "@/components/Modals/AddColumnModal/AddColumnModal";
@@ -9,6 +10,8 @@ import Nav from "@/components/Nav/Nav";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import setModals from "@/lib/zustand";
 
+import { useEffect, useState } from "react";
+
 const dashboard = () => {
   const {
     addColumnModal,
@@ -16,7 +19,26 @@ const dashboard = () => {
     editCardModal,
     checkCardModal,
     editColumnModal,
+    dashboardData,
+    setDashboardData,
   }: any = setModals();
+
+  const fetchDashboardData = async () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      const dashboardData = await getDashboardData(token);
+      setDashboardData({
+        id: dashboardData.id,
+        title: dashboardData.title,
+        userId: dashboardData.userId,
+        createdByMe: dashboardData.createdByMe,
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
   return (
     <>
       <Nav />

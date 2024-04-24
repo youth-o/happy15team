@@ -15,27 +15,26 @@ type userData = Pick<UserData, "email" | "nickname" | "profileImageUrl">;
 const Nav = () => {
   const router = useRouter();
   const path = router.pathname;
-  const { modalState }: any = setModals();
+  const { modalState, dashboardData }: any = setModals();
   const [userData, setUserData] = useState<userData>({
     email: "",
     nickname: "",
     profileImageUrl: "",
   });
 
-  console.log(userData.profileImageUrl);
+  const fetchUserData = async () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      const userData = await UserService.getUserData();
+      setUserData({
+        email: userData.email,
+        nickname: userData.nickname,
+        profileImageUrl: userData.profileImageUrl,
+      });
+    }
+  };
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const token = localStorage.getItem("accessToken");
-      if (token) {
-        const userData = await UserService.getUserData();
-        setUserData({
-          email: userData.email,
-          nickname: userData.nickname,
-          profileImageUrl: userData.profileImageUrl,
-        });
-      }
-    };
     fetchUserData();
   }, []);
 
@@ -51,7 +50,7 @@ const Nav = () => {
               path === "/mydashboard" ? styles.myDashBoard : styles.section2
             }
           >
-            <NavButtons />
+            {dashboardData.createdByMe && <NavButtons />}
             <NavParticipants />
             <div className={styles.vr} />
           </div>
