@@ -46,7 +46,7 @@ const DashboardList = ({
     };
 
     fetchData();
-  }, [currentPage, dataChange, setDataChange]);
+  }, [currentPage, dataChange]);
 
   const handleClick = (index: number) => {
     setClickedIndex(index);

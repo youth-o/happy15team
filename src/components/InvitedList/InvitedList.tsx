@@ -26,7 +26,7 @@ const InvitedList = () => {
     const fetchData = async () => {
       const token = localStorage.getItem("accessToken");
       try {
-        const invitedData = await InvitedData(token, 15);
+        const invitedData = await InvitedData(token, 30);
         setItems([...invitedData.invitations]);
         setDataChange(false);
         
@@ -36,7 +36,7 @@ const InvitedList = () => {
     };
 
     fetchData();
-  }, [dataChange, setDataChange]);
+  }, [dataChange]);
 
   return (
     <div className={styles.wrapper}>
