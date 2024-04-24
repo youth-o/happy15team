@@ -238,6 +238,10 @@
 
 /* 모바일 세로 (해상도 ~ 479px)*/
 @media all and (max-width: 479px) {
+  .main {
+    padding: 4.2rem 0 12rem;
+  }
+
   .section {
     gap: 2.6rem;
   }
@@ -276,6 +280,10 @@
 
   .card {
     margin-top: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .cardContainer {
