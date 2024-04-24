@@ -182,7 +182,7 @@ function SignUpForm() {
         <p>이용약관에 동의합니다.</p>
       </div>
       <button
-        className={styles.loginBtn}
+        className={styles.registerBtn}
         type="submit"
         disabled={!isValid || !agreeTerms}
       >

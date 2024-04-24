@@ -52,7 +52,7 @@
 }
 
 .editContainer input {
-  padding: 15px 16px;
+  padding: 1.5rem 1.6rem;
   border-radius: 6px;
   width: 36.6rem;
   height: 4.8rem;
@@ -87,4 +87,66 @@
   font-size: 1.4rem;
   font-weight: 500;
   line-height: normal;
+}
+
+/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
+@media all and (min-width: 480px) and (max-width: 767px) {
+  .form {
+    width: 54.4rem;
+    margin-left: 18rem;
+  }
+
+  .editContainer input {
+    width: 29rem;
+    height: 4.8rem;
+  }
+}
+
+/* 모바일 세로 (해상도 ~ 479px)*/
+@media all and (max-width: 479px) {
+  .form {
+    width: 28.4rem;
+    height: 42.2rem;
+    padding: 2.8rem 2rem;
+    margin-left: 8rem;
+    margin-top: 2rem;
+    gap: 2.4rem;
+  }
+
+  .profileLabel {
+    font-size: 2rem;
+  }
+
+  .inputContainer {
+    gap: 0;
+    display: inline-block;
+  }
+
+  .fileAddImg {
+    width: 10rem;
+    height: 10rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .editContainer {
+    margin-bottom: 1.6rem;
+  }
+
+  .editContainer label {
+    font-size: 1.6rem;
+  }
+
+  .editContainer input {
+    padding: 1.3rem 1.6rem;
+    width: 24.4rem;
+    height: 4.2rem;
+    font-size: 1.4rem;
+  }
+
+  .formBtn {
+    right: 2rem;
+    bottom: 2rem;
+    padding: 0.7rem 2.5rem;
+    font-size: 1.2rem;
+  }
 }
