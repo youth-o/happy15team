@@ -4,10 +4,12 @@ import Image from "next/image";
 import styles from "./CreateDashboardModal.module.css";
 import { PostCreateDashboardData } from "@/api/PostCreateDashboardData";
 import useStore from "@/lib/zustand2";
+import { useRouter } from 'next/router';
 
 const colorList = ["#7ac555", "#5534da", "#ffa500", "#76a5ea", "#e876ea"];
 
 const CreateDashboardModal = () => {
+  const router = useRouter();
   const { setDataChange } = useStore();
   const { closeCreateDashboardModal }: any = setModals();
   const [clickedIndex, setClickedIndex] = useState<number>(0);
@@ -42,6 +44,7 @@ const CreateDashboardModal = () => {
         const data = await PostCreateDashboardData(token, createDashboardData);
         setDataChange(true);
         closeCreateDashboardModal();
+        router.push(`/dashboard/${data.data.id}`);
       } catch (error) {
         console.error(error);
       }

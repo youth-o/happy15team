@@ -23,14 +23,18 @@ const ExistInvitations = ({ items }: Props) => {
   const { setDataChange } = useStore();
   const [searchTitle, setSearchTitle] = useState<string>("");
   const [searchedItems, setSearchedItems] = useState<Item[]>(items);
-  
+  const [invitedData, setInvitedData] = useState({
+    inviterId: 0,
+    inviteAccepted: false,
+  });
+
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
     setSearchTitle(searchText);
     const results = searchInArrayOfObjects(items, searchText);
     setSearchedItems(results);
   };
-  
+
   const searchInArrayOfObjects = (arr: Item[], searchText: string): Item[] => {
     const foundItems: Item[] = [];
     for (const obj of arr) {
@@ -40,11 +44,6 @@ const ExistInvitations = ({ items }: Props) => {
     }
     return foundItems;
   };
-
-  const [invitedData, setInvitedData] = useState({
-    inviterId: 0,
-    inviteAccepted: false,
-  });
 
   const handleInviteAccepted = (id: number) => {
     const newInvitedData = {
