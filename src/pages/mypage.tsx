@@ -1,6 +1,6 @@
-import BackButton from "@/components/MyPageBackBtn/MyPageBackBtn";
-import PasswordForm from "@/components/MyPagePasswordForm/MyPagePasswordForm";
-import ProfileForm from "@/components/MyPageProfileForm/MyPageProfileForm";
+import BackButton from "@/components/Mypage/MyPageBackBtn/MyPageBackBtn";
+import PasswordForm from "@/components/Mypage/MyPagePasswordForm/MyPagePasswordForm";
+import ProfileForm from "@/components/Mypage/MyPageProfileForm/MyPageProfileForm";
 import Nav from "@/components/Nav/Nav";
 import Sidebar from "@/components/Sidebar/Sidebar";
 
