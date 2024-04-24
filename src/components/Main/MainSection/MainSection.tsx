@@ -7,6 +7,7 @@ function MainSection() {
     <div className={styles.main}>
       <div className={styles.section}>
         <Image
+          className={styles.sectionImg}
           src="/images/section.svg"
           width={722}
           height={423}
@@ -16,6 +17,7 @@ function MainSection() {
           <div className={styles.text}>
             <p>새로운 일정관리</p>
             <Image
+              className={styles.taskifyImg}
               src="/images/taskify.svg"
               width={327}
               height={100}
