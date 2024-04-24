@@ -12,11 +12,11 @@ export default function ColorSelector({
   setSelectedColor,
 }: ColorSelectorProps) {
   const colors = [
-    "var(--Green)",
-    "var(--Violet-20)",
-    "var(--Orange)",
-    "var(--Blue)",
-    "var(--Pink)",
+    "#7ac555", // Green
+    "#5534da", // Violet-20
+    "#ffa500", // Orange
+    "#76a5ea", // Blue
+    "#e876ea", // Pink
   ];
 
   return (
@@ -27,12 +27,15 @@ export default function ColorSelector({
           key={color}
           onClick={() => setSelectedColor(color)}
           type="button"
+          style={{
+            backgroundColor: color,
+          }}
         >
           {selectedColor === color && (
             <Image
               width={24}
               height={24}
-              src="/public/images/check.svg"
+              src="/images/check.svg"
               alt="체크 아이콘"
             />
           )}

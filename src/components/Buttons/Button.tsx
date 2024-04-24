@@ -12,7 +12,6 @@ interface ButtonProps {
   disabled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onBlur?: () => void;
-  // 버튼 내용물
   prefix?: ReactNode;
   children?: ReactNode;
   appendix?: ReactNode;
@@ -30,15 +29,10 @@ export default function Button({
   children,
   appendix,
 }: ButtonProps) {
-  const baseStyle = `flex justify-center items-center`;
-  const variantStyles = {
-    primary: "bg-violet text-white",
-    secondary: "bg-white border border-gray_D9D9D9",
-    ghost: "bg-invisible border border-gray_D9D9D9",
-  };
-  const activeStyle = isActive
-    ? `${variantStyles[variant]}`
-    : "text-white bg-gray_9FA6B2 cursor-not-allowed";
+  const baseStyle = "button";
+  const variantStyle = `button-${variant}`;
+
+  const activeStyle = isActive ? variantStyle : "button-disabled";
 
   return (
     <button

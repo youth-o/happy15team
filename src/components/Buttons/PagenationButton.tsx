@@ -25,7 +25,7 @@ function PagenationButtons({
       <span className={spanStyle}>
         {allPage} 페이지 중 {nowPage}
       </span>
-      <div className="flex items-center">
+      <div>
         <Button
           variant="secondary"
           customStyles={buttonStyle}
@@ -46,7 +46,7 @@ function PagenationButtons({
           onClick={handleForwardButtonClick}
         >
           <Image
-            src="images/arrow-backward-white.svg"
+            src="images/arrow-forward-white.svg"
             width={20}
             height={20}
             alt="앞으로 가기 아이콘"
