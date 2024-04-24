@@ -31,7 +31,7 @@ const Sidebar = () => {
             className={styles.cursorPointer}
           />
         </div>
-        <DashboardList itemCount={13} />
+        <DashboardList size={10} />
       </div>
       {createDashboardModalState && <CreateDashboardModal />}
     </>

@@ -13,6 +13,7 @@ function BackButton() {
     <div className={styles.buttonContainer} onClick={handleClickBack}>
       <Image
         src="/images/back.svg"
+        className={styles.backImg}
         width={20}
         height={20}
         alt="뒤로가기아이콘"

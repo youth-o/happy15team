@@ -5,8 +5,8 @@ import UserService from "@/api/UserService";
 import Image from "next/image";
 import { UserData } from "@/types/interface";
 import setModals from "@/lib/zustand";
-import NicknameErrorModal from "../Modals/NicknameErrorModal/NicknameErrorModal";
-import ChangeProfileModal from "../Modals/ChangeProfileModal/ChangeProfileModal";
+import NicknameErrorModal from "../../Modals/NicknameErrorModal/NicknameErrorModal";
+import ChangeProfileModal from "../../Modals/ChangeProfileModal/ChangeProfileModal";
 
 function ProfileForm() {
   const imageInput = useRef<HTMLInputElement>(null!);
