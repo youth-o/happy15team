@@ -9,6 +9,7 @@ import EditColumnModal from "@/components/Modals/EditColumnModal/EditColumnModal
 import Nav from "@/components/Nav/Nav";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import setModals from "@/lib/zustand";
+import { useRouter } from "next/router";
 
 import { useEffect, useState } from "react";
 
@@ -23,10 +24,14 @@ const dashboard = () => {
     setDashboardData,
   }: any = setModals();
 
+  const router = useRouter();
+  const { id }: any = router.query;
+  console.log(id);
+
   const fetchDashboardData = async () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
-      const dashboardData = await getDashboardData(token);
+      const dashboardData = await getDashboardData(token, id);
       setDashboardData({
         id: dashboardData.id,
         title: dashboardData.title,

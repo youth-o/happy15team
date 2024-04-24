@@ -5,9 +5,7 @@
   font-weight: 700;
   color: var(--White);
   display: flex;
-  align-items: center;
   justify-content: center;
-  background-color: var(--Orange);
   border-radius: 20px;
   border: 1px solid var(--White);
 }

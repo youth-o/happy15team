@@ -10,13 +10,14 @@ import { Fragment, useEffect, useState } from "react";
 import UserService from "@/api/UserService";
 import { UserData } from "@/types/interface";
 
-type userData = Pick<UserData, "email" | "nickname" | "profileImageUrl">;
+type userData = Pick<UserData, "id" | "email" | "nickname" | "profileImageUrl">;
 
 const Nav = () => {
   const router = useRouter();
   const path = router.pathname;
   const { modalState, dashboardData }: any = setModals();
   const [userData, setUserData] = useState<userData>({
+    id: "",
     email: "",
     nickname: "",
     profileImageUrl: "",
@@ -27,6 +28,7 @@ const Nav = () => {
     if (token) {
       const userData = await UserService.getUserData();
       setUserData({
+        id: userData.id,
         email: userData.email,
         nickname: userData.nickname,
         profileImageUrl: userData.profileImageUrl,

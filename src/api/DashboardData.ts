@@ -2,9 +2,9 @@ import instance from "@/lib/axios";
 
 
 
-async function getDashboardData(token: any){
+async function getDashboardData(token: any,id:string){
   try {
-    const response = await instance.get("/dashboards/6427", {
+    const response = await instance.get(`/dashboards/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
