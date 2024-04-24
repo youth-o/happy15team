@@ -1,4 +1,4 @@
-import dashboard from "@/pages/dashboard";
+import dashboard from "@/pages/dashboard/[id]";
 import { create } from "zustand";
 
 //Todo
@@ -27,6 +27,12 @@ const setModals = create((set) => ({
     userId: "",
     createdByMe: false,
   },
+  loginUserData:{ id: "",
+        email: "",
+        nickname: "",
+    profileImageUrl: "",
+  },
+  setLoginUserData:(data:any) => set({loginUserData:data}),
 
   setDashboardData: (data:any) => set({dashboardData:data}),
   openEditColumnModal: () => set({ editColumnModal: true }),

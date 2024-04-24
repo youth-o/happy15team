@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import styles from "./UserProfileImage.module.css";
-import setModals from "@/lib/zustand";
+import styles from "./Participants.module.css";
 
-const UserProfileImage = () => {
-  const { loginUserData } = setModals();
+const Participants = ({ user }) => {
   const [userColor, setUserColor] = useState("");
   const handleUserColor = () => {
-    switch (loginUserData.id % 4) {
+    switch (user.userId % 4) {
       case 0:
         setUserColor("green");
         break;
@@ -28,9 +26,9 @@ const UserProfileImage = () => {
 
   return (
     <div className={`${styles.UserProfileImage} ${styles[userColor]}`}>
-      {loginUserData.email.charAt(0)}
+      {user?.email.charAt(0)}
     </div>
   );
 };
 
-export default UserProfileImage;
+export default Participants;

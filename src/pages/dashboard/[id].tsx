@@ -1,4 +1,4 @@
-import { getDashboardData } from "@/api/DashboardData";
+import { getDashboardData, getDashboardMebers } from "@/api/DashboardData";
 import Column from "@/components/Column/Column";
 import DashboardLayout from "@/components/DashboardLayout/DashboardLayout";
 import AddColumnModal from "@/components/Modals/AddColumnModal/AddColumnModal";
@@ -22,31 +22,33 @@ const dashboard = () => {
     editColumnModal,
     dashboardData,
     setDashboardData,
+    loginUserData,
   }: any = setModals();
-
+  const [dashboardMembers, setDashboardMembers] = useState([{ userId: "" }]);
   const router = useRouter();
   const { id }: any = router.query;
-  console.log(id);
 
   const fetchDashboardData = async () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       const dashboardData = await getDashboardData(token, id);
+      const dashboardMembers = await getDashboardMebers(token, id);
       setDashboardData({
         id: dashboardData.id,
         title: dashboardData.title,
         userId: dashboardData.userId,
         createdByMe: dashboardData.createdByMe,
       });
+      setDashboardMembers(dashboardMembers);
     }
   };
 
   useEffect(() => {
     fetchDashboardData();
-  }, []);
+  }, [id]);
   return (
     <>
-      <Nav />
+      <Nav dashboardMembers={dashboardMembers} />
       <Sidebar />
       <DashboardLayout>
         <Column />

@@ -12,22 +12,16 @@ import { UserData } from "@/types/interface";
 
 type userData = Pick<UserData, "id" | "email" | "nickname" | "profileImageUrl">;
 
-const Nav = () => {
+const Nav = ({ dashboardMembers }) => {
   const router = useRouter();
   const path = router.pathname;
-  const { modalState, dashboardData }: any = setModals();
-  const [userData, setUserData] = useState<userData>({
-    id: "",
-    email: "",
-    nickname: "",
-    profileImageUrl: "",
-  });
-
+  const { modalState, dashboardData, setLoginUserData }: any = setModals();
+  console.log(dashboardMembers);
   const fetchUserData = async () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       const userData = await UserService.getUserData();
-      setUserData({
+      setLoginUserData({
         id: userData.id,
         email: userData.email,
         nickname: userData.nickname,
@@ -53,10 +47,10 @@ const Nav = () => {
             }
           >
             {dashboardData.createdByMe && <NavButtons />}
-            <NavParticipants />
+            <NavParticipants dashboardMembers={dashboardMembers} />
             <div className={styles.vr} />
           </div>
-          <NavUserProfile userData={userData} />
+          <NavUserProfile />
         </div>
       </div>
       {modalState && <InviteModal />}
