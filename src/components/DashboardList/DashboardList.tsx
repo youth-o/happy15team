@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./DashboardList.module.css";
 import { getMyDashboardData } from "@/api/getMyDashboardData";
 import useStore from "@/lib/zustand2";
+import Link from "next/link";
 
 interface DashboardItem {
   id: string;
@@ -71,27 +72,28 @@ const DashboardList = ({
         }
       >
         {items.map((item, index) => (
-          <div
-            key={item.id}
-            className={`${styles.dashboardItems} ${
-              clickedIndex === index ? styles.clicked : ""
-            }`}
-            onClick={() => handleClick(index)}
-          >
+          <Link href={`/dashboard/${item.id}`} key={item.id}>
             <div
-              className={styles.circle}
-              style={{ backgroundColor: item.color }}
-            ></div>
-            <span className={styles.title}>{item.title}</span>
-            {item.createdByMe && (
-              <Image
-                src="/images/crown.svg"
-                alt="Crown Icon"
-                width={17.5}
-                height={14}
-              />
-            )}
-          </div>
+              className={`${styles.dashboardItems} ${
+                clickedIndex === index ? styles.clicked : ""
+              }`}
+              onClick={() => handleClick(index)}
+            >
+              <div
+                className={styles.circle}
+                style={{ backgroundColor: item.color }}
+              ></div>
+              <span className={styles.title}>{item.title}</span>
+              {item.createdByMe && (
+                <Image
+                  src="/images/crown.svg"
+                  alt="Crown Icon"
+                  width={17.5}
+                  height={14}
+                />
+              )}
+            </div>
+          </Link>
         ))}
       </div>
       {totalCount !== 0 ? (

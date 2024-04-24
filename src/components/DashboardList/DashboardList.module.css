@@ -6,7 +6,7 @@
   gap: 1.3rem;
 }
 
-.myDashboardStyle > div {
+.myDashboardStyle .dashboardItems {
   width: 33rem;
   height: 7rem;
   border: 1px solid var(--Gray-20);
@@ -57,7 +57,7 @@
   padding: 0 1.4rem;
 }
 
-.sidebarStyle > div {
+.sidebarStyle .dashboardItems {
   display: flex;
   border-radius: 8px;
   padding: 1.5rem;
