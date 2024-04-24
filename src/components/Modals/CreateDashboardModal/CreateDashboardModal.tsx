@@ -1,5 +1,6 @@
 import setModals from "@/lib/zustand";
-import React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import styles from "./CreateDashboardModal.module.css";
 
 // 아래는 테스트를 위한 color 배열 생성, API 연결 후 지울 예정
@@ -13,14 +14,22 @@ const items = [
 
 const CreateDashboardModal = () => {
   const { closeCreateDashboardModal }: any = setModals();
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
 
   //아래는 오버레이의 버블링으로 모달 내부를 클릭했을때 꺼지는 것을 방지하기 위한 코드입니다.
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 
+  const handleClick = (index: number) => {
+    setClickedIndex(index);
+  };
+
   const handleClickModalOutside = () => {
     closeCreateDashboardModal();
+  };
+  const handleCreateDashboard = () => {
+    //대시보드 생성 api 보내고 거기로 이동
   };
 
   return (
@@ -36,14 +45,25 @@ const CreateDashboardModal = () => {
                 key={index}
                 className={styles.circle}
                 style={{ backgroundColor: color }}
-              ></div>
+                onClick={() => handleClick(index)}
+              >
+                {clickedIndex === index ? (
+                  <Image
+                    src="/images/checkIcon.svg"
+                    alt="Check Icon"
+                    width={24}
+                    height={24}
+                  />
+                ) : null}
+              </div>
             ))}
           </div>
           <div className={styles.buttonContainer}>
             <button onClick={handleClickModalOutside}>취소</button>
-            <button>생성</button>
+            <button onClick={handleCreateDashboard} type="submit">
+              생성
+            </button>
           </div>
-          {/* 생성버튼에는 onClick 이 아닌 onSubmit 속성 넣을 예정 */}
         </form>
       </div>
     </div>
