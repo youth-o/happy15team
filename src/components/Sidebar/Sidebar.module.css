@@ -20,6 +20,14 @@
   font-weight: 700;
 }
 
-.cursorPointer {
+.cursorPointer:hover {
   cursor: pointer;
+  filter: invert(20%) sepia(94%) saturate(2347%) hue-rotate(242deg)
+    brightness(100%) contrast(84%);
+}
+
+.logo:hover {
+  cursor: pointer;
+  filter: invert(90%) sepia(100%) saturate(2347%) hue-rotate(242deg)
+    brightness(100%) contrast(80%);
 }
