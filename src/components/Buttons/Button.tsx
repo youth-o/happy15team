@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import styles from "./Button.module.css";
 
 type ButtonType = JSX.IntrinsicElements["button"]["type"];
 
@@ -29,10 +30,9 @@ export default function Button({
   children,
   appendix,
 }: ButtonProps) {
-  const baseStyle = "button";
-  const variantStyle = `button-${variant}`;
-
-  const activeStyle = isActive ? variantStyle : "button-disabled";
+  const baseStyle = styles.button;
+  const variantStyle = styles[`button-${variant}`];
+  const activeStyle = isActive ? variantStyle : styles["button-disabled"];
 
   return (
     <button

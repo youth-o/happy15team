@@ -1,4 +1,4 @@
-:root {
+.button {
   --button-primary-bg: #5534da;
   --button-primary-text-color: #fff;
   --button-secondary-bg: #fff;
@@ -6,9 +6,7 @@
   --button-secondary-border: 1px solid #d9d9d9;
   --button-ghost-text-color: #333;
   --button-ghost-border: 1px solid #d9d9d9;
-}
 
-.button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,4 +32,9 @@
   background-color: transparent;
   color: var(--button-ghost-text-color);
   border: var(--button-ghost-border);
+}
+
+.button-disabled {
+  color: var(--button-primary-text-color);
+  cursor: not-allowed;
 }
