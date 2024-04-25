@@ -5,12 +5,14 @@ import UserService from "@/api/UserService";
 import Image from "next/image";
 import { UserData } from "@/types/interface";
 import setModals from "@/lib/zustand";
-import NicknameErrorModal from "../../Modals/NicknameErrorModal/NicknameErrorModal";
-import ChangeProfileModal from "../../Modals/ChangeProfileModal/ChangeProfileModal";
+import NicknameErrorModal from "@/components/Modals/NicknameErrorModal/NicknameErrorModal";
+import ChangeProfileModal from "@/components/Modals/ChangeProfileModal/ChangeProfileModal";
+import useStore from "@/lib/zustand2";
+
+type UserFormInput = Pick<UserData, "email" | "nickname" | "profileImageUrl">;
 
 function ProfileForm() {
   const imageInput = useRef<HTMLInputElement>(null!);
-  type UserFormInput = Pick<UserData, "email" | "nickname" | "profileImageUrl">;
   const [formData, setFormData] = useState<UserFormInput>({
     email: "",
     nickname: "",
@@ -23,6 +25,7 @@ function ProfileForm() {
     openNicknameErrorModal,
     openChangeProfileModal,
   }: any = setModals();
+  const { dataChange, setDataChange } = useStore();
 
   useEffect(() => {
     // 회원 정보를 가져와서 이메일 정보를 설정
@@ -39,7 +42,7 @@ function ProfileForm() {
       }
     };
     fetchUserData();
-  }, []);
+  }, [dataChange]);
 
   // 파일이 선택되었을 때 호출되는 함수
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +72,7 @@ function ProfileForm() {
 
   const handleClickImageUpload = () => {
     imageInput.current.click();
+    setDataChange(true);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -82,6 +86,7 @@ function ProfileForm() {
         },
         () => {
           openChangeProfileModal();
+          setDataChange(true);
         },
         () => {
           openNicknameErrorModal();
