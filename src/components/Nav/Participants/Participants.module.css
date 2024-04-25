@@ -1,0 +1,28 @@
+.UserProfileImage {
+  width: 3.4rem;
+  height: 3.4rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--White);
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+  border: 1px solid var(--White);
+  align-items: center;
+}
+
+.orange {
+  background-color: var(--Orange);
+}
+
+.blue {
+  background-color: var(--Blue);
+}
+
+.purple {
+  background-color: var(--Purple);
+}
+
+.green {
+  background-color: var(--Green);
+}
