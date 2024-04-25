@@ -34,6 +34,7 @@ const dashboard = () => {
   const { id }: any = router.query;
 
   const fetchDashboardData = async () => {
+    if (!id) return null;
     const token = localStorage.getItem("accessToken");
     if (token) {
       const dashboardData = await getDashboardData(token, id);
@@ -61,7 +62,7 @@ const dashboard = () => {
         <Column columnData={columnData} />
       </DashboardLayout>
       {addColumnModal && <AddColumnModal />}
-      {createCardModal && <CreateCardModal />}
+
       {editCardModal && <EditCardModal />}
       {checkCardModal && <CheckCardModal />}
       {editColumnModal && <EditColumnModal />}

@@ -41,7 +41,9 @@ const Participants = ({ user }) => {
           : ""
       }`}
     >
-      {user.email ? user.email.charAt(0) : user.nickname?.charAt(0)}
+      {user.email
+        ? user.email.charAt(0).toUpperCase()
+        : user.nickname?.charAt(0).toUpperCase()}
     </div>
   );
 };

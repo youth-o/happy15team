@@ -28,7 +28,7 @@ const UserProfileImage = () => {
 
   return (
     <div className={`${styles.UserProfileImage} ${styles[userColor]}`}>
-      {loginUserData.email.charAt(0)}
+      {loginUserData.email.charAt(0).toUpperCase()}
     </div>
   );
 };
