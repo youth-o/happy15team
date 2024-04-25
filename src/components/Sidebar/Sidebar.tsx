@@ -18,6 +18,7 @@ const Sidebar = () => {
             alt="Taskify Logo"
             width={109}
             height={33}
+            className={styles.logo}
           />
         </Link>
         <div className={styles.title}>

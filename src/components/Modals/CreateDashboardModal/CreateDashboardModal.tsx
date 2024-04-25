@@ -1,20 +1,58 @@
 import setModals from "@/lib/zustand";
-import React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import styles from "./CreateDashboardModal.module.css";
+import { PostCreateDashboardData } from "@/api/PostCreateDashboardData";
+import useStore from "@/lib/zustand2";
+import { useRouter } from 'next/router';
 
-// 아래는 테스트를 위한 color 배열 생성, API 연결 후 지울 예정
-const items = [
-  "var(--Green)",
-  "var(--Violet-20)",
-  "var(--Orange)",
-  "var(--Blue)",
-  "var(--Pink)",
-];
+const colorList = ["#7ac555", "#5534da", "#ffa500", "#76a5ea", "#e876ea"];
 
 const CreateDashboardModal = () => {
+  const router = useRouter();
+  const { setDataChange } = useStore();
   const { closeCreateDashboardModal }: any = setModals();
+  const [clickedIndex, setClickedIndex] = useState<number>(0);
+  const [dashboardTitle, setDashboardTitle] = useState<string>("");
 
-  //아래는 오버레이의 버블링으로 모달 내부를 클릭했을때 꺼지는 것을 방지하기 위한 코드입니다.
+  let createDashboardData = {
+    title: "",
+    color: "",
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDashboardTitle(e.target.value);
+  };
+
+  const handleClick = (index: number) => {
+    setClickedIndex(index);
+  };
+
+  const handleCreateDashboard = () => {
+    createDashboardData = {
+      title: dashboardTitle,
+      color: colorList[clickedIndex],
+    };
+
+    fetchData();
+  };
+
+  const fetchData = async () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      try {
+        const data = await PostCreateDashboardData(token, createDashboardData);
+        setDataChange(data.data.id);
+        closeCreateDashboardModal();
+        router.push(`/dashboard/${data.data.id}`);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.error("토큰 없음");
+    }
+  };
+
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
@@ -29,21 +67,36 @@ const CreateDashboardModal = () => {
         <form>
           <div className={styles.title}>새로운 대시보드</div>
           <div className={styles.naming}>대시보드 이름</div>
-          <input placeholder="뉴프로젝트"></input>
+          <input
+            placeholder="뉴프로젝트"
+            value={dashboardTitle}
+            onChange={handleTitleChange}
+          ></input>
           <div className={styles.circleContainer}>
-            {items.map((color, index) => (
+            {colorList.map((color, index) => (
               <div
                 key={index}
                 className={styles.circle}
                 style={{ backgroundColor: color }}
-              ></div>
+                onClick={() => handleClick(index)}
+              >
+                {clickedIndex === index ? (
+                  <Image
+                    src="/images/checkIcon.svg"
+                    alt="Check Icon"
+                    width={24}
+                    height={24}
+                  />
+                ) : null}
+              </div>
             ))}
           </div>
           <div className={styles.buttonContainer}>
             <button onClick={handleClickModalOutside}>취소</button>
-            <button>생성</button>
+            <button onClick={handleCreateDashboard} type="button">
+              생성
+            </button>
           </div>
-          {/* 생성버튼에는 onClick 이 아닌 onSubmit 속성 넣을 예정 */}
         </form>
       </div>
     </div>

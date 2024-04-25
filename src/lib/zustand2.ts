@@ -6,13 +6,13 @@ import create from 'zustand';
 //리팩토링때 리액트쿼리로 변경할거라 임시로 2로 만들었어요
 
 interface AppState {
-  dataChange: boolean;
-  setDataChange: (value: boolean) => void;
+  dataChange: number;
+  setDataChange: (value: number) => void;
 }
 
 const useStore = create<AppState>((set) => ({
-  dataChange: false,
-  setDataChange: (value: boolean) => set({ dataChange: value }),
+  dataChange: 0,
+  setDataChange: (value: number) => set({ dataChange: value }),
 }));
 
 export default useStore;

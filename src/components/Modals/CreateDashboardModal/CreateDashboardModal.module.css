@@ -53,6 +53,10 @@
   margin-right: 1rem;
 }
 
+.circle:hover{
+  cursor: pointer;
+}
+
 .buttonContainer {
   margin-top: 2rem;
   display: flex;

@@ -20,23 +20,21 @@ interface Item {
 
 const InvitedList = () => {
   const [items, setItems] = useState<Item[]>([]);
-  const { dataChange, setDataChange } = useStore();
+  const { dataChange } = useStore();
 
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("accessToken");
       try {
-        const invitedData = await InvitedData(token, 15);
-        setItems([...invitedData.invitations]);
-        setDataChange(false);
-        
+        const invitedData = await InvitedData(token, 30);
+        setItems(invitedData.invitations);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-  }, [dataChange, setDataChange]);
+  }, [dataChange]);
 
   return (
     <div className={styles.wrapper}>

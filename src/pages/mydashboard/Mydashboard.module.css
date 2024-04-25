@@ -5,23 +5,70 @@
   padding: 4rem;
 }
 
-.empty {
-  font-size: 8rem;
+.emptyWrapper {
+  padding: 3.2rem 0;
+  width: 102rem;
+  background-color: var(--White);
+  border-radius: 12px;
+}
+
+.emptyIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.clickIcon img {
+  animation: blink 1s infinite;
+  float:left;
+  position: relative;
+  left: 92%;
+  top: -23px;
+  cursor: pointer;
+}
+
+.emptyIcon div {
+  font-size: 1.8rem;
+  color: var(--Black-30);
+  margin-top: 1.6rem;
 }
 
 .addDashboard {
   display: flex;
   justify-content: end;
-  align-items: center;
   gap: 0.5rem;
-  padding: 0 0.2rem;
-  margin-bottom: 1.5rem;
+  padding: 0 0.8rem;
+  margin-bottom: 1rem;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--Black-10);
+}
+
+.addDashboard img {
+  vertical-align: middle;
+}
+
+.addDashboard div {
   cursor: pointer;
 }
 
-.addDashboard:hover {
+.hovered div {
   color: var(--Violet-20);
+}
+
+.hovered img {
+  filter: invert(20%) sepia(94%) saturate(2347%) hue-rotate(242deg)
+    brightness(100%) contrast(84%);
 }
