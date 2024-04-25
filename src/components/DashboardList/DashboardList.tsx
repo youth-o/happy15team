@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./DashboardList.module.css";
-import { getMyDashboardData } from "@/api/MyDashboard";
+import { getMyDashboardData } from "@/api/getMyDashboardData";
+import useStore from "@/lib/zustand2";
+import Link from "next/link";
 
 interface DashboardItem {
   id: string;
   title: string;
   color: string;
-  createdAt: string;
+  createdByMe: boolean;
 }
 
 interface DashboardListProps {
-  itemCount: number;
+  size: number;
   myDashboardPage?: boolean;
   onEmpty?: (isEmpty: boolean) => void;
 }
 
 const DashboardList = ({
-  itemCount,
+  size,
   myDashboardPage = false,
   onEmpty,
 }: DashboardListProps) => {
@@ -25,12 +27,13 @@ const DashboardList = ({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [items, setItems] = useState<DashboardItem[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
+  const { dataChange } = useStore();
 
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("accessToken");
       try {
-        const dashboardData = await getMyDashboardData(token, page, itemCount);
+        const dashboardData = await getMyDashboardData(token, page, size);
         setItems(dashboardData.dashboards);
         setTotalCount(dashboardData.totalCount);
         if (onEmpty) {
@@ -42,7 +45,7 @@ const DashboardList = ({
     };
 
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, dataChange]);
 
   const handleClick = (index: number) => {
     setClickedIndex(index);
@@ -58,37 +61,38 @@ const DashboardList = ({
 
   const page = currentPage;
 
-  const totalPage = Math.ceil(totalCount / itemCount);
+  const totalPage = Math.ceil(totalCount / size);
 
   return (
     <>
       <div
         className={
-          myDashboardPage ? styles.myDashboardStyle : styles.sidebarSyle
+          myDashboardPage ? styles.myDashboardStyle : styles.sidebarStyle
         }
       >
         {items.map((item, index) => (
-          <div
-            key={item.id}
-            className={`${styles.dashboardItems} ${
-              clickedIndex === index ? styles.clicked : ""
-            }`}
-            onClick={() => handleClick(index)}
-          >
+          <Link href={`/dashboard/${item.id}`} key={item.id}>
             <div
-              className={styles.circle}
-              style={{ backgroundColor: item.color }}
-            ></div>
-            <span className={styles.title}>{item.title}</span>
-            {item.createdAt && (
-              <Image
-                src="/images/crown.svg"
-                alt="Crown Icon"
-                width={17.5}
-                height={14}
-              />
-            )}
-          </div>
+              className={`${styles.dashboardItems} ${
+                clickedIndex === index ? styles.clicked : ""
+              }`}
+              onClick={() => handleClick(index)}
+            >
+              <div
+                className={styles.circle}
+                style={{ backgroundColor: item.color }}
+              ></div>
+              <span className={styles.title}>{item.title}</span>
+              {item.createdByMe && (
+                <Image
+                  src="/images/crown.svg"
+                  alt="Crown Icon"
+                  width={17.5}
+                  height={14}
+                />
+              )}
+            </div>
+          </Link>
         ))}
       </div>
       {totalCount !== 0 ? (

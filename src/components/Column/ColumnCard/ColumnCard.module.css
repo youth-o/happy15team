@@ -26,7 +26,13 @@
   padding: 0.5rem;
   background-color: var(--Violet-20);
   color: var(--Violet-10);
-  border-radius: 6px;
+  border-radius: 10px;
+}
+
+.tagWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .cardFooter {
@@ -38,4 +44,20 @@
 .createdAt {
   font-size: 1.2rem;
   font-weight: 700;
+}
+
+.orange {
+  background-color: var(--Orange);
+}
+
+.blue {
+  background-color: var(--Blue);
+}
+
+.purple {
+  background-color: var(--Purple);
+}
+
+.green {
+  background-color: var(--Green);
 }

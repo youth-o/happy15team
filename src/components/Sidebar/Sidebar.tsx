@@ -18,6 +18,7 @@ const Sidebar = () => {
             alt="Taskify Logo"
             width={109}
             height={33}
+            className={styles.logo}
           />
         </Link>
         <div className={styles.title}>
@@ -31,7 +32,7 @@ const Sidebar = () => {
             className={styles.cursorPointer}
           />
         </div>
-        <DashboardList itemCount={13} />
+        <DashboardList size={10} />
       </div>
       {createDashboardModalState && <CreateDashboardModal />}
     </>

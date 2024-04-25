@@ -6,12 +6,32 @@ import { useRouter } from "next/router";
 import styles from "./Nav.module.css";
 import setModals from "@/lib/zustand";
 import InviteModal from "../Modals/InviteModal/InviteModal";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
+import UserService from "@/api/UserService";
+import { UserData } from "@/types/interface";
 
-const Nav = () => {
+type userData = Pick<UserData, "id" | "email" | "nickname" | "profileImageUrl">;
+
+const Nav = ({ dashboardMembers }) => {
   const router = useRouter();
   const path = router.pathname;
-  const { modalState }: any = setModals();
+  const { modalState, dashboardData, setLoginUserData }: any = setModals();
+  const fetchUserData = async () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      const userData = await UserService.getUserData();
+      setLoginUserData({
+        id: userData.id,
+        email: userData.email,
+        nickname: userData.nickname,
+        profileImageUrl: userData.profileImageUrl,
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   return (
     <Fragment>
@@ -21,10 +41,12 @@ const Nav = () => {
         </div>
         <div className={styles.sectionWrapper}>
           <div
-            className={path === "/mydashboard" ? styles.myDashBoard : styles.section2}
+            className={
+              path === "/mydashboard" ? styles.myDashBoard : styles.section2
+            }
           >
-            <NavButtons />
-            <NavParticipants />
+            {dashboardData.createdByMe && <NavButtons />}
+            <NavParticipants dashboardMembers={dashboardMembers} />
             <div className={styles.vr} />
           </div>
           <NavUserProfile />
