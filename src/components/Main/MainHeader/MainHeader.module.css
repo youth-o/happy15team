@@ -20,6 +20,10 @@
   margin: 2.5rem 3.6rem 2.5rem 0;
 }
 
+.link:hover {
+  color: var(--Gray-20);
+}
+
 .signup {
   margin-right: 8rem;
 }

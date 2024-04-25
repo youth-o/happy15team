@@ -82,6 +82,10 @@
   background: var(--Gray-30);
 }
 
+.registerBtn:hover {
+  background: var(--Purple);
+}
+
 .alreadyRegistered {
   display: flex;
   margin-bottom: 1.625rem;

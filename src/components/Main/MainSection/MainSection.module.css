@@ -30,6 +30,10 @@
   margin-top: 1.8rem;
 }
 
+.section button:hover {
+  background-color: var(--Purple);
+}
+
 .text {
   display: flex;
   align-items: center;
