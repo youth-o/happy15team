@@ -20,13 +20,13 @@ interface Props {
 }
 
 const ExistInvitations = ({ items }: Props) => {
-  const { setDataChange } = useStore();
+  const { dataChange, setDataChange } = useStore();
   const [searchTitle, setSearchTitle] = useState<string>("");
   const [searchedItems, setSearchedItems] = useState<Item[]>(items);
-  const [invitedData, setInvitedData] = useState({
-    inviterId: 0,
-    inviteAccepted: false,
-  });
+  const [invitedData, setInvitedData] = useState<{
+    inviterId: number;
+    inviteAccepted: boolean;
+  }>({ inviterId: 0, inviteAccepted: false });
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
@@ -67,11 +67,13 @@ const ExistInvitations = ({ items }: Props) => {
     const fetchData = async () => {
       const token = localStorage.getItem("accessToken");
       if (token) {
-        try {
-          const data = await PostInviteData(token, invitedData);
-          setDataChange(true);
-        } catch (error) {
-          console.error(error);
+        if (invitedData.inviterId) {
+          try {
+            const data = await PostInviteData(token, invitedData);
+            setDataChange(data.data.id);
+          } catch (error) {
+            console.error(error);
+          }
         }
       } else {
         console.error("토큰 없음");
@@ -80,6 +82,10 @@ const ExistInvitations = ({ items }: Props) => {
 
     fetchData();
   }, [invitedData]);
+
+  useEffect(() => {
+    setSearchedItems(items);
+  }, [items]);
 
   return (
     <div className={styles.wrapper}>

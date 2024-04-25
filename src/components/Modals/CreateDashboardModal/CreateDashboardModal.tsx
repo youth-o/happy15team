@@ -42,7 +42,7 @@ const CreateDashboardModal = () => {
     if (token) {
       try {
         const data = await PostCreateDashboardData(token, createDashboardData);
-        setDataChange(true);
+        setDataChange(data.data.id);
         closeCreateDashboardModal();
         router.push(`/dashboard/${data.data.id}`);
       } catch (error) {
