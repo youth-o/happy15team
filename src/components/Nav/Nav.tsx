@@ -16,7 +16,6 @@ const Nav = ({ dashboardMembers }) => {
   const router = useRouter();
   const path = router.pathname;
   const { modalState, dashboardData, setLoginUserData }: any = setModals();
-  console.log(dashboardMembers);
   const fetchUserData = async () => {
     const token = localStorage.getItem("accessToken");
     if (token) {

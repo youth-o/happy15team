@@ -2,9 +2,10 @@ import styles from "./NavParticipants.module.css";
 import { Fragment } from "react";
 import UserProfileImage from "@/components/UserProfileImage/UserProfileImage";
 import Participants from "../Participants/Participants";
+import setModals from "@/lib/zustand";
 
-const NavParticipants = ({ dashboardMembers }) => {
-  console.log(dashboardMembers);
+const NavParticipants = () => {
+  const { dashboardMembers } = setModals();
   const totalCount = dashboardMembers?.length;
   const slicedUsers = dashboardMembers?.slice(0, 4);
   const restUser = totalCount - 4;

@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import styles from "./Participants.module.css";
 
 const Participants = ({ user }) => {
-  const [userColor, setUserColor] = useState("");
+  const [userColor, setUserColor] = useState("blue");
+
   const handleUserColor = () => {
-    switch (user.userId % 4) {
+    switch (user?.id % 4) {
       case 0:
         setUserColor("green");
         break;
@@ -24,9 +25,23 @@ const Participants = ({ user }) => {
     handleUserColor();
   }, []);
 
+  if (!user) return null;
+
   return (
-    <div className={`${styles.UserProfileImage} ${styles[userColor]}`}>
-      {user?.email.charAt(0)}
+    <div
+      className={`${styles.UserProfileImage} ${
+        user.id % 4 === 0
+          ? styles.green
+          : user.id % 4 === 1
+          ? styles.purple
+          : user.id % 4 === 2
+          ? styles.orange
+          : user.id % 4 === 3
+          ? styles.blue
+          : ""
+      }`}
+    >
+      {user.email ? user.email.charAt(0) : user.nickname?.charAt(0)}
     </div>
   );
 };

@@ -1,4 +1,8 @@
-import { getDashboardData, getDashboardMebers } from "@/api/DashboardData";
+import {
+  getColumnData,
+  getDashboardData,
+  getDashboardMebers,
+} from "@/api/DashboardData";
 import Column from "@/components/Column/Column";
 import DashboardLayout from "@/components/DashboardLayout/DashboardLayout";
 import AddColumnModal from "@/components/Modals/AddColumnModal/AddColumnModal";
@@ -23,8 +27,9 @@ const dashboard = () => {
     dashboardData,
     setDashboardData,
     loginUserData,
+    setDashboardMembers,
   }: any = setModals();
-  const [dashboardMembers, setDashboardMembers] = useState([{ userId: "" }]);
+  const [columnData, setColumnData] = useState<any>([]);
   const router = useRouter();
   const { id }: any = router.query;
 
@@ -33,6 +38,7 @@ const dashboard = () => {
     if (token) {
       const dashboardData = await getDashboardData(token, id);
       const dashboardMembers = await getDashboardMebers(token, id);
+      const columnData = await getColumnData(token, id);
       setDashboardData({
         id: dashboardData.id,
         title: dashboardData.title,
@@ -40,6 +46,7 @@ const dashboard = () => {
         createdByMe: dashboardData.createdByMe,
       });
       setDashboardMembers(dashboardMembers);
+      setColumnData(columnData);
     }
   };
 
@@ -48,10 +55,10 @@ const dashboard = () => {
   }, [id]);
   return (
     <>
-      <Nav dashboardMembers={dashboardMembers} />
+      <Nav />
       <Sidebar />
       <DashboardLayout>
-        <Column />
+        <Column columnData={columnData} />
       </DashboardLayout>
       {addColumnModal && <AddColumnModal />}
       {createCardModal && <CreateCardModal />}

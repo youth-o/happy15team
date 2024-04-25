@@ -32,6 +32,17 @@ const setModals = create((set) => ({
         nickname: "",
     profileImageUrl: "",
   },
+
+  dashboardMembers: [{
+     userId: "" 
+  }],
+
+  openedModalId: "",
+  confirmCardData: [],
+  
+  setConfirmCardData:(data:any) => set({confirmCardData:data}),
+setOpenedModalId:(data:any) => set({openedModalId:data}),
+  setDashboardMembers:(data:any) => set({dashboardMembers:data}),
   setLoginUserData:(data:any) => set({loginUserData:data}),
 
   setDashboardData: (data:any) => set({dashboardData:data}),

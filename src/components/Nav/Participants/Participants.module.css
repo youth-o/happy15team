@@ -1,6 +1,6 @@
 .UserProfileImage {
-  width: 3.6rem;
-  height: 3.6rem;
+  width: 3.4rem;
+  height: 3.4rem;
   font-size: 2rem;
   font-weight: 700;
   color: var(--White);
@@ -9,7 +9,6 @@
   border-radius: 20px;
   border: 1px solid var(--White);
   align-items: center;
-  padding-bottom: 0.4rem;
 }
 
 .orange {
