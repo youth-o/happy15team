@@ -10,25 +10,68 @@ import setModals from "@/lib/zustand";
 const MyDashboard = () => {
   const { openCreateDashboardModal }: any = setModals();
   const [dashboardListEmpty, setDashboardListEmpty] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseIn = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovered(false);
+  };
 
   return (
     <div>
       <Nav />
       <Sidebar />
       <div className={styles.wrapper}>
-        {dashboardListEmpty ? (
-          <div className={styles.empty}>대시보드 리스트가 없어요ㅠㅠ</div>
-        ) : (
-          <div onClick={openCreateDashboardModal} className={styles.addDashboard}>
-            새로운 대시보드 추가
-            <Image
-              src="/images/plusIcon.svg"
-              width={20}
-              height={20}
-              alt="초대버튼이미지"
-            />
+        <div className={dashboardListEmpty ? styles.emptyWrapper : ""}>
+          <div
+            className={`${styles.addDashboard} ${isHovered && styles.hovered}`}
+          >
+            <div
+              onClick={openCreateDashboardModal}
+              onMouseEnter={handleMouseIn}
+              onMouseLeave={handleMouseOut}
+            >
+              새로운 대시보드 추가
+              <Image
+                src="/images/plusIcon.svg"
+                width={20}
+                height={20}
+                alt="Invite button"
+              />
+            </div>
           </div>
-        )}
+          {dashboardListEmpty ? (
+            <>
+              <div
+                className={`${styles.clickIcon} ${isHovered && styles.hovered}`}
+              >
+                <img
+                  onClick={openCreateDashboardModal}
+                  onMouseEnter={handleMouseIn}
+                  onMouseLeave={handleMouseOut}
+                  src="/images/clickIcon.png"
+                  alt="Click Icon"
+                  width={40}
+                  height={40}
+                />
+              </div>
+              <div className={styles.emptyIcon}>
+                <Image
+                  src="/images/emptyIcon.png"
+                  alt="Empty Icon"
+                  width={130}
+                  height={130}
+                />
+                <div>현재 속한 대시보드가 없어요</div>
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+        </div>
         <DashboardList
           size={6}
           myDashboardPage={true}

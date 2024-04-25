@@ -27,7 +27,7 @@ const DashboardList = ({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [items, setItems] = useState<DashboardItem[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const { dataChange, setDataChange } = useStore();
+  const { dataChange } = useStore();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +36,6 @@ const DashboardList = ({
         const dashboardData = await getMyDashboardData(token, page, size);
         setItems(dashboardData.dashboards);
         setTotalCount(dashboardData.totalCount);
-        setDataChange(false);
         if (onEmpty) {
           onEmpty(dashboardData.totalCount === 0);
         }
@@ -46,7 +45,7 @@ const DashboardList = ({
     };
 
     fetchData();
-  }, [currentPage, dataChange, setDataChange]);
+  }, [currentPage, dataChange]);
 
   const handleClick = (index: number) => {
     setClickedIndex(index);
