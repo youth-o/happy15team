@@ -4,7 +4,7 @@ import Image from "next/image";
 import setModals from "@/lib/zustand";
 
 const ColumnHeader = ({ titles }: { titles: string[] }) => {
-  const { openEditColumnModal } = setModals();
+  const { openEditColumnModal }: any = setModals();
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.titleWrapper}>

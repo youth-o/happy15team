@@ -2,12 +2,16 @@ import Image from "next/image";
 import AddComment from "./AddComment/AddComment";
 import styles from "./CheckCardModal.module.css";
 import ViewComment from "./ViewComment/ViewComment";
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import setModals from "@/lib/zustand";
+import { getConfirmCardData } from "@/api/DashboardData";
+import Participants from "@/components/Nav/Participants/Participants";
 
 const CheckCardModal = () => {
-  const { openEditCardModal, closeCheckCardModal }: any = setModals();
+  const { openEditCardModal, closeCheckCardModal, confirmCardData }: any =
+    setModals();
   const [kebab, setKebab] = useState(false);
+  const [cardData, setCardData] = useState<any>([]);
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -32,6 +36,19 @@ const CheckCardModal = () => {
     closeCheckCardModal();
     openEditCardModal();
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    const cardId = confirmCardData;
+    const fetchCardData = async () => {
+      if (token) {
+        const confirmCardData = await getConfirmCardData(token, cardId);
+        setCardData(confirmCardData);
+      }
+    };
+    fetchCardData();
+  }, [confirmCardData]);
+
   return (
     <div
       className={styles.modalOverlay}
@@ -40,13 +57,15 @@ const CheckCardModal = () => {
     >
       <div className={styles.modalWrapper}>
         <div className={styles.colSection1}>
-          <h1 className={styles.cardTitle}>cardTitle</h1>
+          <h1 className={styles.cardTitle}>{cardData.title}</h1>
           <div className={styles.cardTags}>
             <span className={styles.columnTitle}>columnTitle</span>
             <div className={styles.vr} />
-            <span className={styles.tags}>프로젝트</span>
+            {cardData?.tags?.map((tag) => (
+              <span className={styles.tags}>{tag}</span>
+            ))}
           </div>
-          <p className={styles.cardDescription}>왤케 할게 많아;;</p>
+          <p className={styles.cardDescription}>{cardData.description}</p>
           <div className={styles.cardImage}>
             <Image
               src="/images/cardImageTest.svg"
@@ -89,18 +108,13 @@ const CheckCardModal = () => {
             <div className={styles.manager}>
               <p>담당자</p>
               <div className={styles.managerProfile}>
-                <Image
-                  src="images/profileImageTest.svg"
-                  width={30}
-                  height={30}
-                  alt="유저프로필"
-                />
-                <span>박우혁</span>
+                <Participants user={cardData?.assignee} />
+                <span>{cardData?.assignee?.nickname}</span>
               </div>
             </div>
             <div className={styles.deadLine}>
               <p>마감일</p>
-              <span>2024.04.22 14:00</span>
+              <span>{cardData.dueDate}</span>
             </div>
           </div>
         </div>

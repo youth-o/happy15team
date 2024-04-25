@@ -70,6 +70,41 @@
   font-weight: 700;
 }
 
+.assigneeWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 24.3rem;
+  /* position: absolute; */
+}
+
+.managerInput {
+  width: 60%;
+  position: relative;
+}
+
+.assigneeProfile {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.assignee {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--Gray-20);
+  border-left: 1px solid var(--Gray-20);
+  border-right: 1px solid var(--Gray-20);
+  border-radius: 5px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background-color: var(--White);
+}
+
+.assignee:hover {
+  background-color: var(--Violet-10);
+}
 .modalWrapper input:focus {
   border: 2px solid;
   border-color: var(--Violet-20);
@@ -77,11 +112,6 @@
 
 .modalWrapper input:last-child {
   margin-bottom: 2rem;
-}
-
-.managerInput {
-  width: 60%;
-  position: relative;
 }
 
 .dropDownImage {
@@ -151,7 +181,7 @@
   justify-content: center;
 }
 
-.modalWrapper button {
+.modalButtons button {
   display: flex;
   width: 21rem;
   height: 4.8rem;
@@ -165,9 +195,55 @@
   font-weight: 500;
 }
 
-.modalWrapper button:last-child {
+.modalButtons button:last-child {
   background: var(--Violet-20);
   color: var(--White);
+}
+
+.calendar {
+  display: flex;
+  margin-left: -1rem;
+}
+
+.confirmButton {
+  background: var(--Blue);
+  color: var(--White);
+  height: fit-content;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  padding: 0.4rem;
+  font-weight: 700;
+  margin-top: 1.8rem;
+}
+
+.tags {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.tag {
+  color: var(--White);
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0.3rem;
+}
+
+.orange {
+  background-color: var(--Orange);
+}
+
+.blue {
+  background-color: var(--Blue);
+}
+
+.purple {
+  background-color: var(--Purple);
+}
+
+.green {
+  background-color: var(--Green);
 }
 
 .imageInput {

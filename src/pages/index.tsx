@@ -12,7 +12,7 @@ const Home = () => {
     if (token) {
       // 토큰이 있다면 대시보드 페이지로 이동 원래는 /dashboard/첫번째 대시보드 아이디로 이동해야하는데
       // 일단 그냥 /dashboard 로 이동
-      router.push("/dashboard/");
+      router.push("/mydashboard/");
     }
   }, [router]);
   return (
