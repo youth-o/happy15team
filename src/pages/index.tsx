@@ -20,7 +20,7 @@ const Home = () => {
           }
         } catch (error) {
           console.error("Error fetching dashboard data:", error);
-          router.push("/dashboard");
+          router.push("/mydashboard");
         }
       };
 

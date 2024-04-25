@@ -7,27 +7,27 @@ import { UserData } from "@/types/interface";
 type UserFormInput = Pick<UserData, "email" | "nickname" | "profileImageUrl">;
 
 function Test() {
-  const { dataChange, setDataChange } = useStore();
+  const { dataChange } = useStore();
   const [formData, setFormData] = useState<UserFormInput>({
     email: "",
     nickname: "",
     profileImageUrl: "",
   });
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const token = localStorage.getItem("accessToken");
-      if (token) {
-        try {
-          const userData = await UserService.getUserData();
-          setFormData(userData);
-          setDataChange(false);
-          // 사용자 정보를 처리
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
+  const fetchUserData = async () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      try {
+        const userData = await UserService.getUserData();
+        setFormData(userData);
+        // 사용자 정보를 처리
+      } catch (error) {
+        console.error("Error fetching user data:", error);
       }
-    };
+    }
+  };
+
+  useEffect(() => {
     fetchUserData();
   }, [dataChange]);
 
