@@ -10,7 +10,7 @@ const NavButtons = () => {
 
   return (
     <div className={styles.navButtons}>
-      <Link href="/setting">
+      <Link href="/editdashboard">
         <button>
           <Image
             src="/images/setting.svg"

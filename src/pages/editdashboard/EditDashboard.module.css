@@ -1,0 +1,32 @@
+.deleteButton {
+  display: flex;
+  flex-direction: column;
+
+  width: 62rem;
+  height: 35.5rem;
+  padding: 3.2rem 2.8rem;
+  margin-left: 32rem;
+  margin-top: 2.5rem;
+  border-radius: 8px;
+  gap: 3.2rem;
+}
+
+.deleteButton button {
+  width: 32rem;
+  height: 6.2rem;
+  padding: 2rem 5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.8rem;
+  border: 0.1rem solid var(#d9d9d9);
+  background: var(#fafafa);
+}
+
+.deletetext {
+  color: var(#333236);
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}

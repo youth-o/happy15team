@@ -5,12 +5,14 @@ import UserService from "@/api/UserService";
 import Image from "next/image";
 import { UserData } from "@/types/interface";
 import setModals from "@/lib/zustand";
-import NicknameErrorModal from "../../Modals/NicknameErrorModal/NicknameErrorModal";
-import ChangeProfileModal from "../../Modals/ChangeProfileModal/ChangeProfileModal";
+import NicknameErrorModal from "@/components/Modals/NicknameErrorModal/NicknameErrorModal";
+import ChangeProfileModal from "@/components/Modals/ChangeProfileModal/ChangeProfileModal";
+import { dataChangeStore } from "@/lib/userStore";
+
+type UserFormInput = Pick<UserData, "email" | "nickname" | "profileImageUrl">;
 
 function ProfileForm() {
   const imageInput = useRef<HTMLInputElement>(null!);
-  type UserFormInput = Pick<UserData, "email" | "nickname" | "profileImageUrl">;
   const [formData, setFormData] = useState<UserFormInput>({
     email: "",
     nickname: "",
@@ -23,23 +25,26 @@ function ProfileForm() {
     openNicknameErrorModal,
     openChangeProfileModal,
   }: any = setModals();
+  const { dataChange, setDataChange }: any = dataChangeStore();
+
+  const fetchUserData = async () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      try {
+        const userData = await UserService.getUserData();
+        setFormData(userData);
+        setDataChange(false);
+        // 사용자 정보를 처리
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    }
+  };
 
   useEffect(() => {
-    // 회원 정보를 가져와서 이메일 정보를 설정
-    const fetchUserData = async () => {
-      const token = localStorage.getItem("accessToken");
-      if (token) {
-        try {
-          const userData = await UserService.getUserData();
-          setFormData(userData);
-          // 사용자 정보를 처리
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      }
-    };
     fetchUserData();
-  }, []);
+    console.log(dataChange);
+  }, [dataChange]);
 
   // 파일이 선택되었을 때 호출되는 함수
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,6 +92,7 @@ function ProfileForm() {
           openNicknameErrorModal();
         }
       );
+      setDataChange(true);
     } catch (error) {
       console.error("Error updating user data:", error);
     }
