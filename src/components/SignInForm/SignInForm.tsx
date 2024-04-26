@@ -7,7 +7,7 @@ import { AxiosError } from "axios";
 import styles from "./SignInForm.module.css";
 import Image from "next/image";
 import { LoginData } from "@/types/interface";
-import postSignIn from "../../../api/postSignIn";
+import postSignIn from "@/api/postSignIn";
 import { useRouter } from "next/router";
 import setModal from "@/lib/zustand";
 

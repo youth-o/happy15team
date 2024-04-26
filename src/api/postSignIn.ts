@@ -1,4 +1,4 @@
-import axios from "@/lib/axios";
+import instance from "@/lib/axios";
 
 interface SignInData {
   email: string;
@@ -6,7 +6,7 @@ interface SignInData {
 }
 
 const postSignIn = async ({ email, password }: SignInData) => {
-  const res = await axios.post("auth/login", { email, password });
+  const res = await instance.post("auth/login", { email, password });
   return res.data;
 };
 

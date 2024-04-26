@@ -6,7 +6,6 @@ import styles from "@/pages/signin/SignIn.module.css";
 function SignIn() {
   return (
     <div className={styles.body}>
-      <title>Taskify 로그인</title>
       <SignInHeader />
       <SignInForm />
       <div className={styles.noMember}>
