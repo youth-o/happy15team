@@ -77,9 +77,13 @@
   margin-bottom: 2.6rem;
 }
 
-.loginBtn:disabled {
+.registerBtn:disabled {
   cursor: unset;
   background: var(--Gray-30);
+}
+
+.registerBtn:hover {
+  background: var(--Purple);
 }
 
 .alreadyRegistered {

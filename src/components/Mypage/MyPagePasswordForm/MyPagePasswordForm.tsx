@@ -4,8 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import UserService from "@/api/UserService";
 import setModals from "@/lib/zustand";
-import SamePasswordError from "../../Modals/SamePasswordErrorModal/SamePasswordErrorModal";
-import SuccessChangePassword from "../../Modals/SuccessChangePasswordModal/SuccessChangePasswordModal";
+import SamePasswordError from "@/components/Modals/SamePasswordErrorModal/SamePasswordErrorModal";
+import SuccessChangePassword from "@/components/Modals/SuccessChangePasswordModal/SuccessChangePasswordModal";
 
 function PasswordForm() {
   const {

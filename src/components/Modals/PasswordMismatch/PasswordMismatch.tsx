@@ -1,6 +1,6 @@
 import useModalStore from "@/lib/zustand";
 import { useRef, MouseEvent } from "react";
-import styles from "./PasswordMismatch.module.css";
+import styles from "./Passwordmismatch.module.css";
 
 function PasswordMismatch() {
   const { closePasswordMismatch }: any = useModalStore();
