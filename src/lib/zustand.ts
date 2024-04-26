@@ -38,8 +38,11 @@ const setModals = create((set) => ({
   }],
 
   openedModalId: "",
+  isFetching: false,
   confirmCardData: [],
   
+  setIsFetched: () => set({ isFetching: false }),
+  setIsFetching: ()=>set({isFetching:true}),
   setConfirmCardData:(data:any) => set({confirmCardData:data}),
 setOpenedModalId:(data:any) => set({openedModalId:data}),
   setDashboardMembers:(data:any) => set({dashboardMembers:data}),

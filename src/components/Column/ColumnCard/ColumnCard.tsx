@@ -7,8 +7,12 @@ import Participants from "@/components/Nav/Participants/Participants";
 
 const ColumnCard = ({ id }) => {
   const [cardData, setCardData] = useState<any>([]);
-  const { openCheckCardModal, setConfirmCardData }: any = setModals();
-  const keyRef = useRef<any>(null);
+  const {
+    openCheckCardModal,
+    setConfirmCardData,
+    isFetching,
+    setIsFetched,
+  }: any = setModals();
 
   const fetchCardData = async () => {
     const token = localStorage.getItem("accessToken");
@@ -16,20 +20,17 @@ const ColumnCard = ({ id }) => {
       const cardData = await getCardData(token, id);
       setCardData(cardData);
     }
+    setIsFetched();
   };
 
-  const handleClickCard = (e: React.MouseEvent) => {
-    const cardId = keyRef.current.id;
-    console.log(cardId);
-    setConfirmCardData(cardId);
+  const handleClickCard = (data: any) => {
+    setConfirmCardData(data.id);
     openCheckCardModal();
   };
 
-  console.log(keyRef);
-
   useEffect(() => {
     fetchCardData();
-  }, []);
+  }, [isFetching]);
 
   return (
     <>
@@ -37,8 +38,7 @@ const ColumnCard = ({ id }) => {
         <div
           key={data.id}
           className={styles.cardWrapper}
-          onClick={handleClickCard}
-          ref={keyRef}
+          onClick={() => handleClickCard(data)}
           id={data.id}
         >
           {cardData?.imageUrl && (

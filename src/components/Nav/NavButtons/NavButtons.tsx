@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "./NavButtons.module.css";
 import Image from "next/image";
 import setModals from "@/lib/zustand";
+import { useRouter } from "next/router";
 const NavButtons = () => {
   // TODO
   // 관리버튼 누를시 관리페이지로 이동 & 초대하기 버튼 누를시 초대하기 모달
