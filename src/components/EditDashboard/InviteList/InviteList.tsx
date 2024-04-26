@@ -1,40 +1,31 @@
 import Button from "@/components/Buttons/Button";
 import { DashboardInvitation } from "@/types/interface";
+import styles from "./InviteList.module.css";
 
 interface InviteListProps {
   invitations: DashboardInvitation[] | undefined;
   handleDeleteButtonClick: (invitationId: number) => void;
 }
 
-export default function InviteList({
-  invitations,
-  handleDeleteButtonClick,
-}: InviteListProps) {
+function InviteList({ invitations, handleDeleteButtonClick }: InviteListProps) {
   return (
     <div>
       {invitations?.map((invitation, index) => (
         <div>
-          <div
-            key={invitation.id}
-            className="flex justify-between items-center tablet:px-[2.8rem] px-[2rem] tablet:py-[1.6rem] py-[1.2rem]"
-          >
+          <div key={invitation.id} className={styles.innerContainer}>
             <span>{invitation.invitee.email}</span>
 
             <Button
               variant="secondary"
               type="button"
-              customStyles="tablet:px-[2.9rem] px-[0.9rem] py-[0.7rem] rounded-[0.4rem] text-violet tablet:text-[1.4rem] text-[1.2rem]"
+              customStyles={styles.cancelButton}
               onClick={() => handleDeleteButtonClick(invitation.id)}
             >
               취소
             </Button>
           </div>
           {index !== invitations.length - 1 && (
-            <svg
-              width="100%"
-              height="1"
-              className="stroke-current text-gray_EEEEEE"
-            >
+            <svg width="100%" height="1" className={styles.line}>
               <line
                 x1="0"
                 y1="0"
@@ -50,3 +41,5 @@ export default function InviteList({
     </div>
   );
 }
+
+export default InviteList;

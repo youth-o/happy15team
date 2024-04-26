@@ -1,11 +1,11 @@
-import axios from "@/lib/axios";
+import instance from "@/lib/axios";
 import { DashboardInvitations } from "@/types/interface";
 
 const deleteDashboardInvitation = async (
-  dashboardId: string | undefined,
+  dashboardId: number,
   invitationId: number
 ) => {
-  const { data } = await axios.delete<DashboardInvitations>(
+  const { data } = await instance.delete<DashboardInvitations>(
     `/dashboards/${dashboardId}/invitations/${invitationId}`
   );
   return data;

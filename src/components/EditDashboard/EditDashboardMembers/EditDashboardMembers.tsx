@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import usePaginationDashboardMembers from "@/hooks/usePagenationDashboardMembers";
 import PagenationButtons from "@/components/Buttons/PagenationButton";
 import DashboardList from "@/components/DashboardList/DashboardList";
+import styles from "./EditDashboard.module.css";
 
 function EditDashboardMembers() {
   const {
@@ -23,9 +24,9 @@ function EditDashboardMembers() {
   }, [data, isLoading]);
 
   return (
-    <section>
-      <div>
-        <h1>구성원</h1>
+    <section className={styles.form}>
+      <div className={styles.group}>
+        <h1 className={styles.grouptext}>구성원</h1>
         <PagenationButtons
           allPage={allPage}
           nowPage={nowPage}
@@ -33,9 +34,9 @@ function EditDashboardMembers() {
           handleForwardButtonClick={handleForwardButtonClick}
         />
       </div>
-      <div>
-        <h2>이름</h2>
-        <DashboardList itemCount={13} />
+      <div className={styles.list}>
+        <h2 className={styles.name}>이름</h2>
+        <DashboardList size={0} />
       </div>
     </section>
   );

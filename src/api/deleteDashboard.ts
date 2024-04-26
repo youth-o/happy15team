@@ -1,7 +1,7 @@
-import axios from "@/lib/axios";
+import instance from "@/lib/axios";
 
 const deleteDashboard = async (dashboardId: string | undefined) => {
-  const { data } = await axios.delete(`/dashboards/${dashboardId}`);
+  const { data } = await instance.delete(`/dashboards/${dashboardId}`);
   return data;
 };
 

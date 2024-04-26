@@ -7,7 +7,7 @@ interface ColorSelectorProps {
   setSelectedColor: Dispatch<SetStateAction<string>>;
 }
 
-export default function ColorSelector({
+function ColorSelector({
   selectedColor,
   setSelectedColor,
 }: ColorSelectorProps) {
@@ -44,3 +44,5 @@ export default function ColorSelector({
     </div>
   );
 }
+
+export default ColorSelector;

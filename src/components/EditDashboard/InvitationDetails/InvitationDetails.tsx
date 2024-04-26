@@ -6,6 +6,7 @@ import InviteList from "../InviteList/InviteList";
 import Button from "@/components/Buttons/Button";
 import InviteModal from "@/components/Modals/InviteModal/InviteModal";
 import setModals from "@/lib/zustand";
+import styles from "./InvitationDetails.module.css";
 
 function InvitationDetails() {
   const {
@@ -19,7 +20,7 @@ function InvitationDetails() {
   } = usePagenationDashboardInvitations();
 
   const [displayData, setDisplayData] = useState(data);
-  const { modalState }: any = setModals();
+  const { modalState, openModal }: any = setModals();
 
   useEffect(() => {
     if (!isLoading) {
@@ -28,10 +29,10 @@ function InvitationDetails() {
   }, [data, isLoading]);
 
   return (
-    <section>
-      <div>
-        <h1>초대 내역</h1>
-        <div>
+    <section className={styles.form}>
+      <div className={styles.invitesection}>
+        <h1 className={styles.invitetext}>초대 내역</h1>
+        <div className={styles.buttonsgap}>
           <PagenationButtons
             allPage={allPage}
             nowPage={nowPage}
@@ -42,23 +43,24 @@ function InvitationDetails() {
             variant="primary"
             prefix={
               <Image
-                src="images/add.svg"
+                src="images/add-box.svg"
                 width={20}
                 height={20}
                 alt="추가하기 박스 아이콘"
               />
             }
+            onClick={() => openModal()} // 버튼 클릭 시 모달 열기
           >
-            {modalState && <InviteModal />}
+            초대하기
           </Button>
         </div>
       </div>
       <div>
-        <h2>이메일</h2>
+        <h2 className={styles.emailtext}>이메일</h2>
         {data?.invitations.length === 0 ? (
           <div>
             <p>초대 내역이 없습니다.</p>
-          </div>
+          </div> //이부분이 안됩니다
         ) : (
           <InviteList
             invitations={displayData?.invitations}
@@ -66,6 +68,7 @@ function InvitationDetails() {
           />
         )}
       </div>
+      {modalState && <InviteModal />}
     </section>
   );
 }

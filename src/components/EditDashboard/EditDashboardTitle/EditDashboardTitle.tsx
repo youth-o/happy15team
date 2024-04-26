@@ -2,6 +2,8 @@ import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useUpdateDashboardTitle from "@/hooks/useUpdateDashboardTitle";
 import ColorSelector from "@/components/ColorSelector/ColorSelector";
+import Button from "@/components/Buttons/Button";
+import styles from "./EditDashboardTitle.module.css";
 
 function EditDashboardTitle() {
   const [inputValue, setInputValue] = useState("");
@@ -27,16 +29,16 @@ function EditDashboardTitle() {
   };
 
   return (
-    <section>
-      <div>
-        <h1>비브리지</h1>
+    <section className={styles.container}>
+      <div className={styles.selector}>
+        <h1 className={styles.title}>비브리지</h1>
+        <ColorSelector
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+        />
       </div>
-      <ColorSelector
-        selectedColor={selectedColor}
-        setSelectedColor={setSelectedColor}
-      />
-      <form onSubmit={handleFormSubmit}>
-        <label>대시보드 이름</label>
+      <form className={styles.inputform} onSubmit={handleFormSubmit}>
+        <label className={styles.dashboardname}>대시보드 이름</label>
         <input
           id="editDashboardName"
           type="text"
@@ -44,12 +46,12 @@ function EditDashboardTitle() {
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
           required
+          className={styles.titleInput}
         />
-        <div>
-          <button type="submit" disabled={isPending}>
-            변경
-          </button>
-          {/* 버튼 컴포넌트로 뺄까..? 고민중 */}
+        <div className={styles.chagebutton}>
+          <Button variant="primary" disabled={isPending}>
+            <p className={styles.chagebuttontext}>변경</p>
+          </Button>
         </div>
       </form>
     </section>

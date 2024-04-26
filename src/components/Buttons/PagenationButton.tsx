@@ -1,5 +1,6 @@
-import Button from "./Button";
 import Image from "next/image";
+import styles from "./PagenationButton.module.css";
+import Button from "./Button";
 
 interface PagenationButtonsProps {
   allPage: number;
@@ -9,23 +10,25 @@ interface PagenationButtonsProps {
   isSidebar?: boolean;
 }
 
-function PagenationButtons({
+export default function PagenationButtons({
   allPage,
   nowPage,
   handleBackwardButtonClick,
   handleForwardButtonClick,
   isSidebar,
 }: PagenationButtonsProps) {
-  const contatinerStyle = isSidebar ? "todo" : "todo"; // 스타일 추가 해야함미
-  const buttonStyle = isSidebar ? "todo" : "todo";
-  const spanStyle = isSidebar ? "todo" : "todo";
+  const containerStyle = `${styles.container} ${
+    isSidebar ? styles.sidebar : ""
+  }`;
+  const buttonStyle = `${styles.button} ${isSidebar ? styles.sidebar : ""}`;
+  const spanStyle = `${styles.span} ${isSidebar ? styles.sidebar : ""}`;
 
   return (
-    <div className={contatinerStyle}>
+    <div className={containerStyle}>
       <span className={spanStyle}>
         {allPage} 페이지 중 {nowPage}
       </span>
-      <div>
+      <div className={styles.buttonBox}>
         <Button
           variant="secondary"
           customStyles={buttonStyle}
@@ -56,4 +59,3 @@ function PagenationButtons({
     </div>
   );
 }
-export default PagenationButtons;

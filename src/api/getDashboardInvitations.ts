@@ -1,12 +1,9 @@
-import axios from "@/lib/axios";
+import instance from "@/lib/axios";
 import { PAGENATION_SIZE } from "@/constants/pagenation";
 import { DashboardInvitations } from "@/types/interface";
 
-const getDashboardInvitations = async (
-  dashboardId: string | undefined,
-  page?: number
-) => {
-  const { data } = await axios.get<DashboardInvitations>(
+const getDashboardInvitations = async (dashboardId: number, page?: number) => {
+  const { data } = await instance.get<DashboardInvitations>(
     `/dashboards/${dashboardId}/invitations`,
     {
       params: {

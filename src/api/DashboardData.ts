@@ -1,7 +1,5 @@
 import instance from "@/lib/axios";
 
-
-
 async function getDashboardData(token: any, id: string) {
   try {
     const response = await instance.get(`/dashboards/${id}`, {
@@ -15,7 +13,7 @@ async function getDashboardData(token: any, id: string) {
   }
 }
 
-async function getColumnData(token: any, id: string ) {
+async function getColumnData(token: any, id: string) {
   try {
     const response = await instance.get(`/columns?dashboardId=${id}`, {
       headers: {
@@ -28,7 +26,7 @@ async function getColumnData(token: any, id: string ) {
   }
 }
 
-async function getDashboardMebers(token: any, id: string ) {
+async function getDashboardMebers(token: any, id: string) {
   try {
     const response = await instance.get(`/members?dashboardId=${id}`, {
       headers: {
@@ -68,7 +66,7 @@ async function getConfirmCardData(token: any, cardId: string) {
 }
 
 async function postAddCard(token: string, cardData: any) {
-  console.log(cardData)
+  console.log(cardData);
 
   try {
     const response = await instance.post(`/cards`, cardData, {
@@ -82,5 +80,11 @@ async function postAddCard(token: string, cardData: any) {
   }
 }
 
-
- export { getDashboardData, getDashboardMebers, getColumnData, getCardData, postAddCard, getConfirmCardData }
+export {
+  getDashboardData,
+  getDashboardMebers,
+  getColumnData,
+  getCardData,
+  postAddCard,
+  getConfirmCardData,
+};

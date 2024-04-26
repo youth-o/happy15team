@@ -1,5 +1,7 @@
 .ColorSelectorbody {
-  gap: 0.4rem;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
 }
 
 .ColorSelector {
@@ -9,4 +11,5 @@
   align-items: center;
   display: flex;
   border-radius: 50%;
+  gap: 1rem;
 }

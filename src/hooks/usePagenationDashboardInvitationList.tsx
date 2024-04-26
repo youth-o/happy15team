@@ -11,20 +11,20 @@ export const usePagenationDashboardInvitations = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const { boardId } = router.query;
-  const boardIdString = Array.isArray(boardId) ? boardId[0] : boardId;
+  const dashboardId = Number(boardId);
 
   const { data, isLoading } = useQuery({
-    queryKey: ["invitations", boardId, nowPage],
-    queryFn: () => getDashboardInvitations(boardIdString, nowPage),
+    queryKey: ["invitations", dashboardId, nowPage],
+    queryFn: () => getDashboardInvitations(dashboardId, nowPage),
   });
 
   const { mutate, isLoading: isDeletePending } = useMutation({
     mutationFn: ({ invitationId }: { invitationId: number }) =>
-      deleteDashboardInvitation(boardIdString, invitationId),
+      deleteDashboardInvitation(dashboardId, invitationId),
 
     onSuccess: () => {
       queryClient.refetchQueries({
-        queryKey: ["invitations", boardIdString],
+        queryKey: ["invitations", dashboardId],
       });
     },
   });

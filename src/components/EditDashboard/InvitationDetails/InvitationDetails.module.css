@@ -1,0 +1,47 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 62rem;
+  height: 35.5rem;
+  padding: 3.2rem 2.8rem;
+  margin-left: 32rem;
+  margin-top: 2.5rem;
+  background-color: var(--White);
+  border-radius: 8px;
+  gap: 3.2rem;
+}
+
+.invitesection {
+  display: flex;
+  padding: 0px 2.8rem;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.invitetext {
+  color: var(--black-black_333236, #333236);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.invitesection > div {
+  display: flex;
+  align-items: center;
+}
+
+.buttonsgap {
+  gap: 1.6rem;
+}
+
+.emailtext {
+  color: var(--gray-gray_9FA6B2, #9fa6b2);
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-left: 2.8rem;
+}
