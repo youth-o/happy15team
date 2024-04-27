@@ -1,33 +1,9 @@
-.modalOverlay {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1002;
-}
-
-.modalWrapper {
-  background-color: var(--White);
-  width: 54rem;
-  height: 25rem;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
 .modalText {
   color: var(--Black-20);
   font-size: 1.8rem;
   font-weight: 500;
   line-height: normal;
+  height: 100px;
 }
 
 .modalBtn {

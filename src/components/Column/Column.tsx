@@ -1,5 +1,3 @@
-import setModals from "@/lib/zustand";
-import CreateCardModal from "../Modals/CardModals/CreateCardModal/CreateCardModal";
 import AddCardButton from "./AddCardButton/AddCardButton";
 import AddColumnButton from "./AddColumnButton/AddColumnButton";
 import styles from "./Column.module.css";
@@ -8,7 +6,6 @@ import ColumnHeader from "./ColumnHeader/ColumnHeader";
 import { useState } from "react";
 
 const Column = ({ columnData }) => {
-  const { createCardModal }: any = setModals();
   const [render, setRender] = useState(false);
   if (!columnData) return null;
   return (
@@ -23,7 +20,6 @@ const Column = ({ columnData }) => {
         ))}
         <AddColumnButton />
       </div>
-      {createCardModal && <CreateCardModal setRender={setRender} />}
     </>
   );
 };

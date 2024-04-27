@@ -50,76 +50,70 @@ const CheckCardModal = () => {
   }, [confirmCardData]);
 
   return (
-    <div
-      className={styles.modalOverlay}
-      ref={modalRef}
-      onClick={handleModalClose}
-    >
-      <div className={styles.modalWrapper}>
-        <div className={styles.colSection1}>
-          <h1 className={styles.cardTitle}>{cardData.title}</h1>
-          <div className={styles.cardTags}>
-            <span className={styles.columnTitle}>columnTitle</span>
-            <div className={styles.vr} />
-            {cardData?.tags?.map((tag) => (
-              <span className={styles.tags}>{tag}</span>
-            ))}
-          </div>
-          <p className={styles.cardDescription}>{cardData.description}</p>
-          <div className={styles.cardImage}>
-            <Image
-              src="/images/cardImageTest.svg"
-              alt="카드이미지"
-              width={400}
-              height={200}
-            />
-          </div>
-          <AddComment />
-          <ViewComment />
+    <>
+      <div className={styles.colSection1}>
+        <h1 className={styles.cardTitle}>{cardData.title}</h1>
+        <div className={styles.cardTags}>
+          <span className={styles.columnTitle}>columnTitle</span>
+          <div className={styles.vr} />
+          {cardData?.tags?.map((tag) => (
+            <span className={styles.tags}>{tag}</span>
+          ))}
         </div>
-        <div className={styles.colSection2}>
-          <div className={styles.tools}>
-            <div className={styles.kebab} onClick={handleKebabClick}>
-              {kebab && (
-                <ul id="kebab" className={styles.kebabMenu}>
-                  <li onClick={openEditModal}>수정하기</li>
-                  <li>삭제하기</li>
-                </ul>
-              )}
-              <button className={styles.kebabBtn}>
-                <Image
-                  src="/images/kebabButton.svg"
-                  alt="케밥버튼"
-                  width={50}
-                  height={30}
-                />
-              </button>
-            </div>
-            <button className={styles.closeBtn} onClick={closeCheckCardModal}>
+        <p className={styles.cardDescription}>{cardData.description}</p>
+        <div className={styles.cardImage}>
+          <Image
+            src="/images/cardImageTest.svg"
+            alt="카드이미지"
+            width={400}
+            height={200}
+          />
+        </div>
+        <AddComment />
+        <ViewComment />
+      </div>
+      <div className={styles.colSection2}>
+        <div className={styles.tools}>
+          <div className={styles.kebab} onClick={handleKebabClick}>
+            {kebab && (
+              <ul id="kebab" className={styles.kebabMenu}>
+                <li onClick={openEditModal}>수정하기</li>
+                <li>삭제하기</li>
+              </ul>
+            )}
+            <button className={styles.kebabBtn}>
               <Image
-                src="/images/closeButton.svg"
-                alt="닫힘버튼"
+                src="/images/kebabButton.svg"
+                alt="케밥버튼"
                 width={50}
                 height={30}
               />
             </button>
           </div>
-          <div className={styles.cardPreview}>
-            <div className={styles.manager}>
-              <p>담당자</p>
-              <div className={styles.managerProfile}>
-                <Participants user={cardData?.assignee} />
-                <span>{cardData?.assignee?.nickname}</span>
-              </div>
+          <button className={styles.closeBtn} onClick={closeCheckCardModal}>
+            <Image
+              src="/images/closeButton.svg"
+              alt="닫힘버튼"
+              width={50}
+              height={30}
+            />
+          </button>
+        </div>
+        <div className={styles.cardPreview}>
+          <div className={styles.manager}>
+            <p>담당자</p>
+            <div className={styles.managerProfile}>
+              <Participants user={cardData?.assignee} />
+              <span>{cardData?.assignee?.nickname}</span>
             </div>
-            <div className={styles.deadLine}>
-              <p>마감일</p>
-              <span>{cardData.dueDate}</span>
-            </div>
+          </div>
+          <div className={styles.deadLine}>
+            <p>마감일</p>
+            <span>{cardData.dueDate}</span>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

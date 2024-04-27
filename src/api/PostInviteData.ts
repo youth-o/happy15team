@@ -1,5 +1,6 @@
 import instance from "@/lib/axios";
 
+//초대받은 대시보드에 수락, 거절을 하면 보내는 api
 async function PostInviteData(
   token: any,
   invitedData: { inviterId: number; inviteAccepted: boolean }

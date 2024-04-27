@@ -4,11 +4,13 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { getCardData, getConfirmCardData } from "@/api/DashboardData";
 import Participants from "@/components/Nav/Participants/Participants";
+import modalState from "@/lib/modalState";
 
 const ColumnCard = ({ id }) => {
   const [cardData, setCardData] = useState<any>([]);
-  const { openCheckCardModal, setConfirmCardData }: any = setModals();
+  const { setConfirmCardData }: any = setModals();
   const keyRef = useRef<any>(null);
+  const { setOpenModal } = modalState();
 
   const fetchCardData = async () => {
     const token = localStorage.getItem("accessToken");
@@ -22,7 +24,7 @@ const ColumnCard = ({ id }) => {
     const cardId = keyRef.current.id;
     console.log(cardId);
     setConfirmCardData(cardId);
-    openCheckCardModal();
+    setOpenModal("openCheckCardModal");
   };
 
   console.log(keyRef);

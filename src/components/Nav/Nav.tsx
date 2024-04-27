@@ -5,7 +5,6 @@ import NavUserProfile from "./NavUserProfile/NavUserProfile";
 import { useRouter } from "next/router";
 import styles from "./Nav.module.css";
 import setModals from "@/lib/zustand";
-import InviteModal from "../Modals/InviteModal/InviteModal";
 import { Fragment, useEffect, useState } from "react";
 import UserService from "@/api/UserService";
 import { UserData } from "@/types/interface";
@@ -52,7 +51,6 @@ const Nav = ({ dashboardMembers }) => {
           <NavUserProfile />
         </div>
       </div>
-      {modalState && <InviteModal />}
     </Fragment>
   );
 };

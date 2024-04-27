@@ -1,10 +1,18 @@
-import setModals from "@/lib/zustand";
+import modalState from "@/lib/modalState";
 import styles from "./AddColumnButton.module.css";
 
 const AddColumnButton = () => {
-  const { openAddColumnModal }: any = setModals();
+  const { setOpenModal } = modalState();
+
+  const handleOpenModal = () => {
+    setOpenModal("openAddColumnModal");
+  };
+  
   return (
-    <button onClick={openAddColumnModal} className={styles.addColumnButton}>
+    <button
+      onClick={handleOpenModal}
+      className={styles.addColumnButton}
+    >
       새로운 칼럼 추가<div className={styles.plusButton}>+</div>
     </button>
   );

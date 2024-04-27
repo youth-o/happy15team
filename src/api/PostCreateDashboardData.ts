@@ -1,5 +1,6 @@
 import instance from "@/lib/axios";
 
+//대시보드 생성을 위해 보내는 api
 async function PostCreateDashboardData(
   token: any,
   CreateDashboardData: { title: string; color: string; }

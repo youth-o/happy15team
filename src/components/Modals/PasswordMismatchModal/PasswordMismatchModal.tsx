@@ -1,7 +1,7 @@
-import styles from "./ChangeProfileModal.module.css";
+import styles from "./PasswordMismatchModal.module.css";
 import modalState from "@/lib/modalState";
 
-function ChangeProfileModal() {
+function PasswordMismatchModal() {
   const { setOpenModal } = modalState();
 
   const handleCloseModal = () => {
@@ -10,7 +10,7 @@ function ChangeProfileModal() {
 
   return (
     <>
-      <div className={styles.modalText}>프로필이 저장되었습니다.</div>
+      <div className={styles.modalText}>비밀번호가 틀립니다!</div>
       <button className={styles.modalBtn} onClick={handleCloseModal}>
         확인
       </button>
@@ -18,4 +18,4 @@ function ChangeProfileModal() {
   );
 }
 
-export default ChangeProfileModal;
+export default PasswordMismatchModal;

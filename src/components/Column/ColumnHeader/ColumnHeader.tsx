@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import styles from "./ColumnHeader.module.css";
 import Image from "next/image";
-import setModals from "@/lib/zustand";
+import modalState from "@/lib/modalState";
 
 const ColumnHeader = ({ titles }: { titles: string[] }) => {
-  const { openEditColumnModal }: any = setModals();
+  const { setOpenModal } = modalState();
+
+  const handleOpenModal = () => {
+    setOpenModal("openEditColumnModal");
+  };
+
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.titleWrapper}>
@@ -18,10 +23,10 @@ const ColumnHeader = ({ titles }: { titles: string[] }) => {
             {1}
           </div>
         </div>
-        <button onClick={openEditColumnModal} className={styles.columnSetting}>
+        <button onClick={handleOpenModal} className={styles.columnSetting}>
           <Image
             src="/images/setting.svg"
-            width={40}
+            width={20}
             height={20}
             alt="컬럼설정버튼이미지"
           />
