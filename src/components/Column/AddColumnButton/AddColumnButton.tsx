@@ -1,5 +1,5 @@
-import modalState from "@/lib/modalState";
 import styles from "./AddColumnButton.module.css";
+import modalState from "@/lib/modalState";
 
 const AddColumnButton = () => {
   const { setOpenModal } = modalState();

@@ -11,6 +11,10 @@ import EmailExistedModal from "./EmailExistedModal/EmailExistedModal";
 import InviteModal from "./InviteModal/InviteModal";
 import NicknameErrorModal from "@/components/Modals/NicknameErrorModal/NicknameErrorModal";
 import PasswordMismatchModal from "./PasswordMismatchModal/PasswordMismatchModal";
+import NonExistedUserModal from "./NonExistedUserModal/NonExistedUserModal";
+import RegisterSuccessModal from "./RegisterSuccessModal/RegisterSuccessModal";
+import SamePasswordErrorModal from "./SamePasswordErrorModal/SamePasswordErrorModal";
+import SuccessChangePasswordModal from "./SuccessChangePasswordModal/SuccessChangePasswordModal";
 
 interface ModalName {
   [key: string]: React.ReactNode;
@@ -29,7 +33,11 @@ const ModalBox = () => {
     openEmailExistedModal: <EmailExistedModal />,
     openInviteModal: <InviteModal />,
     openNicknameErrorModal: <NicknameErrorModal />,
-    openPasswordMismatchModal: <PasswordMismatchModal />
+    openPasswordMismatchModal: <PasswordMismatchModal />,
+    openNonExistedUserModal: <NonExistedUserModal />,
+    openRegisterSuccessModal: <RegisterSuccessModal />,
+    openSamePasswordErrorModal: <SamePasswordErrorModal />,
+    openSuccessChangePasswordModal: <SuccessChangePasswordModal />,
   };
 
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {

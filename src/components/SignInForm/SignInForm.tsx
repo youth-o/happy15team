@@ -1,4 +1,4 @@
-
+import modalState from "@/lib/modalState";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -31,9 +31,10 @@ const formSchema = yup.object({
 });
 
 function SignInForm() {
+  const { setOpenModal } = modalState();
   const [seePassword, setSeePassword] = useState<boolean>(false);
   const router = useRouter();
-  const { openPasswordMismatchModal, openNonExistedUserModal }: any =
+  const { openPasswordMismatchModal }: any =
     setModal(); // zustand 스토어에서 함수 불러오기
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -65,11 +66,10 @@ function SignInForm() {
       if (error instanceof AxiosError) {
         // AxiosError인 경우, 에러 응답을 확인
         if (error.response && error.response.data) {
-          const errorMessage = error.response.data.message;
 
           if (error.response && error.response.status === 404) {
             setErrorMessage("존재하지 않는 회원입니다.");
-            openNonExistedUserModal(); // 존재하지 않는 회원 모달 띄우기
+            setOpenModal("openNonExistedUserModal");
           } else if (error.response && error.response.status === 400) {
             setErrorMessage("비밀번호가 일치하지 않습니다.");
             openPasswordMismatchModal(); // 비밀번호 불일치 모달 띄우기

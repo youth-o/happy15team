@@ -6,11 +6,12 @@ import { MouseEvent, useEffect, useRef, useState } from "react";
 import setModals from "@/lib/zustand";
 import { deleteCard, getConfirmCardData } from "@/api/DashboardData";
 import Participants from "@/components/Nav/Participants/Participants";
+import modalState from "@/lib/modalState";
 
 const CheckCardModal = () => {
+  const { setOpenModal } = modalState();
   const {
     openEditCardModal,
-    closeCheckCardModal,
     confirmCardData,
     openedModalId,
     setOpenedCardData,
@@ -31,17 +32,14 @@ const CheckCardModal = () => {
     setKebab(true);
   };
 
-  const handleModalClose = (e: MouseEvent) => {
-    if (kebab && (e.target as HTMLDivElement).id !== "kebab") {
-      setKebab(false);
-    }
-    if (modalRef.current === e.target) {
-      closeCheckCardModal(); //모달 바깥쪽 클릭했을 때 닫히는 로직 (후에 inputValue값 같이 초기화 시키기)
-    }
-  };
+  // const handleModalClose = (e: MouseEvent) => {
+  //   if (kebab && (e.target as HTMLDivElement).id !== "kebab") {
+  //     setKebab(false);
+  //   }
+  // };
 
   const openEditModal = () => {
-    closeCheckCardModal();
+    setOpenModal("");
     openEditCardModal();
   };
 
@@ -55,8 +53,12 @@ const CheckCardModal = () => {
     }
 
     setRerender(!rerender);
-    closeCheckCardModal();
+    setOpenModal("");
   };
+
+  const handleCloseModal = () => {
+    setOpenModal("");
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -74,12 +76,7 @@ const CheckCardModal = () => {
   if (!cardData) return null;
 
   return (
-    <div
-      className={styles.modalOverlay}
-      ref={modalRef}
-      onClick={handleModalClose}
-    >
-      <div className={styles.modalWrapper}>
+<>
         <div className={styles.colSection1}>
           <h1 className={styles.cardTitle}>{cardData.title}</h1>
           <div className={styles.cardTags}>
@@ -125,7 +122,7 @@ const CheckCardModal = () => {
                 />
               </button>
             </div>
-            <button className={styles.closeBtn} onClick={closeCheckCardModal}>
+            <button className={styles.closeBtn} onClick={handleCloseModal}>
               <Image
                 src="/images/closeButton.svg"
                 alt="닫힘버튼"
@@ -148,8 +145,7 @@ const CheckCardModal = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+        </>
   );
 };
 

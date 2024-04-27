@@ -6,8 +6,10 @@ import Participants from "@/components/Nav/Participants/Participants";
 import { DayPicker } from "react-day-picker";
 import moment from "moment";
 import { putEditCard, uploadCardImage } from "@/api/DashboardData";
+import modalState from "@/lib/modalState";
 
 const EditCardModal = () => {
+  const { setOpenModal } = modalState();
   const {
     closeEditCardModal,
     openedCardData,
@@ -16,7 +18,6 @@ const EditCardModal = () => {
     dashboardMembers,
     cardImageUrl,
     setCardImageUrl,
-    openCheckCardModal,
   }: any = setModals();
   const modalRef = useRef<HTMLDivElement>(null);
   const [viewAssignee, setViewAssignee] = useState(false);
@@ -44,11 +45,6 @@ const EditCardModal = () => {
     }
   };
 
-  const handleClickModalOutside = (e: MouseEvent) => {
-    if (modalRef.current === e.target) {
-      closeEditCardModal(); //모달 바깥쪽 클릭했을 때 닫히는 로직 (후에 inputValue값 같이 초기화 시키기)
-    }
-  };
   console.log(assignee);
 
   const handleSubmit = async () => {
@@ -81,7 +77,7 @@ const EditCardModal = () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       await putEditCard(token, cardImageUrl ? cardData : noImgCardData, cardId);
-      openCheckCardModal();
+      setOpenModal("openCheckCardModal");
     }
   };
 
@@ -115,163 +111,157 @@ const EditCardModal = () => {
   if (!prevCardData) return null;
 
   return (
-    <div
-      className={styles.modalOverlay}
-      onClick={handleClickModalOutside}
-      ref={modalRef}
-    >
-      <div className={styles.modalWrapper}>
-        <h1 className={styles.modalTitle}>할 일 수정</h1>
-        <form className={styles.modalForm}>
-          <div className={styles.modalHeader}>
-            <div onClick={() => setViewAssignee(!viewAssignee)}>
-              <label>담당자</label>
-              <div className={styles.managerInput}>
-                <input
-                  readOnly
-                  placeholder={prevCardData.assignee.nickname}
-                  value={assignee?.nickname}
-                />
-                <Image
-                  src="/images/dropDown.svg"
-                  width={40}
-                  height={40}
-                  alt="드롭다운이미지"
-                  className={styles.dropDownImage}
-                />
-                {viewAssignee &&
-                  dashboardMembers?.map((member, index) => (
-                    <div key={index} className={styles.assigneeWrapper}>
-                      <div
-                        onClick={() => {
-                          setAssignee(member);
-                        }}
-                        className={styles.assignee}
-                      >
-                        <Participants user={member} />
-                        <span>{member.nickname}</span>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          </div>
-          <label>
-            제목 <span className={styles.essentialTag}>*</span>
-          </label>
-          <input
-            className={styles.titleInput}
-            placeholder={openedCardData.title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <label>
-            설명 <span className={styles.essentialTag}>*</span>
-          </label>
-          <textarea
-            placeholder="변경사항 입력"
-            className={styles.descriptionInput}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <label>마감일 </label>
-
-          <div
-            onClick={() => setViewCalender(!viewCalender)}
-            className={styles.deadlineInput}
-          >
-            <input readOnly value={formatDate} />
-            <Image
-              src="/images/calendar.svg"
-              width={22}
-              height={22}
-              alt="달력이미지"
-              className={styles.calendarImage}
-            />
-
-            <span>이전 마감일 : {prevCardData.dueDate}</span>
-          </div>
-          {viewCalender && (
-            <div className={styles.calendar}>
-              <DayPicker
-                showOutsideDays
-                mode="single"
-                selected={selected}
-                onSelect={setSelected}
+    <>
+      <h1 className={styles.modalTitle}>할 일 수정</h1>
+      <form className={styles.modalForm}>
+        <div className={styles.modalHeader}>
+          <div onClick={() => setViewAssignee(!viewAssignee)}>
+            <label>담당자</label>
+            <div className={styles.managerInput}>
+              <input
+                readOnly
+                placeholder={prevCardData.assignee.nickname}
+                value={assignee?.nickname}
               />
-              <button
-                className={styles.confirmButton}
-                onClick={() => setViewCalender(!viewCalender)}
-              >
-                닫기
-              </button>
-            </div>
-          )}
-          <label>태그</label>
-          <input
-            placeholder="입력 후 Enter"
-            className={styles.tagInput}
-            onKeyDown={addTags}
-            value={tagInputValue}
-            onChange={(e) => setTagInputValue(e.target.value)}
-            maxLength={10}
-          />
-          {tags && (
-            <div className={styles.tags}>
-              {tags.map((tag, index) => (
-                <div
-                  key={index}
-                  className={`${styles.tag} ${
-                    index % 4 === 0
-                      ? styles.green
-                      : index % 4 === 1
-                      ? styles.purple
-                      : index % 4 === 2
-                      ? styles.orange
-                      : index % 4 === 3
-                      ? styles.blue
-                      : ""
-                  }`}
-                  onClick={() => handleTagClick(index)}
-                >
-                  {tag}
-                </div>
-              ))}
-            </div>
-          )}
-          <label>이미지</label>
-          <div className={styles.imageSection}>
-            <label htmlFor="uploadImage">
-              <div className={styles.uploadBtn}>✖️</div>
-            </label>
-            <input
-              id="uploadImage"
-              type="file"
-              accept="image/*"
-              className={styles.imageInput}
-              onChange={handleImageChange}
-              ref={imageInput}
-            />
-            <div className={styles.preview}>
-              <span>이미지 미리보기</span>
-              <div className={styles.previewImg}>
-                <Image
-                  src={image ? image : ""}
-                  width={70}
-                  height={70}
-                  alt="이미지프리뷰"
-                  className={image ? "" : styles.noImg}
-                />
-              </div>
+              <Image
+                src="/images/dropDown.svg"
+                width={40}
+                height={40}
+                alt="드롭다운이미지"
+                className={styles.dropDownImage}
+              />
+              {viewAssignee &&
+                dashboardMembers?.map((member, index) => (
+                  <div key={index} className={styles.assigneeWrapper}>
+                    <div
+                      onClick={() => {
+                        setAssignee(member);
+                      }}
+                      className={styles.assignee}
+                    >
+                      <Participants user={member} />
+                      <span>{member.nickname}</span>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
-        </form>
-        <div className={styles.modalButtons}>
-          <button onClick={closeEditCardModal}>취소</button>
-          <button onClick={handleSubmit} className={styles.inviteButton}>
-            변경
-          </button>
         </div>
+        <label>
+          제목 <span className={styles.essentialTag}>*</span>
+        </label>
+        <input
+          className={styles.titleInput}
+          placeholder={openedCardData.title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <label>
+          설명 <span className={styles.essentialTag}>*</span>
+        </label>
+        <textarea
+          placeholder="변경사항 입력"
+          className={styles.descriptionInput}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <label>마감일 </label>
+
+        <div
+          onClick={() => setViewCalender(!viewCalender)}
+          className={styles.deadlineInput}
+        >
+          <input readOnly value={formatDate} />
+          <Image
+            src="/images/calendar.svg"
+            width={22}
+            height={22}
+            alt="달력이미지"
+            className={styles.calendarImage}
+          />
+
+          <span>이전 마감일 : {prevCardData.dueDate}</span>
+        </div>
+        {viewCalender && (
+          <div className={styles.calendar}>
+            <DayPicker
+              showOutsideDays
+              mode="single"
+              selected={selected}
+              onSelect={setSelected}
+            />
+            <button
+              className={styles.confirmButton}
+              onClick={() => setViewCalender(!viewCalender)}
+            >
+              닫기
+            </button>
+          </div>
+        )}
+        <label>태그</label>
+        <input
+          placeholder="입력 후 Enter"
+          className={styles.tagInput}
+          onKeyDown={addTags}
+          value={tagInputValue}
+          onChange={(e) => setTagInputValue(e.target.value)}
+          maxLength={10}
+        />
+        {tags && (
+          <div className={styles.tags}>
+            {tags.map((tag, index) => (
+              <div
+                key={index}
+                className={`${styles.tag} ${
+                  index % 4 === 0
+                    ? styles.green
+                    : index % 4 === 1
+                    ? styles.purple
+                    : index % 4 === 2
+                    ? styles.orange
+                    : index % 4 === 3
+                    ? styles.blue
+                    : ""
+                }`}
+                onClick={() => handleTagClick(index)}
+              >
+                {tag}
+              </div>
+            ))}
+          </div>
+        )}
+        <label>이미지</label>
+        <div className={styles.imageSection}>
+          <label htmlFor="uploadImage">
+            <div className={styles.uploadBtn}>✖️</div>
+          </label>
+          <input
+            id="uploadImage"
+            type="file"
+            accept="image/*"
+            className={styles.imageInput}
+            onChange={handleImageChange}
+            ref={imageInput}
+          />
+          <div className={styles.preview}>
+            <span>이미지 미리보기</span>
+            <div className={styles.previewImg}>
+              <Image
+                src={image ? image : ""}
+                width={70}
+                height={70}
+                alt="이미지프리뷰"
+                className={image ? "" : styles.noImg}
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+      <div className={styles.modalButtons}>
+        <button onClick={closeEditCardModal}>취소</button>
+        <button onClick={handleSubmit} className={styles.inviteButton}>
+          변경
+        </button>
       </div>
-    </div>
+    </>
   );
 };
 
