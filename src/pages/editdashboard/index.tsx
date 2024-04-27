@@ -14,7 +14,9 @@ function EditDashboardPage() {
     <div>
       <Nav />
       <Sidebar />
-      <BackButton />
+      <div className={styles.backbutton}>
+        <BackButton />
+      </div>
       <div className={styles.form}>
         <EditDashboardTitle />
         <EditDashboardMembers />
