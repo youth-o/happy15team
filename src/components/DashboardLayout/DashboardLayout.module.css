@@ -3,4 +3,5 @@
   top: 7rem;
   left: 30rem;
   z-index: -1;
+  overflow-y: hidden;
 }

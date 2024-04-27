@@ -51,8 +51,10 @@
 }
 
 .titleInput::placeholder {
-  font-size: 1.6rem;
-  font-weight: 400;
+
+.titleInput:focus {
+  border: 1px solid var(--Violet-20);
+
 }
 
 .titleInput:focus {

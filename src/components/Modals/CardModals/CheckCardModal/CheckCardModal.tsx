@@ -4,7 +4,7 @@ import styles from "./CheckCardModal.module.css";
 import ViewComment from "./ViewComment/ViewComment";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import setModals from "@/lib/zustand";
-import { getConfirmCardData } from "@/api/DashboardData";
+import { deleteCard, getConfirmCardData } from "@/api/DashboardData";
 import Participants from "@/components/Nav/Participants/Participants";
 
 const CheckCardModal = () => {
@@ -13,7 +13,11 @@ const CheckCardModal = () => {
     closeCheckCardModal,
     confirmCardData,
     openedModalId,
+    setOpenedCardData,
+    rerender,
+    setRerender,
   }: any = setModals();
+
   const [kebab, setKebab] = useState(false);
   const [cardData, setCardData] = useState<any>([]);
 
@@ -41,6 +45,19 @@ const CheckCardModal = () => {
     openEditCardModal();
   };
 
+  const handleDeleteCard = async () => {
+    const result = confirm("카드를 삭제하시겠습니까?");
+    if (!result) return;
+    const token = localStorage.getItem("accessToken");
+    const cardId = confirmCardData;
+    if (token) {
+      await deleteCard(token, cardId);
+    }
+
+    setRerender(!rerender);
+    closeCheckCardModal();
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const cardId = confirmCardData;
@@ -48,6 +65,7 @@ const CheckCardModal = () => {
       if (token) {
         const confirmCardData = await getConfirmCardData(token, cardId);
         setCardData(confirmCardData);
+        setOpenedCardData(confirmCardData);
       }
     };
     fetchCardData();
@@ -95,7 +113,7 @@ const CheckCardModal = () => {
               {kebab && (
                 <ul id="kebab" className={styles.kebabMenu}>
                   <li onClick={openEditModal}>수정하기</li>
-                  <li>삭제하기</li>
+                  <li onClick={handleDeleteCard}>삭제하기</li>
                 </ul>
               )}
               <button className={styles.kebabBtn}>

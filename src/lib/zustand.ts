@@ -36,6 +36,7 @@ const setModals = create((set) => ({
   cardImageUrl: "",
   rerender:"",
 
+  columnState: "",
   
 
   dashboardMembers: [{
@@ -45,8 +46,11 @@ const setModals = create((set) => ({
 
   openedModalId: "",
   confirmCardData: [],
+  openedCardData : "",
   isFetching: false,
   commentRender: false,
+  setOpenedCardData:(data) => set({ openedCardData: data }),
+  setColumnState:(data) => set({ columnState: data }),
   setRerender:(state) => set({ rerender: state }),
   setRerenderDone: () => set({ rerender: false }),
     setCommentRenderDone: () => set({ commentRender: false }),

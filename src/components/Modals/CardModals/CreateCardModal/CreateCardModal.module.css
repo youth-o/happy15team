@@ -242,6 +242,12 @@
   padding: 0.3rem;
 }
 
+.tag:hover {
+  cursor: pointer;
+  opacity: 0.8; /* 호버시 투명도 조절 */
+  transform: translateY(-2px);
+}
+
 .orange {
   background-color: var(--Orange);
 }
