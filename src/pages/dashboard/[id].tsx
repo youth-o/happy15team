@@ -29,6 +29,7 @@ const dashboard = () => {
     loginUserData,
     setDashboardMembers,
     rerender,
+    setColumnState,
   }: any = setModals();
   const [columnData, setColumnData] = useState<any>([]);
   const router = useRouter();
@@ -49,6 +50,7 @@ const dashboard = () => {
       });
       setDashboardMembers(dashboardMembers);
       setColumnData(columnData);
+      setColumnState(columnData);
     }
   };
 

@@ -18,6 +18,7 @@ const ColumnCard = ({ modalData }) => {
     setIsFetched,
     setCardLength,
     setOpenedModalId,
+    rerender,
   }: any = setModals();
 
   const fetchCardData = async () => {
@@ -38,7 +39,7 @@ const ColumnCard = ({ modalData }) => {
   useEffect(() => {
     fetchCardData();
     setCardLength(cardData.length);
-  }, [isFetching]);
+  }, [isFetching, rerender]);
 
   if (!cardData) return null;
 

@@ -6,7 +6,7 @@
 
 .columnTemplate {
   width: 19vw;
-  height: 91vh;
+  height: 89vh;
   border-right: 1px solid var(--Gray-20);
   padding: 2rem;
   z-index: 0;

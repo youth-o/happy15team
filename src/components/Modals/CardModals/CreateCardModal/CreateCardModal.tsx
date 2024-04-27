@@ -113,6 +113,12 @@ const CreateCardModal = () => {
     }
   };
 
+  const handleTagClick = (indexToRemove) => {
+    setTags((prevTags) =>
+      prevTags.filter((_, index) => index !== indexToRemove)
+    );
+  };
+
   useEffect(() => {
     const currentDate = new Date();
     if (selected < currentDate) {
@@ -251,6 +257,7 @@ const CreateCardModal = () => {
                       ? styles.blue
                       : ""
                   }`}
+                  onClick={() => handleTagClick(index)}
                 >
                   {tag}
                 </div>

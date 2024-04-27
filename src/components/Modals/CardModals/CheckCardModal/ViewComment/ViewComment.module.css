@@ -68,3 +68,32 @@
 .commentFooter span:hover {
   cursor: pointer;
 }
+
+.textarea::placeholder {
+  color: var(--Gray-20);
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  border-color: var(--Gray-20);
+  border-radius: 6px;
+  resize: none;
+  height: 4rem;
+}
+
+.editTool {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: end;
+  margin-right: 3rem;
+  margin-top: -1rem;
+}
+
+.editTool button {
+  background-color: var(--White);
+  color: var(--Purple);
+  border: 1px solid var(--Gray-20);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+}
