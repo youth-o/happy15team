@@ -110,6 +110,20 @@ const  postComment= async(token:string, formData) => {
     }
 }
 
+const  EditComment= async(token:string, content, id ) => {
+    try {
+        const response = await instance.put(`/comments/${id}`, content, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response.data;
+      }
+     catch (error) {
+      throw error;
+    }
+}
+
 const addColumns = async (token: string, title, dashboardId) => {
   const data = {
     "title": title,
@@ -140,6 +154,8 @@ const getComment= async(token:string, cardId) => {
       throw error;
     }
 }
+
+
   
 const deleteColumn= async(token:string, columnId) => {
     try {
@@ -168,7 +184,48 @@ const reNameColumn = async (token: string, columnId, name) => {
      catch (error) {
       throw error;
     }
-  }
+}
+  
+const putEditCard = async (token: string, data, cardId) => {
+    try {
+        await instance.put(`/cards/${cardId}`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+     catch (error) {
+      throw error;
+    }
+}
+  
+const deleteCard= async(token:string, cardId) => {
+    try {
+        await instance.delete(`/cards/${cardId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+     catch (error) {
+      throw error;
+    }
+}
+
+const deleteComment= async(token:string, Id) => {
+    try {
+        await instance.delete(`/comments/${Id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+     catch (error) {
+      throw error;
+    }
+}
+
+
 
 export {
   getDashboardData,
@@ -182,5 +239,9 @@ export {
   getComment,
   deleteColumn,
   reNameColumn,
-  addColumns
+  addColumns,
+  putEditCard,
+  deleteCard,
+  EditComment,
+  deleteComment
 };

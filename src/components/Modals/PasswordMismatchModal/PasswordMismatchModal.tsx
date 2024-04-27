@@ -1,7 +1,7 @@
+import styles from "./PasswordMismatchModal.module.css";
 import modalState from "@/lib/modalState";
-import styles from "./SamePasswordErrorModal.module.css";
 
-function SamePasswordError() {
+function PasswordMismatchModal() {
   const { setOpenModal } = modalState();
 
   const handleCloseModal = () => {
@@ -10,7 +10,7 @@ function SamePasswordError() {
 
   return (
     <>
-      <div className={styles.modalText}>현재 비밀번호가 틀렸습니다.</div>
+      <div className={styles.modalText}>비밀번호가 틀립니다!</div>
       <button className={styles.modalBtn} onClick={handleCloseModal}>
         확인
       </button>
@@ -18,4 +18,4 @@ function SamePasswordError() {
   );
 }
 
-export default SamePasswordError;
+export default PasswordMismatchModal;

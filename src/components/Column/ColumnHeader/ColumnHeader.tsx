@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
 import styles from "./ColumnHeader.module.css";
 import Image from "next/image";
 import setModals from "@/lib/zustand";
+import modalState from "@/lib/modalState";
 
 const ColumnHeader = ({ titles, columnData }) => {
-  const { openEditColumnModal, cardLength, setOpenedModalId }: any =
+  const { setOpenModal } = modalState();
+  const { cardLength, setOpenedModalId }: any =
     setModals();
 
   const handleClickEdit = () => {
     setOpenedModalId(columnData);
-    openEditColumnModal();
+    setOpenModal("openEditColumnModal");
   };
   return (
     <div className={styles.headerWrapper}>

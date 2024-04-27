@@ -3,10 +3,16 @@ import styles from "./NavButtons.module.css";
 import Image from "next/image";
 import setModals from "@/lib/zustand";
 import { useRouter } from "next/router";
+import modalState from "@/lib/modalState";
+
 const NavButtons = () => {
   // TODO
   // 관리버튼 누를시 관리페이지로 이동 & 초대하기 버튼 누를시 초대하기 모달
-  const { openModal }: any = setModals();
+  const { setOpenModal } = modalState();
+
+  const handleOpenModal = () => {
+    setOpenModal("openInviteModal");
+  }
 
   return (
     <div className={styles.navButtons}>
@@ -21,7 +27,7 @@ const NavButtons = () => {
           <p>관리</p>
         </button>
       </Link>
-      <button onClick={openModal}>
+      <button onClick={handleOpenModal}>
         <Image
           src="/images/plusIcon.svg"
           width={20}

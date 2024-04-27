@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import setModals from "@/lib/zustand";
 import UserService from "@/api/UserService";
+import modalState from "@/lib/modalState";
 
 function SignUpForm() {
   const [passwordType, setPasswordType] = useState({
@@ -21,7 +22,7 @@ function SignUpForm() {
   });
   const [agreeTerms, setAgreeTerms] = useState(false);
   const router = useRouter();
-  const { openEmailExistedModal, openRegisterSuccessModal }: any = setModals();
+  const { setOpenModal } = modalState();
 
   const handlePasswordType = () => {
     setPasswordType(() => {
@@ -79,12 +80,11 @@ function SignUpForm() {
   async function onSubmit(data: UserData) {
     try {
       await mutation.mutateAsync(data);
-      openRegisterSuccessModal();
-
+      setOpenModal("openRegisterSuccessModal");
       console.log("회원가입 성공:", data);
     } catch (error: any) {
       if (error.response && error.response.status === 409) {
-        openEmailExistedModal();
+        setOpenModal("openEmailExistedModal");
       }
       console.error("회원가입 실패:", error);
     }

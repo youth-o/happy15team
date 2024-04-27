@@ -8,16 +8,18 @@ import {
   getConfirmCardData,
 } from "@/api/DashboardData";
 import Participants from "@/components/Nav/Participants/Participants";
+import modalState from "@/lib/modalState";
 
 const ColumnCard = ({ modalData }) => {
   const [cardData, setCardData] = useState<any>([]);
+  const { setOpenModal } = modalState();
   const {
-    openCheckCardModal,
     setConfirmCardData,
     isFetching,
     setIsFetched,
     setCardLength,
     setOpenedModalId,
+    rerender,
   }: any = setModals();
 
   const fetchCardData = async () => {
@@ -32,13 +34,13 @@ const ColumnCard = ({ modalData }) => {
   const handleClickCard = (data: any) => {
     setConfirmCardData(data.id);
     setOpenedModalId(modalData);
-    openCheckCardModal();
+    setOpenModal("openCheckCardModal");
   };
 
   useEffect(() => {
     fetchCardData();
     setCardLength(cardData.length);
-  }, [isFetching]);
+  }, [isFetching, rerender]);
 
   if (!cardData) return null;
 
