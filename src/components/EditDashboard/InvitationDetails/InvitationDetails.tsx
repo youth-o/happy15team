@@ -4,7 +4,6 @@ import Image from "next/image";
 import PagenationButtons from "@/components/Buttons/PagenationButton";
 import InviteList from "../InviteList/InviteList";
 import Button from "@/components/Buttons/Button";
-import InviteModal from "@/components/Modals/InviteModal/InviteModal";
 import setModals from "@/lib/zustand";
 import styles from "./InvitationDetails.module.css";
 
@@ -68,7 +67,6 @@ function InvitationDetails() {
           />
         )}
       </div>
-      {modalState && <InviteModal />}
     </section>
   );
 }

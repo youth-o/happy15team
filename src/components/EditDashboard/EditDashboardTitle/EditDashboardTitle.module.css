@@ -50,8 +50,6 @@
   padding: 0.8rem;
 }
 
-.titleInput::placeholder {
-
 .titleInput:focus {
   border: 1px solid var(--Violet-20);
 

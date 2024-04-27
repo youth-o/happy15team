@@ -1,30 +1,20 @@
-import setModals from "@/lib/zustand";
-import { useRef, MouseEvent } from "react";
 import styles from "./ChangeProfileModal.module.css";
+import modalState from "@/lib/modalState";
 
 function ChangeProfileModal() {
-  const { closeChangeProfileModal }: any = setModals();
-  const modalRef = useRef<HTMLDivElement>(null);
+  const { setOpenModal } = modalState();
 
-  const handleClickModalOutside = (e: MouseEvent) => {
-    if (modalRef.current === e.target) {
-      closeChangeProfileModal();
-    }
+  const handleCloseModal = () => {
+    setOpenModal("");
   };
 
   return (
-    <div
-      ref={modalRef}
-      className={styles.modalOverlay}
-      onClick={handleClickModalOutside}
-    >
-      <div className={styles.modalWrapper}>
-        <div className={styles.modalText}>프로필이 저장되었습니다.</div>
-        <button className={styles.modalBtn} onClick={closeChangeProfileModal}>
-          확인
-        </button>
-      </div>
-    </div>
+    <>
+      <div className={styles.modalText}>프로필이 저장되었습니다.</div>
+      <button className={styles.modalBtn} onClick={handleCloseModal}>
+        확인
+      </button>
+    </>
   );
 }
 

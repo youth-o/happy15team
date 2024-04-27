@@ -1,25 +1,3 @@
-.modalOverlay {
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal {
-  background-color: var(--White);
-  width: 51.2rem;
-  height: 30.6rem;
-  border: 1px solid var(--Gray-20);
-  border-radius: 8px;
-  padding: 2.8rem;
-}
-
 .title {
   margin-top: 0.4rem;
   font-size: 2.4rem;
@@ -32,7 +10,7 @@
   font-weight: 500;
 }
 
-.modal input {
+.input {
   margin-top: 1rem;
   padding: 1.5rem;
   width: 100%;
