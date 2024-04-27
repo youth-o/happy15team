@@ -25,8 +25,8 @@ function MainSection() {
             />
           </div>
           <p className={styles.description}>
-            피그마에 메인 설명 들어갑니다 라고만 적혀있고 왜 설명을 안 적어놓죠?
-            😓
+            모든 것을 한 곳에서 - 일정 등록, 우선순위 설정, 팀원 초대까지
+            간편하게 관리하세요.
           </p>
         </div>
         <Link href="/signin">
