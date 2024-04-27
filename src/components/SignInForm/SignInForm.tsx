@@ -102,7 +102,7 @@ function SignInForm() {
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="password">비밀번호</label>
-        <div className={styles.passwordContainer}>
+        <div className={styles.pwContainer}>
           <input
             id="password"
             type={seePassword ? "text" : "password"}
@@ -118,15 +118,15 @@ function SignInForm() {
             {!seePassword ? (
               <Image
                 src="/images/eye-on.svg"
-                width={15}
-                height={15}
+                width={25}
+                height={25}
                 alt="eyeOn"
               />
             ) : (
               <Image
                 src="/images/eye-off.svg"
-                width={15}
-                height={15}
+                width={25}
+                height={25}
                 alt="eyeOff"
               />
             )}

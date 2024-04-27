@@ -38,6 +38,7 @@
   bottom: 1.2rem;
   right: 1.6rem;
   cursor: pointer;
+  background-color: var(--White);
 }
 
 .notError {
