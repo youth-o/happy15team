@@ -3,8 +3,14 @@ import styles from "./ColumnHeader.module.css";
 import Image from "next/image";
 import setModals from "@/lib/zustand";
 
-const ColumnHeader = ({ titles }: { titles: string[] }) => {
-  const { openEditColumnModal }: any = setModals();
+const ColumnHeader = ({ titles, columnData }) => {
+  const { openEditColumnModal, cardLength, setOpenedModalId }: any =
+    setModals();
+
+  const handleClickEdit = () => {
+    setOpenedModalId(columnData);
+    openEditColumnModal();
+  };
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.titleWrapper}>
@@ -13,12 +19,9 @@ const ColumnHeader = ({ titles }: { titles: string[] }) => {
           {titles.map((title: any) => (
             <div className={styles.columnTitle}>{title}</div>
           ))}
-          <div className={styles.cardCounts}>
-            {/* cards.length */}
-            {1}
-          </div>
+          <div className={styles.cardCounts}>{cardLength}</div>
         </div>
-        <button onClick={openEditColumnModal} className={styles.columnSetting}>
+        <button onClick={handleClickEdit} className={styles.columnSetting}>
           <Image
             src="/images/setting.svg"
             width={40}

@@ -32,15 +32,26 @@ const setModals = create((set) => ({
         nickname: "",
     profileImageUrl: "",
   },
+  cardImageUrl: "",
+  rerender:"",
+
+  
 
   dashboardMembers: [{
      userId: "" 
   }],
+  cardLength:"",
 
   openedModalId: "",
-  isFetching: false,
   confirmCardData: [],
-  
+  isFetching: false,
+  commentRender: false,
+  setRerender:(state) => set({ rerender: state }),
+  setRerenderDone: () => set({ rerender: false }),
+    setCommentRenderDone: () => set({ commentRender: false }),
+  setCommentRender: ()=>set({commentRender:true}),
+  setCardLength: (length:number) => set({ cardLength: length }),
+  setCardImageUrl: (data:string) => set({ cardImageUrl: data }),
   setIsFetched: () => set({ isFetching: false }),
   setIsFetching: ()=>set({isFetching:true}),
   setConfirmCardData:(data:any) => set({confirmCardData:data}),
@@ -56,7 +67,10 @@ setOpenedModalId:(data:any) => set({openedModalId:data}),
   openEditCardModal: () => set({ editCardModal: true }),
   closeEditCardModal: () => set({ editCardModal: false }),
   openCreateCardModal: () => set({ createCardModal: true }),
-  closeCreateCardModal: () => set({ createCardModal: false }),
+  closeCreateCardModal: () => set({
+    createCardModal: false,
+    cardImageUrl:false
+   }),
   openAddColumnModal: () => set({ addColumnModal: true }),
   closeAddColumnModal: () => set({ addColumnModal: false }),
   openPasswordMismatchModal: () => set({ modalState: true }),
