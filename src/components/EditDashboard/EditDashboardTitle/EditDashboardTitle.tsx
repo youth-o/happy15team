@@ -4,11 +4,13 @@ import useUpdateDashboardTitle from "@/hooks/useUpdateDashboardTitle";
 import ColorSelector from "@/components/ColorSelector/ColorSelector";
 import Button from "@/components/Buttons/Button";
 import styles from "./EditDashboardTitle.module.css";
+import setModals from "@/lib/zustand";
 
 function EditDashboardTitle() {
   const [inputValue, setInputValue] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const router = useRouter();
+  const { dashboardData }: any = setModals();
   const { boardId } = router.query;
   const { data, mutate, isPending } = useUpdateDashboardTitle(
     boardId as string
@@ -33,7 +35,7 @@ function EditDashboardTitle() {
   return (
     <section className={styles.container}>
       <div className={styles.selector}>
-        <h1 className={styles.title}>{data ? data.title : "비브리지"}</h1>
+        <h1 className={styles.title}>{dashboardData.title}</h1>
         <ColorSelector
           selectedColor={selectedColor}
           setSelectedColor={setSelectedColor}
