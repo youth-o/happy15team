@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "react-query";
 import * as yup from "yup";
-import { AxiosError } from "axios";
+import postSignIn from "@/api/postSignIn";
 import styles from "./SignInForm.module.css";
 import Image from "next/image";
-import { LoginData } from "@/types/interface";
-import postSignIn from "@/api/postSignIn";
+import { LoginData, UserData } from "@/types/interface";
+
 import { useRouter } from "next/router";
 import setModal from "@/lib/zustand";
 
@@ -32,12 +32,15 @@ const formSchema = yup.object({
 function SignInForm() {
   const [seePassword, setSeePassword] = useState<boolean>(false);
   const router = useRouter();
-  const { openPasswordMismatchModal }: any = setModal(); // zustand 스토어에서 함수 불러오기
+  const { openPasswordMismatchModal, openNonExistedUserModal }: any =
+    setModal(); // zustand 스토어에서 함수 불러오기
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const seePasswordHandler = () => {
+  const handleSeePassword = () => {
     setSeePassword(!seePassword);
   };
+
+  const mutation = useMutation(postSignIn);
 
   const {
     register,
@@ -48,46 +51,23 @@ function SignInForm() {
     resolver: yupResolver(formSchema),
   });
 
-  const { mutate } = useMutation({
-    mutationFn: postSignIn,
-    onSuccess: (data) => {
-      // 로그인 성공 시 로컬 스토리지에 토큰 저장
-      localStorage.setItem("accessToken", data.accessToken);
-      // /mydashboard로 이동
+  async function onSubmit(data: LoginData) {
+    try {
+      await mutation.mutateAsync(data);
+      console.log("로그인 성공", data);
       router.push("/mydashboard");
-    },
-    onError: (error: unknown) => {
-      console.error("로그인 실패:", error);
-
-      // error가 AxiosError인지 체크
-      if (error instanceof AxiosError) {
-        // AxiosError인 경우, 에러 응답을 확인
-        if (error.response && error.response.data) {
-          const errorMessage = error.response.data.message;
-
-          // 비밀번호 불일치 오류를 체크
-          if (errorMessage === "passwordMismatch") {
-            openPasswordMismatchModal();
-          }
-          if (error.response) {
-            const statuseCode = error.response.status;
-
-            if (statuseCode === 404) {
-              setErrorMessage("존재하지 않는 회원입니다.");
-            }
-          }
-        }
+    } catch (error: any) {
+      if (error.response && error.response.status === 404) {
+        setErrorMessage("존재하지 않는 회원입니다.");
+        openNonExistedUserModal(); // 존재하지 않는 회원 모달 띄우기
+      } else if (error.response && error.response.status === 400) {
+        setErrorMessage("비밀번호가 일치하지 않습니다.");
+        openPasswordMismatchModal(); // 비밀번호 불일치 모달 띄우기
+      } else {
+        console.error("로그인 실패", error);
       }
-    },
-  });
-
-  // 폼 제출 함수
-  const onSubmit = (data: LoginData) => {
-    mutate(data);
-  };
-
-  //테스트
-
+    }
+  }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.inputContainer}>
@@ -105,7 +85,7 @@ function SignInForm() {
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="password">비밀번호</label>
-        <div className={styles.passwordContainer}>
+        <div className={styles.pwContainer}>
           <input
             id="password"
             type={seePassword ? "text" : "password"}
@@ -113,34 +93,34 @@ function SignInForm() {
             {...register("password")}
             className={errors.password ? styles.errorFocus : styles.notError}
           />
-          <button
-            type="button"
-            className={styles.eye}
-            onClick={seePasswordHandler}
-          >
-            {!seePassword ? (
-              <Image
-                src="/images/eye-on.svg"
-                width={15}
-                height={15}
-                alt="eyeOn"
-              />
-            ) : (
-              <Image
-                src="/images/eye-off.svg"
-                width={15}
-                height={15}
-                alt="eyeOff"
-              />
-            )}
-          </button>
+          {!seePassword ? (
+            <Image
+              src="/images/eye-on.svg"
+              width={24}
+              height={24}
+              alt="열린눈"
+              className={styles.eye}
+              onClick={handleSeePassword}
+            />
+          ) : (
+            <Image
+              src="/images/eye-off.svg"
+              width={24}
+              height={24}
+              alt="닫힌눈"
+              className={styles.eye}
+              onClick={handleSeePassword}
+            />
+          )}
         </div>
         {errors.password && (
           <div className={styles.error}>{errors.password.message}</div>
         )}
       </div>
-      {errorMessage && <div className={styles.error}>{errorMessage}</div>}
-      <button type="submit" className={styles.loginBtn}>
+      <div className={styles.errorMessage}>
+        {errorMessage && <div className={styles.error}>{errorMessage}</div>}
+      </div>
+      <button className={styles.loginBtn} type="submit">
         로그인
       </button>
     </form>

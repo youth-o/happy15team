@@ -1,14 +1,14 @@
 import setModals from "@/lib/zustand";
 import { useRef, MouseEvent } from "react";
-import styles from "./Passwordmismatch.module.css";
+import styles from "./NonExistedUserModal.module.css";
 
-function PasswordMismatch() {
-  const { closePasswordMismatch }: any = setModals();
+function NonExistedUserModal() {
+  const { closeNonExistedUserModal }: any = setModals();
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleClickModalOutside = (e: MouseEvent) => {
     if (modalRef.current === e.target) {
-      closePasswordMismatch();
+      closeNonExistedUserModal();
     }
   };
 
@@ -19,8 +19,8 @@ function PasswordMismatch() {
       onClick={handleClickModalOutside}
     >
       <div className={styles.modalWrapper}>
-        <div className={styles.modalText}>비밀번호가 틀립니다!</div>
-        <button className={styles.modalBtn} onClick={closePasswordMismatch}>
+        <div className={styles.modalText}>존재하지 않는 회원입니다.</div>
+        <button className={styles.modalBtn} onClick={closeNonExistedUserModal}>
           확인
         </button>
       </div>
@@ -28,4 +28,4 @@ function PasswordMismatch() {
   );
 }
 
-export default PasswordMismatch;
+export default NonExistedUserModal;

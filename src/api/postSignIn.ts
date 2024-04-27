@@ -5,9 +5,13 @@ interface SignInData {
   password: string;
 }
 
-const postSignIn = async ({ email, password }: SignInData) => {
-  const res = await instance.post("auth/login", { email, password });
-  return res.data;
+const postSignIn = async (userData: SignInData) => {
+  try {
+    const response = await instance.post("/auth/login", userData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export default postSignIn;
