@@ -8,8 +8,12 @@ import { getConfirmCardData } from "@/api/DashboardData";
 import Participants from "@/components/Nav/Participants/Participants";
 
 const CheckCardModal = () => {
-  const { openEditCardModal, closeCheckCardModal, confirmCardData }: any =
-    setModals();
+  const {
+    openEditCardModal,
+    closeCheckCardModal,
+    confirmCardData,
+    openedModalId,
+  }: any = setModals();
   const [kebab, setKebab] = useState(false);
   const [cardData, setCardData] = useState<any>([]);
 
@@ -49,6 +53,8 @@ const CheckCardModal = () => {
     fetchCardData();
   }, [confirmCardData]);
 
+  if (!cardData) return null;
+
   return (
     <div
       className={styles.modalOverlay}
@@ -59,21 +65,27 @@ const CheckCardModal = () => {
         <div className={styles.colSection1}>
           <h1 className={styles.cardTitle}>{cardData.title}</h1>
           <div className={styles.cardTags}>
-            <span className={styles.columnTitle}>columnTitle</span>
+            <span className={styles.columnTitle}>{openedModalId.title}</span>
             <div className={styles.vr} />
             {cardData?.tags?.map((tag) => (
               <span className={styles.tags}>{tag}</span>
             ))}
           </div>
           <p className={styles.cardDescription}>{cardData.description}</p>
+
           <div className={styles.cardImage}>
             <Image
-              src="/images/cardImageTest.svg"
+              src={
+                cardData.imageUrl
+                  ? cardData.imageUrl
+                  : "/images/defaultCardImage.svg"
+              }
               alt="카드이미지"
               width={400}
               height={200}
             />
           </div>
+
           <AddComment />
           <ViewComment />
         </div>
@@ -108,8 +120,8 @@ const CheckCardModal = () => {
             <div className={styles.manager}>
               <p>담당자</p>
               <div className={styles.managerProfile}>
-                <Participants user={cardData?.assignee} />
-                <span>{cardData?.assignee?.nickname}</span>
+                <Participants user={cardData.assignee} />
+                <span>{cardData.assignee?.nickname}</span>
               </div>
             </div>
             <div className={styles.deadLine}>

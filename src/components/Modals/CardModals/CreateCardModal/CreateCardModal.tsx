@@ -1,12 +1,12 @@
 import Image from "next/image";
 import styles from "./CreateCardModal.module.css";
-import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import setModals from "@/lib/zustand";
 import Participants from "@/components/Nav/Participants/Participants";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import moment from "moment";
-import { getCardData, postAddCard } from "@/api/DashboardData";
+import { postAddCard, uploadCardImage } from "@/api/DashboardData";
 
 const CreateCardModal = () => {
   const {
@@ -14,6 +14,9 @@ const CreateCardModal = () => {
     dashboardMembers,
     dashboardData,
     openedModalId,
+    setIsFetching,
+    cardImageUrl,
+    setCardImageUrl,
   }: any = setModals();
   const [image, setImage] = useState<string | null>(null);
   const [viewAssignee, setViewAssignee] = useState(false);
@@ -26,25 +29,27 @@ const CreateCardModal = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [tagInputValue, setTagInputValue] = useState<any>("");
   const [cardInfo, setCardInfo] = useState({
-    assigneeId: "",
     title: "",
     description: "",
   });
-  console.log(image);
 
-  const handleImageChange = (e: React.ChangeEvent) => {
+  const handleImageChange = async (e: React.ChangeEvent) => {
+    const token = localStorage.getItem("accessToken");
     const file = imageInput.current?.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        const result = reader.result;
-        if (typeof result === "string") {
-          setImage(result);
-        }
-      };
+    if (file && token) {
+      const imageUrl = URL.createObjectURL(file);
+      const id = openedModalId;
+      setImage(imageUrl);
+      const profileImageUrl = await uploadCardImage(token, file, id);
+      setCardImageUrl(profileImageUrl);
     }
   };
+
+  let fulfilled;
+
+  if (!manager?.userId || !cardInfo.title || !cardInfo.description) {
+    fulfilled = true;
+  }
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -88,16 +93,34 @@ const CreateCardModal = () => {
       description: cardInfo.description,
       dueDate: formatDate,
       tags: tags,
-      imageUrl:
-        "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/task_image/4-15_22540_1713969821043.png",
+      imageUrl: cardImageUrl,
+    };
+
+    const noImgCardData = {
+      assigneeUserId: manager.userId,
+      dashboardId: dashboardData.id,
+      columnId: openedModalId,
+      title: cardInfo.title,
+      description: cardInfo.description,
+      dueDate: formatDate,
+      tags: tags,
     };
     const token = localStorage.getItem("accessToken");
     if (token) {
-      await postAddCard(token, cardData);
+      await postAddCard(token, cardImageUrl ? cardData : noImgCardData);
+      setIsFetching();
       closeCreateCardModal();
     }
   };
 
+  useEffect(() => {
+    const currentDate = new Date();
+    if (selected < currentDate) {
+      alert("이미 지난 날짜입니다.");
+      currentDate.setMinutes(currentDate.getMinutes() + 1);
+      setSelected(currentDate);
+    }
+  }, [selected]);
   return (
     <div
       className={styles.modalOverlay}
@@ -106,8 +129,14 @@ const CreateCardModal = () => {
     >
       <div className={styles.modalWrapper}>
         <h1 className={styles.modalTitle}>할 일 생성</h1>
+        <h2>
+          <span className={styles.essentialTag}>* </span>항목은 필수입니다.
+        </h2>
         <form className={styles.modalForm}>
-          <label>담당자</label>
+          <label>
+            담당자 <span className={styles.essentialTag}>*</span>
+          </label>
+
           <div
             className={styles.managerInput}
             onClick={() => {
@@ -161,7 +190,9 @@ const CreateCardModal = () => {
             onChange={handleInputChange}
             name="description"
           />
-          <label>마감일</label>
+          <label>
+            마감일 <span className={styles.essentialTag}>*</span>
+          </label>
           <div
             className={styles.deadlineInput}
             onClick={() => setViewCalender(!viewCalender)}
@@ -202,6 +233,7 @@ const CreateCardModal = () => {
             onKeyDown={addTags}
             value={tagInputValue}
             onChange={(e) => setTagInputValue(e.target.value)}
+            maxLength={10}
           />
           {tags && (
             <div className={styles.tags}>
@@ -254,7 +286,11 @@ const CreateCardModal = () => {
         </form>
         <div className={styles.modalButtons}>
           <button onClick={closeCreateCardModal}>취소</button>
-          <button onClick={handleSubmit} className={styles.inviteButton}>
+          <button
+            disabled={fulfilled}
+            onClick={handleSubmit}
+            className={styles.inviteButton}
+          >
             생성
           </button>
         </div>

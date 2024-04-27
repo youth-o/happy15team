@@ -28,6 +28,7 @@ const dashboard = () => {
     setDashboardData,
     loginUserData,
     setDashboardMembers,
+    rerender,
   }: any = setModals();
   const [columnData, setColumnData] = useState<any>([]);
   const router = useRouter();
@@ -53,7 +54,7 @@ const dashboard = () => {
 
   useEffect(() => {
     fetchDashboardData();
-  }, [id]);
+  }, [id, rerender]);
   return (
     <>
       <Nav />

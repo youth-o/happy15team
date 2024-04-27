@@ -14,12 +14,17 @@
 .modalWrapper {
   background-color: var(--White);
   width: 65rem;
-  height: 65rem;
+  height: 69rem;
   border: 1px solid var(--Gray-20);
   border-radius: 8px;
   padding: 2.8rem;
   display: flex;
   justify-content: space-between;
+}
+
+.cardImage {
+  border: 2px solid var(--Violet-10);
+  border-radius: 6px;
 }
 
 .colSection1 {
