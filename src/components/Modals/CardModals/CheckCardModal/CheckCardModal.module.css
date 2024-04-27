@@ -1,0 +1,123 @@
+.colSection1 {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 70%;
+  overflow-wrap: break-word;
+  padding-right: 4rem;
+}
+
+.cardTitle {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.cardTags {
+  display: flex;
+  gap: 1rem;
+}
+
+.columnTitle {
+  background-color: var(--Violet-10);
+  padding: 3px;
+  color: var(--Violet-20);
+  border-radius: 8px;
+}
+
+.tags {
+  background-color: var(--Violet-10);
+  padding: 3px;
+  color: var(--Violet-20);
+  border-radius: 8px;
+}
+
+.vr {
+  width: 1px;
+  background-color: var(--Gray-20);
+}
+
+.cardDescription {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.colSection2 {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.colSection2 button {
+  background-color: transparent;
+}
+
+.tools {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+}
+
+.kebab-off {
+  display: none;
+}
+
+.kebab {
+  position: relative;
+}
+
+.kebabMenu li {
+  width: 6rem;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.kebabMenu li:hover {
+  background-color: var(--Violet-10);
+  color: var(--Violet-20);
+  cursor: pointer;
+}
+
+.kebabMenu {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  position: absolute;
+  right: 2.5rem;
+  top: 2.8rem;
+  background-color: var(--White);
+  border: 1px solid var(--Gray-10);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.cardPreview {
+  width: 100%;
+  border: 1px solid var(--Gray-20);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.manager {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.managerProfile {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.cardPreview p {
+  font-weight: 700;
+}
+
+.cardPreview span {
+  font-size: 1.2rem;
+  font-weight: 700;
+}

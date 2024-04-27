@@ -1,0 +1,44 @@
+.modalTitle1 {
+  margin-top: 0.4rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.formContainer {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.formContainer input {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  width: 100%;
+  height: 4.8rem;
+  border-radius: 6px;
+  border: 1px solid var(--Gray-20);
+}
+
+.modalButtons {
+  display: flex;
+  gap: 2rem;
+  justify-content: end;
+}
+
+.modalButtons button {
+  display: flex;
+  width: 12rem;
+  height: 4.8rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-20);
+  background: var(--White);
+  color: var(--Gray-40);
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.modalButtons button:last-child {
+  background: var(--Violet-20);
+  color: var(--White);
+}

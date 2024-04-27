@@ -1,0 +1,40 @@
+.button {
+  --button-primary-bg: #5534da;
+  --button-primary-text-color: #fff;
+  --button-secondary-bg: #fff;
+  --button-secondary-text-color: #333;
+  --button-secondary-border: 1px solid #d9d9d9;
+  --button-ghost-text-color: #333;
+  --button-ghost-border: 1px solid #d9d9d9;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.button-primary {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text-color);
+}
+
+.button-secondary {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text-color);
+  border: var(--button-secondary-border);
+}
+
+.button-ghost {
+  background-color: transparent;
+  color: var(--button-ghost-text-color);
+  border: var(--button-ghost-border);
+}
+
+.button-disabled {
+  color: var(--button-primary-text-color);
+  cursor: not-allowed;
+}

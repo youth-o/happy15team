@@ -1,0 +1,120 @@
+import Image from "next/image";
+import AddComment from "./AddComment/AddComment";
+import styles from "./CheckCardModal.module.css";
+import ViewComment from "./ViewComment/ViewComment";
+import { MouseEvent, useEffect, useRef, useState } from "react";
+import setModals from "@/lib/zustand";
+import { getConfirmCardData } from "@/api/DashboardData";
+import Participants from "@/components/Nav/Participants/Participants";
+
+const CheckCardModal = () => {
+  const { openEditCardModal, closeCheckCardModal, confirmCardData }: any =
+    setModals();
+  const [kebab, setKebab] = useState(false);
+  const [cardData, setCardData] = useState<any>([]);
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleKebabClick = () => {
+    if (kebab) {
+      setKebab(false);
+      return;
+    }
+    setKebab(true);
+  };
+
+  const handleModalClose = (e: MouseEvent) => {
+    if (kebab && (e.target as HTMLDivElement).id !== "kebab") {
+      setKebab(false);
+    }
+    if (modalRef.current === e.target) {
+      closeCheckCardModal(); //모달 바깥쪽 클릭했을 때 닫히는 로직 (후에 inputValue값 같이 초기화 시키기)
+    }
+  };
+
+  const openEditModal = () => {
+    closeCheckCardModal();
+    openEditCardModal();
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    const cardId = confirmCardData;
+    const fetchCardData = async () => {
+      if (token) {
+        const confirmCardData = await getConfirmCardData(token, cardId);
+        setCardData(confirmCardData);
+      }
+    };
+    fetchCardData();
+  }, [confirmCardData]);
+
+  return (
+    <>
+      <div className={styles.colSection1}>
+        <h1 className={styles.cardTitle}>{cardData.title}</h1>
+        <div className={styles.cardTags}>
+          <span className={styles.columnTitle}>columnTitle</span>
+          <div className={styles.vr} />
+          {cardData?.tags?.map((tag) => (
+            <span className={styles.tags}>{tag}</span>
+          ))}
+        </div>
+        <p className={styles.cardDescription}>{cardData.description}</p>
+        <div className={styles.cardImage}>
+          <Image
+            src="/images/cardImageTest.svg"
+            alt="카드이미지"
+            width={400}
+            height={200}
+          />
+        </div>
+        <AddComment />
+        <ViewComment />
+      </div>
+      <div className={styles.colSection2}>
+        <div className={styles.tools}>
+          <div className={styles.kebab} onClick={handleKebabClick}>
+            {kebab && (
+              <ul id="kebab" className={styles.kebabMenu}>
+                <li onClick={openEditModal}>수정하기</li>
+                <li>삭제하기</li>
+              </ul>
+            )}
+            <button className={styles.kebabBtn}>
+              <Image
+                src="/images/kebabButton.svg"
+                alt="케밥버튼"
+                width={50}
+                height={30}
+              />
+            </button>
+          </div>
+          <button className={styles.closeBtn} onClick={closeCheckCardModal}>
+            <Image
+              src="/images/closeButton.svg"
+              alt="닫힘버튼"
+              width={50}
+              height={30}
+            />
+          </button>
+        </div>
+        <div className={styles.cardPreview}>
+          <div className={styles.manager}>
+            <p>담당자</p>
+            <div className={styles.managerProfile}>
+              <Participants user={cardData?.assignee} />
+              <span>{cardData?.assignee?.nickname}</span>
+            </div>
+          </div>
+          <div className={styles.deadLine}>
+            <p>마감일</p>
+            <span>{cardData.dueDate}</span>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default CheckCardModal;

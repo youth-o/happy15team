@@ -1,0 +1,23 @@
+.modalText {
+  color: var(--Black-20);
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: normal;
+  height: 100px;
+}
+
+.modalBtn {
+  background: var(--Violet-20);
+  border-radius: 8px;
+  padding: 1.4rem 4.6rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--White);
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: normal;
+  position: absolute;
+  bottom: 2.8rem;
+  right: 2.8rem;
+}

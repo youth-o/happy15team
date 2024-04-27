@@ -1,0 +1,117 @@
+/* 내 대시보드 페이지에서의 스타일 */
+
+.myDashboardStyle {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.3rem;
+}
+
+.myDashboardStyle .dashboardItems {
+  width: 33rem;
+  height: 7rem;
+  border: 1px solid var(--Gray-20);
+  border-radius: 8px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--Black-20);
+  padding: 0 2rem;
+  background-color: var(--White);
+  display: flex;
+  align-items: center;
+}
+
+.myDashboardStyle ~ .pageContainer {
+  display: flex;
+  justify-content: end;
+  margin-top: 1.2rem;
+}
+
+.pageDisplay {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  margin-right: 2.5rem;
+}
+
+
+/* .click {
+  font-size: 3rem;
+  font-weight: 150;
+  position: absolute;
+  top: 50%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+} */
+
+
+/* 사이드바에서의 스타일 */
+
+.sidebarStyle {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  color: var(--Gray-40);
+  font-size: 1.8rem;
+  font-weight: 500;
+  position: relative;
+  padding: 0 1.4rem;
+}
+
+.sidebarStyle .dashboardItems {
+  display: flex;
+  border-radius: 8px;
+  padding: 1.5rem;
+  align-items: center;
+}
+
+.sidebarStyle ~ .pageContainer {
+  position: fixed;
+  margin-top: 1.2rem;
+  display: flex;
+  bottom: 3rem;
+  left: 12.5rem;
+}
+
+.clicked {
+  background-color: var(--Violet-10);
+}
+
+/* 여기부터는 공통 스타일 */
+
+.title {
+  margin-right: 0.8rem;
+}
+
+.circle {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  margin-right: 1.8rem;
+}
+
+.pageContainer button {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--White);
+  border: 1px solid var(--Gray-20);
+  font-size: 1.7rem;
+  border-radius: 8px;
+}
+
+.open {
+  color: var(--Black-10);
+}
+
+.open:hover {
+  background-color: var(--Violet-10);
+}
+
+.close {
+  color: var(--Gray-20);
+  cursor: default;
+}
+
+.dashboardItems:hover {
+  background-color: var(--Violet-10);
+  cursor: pointer;
+}

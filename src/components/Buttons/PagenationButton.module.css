@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.container.sidebar {
+  flex-direction: column-reverse;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 0.4rem;
+}
+
+.buttonBox {
+  display: flex;
+  align-items: center;
+}
+
+.button.sidebar {
+  width: 2rem;
+  height: 2rem;
+}
+
+.span {
+  font-size: 1.2rem;
+}
+
+.span.sidebar {
+  font-size: 1.4rem;
+}

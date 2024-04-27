@@ -1,0 +1,46 @@
+.headerTagWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titleTag {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+}
+
+.columnTitle {
+  color: var(--Black-20);
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.tagCircle {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background-color: var(--Violet-20);
+}
+
+.columnSetting {
+  background-color: transparent;
+}
+
+.cardCounts {
+  height: 20px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background-color: var(--Gray-10);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+}

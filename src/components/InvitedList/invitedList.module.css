@@ -1,0 +1,14 @@
+.wrapper {
+  margin-top: 3.2rem;
+  padding: 3.2rem 0;
+  width: 102rem;
+  background-color: var(--White);
+  border-radius: 12px;
+}
+
+.title {
+  color: var(--Black-20);
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-left: 2.8rem;
+}
