@@ -36,7 +36,6 @@ function EditDashboardMembers() {
       </div>
       <div className={styles.list}>
         <h2 className={styles.name}>이름</h2>
-        <DashboardList size={0} />
       </div>
     </section>
   );
