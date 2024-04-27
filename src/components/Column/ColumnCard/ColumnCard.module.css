@@ -33,6 +33,21 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  overflow-x: scroll;
+}
+
+.tagWrapper::-webkit-scrollbar {
+  height: 15px;
+  background-color: transparent;
+  /* 수직 스크롤바의 배경색을 투명하게 설정 */
+}
+
+/* 수평 스크롤바 스타일 */
+.tagWrapper::-webkit-scrollbar-thumb:horizontal {
+  background-color: transparent;
+  width: 10px;
+  height: 4px;
+  /* 수평 스크롤바의 스크롤 막대 색상을 투명하게 설정 */
 }
 
 .cardFooter {

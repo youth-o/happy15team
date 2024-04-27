@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -32,7 +33,8 @@ const formSchema = yup.object({
 function SignInForm() {
   const [seePassword, setSeePassword] = useState<boolean>(false);
   const router = useRouter();
-  const { openPasswordMismatchModal }: any = setModal(); // zustand 스토어에서 함수 불러오기
+  const { openPasswordMismatchModal, openNonExistedUserModal }: any =
+    setModal(); // zustand 스토어에서 함수 불러오기
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const seePasswordHandler = () => {
@@ -65,17 +67,14 @@ function SignInForm() {
         if (error.response && error.response.data) {
           const errorMessage = error.response.data.message;
 
-          // 비밀번호 불일치 오류를 체크
-          if (errorMessage === "passwordMismatch") {
-            openPasswordMismatchModal();
-            console.log("dd");
-          }
-          if (error.response) {
-            const statuseCode = error.response.status;
-
-            if (statuseCode === 404) {
-              setErrorMessage("존재하지 않는 회원입니다.");
-            }
+          if (error.response && error.response.status === 404) {
+            setErrorMessage("존재하지 않는 회원입니다.");
+            openNonExistedUserModal(); // 존재하지 않는 회원 모달 띄우기
+          } else if (error.response && error.response.status === 400) {
+            setErrorMessage("비밀번호가 일치하지 않습니다.");
+            openPasswordMismatchModal(); // 비밀번호 불일치 모달 띄우기
+          } else {
+            console.error("로그인 실패", error);
           }
         }
       }
@@ -86,8 +85,6 @@ function SignInForm() {
   const onSubmit = (data: LoginData) => {
     mutate(data);
   };
-
-  //테스트
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -140,7 +137,9 @@ function SignInForm() {
           <div className={styles.error}>{errors.password.message}</div>
         )}
       </div>
-      {errorMessage && <div className={styles.error}>{errorMessage}</div>}
+      <div className={styles.errorMessage}>
+        {errorMessage && <div className={styles.error}>{errorMessage}</div>}
+      </div>
       <button type="submit" className={styles.loginBtn}>
         로그인
       </button>

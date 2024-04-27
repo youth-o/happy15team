@@ -3,11 +3,45 @@
   gap: 1.2rem;
   align-items: center;
   flex-shrink: 0;
+  position: relative;
+}
+
+.navUserProfile:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
 }
 .userProfileImage {
 }
 
 .userName {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.assigneeWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  position: absolute;
+  top: 5rem;
+  left: -5rem;
+  /* position: absolute; */
+}
+
+.assignee {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--Gray-20);
+  border-left: 1px solid var(--Gray-20);
+  border-right: 1px solid var(--Gray-20);
+  border-radius: 5px;
   font-size: 1.6rem;
-  font-weight: 500;
+  font-weight: 700;
+  background-color: var(--White);
+}
+
+.assignee:hover {
+  background-color: var(--Violet-10);
 }

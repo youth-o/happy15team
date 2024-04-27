@@ -2,36 +2,46 @@ import setModals from "@/lib/zustand";
 import styles from "./ColumnCard.module.css";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { getCardData, getConfirmCardData } from "@/api/DashboardData";
+import {
+  getCardData,
+  getComment,
+  getConfirmCardData,
+} from "@/api/DashboardData";
 import Participants from "@/components/Nav/Participants/Participants";
-import modalState from "@/lib/modalState";
 
-const ColumnCard = ({ id }) => {
+const ColumnCard = ({ modalData }) => {
   const [cardData, setCardData] = useState<any>([]);
-  const { setConfirmCardData }: any = setModals();
-  const keyRef = useRef<any>(null);
-  const { setOpenModal } = modalState();
+  const {
+    openCheckCardModal,
+    setConfirmCardData,
+    isFetching,
+    setIsFetched,
+    setCardLength,
+    setOpenedModalId,
+    rerender,
+  }: any = setModals();
 
   const fetchCardData = async () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
-      const cardData = await getCardData(token, id);
-      setCardData(cardData);
+      const cardData = await getCardData(token, modalData.id);
+      setCardData(cardData.cards);
+      setCardLength(cardData.totalCount);
     }
+    setIsFetched();
   };
-
-  const handleClickCard = (e: React.MouseEvent) => {
-    const cardId = keyRef.current.id;
-    console.log(cardId);
-    setConfirmCardData(cardId);
-    setOpenModal("openCheckCardModal");
+  const handleClickCard = (data: any) => {
+    setConfirmCardData(data.id);
+    setOpenedModalId(modalData);
+    openCheckCardModal();
   };
-
-  console.log(keyRef);
 
   useEffect(() => {
     fetchCardData();
-  }, []);
+    setCardLength(cardData.length);
+  }, [isFetching, rerender]);
+
+  if (!cardData) return null;
 
   return (
     <>
@@ -39,11 +49,10 @@ const ColumnCard = ({ id }) => {
         <div
           key={data.id}
           className={styles.cardWrapper}
-          onClick={handleClickCard}
-          ref={keyRef}
+          onClick={() => handleClickCard(data)}
           id={data.id}
         >
-          {cardData?.imageUrl && (
+          {data.imageUrl && (
             <div className={styles.cardrImage}>
               <Image
                 src={data.imageUrl}

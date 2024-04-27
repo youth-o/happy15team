@@ -45,6 +45,12 @@
   font-weight: 700;
 }
 
+.modalWrapper h2 {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
 .modalWrapper label {
   font-size: 1.3rem;
   font-weight: 700;
@@ -200,6 +206,11 @@
   color: var(--White);
 }
 
+.modalButtons button:last-child:disabled {
+  background: var(--Gray-20);
+  cursor: auto;
+}
+
 .calendar {
   display: flex;
   margin-left: -1rem;
@@ -220,6 +231,7 @@
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
+  overflow-wrap: break-word;
 }
 
 .tag {
@@ -228,6 +240,12 @@
   font-weight: 700;
   border-radius: 10px;
   padding: 0.3rem;
+}
+
+.tag:hover {
+  cursor: pointer;
+  opacity: 0.8; /* 호버시 투명도 조절 */
+  transform: translateY(-2px);
 }
 
 .orange {

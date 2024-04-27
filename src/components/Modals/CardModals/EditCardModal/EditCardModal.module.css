@@ -117,6 +117,26 @@
   outline-color: var(--Violet-20);
 }
 
+.assigneeWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.assignee {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--Gray-20);
+  border-left: 1px solid var(--Gray-20);
+  border-right: 1px solid var(--Gray-20);
+  border-radius: 5px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background-color: var(--White);
+}
+
 .descriptionInput::placeholder {
   color: var(--Gray-20);
 }
@@ -132,6 +152,11 @@
 
 .deadlineInput input:hover {
   cursor: pointer;
+}
+
+.deadlineInput span {
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 .calendarImage {
@@ -159,7 +184,7 @@
   justify-content: center;
 }
 
-.modalWrapper button {
+.modalButtons button {
   display: flex;
   width: 21rem;
   height: 4.8rem;
@@ -173,9 +198,46 @@
   font-weight: 500;
 }
 
-.modalWrapper button:last-child {
+.modalButtons button:last-child {
   background: var(--Violet-20);
   color: var(--White);
+}
+
+.tags {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  overflow-wrap: break-word;
+}
+
+.tag {
+  color: var(--White);
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0.3rem;
+}
+
+.tag:hover {
+  cursor: pointer;
+  opacity: 0.8; /* 호버시 투명도 조절 */
+  transform: translateY(-2px);
+}
+
+.orange {
+  background-color: var(--Orange);
+}
+
+.blue {
+  background-color: var(--Blue);
+}
+
+.purple {
+  background-color: var(--Purple);
+}
+
+.green {
+  background-color: var(--Green);
 }
 
 .imageInput {
@@ -226,4 +288,20 @@
   justify-content: center;
   width: 8.4rem;
   height: 8.3rem;
+}
+
+.calendar {
+  display: flex;
+  margin-left: -1rem;
+}
+
+.confirmButton {
+  background: var(--Blue);
+  color: var(--White);
+  height: fit-content;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  padding: 0.4rem;
+  font-weight: 700;
+  margin-top: 1.8rem;
 }
