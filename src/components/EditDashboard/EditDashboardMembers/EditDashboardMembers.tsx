@@ -3,6 +3,7 @@ import styles from "./EditDashboard.module.css";
 import useStore from "@/lib/zustand2";
 import { getDashboardMembers } from "@/api/getDashboardMembers";
 import dashboardIdState from "@/lib/dashboardIdState";
+import { deleteMember } from "@/api/deleteMember";
 
 function EditDashboardMembers() {
   const { savedDashboardId } = dashboardIdState();
@@ -10,10 +11,9 @@ function EditDashboardMembers() {
   const [items, setItems] = useState([]);
   const [totalCount, setTotalCount] = useState<number>(0);
   const { dataChange } = useStore();
-  let size = 6;
+  let size = 4;
 
   useEffect(() => {
-    console.log(savedDashboardId);
     const dashId = savedDashboardId;
     const fetchData = async () => {
       const token = localStorage.getItem("accessToken");
@@ -34,6 +34,20 @@ function EditDashboardMembers() {
     fetchData();
   }, [currentPage, dataChange]);
 
+  const handleDeleteMember = (userId: number) => {
+    const response = confirm("정말로 삭제 하시겠습니까?");
+    if (!response) return;
+    const fetchData = async () => {
+      const token = localStorage.getItem("accessToken");
+      try {
+        await deleteMember(token, userId);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  };
+
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
   };
@@ -49,7 +63,7 @@ function EditDashboardMembers() {
   return (
     <section className={styles.form}>
       <div className={styles.group}>
-        <h1 className={styles.grouptext}>구성원</h1>
+        <h1 className={styles.groupText}>구성원</h1>
         <div className={styles.pageContainer}>
           <div className={styles.pageDisplay}>
             {totalPage} 페이지 중 {currentPage}
@@ -73,6 +87,9 @@ function EditDashboardMembers() {
         {items.map((item, index) => (
           <div className={styles.list}>
             <span>{item.nickname}</span>
+            <button onClick={() => handleDeleteMember(item.userId)}>
+              삭제
+            </button>
           </div>
         ))}
       </div>
