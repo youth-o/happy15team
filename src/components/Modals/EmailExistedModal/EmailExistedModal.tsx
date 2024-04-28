@@ -1,30 +1,20 @@
-import setModals from "@/lib/zustand";
-import { useRef, MouseEvent } from "react";
 import styles from "./EmailExistedModal.module.css";
+import modalState from "@/lib/modalState";
 
 function EmailExistedModal() {
-  const { closeEmailExistedModal }: any = setModals();
-  const modalRef = useRef<HTMLDivElement>(null);
+  const { setOpenModal } = modalState();
 
-  const handleClickModalOutside = (e: MouseEvent) => {
-    if (modalRef.current === e.target) {
-      closeEmailExistedModal();
-    }
+  const handleOpenModal = () => {
+    setOpenModal("");
   };
 
   return (
-    <div
-      ref={modalRef}
-      className={styles.modalOverlay}
-      onClick={handleClickModalOutside}
-    >
-      <div className={styles.modalWrapper}>
+    <>
         <div className={styles.modalText}>이미 사용 중인 이메일입니다.</div>
-        <button className={styles.modalBtn} onClick={closeEmailExistedModal}>
+        <button className={styles.modalBtn} onClick={handleOpenModal}>
           확인
         </button>
-      </div>
-    </div>
+    </>
   );
 }
 

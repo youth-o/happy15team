@@ -1,0 +1,75 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /* position: relative; */
+  width: 62rem;
+  height: 25.6rem;
+  padding: 3.2rem 2.8rem;
+  margin-left: 32rem;
+  margin-top: 2rem;
+  background-color: var(--White);
+  border-radius: 8px;
+  gap: 3.2rem;
+}
+
+.selector {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboardname {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--black-black_333236, #333236);
+  font-family: Pretendard;
+  line-height: normal;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.inputform {
+  display: flex;
+  flex-direction: column;
+}
+
+.titleInput {
+  width: 56.4rem;
+  height: 4.8rem;
+  flex-shrink: 0;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  border-radius: 0.6rem;
+  border: 1px solid var(--Gray-20);
+  padding: 0.8rem;
+}
+
+.titleInput:focus {
+  border: 1px solid var(--Violet-20);
+
+}
+
+.titleInput:focus {
+  border: 1px solid var(--Violet-20);
+}
+
+.chagebutton {
+  display: flex;
+  margin-left: auto;
+}
+
+.chagebuttontext {
+  display: flex;
+  width: 8.4rem;
+  height: 3.2rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+}

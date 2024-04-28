@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./UserProfileImage.module.css";
 import setModals from "@/lib/zustand";
+import Image from "next/image";
 
 const UserProfileImage = () => {
   const { loginUserData } = setModals();
@@ -27,9 +28,23 @@ const UserProfileImage = () => {
   }, []);
 
   return (
-    <div className={`${styles.UserProfileImage} ${styles[userColor]}`}>
-      {loginUserData.email.charAt(0).toUpperCase()}
-    </div>
+    <>
+      {!loginUserData.profileImageUrl ? (
+        <div className={`${styles.UserProfileImage} ${styles[userColor]}`}>
+          {loginUserData.email.charAt(0).toUpperCase()}
+        </div>
+      ) : (
+        <div className={styles.UserProfileImage}>
+          <Image
+            src={loginUserData?.profileImageUrl}
+            width={40}
+            height={40}
+            alt="유저프로필이미지"
+            className={styles.UserProfileImage}
+          />
+        </div>
+      )}
+    </>
   );
 };
 

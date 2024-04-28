@@ -2,11 +2,14 @@ import SignInForm from "@/components/SignInForm/SignInForm";
 import Link from "next/link";
 import SignInHeader from "@/components/SignInHeader/SignInHeader";
 import styles from "@/pages/signin/SignIn.module.css";
+import modalState from "@/lib/modalState";
+import ModalBox from "@/components/Modals/ModalBox";
 
 function SignIn() {
+  const { openModal } = modalState();
+
   return (
     <div className={styles.body}>
-      <title>Taskify 로그인</title>
       <SignInHeader />
       <SignInForm />
       <div className={styles.noMember}>
@@ -15,6 +18,7 @@ function SignIn() {
           회원가입 하기
         </Link>
       </div>
+      {openModal && <ModalBox />}
     </div>
   );
 }

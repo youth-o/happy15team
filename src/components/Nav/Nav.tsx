@@ -5,17 +5,16 @@ import NavUserProfile from "./NavUserProfile/NavUserProfile";
 import { useRouter } from "next/router";
 import styles from "./Nav.module.css";
 import setModals from "@/lib/zustand";
-import InviteModal from "../Modals/InviteModal/InviteModal";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import UserService from "@/api/UserService";
 import { UserData } from "@/types/interface";
 
 type userData = Pick<UserData, "id" | "email" | "nickname" | "profileImageUrl">;
 
-const Nav = ({ dashboardMembers }) => {
+const Nav = () => {
   const router = useRouter();
   const path = router.pathname;
-  const { modalState, dashboardData, setLoginUserData }: any = setModals();
+  const { dashboardData, setLoginUserData }: any = setModals();
   const fetchUserData = async () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
@@ -46,13 +45,12 @@ const Nav = ({ dashboardMembers }) => {
             }
           >
             {dashboardData.createdByMe && <NavButtons />}
-            <NavParticipants dashboardMembers={dashboardMembers} />
+            <NavParticipants />
             <div className={styles.vr} />
           </div>
           <NavUserProfile />
         </div>
       </div>
-      {modalState && <InviteModal />}
     </Fragment>
   );
 };

@@ -1,34 +1,19 @@
-import setModals from "@/lib/zustand";
-import { useRef, MouseEvent } from "react";
 import styles from "./SuccessChangePasswordModal.module.css";
+import modalState from "@/lib/modalState";
 
-function SuccessChangePassword() {
-  const { closeSuccessChangePasswordModal }: any = setModals();
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  const handleClickModalOutside = (e: MouseEvent) => {
-    if (modalRef.current === e.target) {
-      closeSuccessChangePasswordModal();
-    }
+function SuccessChangePasswordModal() {
+  const { setOpenModal } = modalState();
+  const handleCloseModal = () => {
+    setOpenModal("");
   };
-
   return (
-    <div
-      ref={modalRef}
-      className={styles.modalOverlay}
-      onClick={handleClickModalOutside}
-    >
-      <div className={styles.modalWrapper}>
-        <div className={styles.modalText}>비밀번호가 변경되었습니다.</div>
-        <button
-          className={styles.modalBtn}
-          onClick={closeSuccessChangePasswordModal}
-        >
-          확인
-        </button>
-      </div>
-    </div>
+    <>
+      <div className={styles.modalText}>비밀번호가 변경되었습니다.</div>
+      <button className={styles.modalBtn} onClick={handleCloseModal}>
+        확인
+      </button>
+    </>
   );
 }
 
-export default SuccessChangePassword;
+export default SuccessChangePasswordModal;

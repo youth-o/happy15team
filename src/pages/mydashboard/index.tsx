@@ -5,12 +5,16 @@ import styles from "./Mydashboard.module.css";
 import InvitedList from "@/components/InvitedList/InvitedList";
 import React, { useState } from "react";
 import Image from "next/image";
-import setModals from "@/lib/zustand";
+import modalState from "@/lib/modalState";
 
 const MyDashboard = () => {
-  const { openCreateDashboardModal }: any = setModals();
   const [dashboardListEmpty, setDashboardListEmpty] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const { setOpenModal } = modalState();
+
+  const handleOpenModal = () => {
+    setOpenModal("openCreateDashboardModal");
+  };
 
   const handleMouseIn = () => {
     setIsHovered(true);
@@ -30,7 +34,7 @@ const MyDashboard = () => {
             className={`${styles.addDashboard} ${isHovered && styles.hovered}`}
           >
             <div
-              onClick={openCreateDashboardModal}
+              onClick={handleOpenModal}
               onMouseEnter={handleMouseIn}
               onMouseLeave={handleMouseOut}
             >
@@ -49,7 +53,7 @@ const MyDashboard = () => {
                 className={`${styles.clickIcon} ${isHovered && styles.hovered}`}
               >
                 <img
-                  onClick={openCreateDashboardModal}
+                  onClick={handleOpenModal}
                   onMouseEnter={handleMouseIn}
                   onMouseLeave={handleMouseOut}
                   src="/images/clickIcon.png"

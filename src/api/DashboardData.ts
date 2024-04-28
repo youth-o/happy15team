@@ -1,7 +1,5 @@
 import instance from "@/lib/axios";
 
-
-
 async function getDashboardData(token: any, id: string) {
   try {
     const response = await instance.get(`/dashboards/${id}`, {
@@ -15,7 +13,7 @@ async function getDashboardData(token: any, id: string) {
   }
 }
 
-async function getColumnData(token: any, id: string ) {
+async function getColumnData(token: any, id: string) {
   try {
     const response = await instance.get(`/columns?dashboardId=${id}`, {
       headers: {
@@ -28,7 +26,7 @@ async function getColumnData(token: any, id: string ) {
   }
 }
 
-async function getDashboardMebers(token: any, id: string ) {
+async function getDashboardMebers(token: any, id: string) {
   try {
     const response = await instance.get(`/members?dashboardId=${id}`, {
       headers: {
@@ -48,7 +46,7 @@ async function getCardData(token: any, columnId: string) {
         Authorization: `Bearer ${token}`,
       },
     });
-    return response.data.cards;
+    return response.data;
   } catch (error) {
     throw error;
   }
@@ -68,7 +66,7 @@ async function getConfirmCardData(token: any, cardId: string) {
 }
 
 async function postAddCard(token: string, cardData: any) {
-  console.log(cardData)
+
 
   try {
     const response = await instance.post(`/cards`, cardData, {
@@ -82,5 +80,168 @@ async function postAddCard(token: string, cardData: any) {
   }
 }
 
+const  uploadCardImage= async(token:string, file: File, id:string) => {
+    try {
+        const formData = new FormData();
+        formData.append("image", file);
+        const response = await instance.post(`/columns/${id}/card-image`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response.data.imageUrl;
+      }
+     catch (error) {
+      throw error;
+    }
+}
+  
+const  postComment= async(token:string, formData) => {
+    try {
+        const response = await instance.post(`/comments`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response.data;
+      }
+     catch (error) {
+      throw error;
+    }
+}
 
- export { getDashboardData, getDashboardMebers, getColumnData, getCardData, postAddCard, getConfirmCardData }
+const  EditComment= async(token:string, content, id ) => {
+    try {
+        const response = await instance.put(`/comments/${id}`, content, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response.data;
+      }
+     catch (error) {
+      throw error;
+    }
+}
+
+const addColumns = async (token: string, title, dashboardId) => {
+  const data = {
+    "title": title,
+  "dashboardId": Number(dashboardId)
+  }
+    try {
+      await instance.post(`/columns`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+     catch (error) {
+      throw error;
+    }
+}
+  
+const getComment= async(token:string, cardId) => {
+    try {
+        const response = await instance.get(`/comments?cardId=${cardId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response.data.comments;
+      }
+     catch (error) {
+      throw error;
+    }
+}
+
+
+  
+const deleteColumn= async(token:string, columnId) => {
+    try {
+        await instance.delete(`/columns/${columnId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+     catch (error) {
+      throw error;
+    }
+}
+  
+const reNameColumn = async (token: string, columnId, name) => {
+  const title = {
+    "title":name
+  }
+    try {
+        await instance.put(`/columns/${columnId}`, title, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+     catch (error) {
+      throw error;
+    }
+}
+  
+const putEditCard = async (token: string, data, cardId) => {
+    try {
+        await instance.put(`/cards/${cardId}`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+     catch (error) {
+      throw error;
+    }
+}
+  
+const deleteCard= async(token:string, cardId) => {
+    try {
+        await instance.delete(`/cards/${cardId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+     catch (error) {
+      throw error;
+    }
+}
+
+const deleteComment= async(token:string, Id) => {
+    try {
+        await instance.delete(`/comments/${Id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+     catch (error) {
+      throw error;
+    }
+}
+
+
+
+export {
+  getDashboardData,
+  getDashboardMebers,
+  getColumnData,
+  getCardData,
+  postAddCard,
+  getConfirmCardData,
+  uploadCardImage,
+  postComment,
+  getComment,
+  deleteColumn,
+  reNameColumn,
+  addColumns,
+  putEditCard,
+  deleteCard,
+  EditComment,
+  deleteComment
+};
