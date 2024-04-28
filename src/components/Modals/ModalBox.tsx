@@ -15,12 +15,14 @@ import NonExistedUserModal from "./NonExistedUserModal/NonExistedUserModal";
 import RegisterSuccessModal from "./RegisterSuccessModal/RegisterSuccessModal";
 import SamePasswordErrorModal from "./SamePasswordErrorModal/SamePasswordErrorModal";
 import SuccessChangePasswordModal from "./SuccessChangePasswordModal/SuccessChangePasswordModal";
+import { useRouter } from "next/router";
 
 interface ModalName {
   [key: string]: React.ReactNode;
 }
 
 const ModalBox = () => {
+  const router = useRouter();
   const { openModal, setOpenModal } = modalState();
 
   const modalName: ModalName = {
@@ -45,6 +47,9 @@ const ModalBox = () => {
   };
 
   const handleClickModalOutside = () => {
+    if (openModal === "openRegisterSuccessModal") {
+      router.push("/signin");
+    }
     setOpenModal("");
   };
 
