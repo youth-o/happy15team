@@ -69,21 +69,6 @@ const CreateCardModal = () => {
     }));
   };
 
-  const addTags = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && tagInputValue.length < 1) {
-      alert("태그는 1글자 이상 작성바랍니다");
-      return;
-    }
-    if (e.key === "Enter" && tags.length >= 4) {
-      alert("태그는 최대 4개까지 생성 가능합니다");
-      return;
-    }
-    if (e.key === "Enter") {
-      setTags((prev) => [...prev, tagInputValue]);
-      setTagInputValue("");
-    }
-  };
-
   const handleSubmit = async () => {
     const cardData = {
       assigneeUserId: manager.userId,
@@ -110,6 +95,21 @@ const CreateCardModal = () => {
       await postAddCard(token, cardImageUrl ? cardData : noImgCardData);
       setIsFetching();
       closeCreateCardModal();
+    }
+  };
+
+  const addTags = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && tagInputValue.length < 1) {
+      alert("태그는 1글자 이상 작성바랍니다");
+      return;
+    }
+    if (e.key === "Enter" && tags.length >= 4) {
+      alert("태그는 최대 4개까지 생성 가능합니다");
+      return;
+    }
+    if (e.key === "Enter") {
+      setTags((prev) => [...prev, tagInputValue]);
+      setTagInputValue("");
     }
   };
 
