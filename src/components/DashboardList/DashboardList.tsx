@@ -4,9 +4,10 @@ import styles from "./DashboardList.module.css";
 import { getMyDashboardData } from "@/api/getMyDashboardData";
 import useStore from "@/lib/zustand2";
 import Link from "next/link";
+import dashboardIdState from "@/lib/dashboardIdState";
 
 interface DashboardItem {
-  id: string;
+  id: number;
   title: string;
   color: string;
   createdByMe: boolean;
@@ -28,6 +29,7 @@ const DashboardList = ({
   const [items, setItems] = useState<DashboardItem[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
   const { dataChange } = useStore();
+  const { setSavedDashboardId } = dashboardIdState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,8 +49,9 @@ const DashboardList = ({
     fetchData();
   }, [currentPage, dataChange]);
 
-  const handleClick = (index: number) => {
+  const handleClick = (index: number, dashboardNum: number) => {
     setClickedIndex(index);
+    setSavedDashboardId(dashboardNum);
   };
 
   const handleNextPage = () => {
@@ -76,7 +79,7 @@ const DashboardList = ({
               className={`${styles.dashboardItems} ${
                 clickedIndex === index ? styles.clicked : ""
               }`}
-              onClick={() => handleClick(index)}
+              onClick={() => handleClick(index, item.id)}
             >
               <div
                 className={styles.circle}
@@ -99,7 +102,7 @@ const DashboardList = ({
         <div className={styles.pageContainer}>
           {myDashboardPage && (
             <div className={styles.pageDisplay}>
-              {currentPage} 페이지 중 {totalPage}
+              {totalPage} 페이지 중 {currentPage}
             </div>
           )}
           <button

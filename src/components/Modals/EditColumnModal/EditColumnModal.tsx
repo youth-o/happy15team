@@ -45,7 +45,6 @@ const EditColumnModal = () => {
     }
   };
 
-  console.log(assignee);
 
   const handleSubmit = async () => {
     const cardData = {

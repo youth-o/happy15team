@@ -37,7 +37,6 @@ function ProfileForm() {
 
   useEffect(() => {
     fetchUserData();
-    console.log(dataChange);
   }, [dataChange]);
 
   // 파일이 선택되었을 때 호출되는 함수

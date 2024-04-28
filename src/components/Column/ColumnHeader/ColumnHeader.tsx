@@ -11,7 +11,6 @@ const ColumnHeader = ({ titles, columnData }) => {
   const handleClickEdit = () => {
     setOpenedModalId(columnData);
     setOpenModal("openEditColumnModal");
-    console.log(openModal);
   };
 
   return (

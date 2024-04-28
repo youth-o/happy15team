@@ -5,10 +5,12 @@ import { PostCreateDashboardData } from "@/api/PostCreateDashboardData";
 import useStore from "@/lib/zustand2";
 import { useRouter } from "next/router";
 import modalState from "@/lib/modalState";
+import dashboardIdState from "@/lib/dashboardIdState";
 
 const colorList = ["#7ac555", "#5534da", "#ffa500", "#76a5ea", "#e876ea"];
 
 const CreateDashboardModal = () => {
+  const { setSavedDashboardId } = dashboardIdState();
   const router = useRouter();
   const { setDataChange } = useStore();
   const { setOpenModal } = modalState();
@@ -44,6 +46,7 @@ const CreateDashboardModal = () => {
       try {
         const data = await PostCreateDashboardData(token, createDashboardData);
         setDataChange(data.data.id);
+        setSavedDashboardId(data.data.id);
         setOpenModal("");
         router.push(`/dashboard/${data.data.id}`);
       } catch (error) {
