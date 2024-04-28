@@ -10,7 +10,6 @@ import Image from "next/image";
 import { LoginData } from "@/types/interface";
 import postSignIn from "@/api/postSignIn";
 import { useRouter } from "next/router";
-import setModal from "@/lib/zustand";
 
 const formSchema = yup.object({
   email: yup
@@ -34,8 +33,6 @@ function SignInForm() {
   const { setOpenModal } = modalState();
   const [seePassword, setSeePassword] = useState<boolean>(false);
   const router = useRouter();
-  const { openPasswordMismatchModal }: any =
-    setModal(); // zustand 스토어에서 함수 불러오기
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const seePasswordHandler = () => {
@@ -72,7 +69,7 @@ function SignInForm() {
             setOpenModal("openNonExistedUserModal");
           } else if (error.response && error.response.status === 400) {
             setErrorMessage("비밀번호가 일치하지 않습니다.");
-            openPasswordMismatchModal(); // 비밀번호 불일치 모달 띄우기
+            setOpenModal(openPasswordMismatchModal);
           } else {
             console.error("로그인 실패", error);
           }

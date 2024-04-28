@@ -11,7 +11,6 @@ import modalState from "@/lib/modalState";
 const EditCardModal = () => {
   const { setOpenModal } = modalState();
   const {
-    closeEditCardModal,
     openedCardData,
     openedModalId,
     columnState,
@@ -19,7 +18,6 @@ const EditCardModal = () => {
     cardImageUrl,
     setCardImageUrl,
   }: any = setModals();
-  const modalRef = useRef<HTMLDivElement>(null);
   const [viewAssignee, setViewAssignee] = useState(false);
   const [prevCardData, setPrevCardData] = useState();
   const [assignee, setAssignee] = useState();
@@ -101,6 +99,10 @@ const EditCardModal = () => {
       prevTags.filter((_, index) => index !== indexToRemove)
     );
   };
+
+  const handleCloseModal = () => {
+    setOpenModal("");
+  }
 
   useEffect(() => {
     setPrevCardData(openedCardData);
@@ -256,7 +258,7 @@ const EditCardModal = () => {
         </div>
       </form>
       <div className={styles.modalButtons}>
-        <button onClick={closeEditCardModal}>취소</button>
+        <button onClick={handleCloseModal}>취소</button>
         <button onClick={handleSubmit} className={styles.inviteButton}>
           변경
         </button>

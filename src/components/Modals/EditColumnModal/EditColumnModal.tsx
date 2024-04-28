@@ -10,7 +10,6 @@ import modalState from "@/lib/modalState";
 
 const EditColumnModal = () => {
   const {
-    closeEditCardModal,
     openedCardData,
     dashboardMembers,
     cardImageUrl,
@@ -29,6 +28,10 @@ const EditColumnModal = () => {
   const [image, setImage] = useState<string | null>(null);
   const formatDate = moment(selected).format("YYYY-MM-DD hh:mm");
   const imageInput = useRef<HTMLInputElement>(null!);
+
+  const handleCloseModal = () => {
+    setOpenModal("");
+  };
 
   const handleImageChange = async (e: React.ChangeEvent) => {
     const token = localStorage.getItem("accessToken");
@@ -74,7 +77,7 @@ const EditColumnModal = () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       await putEditCard(token, cardImageUrl ? cardData : noImgCardData, cardId);
-      setOpenModal("openCheckcardModal");
+      setOpenModal("openCheckCardModal");
     }
   };
 
@@ -253,7 +256,7 @@ const EditColumnModal = () => {
         </div>
       </form>
       <div className={styles.modalButtons}>
-        <button onClick={closeEditCardModal}>취소</button>
+        <button onClick={handleCloseModal}>취소</button>
         <button onClick={handleSubmit} className={styles.inviteButton}>
           변경
         </button>
