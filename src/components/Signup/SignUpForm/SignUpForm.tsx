@@ -81,7 +81,6 @@ function SignUpForm() {
     try {
       await mutation.mutateAsync(data);
       setOpenModal("openRegisterSuccessModal");
-      console.log("회원가입 성공:", data);
     } catch (error: any) {
       if (error.response && error.response.status === 409) {
         setOpenModal("openEmailExistedModal");

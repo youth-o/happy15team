@@ -43,8 +43,6 @@ const EditCardModal = () => {
     }
   };
 
-  console.log(assignee);
-
   const handleSubmit = async () => {
     const cardData = {
       assigneeUserId: assignee

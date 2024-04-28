@@ -26,8 +26,6 @@ const Participants = ({ user }) => {
     handleUserColor();
   }, []);
 
-  console.log(user);
-  console.log(user?.profileImageUrl);
 
   useEffect(() => {}, []);
 

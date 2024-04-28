@@ -27,7 +27,6 @@ function testt() {
   const handle = () => {
     setOpenModal(modalName[k]);
     k++;
-    console.log(k);
   };
 
   return (
