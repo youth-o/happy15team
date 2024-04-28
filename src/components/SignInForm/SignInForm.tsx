@@ -58,18 +58,15 @@ function SignInForm() {
     },
     onError: (error: unknown) => {
       console.error("로그인 실패:", error);
-
       // error가 AxiosError인지 체크
       if (error instanceof AxiosError) {
         // AxiosError인 경우, 에러 응답을 확인
         if (error.response && error.response.data) {
 
           if (error.response && error.response.status === 404) {
-            setErrorMessage("존재하지 않는 회원입니다.");
             setOpenModal("openNonExistedUserModal");
           } else if (error.response && error.response.status === 400) {
-            setErrorMessage("비밀번호가 일치하지 않습니다.");
-            setOpenModal(openPasswordMismatchModal);
+            setOpenModal("openPasswordMismatchModal");
           } else {
             console.error("로그인 실패", error);
           }
