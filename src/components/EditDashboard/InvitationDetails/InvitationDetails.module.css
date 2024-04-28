@@ -36,6 +36,7 @@
 
 .pageContainer {
   display: flex;
+  align-items: center;
 }
 
 .pageDisplay {
@@ -45,17 +46,29 @@
   margin-right: 2.5rem;
 }
 
-.pageContainer button {
+.Invite {
+  margin-left: 2rem;
+  background-color: var(--Violet-20);
+  border: 1px solid var(--Gray-20);
+  color: var(--White);
+  font-size: 1.7rem;
+  border-radius: 8px;
+  display: flex;
+  width: 10rem;
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+  font-weight: 200;
+}
+
+.open {
+  color: var(--Black-10);
   width: 2.5rem;
   height: 2.5rem;
   background-color: var(--White);
   border: 1px solid var(--Gray-20);
   font-size: 1.7rem;
   border-radius: 8px;
-}
-
-.open {
-  color: var(--Black-10);
 }
 
 .open:hover {
@@ -65,6 +78,12 @@
 .close {
   color: var(--Gray-20);
   cursor: default;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--White);
+  border: 1px solid var(--Gray-20);
+  font-size: 1.7rem;
+  border-radius: 8px;
 }
 
 .list {

@@ -3,8 +3,10 @@ import modalState from "@/lib/modalState";
 import { PostInviteMember } from "@/api/postInviteMember";
 import dashboardIdState from "@/lib/dashboardIdState";
 import { useState } from "react";
+import useStore from "@/lib/zustand2";
 
 const InviteModal = () => {
+  const { dataChange, setDataChange } = useStore();
   const { setOpenModal } = modalState();
   const { savedDashboardId } = dashboardIdState();
   const [email, setEmail] = useState("");
@@ -42,6 +44,7 @@ const InviteModal = () => {
         }
         setOpenModal("");
         alert("성공적으로 초대 되었습니다.");
+        setDataChange(dataChange + 1);
         return;
       } catch (error) {
         console.error(error);

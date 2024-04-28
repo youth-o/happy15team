@@ -4,6 +4,7 @@ import useStore from "@/lib/zustand2";
 import { getInviteData } from "@/api/getInviteData";
 import dashboardIdState from "@/lib/dashboardIdState";
 import { cancelInvite } from "@/api/cancelInvite";
+import modalState from "@/lib/modalState";
 
 function EditDashboardMembers() {
   const { savedDashboardId } = dashboardIdState();
@@ -11,6 +12,7 @@ function EditDashboardMembers() {
   const [items, setItems] = useState([]);
   const [totalCount, setTotalCount] = useState<number>(0);
   const { dataChange, setDataChange } = useStore();
+  const { setOpenModal } = modalState();
   let size = 4;
 
   useEffect(() => {
@@ -41,12 +43,16 @@ function EditDashboardMembers() {
       const token = localStorage.getItem("accessToken");
       try {
         await cancelInvite(token, savedDashboardId, userId);
-        setDataChange(dataChange+1);
+        setDataChange(dataChange + 1);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
+  };
+
+  const handleOpenModal = () => {
+    setOpenModal("openInviteModal");
   };
 
   const handleNextPage = () => {
@@ -81,6 +87,9 @@ function EditDashboardMembers() {
           >
             {">"}
           </button>
+          <button className={styles.Invite} onClick={handleOpenModal}>
+            초대하기
+          </button>
         </div>
       </div>
       <div>
@@ -88,9 +97,7 @@ function EditDashboardMembers() {
         {items.map((item, index) => (
           <div className={styles.list}>
             <span>{item.invitee.email}</span>
-            <button onClick={() => handleCancelInvite(item.id)}>
-              취소
-            </button>
+            <button onClick={() => handleCancelInvite(item.id)}>취소</button>
           </div>
         ))}
       </div>
