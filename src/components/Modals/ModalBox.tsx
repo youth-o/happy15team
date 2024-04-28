@@ -6,7 +6,6 @@ import AddColumnModal from "./AddColumnModal/AddColumnModal";
 import CheckCardModal from "./CardModals/CheckCardModal/CheckCardModal";
 import CreateCardModal from "./CardModals/CreateCardModal/CreateCardModal";
 import ChangeProfileModal from "./ChangeProfileModal/ChangeProfileModal";
-import EditColumnModal from "./EditColumnModal/EditColumnModal";
 import EmailExistedModal from "./EmailExistedModal/EmailExistedModal";
 import InviteModal from "./InviteModal/InviteModal";
 import NicknameErrorModal from "@/components/Modals/NicknameErrorModal/NicknameErrorModal";
@@ -15,12 +14,16 @@ import NonExistedUserModal from "./NonExistedUserModal/NonExistedUserModal";
 import RegisterSuccessModal from "./RegisterSuccessModal/RegisterSuccessModal";
 import SamePasswordErrorModal from "./SamePasswordErrorModal/SamePasswordErrorModal";
 import SuccessChangePasswordModal from "./SuccessChangePasswordModal/SuccessChangePasswordModal";
+import { useRouter } from "next/router";
+import EditCardModal from "./CardModals/EditCardModal/EditCardModal";
+import EditColumnModal from "./EditColumnModal/EditColumnModal";
 
 interface ModalName {
   [key: string]: React.ReactNode;
 }
 
 const ModalBox = () => {
+  const router = useRouter();
   const { openModal, setOpenModal } = modalState();
 
   const modalName: ModalName = {
@@ -38,6 +41,7 @@ const ModalBox = () => {
     openRegisterSuccessModal: <RegisterSuccessModal />,
     openSamePasswordErrorModal: <SamePasswordErrorModal />,
     openSuccessChangePasswordModal: <SuccessChangePasswordModal />,
+    openEditCardModal: <EditCardModal />,
   };
 
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -45,12 +49,15 @@ const ModalBox = () => {
   };
 
   const handleClickModalOutside = () => {
+    if (openModal === "openRegisterSuccessModal") {
+      router.push("/signin");
+    }
     setOpenModal("");
   };
 
   return (
     <div className={styles.modalOverlay} onClick={handleClickModalOutside}>
-      <div className={styles.modalWrapper} onClick={handleModalClick}>
+      <div className={`${openModal === "openCheckCardModal" ? "" : styles.modalWrapper}`} onClick={handleModalClick}>
         {modalName[openModal]}
       </div>
     </div>

@@ -125,7 +125,7 @@ const CreateCardModal = () => {
     }
   }, [selected]);
   return (
-    <>
+    <div className={styles.modalWrapper}>
       <h1 className={styles.modalTitle}>할 일 생성</h1>
       <h2>
         <span className={styles.essentialTag}>* </span>항목은 필수입니다.
@@ -293,7 +293,7 @@ const CreateCardModal = () => {
           생성
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

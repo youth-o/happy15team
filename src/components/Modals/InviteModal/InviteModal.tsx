@@ -1,25 +1,75 @@
 import styles from "./InviteModal.module.css";
 import modalState from "@/lib/modalState";
+import { PostInviteMember } from "@/api/postInviteMember";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const InviteModal = () => {
   const { setOpenModal } = modalState();
+  const router = useRouter();
+  const [email, setEmail] = useState("");
 
   const handleCloseModal = () => {
     setOpenModal("");
   };
-  // todo
-  // 초대 버튼 클릭시 초대 이메일 및 에러처리 & 소셜 초대기능 구현
+
+  const handleInviteMember = async () => {
+    const inviteMemberData = {
+      dashboardId: router.query.id,
+      email: email,
+    };
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      try {
+        const data = await PostInviteMember(token, inviteMemberData);
+        if (data.response) {
+          if (data.response.status === 400) {
+            alert("이메일 형식이 올바르지 않습니다.");
+            return;
+          }
+          if (data.response.status === 403) {
+            alert("대시보드 초대 권한이 없습니다.");
+            return;
+          }
+          if (data.response.status === 404) {
+            alert("대시보드가 존재하지 않습니다.");
+            return;
+          }
+          if (data.response.status === 409) {
+            alert("이미 대시보드에 초대된 멤버입니다.");
+            return;
+          }
+        }
+        setOpenModal("");
+        alert("성공적으로 초대 되었습니다.");
+        return;
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.error("토큰 없음");
+    }
+  };
 
   return (
     <>
       <h1 className={styles.modalTitle}>초대하기</h1>
-      <form>
+      <form className={styles.form}>
         <label htmlFor="inviteInput">이메일</label>
-        <input className={styles.inviteInput} />
+        <input
+          className={styles.inviteInput}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </form>
       <div className={styles.modalButtons}>
         <button onClick={handleCloseModal}>취소</button>
-        <button className={styles.inviteButton}>초대</button>
+        <button
+          onClick={email ? handleInviteMember : undefined}
+          className={`${styles.inviteButton} ${!email && styles.none}`}
+        >
+          초대
+        </button>
       </div>
     </>
   );

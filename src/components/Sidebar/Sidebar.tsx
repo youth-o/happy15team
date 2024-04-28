@@ -15,7 +15,7 @@ const Sidebar = () => {
   return (
     <>
       <div className={styles.wrapper}>
-        <Link href="/">
+        <Link href="/mydashboard">
           <Image
             src="/images/sidebarLogo.svg"
             alt="Taskify Logo"
@@ -35,7 +35,7 @@ const Sidebar = () => {
             className={styles.cursorPointer}
           />
         </div>
-        <DashboardList size={10} />
+        <DashboardList size={13} />
       </div>
       {openModal && <ModalBox />}
     </>

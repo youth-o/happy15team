@@ -12,8 +12,14 @@
 }
 
 .modalWrapper {
+  position: relative;
   background-color: var(--White);
   border: 1px solid var(--Gray-20);
   border-radius: 8px;
   padding: 2.8rem;
+  width: 54rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,7 +1,6 @@
 .form {
   display: flex;
   flex-direction: column;
-  /* position: relative; */
   width: 62rem;
   height: 35.5rem;
   padding: 3.2rem 2.8rem;
@@ -34,4 +33,44 @@
   font-size: 1.6rem;
   font-weight: 400;
   color: var(--Gray-30);
+}
+
+.pageContainer {
+  display: flex;
+}
+
+.pageDisplay {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  margin-right: 2.5rem;
+}
+
+.pageContainer button {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--White);
+  border: 1px solid var(--Gray-20);
+  font-size: 1.7rem;
+  border-radius: 8px;
+}
+
+.open {
+  color: var(--Black-10);
+}
+
+.open:hover {
+  background-color: var(--Violet-10);
+}
+
+.close {
+  color: var(--Gray-20);
+  cursor: default;
+}
+
+.list {
+  margin: 1.5rem;
+  font-size: 2rem;
+  background-color: var(--White);
+  
 }

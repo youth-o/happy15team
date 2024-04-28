@@ -120,7 +120,6 @@ class UserService {
     } catch (error) {
       console.error("비밀번호 업데이트 중 오류가 발생했습니다.", error);
       onFailure();
-      console.log(onFailure);
     }
   }
 }
