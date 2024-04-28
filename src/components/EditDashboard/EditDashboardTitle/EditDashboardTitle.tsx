@@ -5,6 +5,7 @@ import ColorSelector from "@/components/ColorSelector/ColorSelector";
 import Button from "@/components/Buttons/Button";
 import styles from "./EditDashboardTitle.module.css";
 import setModals from "@/lib/zustand";
+import dashboardIdState from "@/lib/dashboardIdState";
 
 function EditDashboardTitle() {
   const [inputValue, setInputValue] = useState("");
@@ -15,23 +16,26 @@ function EditDashboardTitle() {
   const { data, mutate, isPending } = useUpdateDashboardTitle(
     boardId as string
   );
+  const { savedDashboardId } = dashboardIdState();
 
   useEffect(() => {
-    if (data) {
-      setSelectedColor(data.color);
-      setInputValue(data.title);
-    }
+    setSelectedColor(data?.color ?? "");
+    setInputValue(data?.title ?? "");
   }, [data]);
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutate({
-      dashboardId: boardId as string,
-      title: inputValue,
-      color: selectedColor,
-    });
+    if (boardId) {
+      // boardId가 유효한 경우에만 API 요청을 보냄
+      mutate({
+        dashboardId: boardId as string,
+        title: inputValue,
+        color: selectedColor,
+      });
+    } else {
+      console.error("boardId가 유효하지 않습니다.");
+    }
   };
-
   return (
     <section className={styles.container}>
       <div className={styles.selector}>

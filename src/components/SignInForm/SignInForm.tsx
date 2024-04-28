@@ -34,8 +34,7 @@ function SignInForm() {
   const { setOpenModal } = modalState();
   const [seePassword, setSeePassword] = useState<boolean>(false);
   const router = useRouter();
-  const { openPasswordMismatchModal }: any =
-    setModal(); // zustand 스토어에서 함수 불러오기
+  const { openPasswordMismatchModal }: any = setModal(); // zustand 스토어에서 함수 불러오기
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const seePasswordHandler = () => {
@@ -66,7 +65,6 @@ function SignInForm() {
       if (error instanceof AxiosError) {
         // AxiosError인 경우, 에러 응답을 확인
         if (error.response && error.response.data) {
-
           if (error.response && error.response.status === 404) {
             setErrorMessage("존재하지 않는 회원입니다.");
             setOpenModal("openNonExistedUserModal");
