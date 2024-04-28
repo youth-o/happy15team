@@ -3,10 +3,10 @@
   flex-direction: column;
   /* position: relative; */
   width: 62rem;
-  height: 35.5rem;
+  height: 25.6rem;
   padding: 3.2rem 2.8rem;
   margin-left: 32rem;
-  margin-top: 13.4rem;
+  margin-top: 2rem;
   background-color: var(--White);
   border-radius: 8px;
   gap: 3.2rem;
@@ -51,6 +51,10 @@
 }
 
 .titleInput::placeholder {
+
+.titleInput:focus {
+  border: 1px solid var(--Violet-20);
+
 }
 
 .titleInput:focus {
