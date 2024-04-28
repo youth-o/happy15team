@@ -10,7 +10,7 @@ function EditDashboardMembers() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [items, setItems] = useState([]);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const { dataChange } = useStore();
+  const { dataChange, setDataChange } = useStore();
   let size = 4;
 
   useEffect(() => {
@@ -41,6 +41,7 @@ function EditDashboardMembers() {
       const token = localStorage.getItem("accessToken");
       try {
         await deleteMember(token, userId);
+        setDataChange(dataChange+1);
       } catch (error) {
         console.error(error);
       }
@@ -87,7 +88,7 @@ function EditDashboardMembers() {
         {items.map((item, index) => (
           <div className={styles.list}>
             <span>{item.nickname}</span>
-            <button onClick={() => handleDeleteMember(item.userId)}>
+            <button onClick={() => handleDeleteMember(item.id)}>
               삭제
             </button>
           </div>

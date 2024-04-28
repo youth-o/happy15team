@@ -1,12 +1,12 @@
 import styles from "./InviteModal.module.css";
 import modalState from "@/lib/modalState";
 import { PostInviteMember } from "@/api/postInviteMember";
-import { useRouter } from "next/router";
+import dashboardIdState from "@/lib/dashboardIdState";
 import { useState } from "react";
 
 const InviteModal = () => {
   const { setOpenModal } = modalState();
-  const router = useRouter();
+  const { savedDashboardId } = dashboardIdState();
   const [email, setEmail] = useState("");
 
   const handleCloseModal = () => {
@@ -15,7 +15,7 @@ const InviteModal = () => {
 
   const handleInviteMember = async () => {
     const inviteMemberData = {
-      dashboardId: router.query.id,
+      dashboardId: savedDashboardId,
       email: email,
     };
     const token = localStorage.getItem("accessToken");
