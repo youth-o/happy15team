@@ -30,6 +30,8 @@ const dashboard = () => {
     setDashboardMembers,
     rerender,
     setColumnState,
+    isFetching,
+    setIsFetching,
   }: any = setModals();
   const [columnData, setColumnData] = useState<any>([]);
   const router = useRouter();
@@ -65,7 +67,7 @@ const dashboard = () => {
         <Column columnData={columnData} />
       </DashboardLayout>
       {addColumnModal && <AddColumnModal />}
-
+      {createCardModal && <CreateCardModal />}
       {editCardModal && <EditCardModal />}
       {checkCardModal && <CheckCardModal />}
       {editColumnModal && <EditColumnModal />}

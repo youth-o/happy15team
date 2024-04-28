@@ -5,15 +5,8 @@ import Image from "next/image";
 import { deleteColumn, reNameColumn } from "@/api/DashboardData";
 
 const EditColumnModal = () => {
-  const {
-    closeEditColumnModal,
-    openedModalId,
-    setIsFetched,
-    setIsFetching,
-    rerender,
-    setRerender,
-    setRerenderDone,
-  }: any = setModals();
+  const { closeEditColumnModal, openedModalId, rerender, setRerender }: any =
+    setModals();
   const modalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef(null);
   const [inputValue, setInputValue] = useState("");
@@ -29,6 +22,7 @@ const EditColumnModal = () => {
       const token = localStorage.getItem("accessToken");
       if (token) {
         await deleteColumn(token, openedModalId.id);
+        console.log(openedModalId.id);
         closeEditColumnModal();
         setRerender(!rerender);
       }
@@ -67,7 +61,7 @@ const EditColumnModal = () => {
             onClick={handleClickDelete}
           />
         </div>
-        <form>
+        <div>
           <label htmlFor="inviteInput">이름</label>
           <input
             placeholder={openedModalId.title}
@@ -76,7 +70,7 @@ const EditColumnModal = () => {
             onChange={(e) => setInputValue(e.target.value)}
             ref={inputRef}
           />
-        </form>
+        </div>
         <div className={styles.modalButtons}>
           <button onClick={closeEditColumnModal}>취소</button>
           <button onClick={handleClickRename} className={styles.inviteButton}>

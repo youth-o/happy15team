@@ -5,7 +5,7 @@
   width: 62rem;
   height: 35.5rem;
   padding: 3.2rem 2.8rem;
-  margin-left: 32rem;
+  margin-left: 1rem;
   margin-top: 2.5rem;
   background-color: var(--White);
   border-radius: 8px;
@@ -97,7 +97,6 @@
 @media all and (min-width: 480px) and (max-width: 767px) {
   .form {
     width: 54.4rem;
-    margin-left: 18rem;
   }
 
   .editContainer input {
@@ -112,7 +111,7 @@
     width: 28.4rem;
     height: 42.2rem;
     padding: 2.8rem 2rem;
-    margin-left: 8rem;
+
     margin-top: 2rem;
     gap: 2.4rem;
   }

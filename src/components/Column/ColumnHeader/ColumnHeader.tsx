@@ -2,15 +2,31 @@ import { useEffect, useState } from "react";
 import styles from "./ColumnHeader.module.css";
 import Image from "next/image";
 import setModals from "@/lib/zustand";
+import { getCardData } from "@/api/DashboardData";
 
 const ColumnHeader = ({ titles, columnData }) => {
-  const { openEditColumnModal, cardLength, setOpenedModalId }: any =
+  const [totalCount, setTotalCount] = useState("");
+  const { openEditColumnModal, setOpenedModalId, isFetching }: any =
     setModals();
 
   const handleClickEdit = () => {
     setOpenedModalId(columnData);
     openEditColumnModal();
   };
+
+  const fetchCardData = async () => {
+    if (!columnData) return;
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      const cardData = await getCardData(token, columnData.id);
+
+      setTotalCount(cardData.totalCount);
+    }
+  };
+
+  useEffect(() => {
+    fetchCardData();
+  }, [isFetching]);
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.titleWrapper}>
@@ -19,7 +35,7 @@ const ColumnHeader = ({ titles, columnData }) => {
           {titles.map((title: any) => (
             <div className={styles.columnTitle}>{title}</div>
           ))}
-          <div className={styles.cardCounts}>{cardLength}</div>
+          <div className={styles.cardCounts}>{totalCount}</div>
         </div>
         <button onClick={handleClickEdit} className={styles.columnSetting}>
           <Image

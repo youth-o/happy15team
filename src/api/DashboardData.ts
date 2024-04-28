@@ -47,7 +47,8 @@ async function getCardData(token: any, columnId: string) {
       },
     });
     return response.data;
-  } catch (error) {
+  }
+  catch (error) {
     throw error;
   }
 }

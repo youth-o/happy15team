@@ -8,6 +8,7 @@ import {
   getConfirmCardData,
 } from "@/api/DashboardData";
 import Participants from "@/components/Nav/Participants/Participants";
+import moment from "moment";
 
 const ColumnCard = ({ modalData }) => {
   const [cardData, setCardData] = useState<any>([]);
@@ -15,31 +16,33 @@ const ColumnCard = ({ modalData }) => {
     openCheckCardModal,
     setConfirmCardData,
     isFetching,
-    setIsFetched,
     setCardLength,
     setOpenedModalId,
-    rerender,
   }: any = setModals();
 
-  const fetchCardData = async () => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      const cardData = await getCardData(token, modalData.id);
-      setCardData(cardData.cards);
-      setCardLength(cardData.totalCount);
-    }
-    setIsFetched();
-  };
+  const formatDate = moment(cardData.createdAt).format("YYYY-MM-DD hh:mm");
+
   const handleClickCard = (data: any) => {
     setConfirmCardData(data.id);
     setOpenedModalId(modalData);
     openCheckCardModal();
   };
 
+  const fetchCardData = async () => {
+    if (!modalData) return;
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      const cardData = await getCardData(token, modalData.id);
+      setCardData(cardData.cards);
+      setCardLength(cardData.totalCount);
+    }
+  };
+
   useEffect(() => {
     fetchCardData();
-    setCardLength(cardData.length);
-  }, [isFetching, rerender]);
+  }, [isFetching]);
+
+  console.log(cardData);
 
   if (!cardData) return null;
 
@@ -84,7 +87,7 @@ const ColumnCard = ({ modalData }) => {
             ))}
           </div>
           <div className={styles.cardFooter}>
-            <div className={styles.createdAt}>{data.createdAt}</div>
+            <div className={styles.createdAt}>{formatDate}</div>
             <div className={styles.manager}>
               <Participants user={data.assignee} />
             </div>

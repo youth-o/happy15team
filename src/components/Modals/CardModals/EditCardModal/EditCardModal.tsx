@@ -11,12 +11,12 @@ const EditCardModal = () => {
   const {
     closeEditCardModal,
     openedCardData,
-    openedModalId,
-    columnState,
     dashboardMembers,
     cardImageUrl,
     setCardImageUrl,
     openCheckCardModal,
+    setIsFetching,
+    isFetching,
   }: any = setModals();
   const modalRef = useRef<HTMLDivElement>(null);
   const [viewAssignee, setViewAssignee] = useState(false);
@@ -49,7 +49,6 @@ const EditCardModal = () => {
       closeEditCardModal(); //모달 바깥쪽 클릭했을 때 닫히는 로직 (후에 inputValue값 같이 초기화 시키기)
     }
   };
-  console.log(assignee);
 
   const handleSubmit = async () => {
     const cardData = {
@@ -82,7 +81,9 @@ const EditCardModal = () => {
     if (token) {
       await putEditCard(token, cardImageUrl ? cardData : noImgCardData, cardId);
       openCheckCardModal();
+      closeEditCardModal();
     }
+    setIsFetching(!isFetching);
   };
 
   const addTags = (e: React.KeyboardEvent) => {

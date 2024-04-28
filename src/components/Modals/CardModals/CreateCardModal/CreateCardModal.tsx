@@ -14,9 +14,10 @@ const CreateCardModal = () => {
     dashboardMembers,
     dashboardData,
     openedModalId,
-    setIsFetching,
     cardImageUrl,
     setCardImageUrl,
+    setIsFetching,
+    isFetching,
   }: any = setModals();
   const [image, setImage] = useState<string | null>(null);
   const [viewAssignee, setViewAssignee] = useState(false);
@@ -93,7 +94,7 @@ const CreateCardModal = () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       await postAddCard(token, cardImageUrl ? cardData : noImgCardData);
-      setIsFetching();
+      setIsFetching(!isFetching);
       closeCreateCardModal();
     }
   };

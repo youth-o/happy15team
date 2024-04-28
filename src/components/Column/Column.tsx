@@ -5,25 +5,22 @@ import AddColumnButton from "./AddColumnButton/AddColumnButton";
 import styles from "./Column.module.css";
 import ColumnCard from "./ColumnCard/ColumnCard";
 import ColumnHeader from "./ColumnHeader/ColumnHeader";
-import { useState } from "react";
 
 const Column = ({ columnData }) => {
-  const { createCardModal }: any = setModals();
-
   if (!columnData) return null;
+
   return (
     <>
       <div className={styles.columnWrapper}>
         {columnData.map((data, index) => (
-          <div key={data.id} className={styles.columnTemplate}>
+          <div key={index} className={styles.columnTemplate}>
             <ColumnHeader columnData={data} titles={[data.title]} />
             <AddCardButton columnId={data.id} />
-            <ColumnCard modalData={data} />
+            <ColumnCard key={index} modalData={data} />
           </div>
         ))}
         <AddColumnButton />
       </div>
-      {createCardModal && <CreateCardModal />}
     </>
   );
 };

@@ -16,6 +16,8 @@ const CheckCardModal = () => {
     setOpenedCardData,
     rerender,
     setRerender,
+    setIsFetching,
+    isFetching,
   }: any = setModals();
 
   const [kebab, setKebab] = useState(false);
@@ -54,7 +56,7 @@ const CheckCardModal = () => {
       await deleteCard(token, cardId);
     }
 
-    setRerender(!rerender);
+    setIsFetching(!isFetching);
     closeCheckCardModal();
   };
 

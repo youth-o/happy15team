@@ -42,7 +42,7 @@ const AddColumnModal = () => {
     >
       <div className={styles.modalWrapper}>
         <h1 className={styles.modalTitle}>새 컬럼 생성</h1>
-        <form>
+        <div>
           <label htmlFor="inviteInput">이름</label>
           <input
             maxLength={10}
@@ -50,7 +50,7 @@ const AddColumnModal = () => {
             className={styles.inviteInput}
             ref={inputRef}
           />
-        </form>
+        </div>
         <div className={styles.modalButtons}>
           <button onClick={closeAddColumnModal}>취소</button>
           <button onClick={handleClickAdd} className={styles.inviteButton}>
