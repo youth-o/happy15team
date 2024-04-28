@@ -15,7 +15,7 @@ const Sidebar = () => {
   return (
     <>
       <div className={styles.wrapper}>
-        <Link href="/">
+        <Link href="/mydashboard">
           <Image
             src="/images/sidebarLogo.svg"
             alt="Taskify Logo"

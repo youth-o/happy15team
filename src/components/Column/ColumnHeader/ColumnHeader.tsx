@@ -4,14 +4,16 @@ import setModals from "@/lib/zustand";
 import modalState from "@/lib/modalState";
 
 const ColumnHeader = ({ titles, columnData }) => {
-  const { setOpenModal } = modalState();
+  const { openModal, setOpenModal } = modalState();
   const { cardLength, setOpenedModalId }: any =
     setModals();
 
   const handleClickEdit = () => {
     setOpenedModalId(columnData);
     setOpenModal("openEditColumnModal");
+    console.log(openModal);
   };
+
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.titleWrapper}>

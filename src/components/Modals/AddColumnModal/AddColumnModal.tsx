@@ -31,7 +31,7 @@ const AddColumnModal = () => {
   };
 
   return (
-    <>
+    <div className={styles.modalWrapper}>
       <h1 className={styles.modalTitle}>새 컬럼 생성</h1>
       <form>
         <label htmlFor="inviteInput">이름</label>
@@ -48,7 +48,7 @@ const AddColumnModal = () => {
           생성
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

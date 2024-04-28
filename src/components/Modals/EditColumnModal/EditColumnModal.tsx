@@ -111,7 +111,7 @@ const EditColumnModal = () => {
   if (!prevCardData) return null;
 
   return (
-    <>
+    <div className={styles.modalWrapper}>
       <h1 className={styles.modalTitle}>할 일 수정</h1>
       <form className={styles.modalForm}>
         <div className={styles.modalHeader}>
@@ -261,7 +261,7 @@ const EditColumnModal = () => {
           변경
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

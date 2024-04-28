@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./EditCardModal.module.css";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import setModals from "@/lib/zustand";
 import Participants from "@/components/Nav/Participants/Participants";
 import { DayPicker } from "react-day-picker";
@@ -113,7 +113,7 @@ const EditCardModal = () => {
   if (!prevCardData) return null;
 
   return (
-    <>
+    <div className={styles.modalWrapper}>
       <h1 className={styles.modalTitle}>할 일 수정</h1>
       <form className={styles.modalForm}>
         <div className={styles.modalHeader}>
@@ -263,7 +263,7 @@ const EditCardModal = () => {
           변경
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

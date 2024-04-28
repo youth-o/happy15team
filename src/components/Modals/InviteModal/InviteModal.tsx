@@ -13,7 +13,7 @@ const InviteModal = () => {
   return (
     <>
       <h1 className={styles.modalTitle}>초대하기</h1>
-      <form>
+      <form className={styles.form}>
         <label htmlFor="inviteInput">이메일</label>
         <input className={styles.inviteInput} />
       </form>
