@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./EditCardModal.module.css";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import setModals from "@/lib/zustand";
 import Participants from "@/components/Nav/Participants/Participants";
 import { DayPicker } from "react-day-picker";
@@ -11,7 +11,6 @@ import modalState from "@/lib/modalState";
 const EditCardModal = () => {
   const { setOpenModal } = modalState();
   const {
-    closeEditCardModal,
     openedCardData,
     openedModalId,
     columnState,
@@ -19,7 +18,6 @@ const EditCardModal = () => {
     cardImageUrl,
     setCardImageUrl,
   }: any = setModals();
-  const modalRef = useRef<HTMLDivElement>(null);
   const [viewAssignee, setViewAssignee] = useState(false);
   const [prevCardData, setPrevCardData] = useState();
   const [assignee, setAssignee] = useState();
@@ -102,6 +100,10 @@ const EditCardModal = () => {
     );
   };
 
+  const handleCloseModal = () => {
+    setOpenModal("");
+  }
+
   useEffect(() => {
     setPrevCardData(openedCardData);
     setTags(openedCardData.tags);
@@ -111,7 +113,7 @@ const EditCardModal = () => {
   if (!prevCardData) return null;
 
   return (
-    <>
+    <div className={styles.modalWrapper}>
       <h1 className={styles.modalTitle}>할 일 수정</h1>
       <form className={styles.modalForm}>
         <div className={styles.modalHeader}>
@@ -256,12 +258,12 @@ const EditCardModal = () => {
         </div>
       </form>
       <div className={styles.modalButtons}>
-        <button onClick={closeEditCardModal}>취소</button>
+        <button onClick={handleCloseModal}>취소</button>
         <button onClick={handleSubmit} className={styles.inviteButton}>
           변경
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

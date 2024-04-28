@@ -10,10 +10,10 @@ function EmailExistedModal() {
 
   return (
     <>
-      <div className={styles.modalText}>이미 사용 중인 이메일입니다.</div>
-      <button className={styles.modalBtn} onClick={handleOpenModal}>
-        확인
-      </button>
+        <div className={styles.modalText}>이미 사용 중인 이메일입니다.</div>
+        <button className={styles.modalBtn} onClick={handleOpenModal}>
+          확인
+        </button>
     </>
   );
 }
