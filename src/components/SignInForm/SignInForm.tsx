@@ -116,14 +116,14 @@ function SignInForm() {
           >
             {!seePassword ? (
               <Image
-                src="/images/eye-on.svg"
+                src="/images/eye-off.svg"
                 width={25}
                 height={25}
                 alt="eyeOn"
               />
             ) : (
               <Image
-                src="/images/eye-off.svg"
+                src="/images/eye-on.svg"
                 width={25}
                 height={25}
                 alt="eyeOff"

@@ -52,6 +52,7 @@ function EditDashboardTitle() {
             value={inputValue}
             required
             className={styles.titleInput}
+            maxLength={10}
           />
         </div>
         <div className={styles.chagebutton}>
