@@ -10,6 +10,7 @@ import styles from "./EditDashboard.module.css";
 
 function EditDashboardPage() {
   const { handleDashboardDeleteButtonClick } = useDeleteDashboard();
+
   return (
     <div>
       <Nav />

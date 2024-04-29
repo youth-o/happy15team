@@ -63,13 +63,6 @@
   font-weight: 700;
 }
 
-.assigneeWrapper {
-  display: flex;
-  flex-direction: column;
-  width: 24.3rem;
-  /* position: absolute; */
-}
-
 .managerInput {
   width: 60%;
   position: relative;
@@ -79,6 +72,13 @@
   position: absolute;
   right: 1rem;
   top: 1rem;
+}
+
+.assigneeWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 24.3rem;
+  /* position: absolute; */
 }
 
 .assignee {

@@ -4,8 +4,10 @@ import useStore from "@/lib/zustand2";
 import { getDashboardMembers } from "@/api/getDashboardMembers";
 import dashboardIdState from "@/lib/dashboardIdState";
 import { deleteMember } from "@/api/deleteMember";
+import setModals from "@/lib/zustand";
 
 function EditDashboardMembers() {
+  const { setRerender, rerender } = setModals();
   const { savedDashboardId } = dashboardIdState();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [items, setItems] = useState([]);
@@ -47,6 +49,7 @@ function EditDashboardMembers() {
       }
     };
     fetchData();
+    setRerender(!rerender);
   };
 
   const handleNextPage = () => {

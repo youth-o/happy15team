@@ -2,13 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-left: 30rem;
+
   padding: 1.5rem 2rem;
   border-bottom: 1px solid var(--Gray-20);
   flex-shrink: 0;
   background-color: var(--White);
-  /* position: fixed; */
-  width: 83vw;
+  position: fixed;
+  width: 100%;
+  padding-left: 32rem;
 }
 
 .sectionWrapper {

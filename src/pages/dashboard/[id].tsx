@@ -12,16 +12,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const dashboard = () => {
-  const {
-    editCardModal,
-    dashboardData,
-    setDashboardData,
-    loginUserData,
-    setDashboardMembers,
-    rerender,
-    setColumnState,
-  }: any = setModals();
-  const [columnData, setColumnData] = useState<any>([]);
+  const { setDashboardData, setDashboardMembers }: any = setModals();
+
   const router = useRouter();
   const { id }: any = router.query;
 
@@ -31,7 +23,6 @@ const dashboard = () => {
     if (token) {
       const dashboardData = await getDashboardData(token, id);
       const dashboardMembers = await getDashboardMebers(token, id);
-      const columnData = await getColumnData(token, id);
       setDashboardData({
         id: dashboardData.id,
         title: dashboardData.title,
@@ -39,20 +30,18 @@ const dashboard = () => {
         createdByMe: dashboardData.createdByMe,
       });
       setDashboardMembers(dashboardMembers);
-      setColumnData(columnData);
-      setColumnState(columnData);
     }
   };
 
   useEffect(() => {
     fetchDashboardData();
-  }, [id, rerender]);
+  }, [id]);
   return (
     <>
       <Nav />
       <Sidebar />
       <DashboardLayout>
-        <Column columnData={columnData} />
+        <Column />
       </DashboardLayout>
     </>
   );

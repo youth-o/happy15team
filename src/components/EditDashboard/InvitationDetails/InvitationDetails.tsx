@@ -25,7 +25,6 @@ function EditDashboardMembers() {
           size: size,
         };
         const invitations = await getInviteData(token, invitedData);
-        console.log(invitations.invitations);
         setItems(invitations.invitations);
         setTotalCount(invitations.totalCount);
       } catch (error) {
