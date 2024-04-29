@@ -1,0 +1,67 @@
+.modalTitle {
+  margin-top: 4rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.form {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form label {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.form input {
+  margin-top: 1.2rem;
+  padding: 1.5rem;
+  width: 41.5rem;
+  height: 4.8rem;
+  border-radius: 6px;
+  border: 1px solid var(--Gray-20);
+}
+
+.modalButtons {
+  margin: 3rem 6rem 1.5rem 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.modalButtons button {
+  display: flex;
+  width: 12rem;
+  height: 4.8rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-20);
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.modalButtons button:first-child {
+  background: var(--White);
+  color: var(--Gray-40);
+}
+
+.inviteButton {
+  background: var(--Violet-20);
+  color: var(--White);
+}
+
+.none {
+  background: var(--Gray-10);
+  color: var(--White);
+  cursor: default;
+}
+
+.naming {
+  margin-top: 3.2rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+}

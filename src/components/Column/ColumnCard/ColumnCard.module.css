@@ -1,0 +1,97 @@
+.cardWrapper {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  background-color: var(--White);
+  border: 1px solid var(--Gray-20);
+  border-radius: 6px;
+}
+
+.dragEnter {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+
+  background-color: var(--Gray-20);
+  border: 1px solid var(--Gray-20);
+  border-radius: 6px;
+}
+
+.cardWrapper:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.cardTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.dragging {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  cursor: move;
+}
+
+.cardTag {
+  width: fit-content;
+  padding: 0.5rem;
+  background-color: var(--Violet-20);
+  color: var(--Violet-10);
+  border-radius: 10px;
+}
+
+.tagWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  overflow-x: scroll;
+}
+
+.tagWrapper::-webkit-scrollbar {
+  height: 15px;
+  background-color: transparent;
+  /* 수직 스크롤바의 배경색을 투명하게 설정 */
+}
+
+/* 수평 스크롤바 스타일 */
+.tagWrapper::-webkit-scrollbar-thumb:horizontal {
+  background-color: transparent;
+  width: 10px;
+  height: 4px;
+  /* 수평 스크롤바의 스크롤 막대 색상을 투명하게 설정 */
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.createdAt {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.orange {
+  background-color: var(--Orange);
+}
+
+.blue {
+  background-color: var(--Blue);
+}
+
+.purple {
+  background-color: var(--Purple);
+}
+
+.green {
+  background-color: var(--Green);
+}

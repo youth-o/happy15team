@@ -1,0 +1,13 @@
+.center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.center button{
+  background-color: var(--Violet-10);
+  margin-top: 10px;
+  padding: 3px 3px;
+  border: solid 1px var(--Gray-30);
+}

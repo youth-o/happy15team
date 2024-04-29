@@ -1,0 +1,43 @@
+.nav {
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--Black-40);
+}
+
+.logo {
+  margin: 1.6rem;
+}
+
+.link {
+  color: var(--White);
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 2.5rem 3.6rem 2.5rem 0;
+}
+
+.link:hover {
+  color: var(--Gray-20);
+}
+
+.signup {
+  margin-right: 8rem;
+}
+
+/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
+@media all and (min-width: 480px) and (max-width: 767px) {
+  .signup {
+    margin-right: 4rem;
+  }
+}
+
+/* 모바일 세로 (해상도 ~ 479px)*/
+@media all and (max-width: 479px) {
+  .signup {
+    margin-right: 2.4rem;
+  }
+}

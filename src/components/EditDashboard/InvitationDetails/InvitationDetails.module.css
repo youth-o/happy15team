@@ -1,0 +1,110 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 62rem;
+  max-height: 35.5rem;
+  padding: 3.2rem 2.8rem;
+  margin-left: 1rem;
+  margin-top: 2.5rem;
+  background-color: var(--White);
+  border-radius: 8px;
+  gap: 3.2rem;
+}
+
+.group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2.8rem;
+  flex-shrink: 0;
+}
+
+.groupText {
+  color: var(--black-black_333236, #333236);
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.name {
+  padding-left: 2.8rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--Gray-30);
+}
+
+.pageContainer {
+  display: flex;
+  align-items: center;
+}
+
+.pageDisplay {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  margin-right: 2.5rem;
+}
+
+.Invite {
+  margin-left: 2rem;
+  background-color: var(--Violet-20);
+  border: 1px solid var(--Gray-20);
+  color: var(--White);
+  font-size: 1.7rem;
+  border-radius: 8px;
+  display: flex;
+  width: 10rem;
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+  font-weight: 200;
+}
+
+.open {
+  color: var(--Black-10);
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--White);
+  border: 1px solid var(--Gray-20);
+  font-size: 1.7rem;
+  border-radius: 8px;
+}
+
+.open:hover {
+  background-color: var(--Violet-10);
+}
+
+.close {
+  color: var(--Gray-20);
+  cursor: default;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--White);
+  border: 1px solid var(--Gray-20);
+  font-size: 1.7rem;
+  border-radius: 8px;
+}
+
+.list {
+  margin: 1.5rem;
+  font-size: 1.8rem;
+  background-color: var(--White);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list button {
+  display: flex;
+  width: 10rem;
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-20);
+  background: var(--White);
+  color: var(--Violet-20);
+  font-size: 1.6rem;
+  font-weight: 500;
+}

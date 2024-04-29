@@ -1,0 +1,37 @@
+.navWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--Gray-20);
+  flex-shrink: 0;
+  background-color: var(--White);
+  position: fixed;
+  width: 100%;
+  padding-left: 32rem;
+}
+
+.sectionWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+.section2 {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+  justify-content: right;
+  flex-shrink: 0;
+}
+
+.vr {
+  height: 3.8rem;
+  width: 0.1rem;
+  background-color: var(--Gray-20);
+}
+
+.myDashBoard {
+  display: none;
+}

@@ -1,0 +1,33 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 2rem 1rem 0;
+  width: 30rem;
+  height: 100vh;
+  background-color: var(--White);
+  border-right: 1px solid var(--Gray-20);
+  z-index: 1001;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3.8rem 1.4rem 1.8rem;
+  color: var(--Gray-40);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cursorPointer:hover {
+  cursor: pointer;
+  filter: invert(20%) sepia(94%) saturate(2347%) hue-rotate(242deg)
+    brightness(100%) contrast(84%);
+}
+
+.logo:hover {
+  cursor: pointer;
+  filter: invert(90%) sepia(100%) saturate(2347%) hue-rotate(242deg)
+    brightness(100%) contrast(80%);
+}

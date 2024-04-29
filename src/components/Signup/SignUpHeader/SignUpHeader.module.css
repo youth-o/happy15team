@@ -1,0 +1,31 @@
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  margin-bottom: 1rem;
+  width: 20rem;
+  height: 28rem;
+}
+
+.welcome {
+  color: var(--Black-20);
+  text-align: center;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 3.8rem;
+}
+
+/* 모바일 세로 (해상도 ~ 479px)*/
+@media all and (max-width: 479px) {
+  .logo {
+    margin-bottom: 0.8rem;
+    width: 14rem;
+    height: 19.5rem;
+  }
+}

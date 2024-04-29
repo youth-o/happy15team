@@ -1,0 +1,113 @@
+.commentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+  overflow-y: scroll;
+}
+
+.commentWrapper hr {
+  width: 86%;
+  background-color: var(--Gray-10);
+  margin-left: auto;
+  margin-right: auto;
+  height: 1px;
+}
+
+.commentWrapper::-webkit-scrollbar {
+  width: 1.5rem;
+}
+
+.commentWrapper::-webkit-scrollbar-track {
+  background: var(--Gray-10);
+  border-radius: 5px;
+}
+
+.commentWrapper::-webkit-scrollbar-thumb {
+  background: var(--Gray-20);
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  border-radius: 8px;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.commentHeader h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.commentHeader p {
+  color: var(--Gray-20);
+}
+
+.commentBody {
+  font-size: 1.3rem;
+  padding-left: 3rem;
+  width: 90%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.commentFooter {
+  padding-left: 2.8rem;
+  display: flex;
+  gap: 1rem;
+  font-weight: 600;
+  color: var(--Gray-40);
+  margin-bottom: 0.5rem;
+}
+
+.commentFooter span {
+  border: 1px solid var(--Gray-20);
+  border-radius: 5px;
+  padding: 0.2rem;
+}
+
+.commentFooter span:hover {
+  cursor: pointer;
+}
+
+.textarea::placeholder {
+  color: var(--Gray-20);
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  border-color: var(--Gray-20);
+  border-radius: 6px;
+  resize: none;
+  height: 4rem;
+}
+
+.noEdit {
+  display: none;
+}
+
+.editTool {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: end;
+  margin-right: 3.3rem;
+  margin-top: -2.7rem;
+}
+
+.editTool button {
+  background-color: var(--White);
+  color: var(--Purple);
+  border: 1px solid var(--Gray-20);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+}
+
+.editComment p {
+  display: none;
+}
+
+.Edit {
+  display: block;
+}
