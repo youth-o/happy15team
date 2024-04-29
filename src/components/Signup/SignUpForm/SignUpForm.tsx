@@ -60,7 +60,7 @@ function SignUpForm() {
       .required("8자 이상 입력해 주세요.")
       .min(8, "8자 이상 입력해 주세요.")
       .matches(
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/,
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/,
         "비밀번호는 영문, 숫자 조합 8자 이상 입력해 주세요."
       ),
     confirmPassword: yup
