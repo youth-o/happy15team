@@ -1,76 +1,108 @@
 import { useEffect, useState } from "react";
-import usePagenationDashboardInvitations from "@/hooks/usePagenationDashboardInvitationList";
-import Image from "next/image";
-import PagenationButtons from "@/components/Buttons/PagenationButton";
-import InviteList from "../InviteList/InviteList";
-import Button from "@/components/Buttons/Button";
-import InviteModal from "@/components/Modals/InviteModal/InviteModal";
-import setModals from "@/lib/zustand";
 import styles from "./InvitationDetails.module.css";
+import useStore from "@/lib/zustand2";
+import { getInviteData } from "@/api/getInviteData";
+import dashboardIdState from "@/lib/dashboardIdState";
+import { cancelInvite } from "@/api/cancelInvite";
+import modalState from "@/lib/modalState";
 
-function InvitationDetails() {
-  const {
-    data,
-    isLoading,
-    allPage,
-    nowPage,
-    handleBackwardButtonClick,
-    handleForwardButtonClick,
-    handleDeleteButtonClick,
-  } = usePagenationDashboardInvitations();
-
-  const [displayData, setDisplayData] = useState(data);
-  const { modalState, openModal }: any = setModals();
+function EditDashboardMembers() {
+  const { savedDashboardId } = dashboardIdState();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [items, setItems] = useState([]);
+  const [totalCount, setTotalCount] = useState<number>(0);
+  const { dataChange, setDataChange } = useStore();
+  const { setOpenModal } = modalState();
+  let size = 4;
 
   useEffect(() => {
-    if (!isLoading) {
-      setDisplayData(data);
-    }
-  }, [data, isLoading]);
+    const fetchData = async () => {
+      const token = localStorage.getItem("accessToken");
+      try {
+        const invitedData = {
+          dashboardId: savedDashboardId,
+          page: currentPage,
+          size: size,
+        };
+        const invitations = await getInviteData(token, invitedData);
+        console.log(invitations.invitations);
+        setItems(invitations.invitations);
+        setTotalCount(invitations.totalCount);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [currentPage, dataChange]);
+
+  const handleCancelInvite = (userId: number) => {
+    const response = confirm("정말로 취소 하시겠습니까?");
+    if (!response) return;
+    const fetchData = async () => {
+      const token = localStorage.getItem("accessToken");
+      try {
+        await cancelInvite(token, savedDashboardId, userId);
+        setDataChange(dataChange + 1);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  };
+
+  const handleOpenModal = () => {
+    setOpenModal("openInviteModal");
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const page = currentPage;
+
+  const totalPage = Math.ceil(totalCount / size);
 
   return (
     <section className={styles.form}>
-      <div className={styles.invitesection}>
-        <h1 className={styles.invitetext}>초대 내역</h1>
-        <div className={styles.buttonsgap}>
-          <PagenationButtons
-            allPage={allPage}
-            nowPage={nowPage}
-            handleBackwardButtonClick={handleBackwardButtonClick}
-            handleForwardButtonClick={handleForwardButtonClick}
-          />
-          <Button
-            variant="primary"
-            prefix={
-              <Image
-                src="images/add-box.svg"
-                width={20}
-                height={20}
-                alt="추가하기 박스 아이콘"
-              />
-            }
-            onClick={() => openModal()} // 버튼 클릭 시 모달 열기
+      <div className={styles.group}>
+        <h1 className={styles.groupText}>초대내역</h1>
+        <div className={styles.pageContainer}>
+          <div className={styles.pageDisplay}>
+            {totalPage} 페이지 중 {currentPage}
+          </div>
+          <button
+            onClick={currentPage === 1 ? undefined : handlePrevPage}
+            className={currentPage === 1 ? styles.close : styles.open}
           >
+            {"<"}
+          </button>
+          <button
+            onClick={currentPage < totalPage ? handleNextPage : undefined}
+            className={currentPage < totalPage ? styles.open : styles.close}
+          >
+            {">"}
+          </button>
+          <button className={styles.Invite} onClick={handleOpenModal}>
             초대하기
-          </Button>
+          </button>
         </div>
       </div>
       <div>
-        <h2 className={styles.emailtext}>이메일</h2>
-        {data?.invitations.length === 0 ? (
-          <div>
-            <p>초대 내역이 없습니다.</p>
-          </div> //이부분이 안됩니다
-        ) : (
-          <InviteList
-            invitations={displayData?.invitations}
-            handleDeleteButtonClick={handleDeleteButtonClick}
-          />
-        )}
+        <h2 className={styles.name}>이메일</h2>
+        {items.map((item, index) => (
+          <div className={styles.list}>
+            <span>{item.invitee.email}</span>
+            <button onClick={() => handleCancelInvite(item.id)}>취소</button>
+          </div>
+        ))}
       </div>
-      {modalState && <InviteModal />}
     </section>
   );
 }
 
-export default InvitationDetails;
+export default EditDashboardMembers;

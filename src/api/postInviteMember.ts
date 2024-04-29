@@ -1,16 +1,14 @@
 import instance from "@/lib/axios";
 
-//대시보드 생성을 위해 보내는 api
-async function PostCreateDashboardData(
+async function PostInviteMember(
   token: any,
-  CreateDashboardData: { title: string; color: string; }
+  invitedData: { dashboardId: number; email: string }
 ) {
   try {
     const response = await instance.post(
-      `/dashboards`,
+      `/dashboards/${invitedData.dashboardId}/invitations`,
       {
-        title: CreateDashboardData.title,
-        color: CreateDashboardData.color,
+        email: invitedData.email,
       },
       {
         headers: {
@@ -24,4 +22,4 @@ async function PostCreateDashboardData(
   }
 }
 
-export { PostCreateDashboardData };
+export { PostInviteMember };

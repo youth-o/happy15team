@@ -4,10 +4,9 @@ import { useState, useEffect } from "react";
 import UserService from "@/api/UserService";
 import Image from "next/image";
 import { UserData } from "@/types/interface";
-import setModals from "@/lib/zustand";
-import NicknameErrorModal from "@/components/Modals/NicknameErrorModal/NicknameErrorModal";
-import ChangeProfileModal from "@/components/Modals/ChangeProfileModal/ChangeProfileModal";
 import { dataChangeStore } from "@/lib/userStore";
+import modalState from "@/lib/modalState";
+import ModalBox from "@/components/Modals/ModalBox";
 
 type UserFormInput = Pick<UserData, "email" | "nickname" | "profileImageUrl">;
 
@@ -19,13 +18,8 @@ function ProfileForm() {
     profileImageUrl: "",
   });
   const [previewImage, setPreviewImage] = useState<string | null>("");
-  const {
-    nicknameError,
-    changeProfileModal,
-    openNicknameErrorModal,
-    openChangeProfileModal,
-  }: any = setModals();
   const { dataChange, setDataChange }: any = dataChangeStore();
+  const { openModal, setOpenModal } = modalState();
 
   const fetchUserData = async () => {
     const token = localStorage.getItem("accessToken");
@@ -43,7 +37,6 @@ function ProfileForm() {
 
   useEffect(() => {
     fetchUserData();
-    console.log(dataChange);
   }, [dataChange]);
 
   // 파일이 선택되었을 때 호출되는 함수
@@ -86,10 +79,10 @@ function ProfileForm() {
           nickname: formData.nickname,
         },
         () => {
-          openChangeProfileModal();
+          setOpenModal("openChangeProfileModal");
         },
         () => {
-          openNicknameErrorModal();
+          setOpenModal("openNicknameErrorModal");
         }
       );
       setDataChange(true);
@@ -166,8 +159,6 @@ function ProfileForm() {
       <button type="submit" className={styles.formBtn}>
         저장
       </button>
-      {nicknameError && <NicknameErrorModal />}
-      {changeProfileModal && <ChangeProfileModal />}
     </form>
   );
 }

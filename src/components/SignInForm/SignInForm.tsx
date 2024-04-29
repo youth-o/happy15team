@@ -9,7 +9,8 @@ import Image from "next/image";
 import { LoginData } from "@/types/interface";
 import postSignIn from "@/api/postSignIn";
 import { useRouter } from "next/router";
-import setModal from "@/lib/zustand";
+import MyDashboard from "@/pages/mydashboard";
+import modalState from "@/lib/modalState";
 
 const formSchema = yup.object({
   email: yup
@@ -30,11 +31,10 @@ const formSchema = yup.object({
 });
 
 function SignInForm() {
+  const { setOpenModal } = modalState();
   const [seePassword, setSeePassword] = useState<boolean>(false);
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
   const router = useRouter();
-  const { openPasswordMismatchModal, openNonExistedUserModal }: any =
-    setModal(); // zustand 스토어에서 함수 불러오기
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const seePasswordHandler = () => {
@@ -60,19 +60,14 @@ function SignInForm() {
     },
     onError: (error: unknown) => {
       console.error("로그인 실패:", error);
-
       // error가 AxiosError인지 체크
       if (error instanceof AxiosError) {
         // AxiosError인 경우, 에러 응답을 확인
         if (error.response && error.response.data) {
-          const errorMessage = error.response.data.message;
-
           if (error.response && error.response.status === 404) {
-            setErrorMessage("존재하지 않는 회원입니다.");
-            openNonExistedUserModal(); // 존재하지 않는 회원 모달 띄우기
+            setOpenModal("openNonExistedUserModal");
           } else if (error.response && error.response.status === 400) {
-            setErrorMessage("비밀번호가 일치하지 않습니다.");
-            openPasswordMismatchModal(); // 비밀번호 불일치 모달 띄우기
+            setOpenModal("openPasswordMismatchModal");
           } else {
             console.error("로그인 실패", error);
           }
@@ -114,6 +109,27 @@ function SignInForm() {
           {errors.email && (
             <div className={styles.error}>{errors.email.message}</div>
           )}
+          <button
+            type="button"
+            className={styles.eye}
+            onClick={seePasswordHandler}
+          >
+            {!seePassword ? (
+              <Image
+                src="/images/eye-on.svg"
+                width={25}
+                height={25}
+                alt="eyeOn"
+              />
+            ) : (
+              <Image
+                src="/images/eye-off.svg"
+                width={25}
+                height={25}
+                alt="eyeOff"
+              />
+            )}
+          </button>
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="password">비밀번호</label>

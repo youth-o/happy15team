@@ -2,17 +2,19 @@ import SignUpForm from "@/components/Signup/SignUpForm/SignUpForm";
 import SignUpHeader from "@/components/Signup/SignUpHeader/SignUpHeader";
 import styles from "@/components/Signup/SignUpForm/SignUpForm.module.css";
 import Link from "next/link";
-import setModals from "@/lib/zustand";
-import EmailExistedModal from "@/components/Modals/EmailExistedModal/EmailExistedModal";
-import RegisterSuccessModal from "@/components/Modals/RegisterSuccessModal/RegisterSuccessModal";
 import SignLayout from "@/components/SignLayout/SignLayout";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import setModals from "@/lib/zustand";
+import modalState from "@/lib/modalState";
+import MyDashboard from "./mydashboard";
+import ModalBox from "@/components/Modals/ModalBox";
 
 function SignUp() {
   const { emailExisted, registerSuccess }: any = setModals();
   const router = useRouter();
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
+  const { openModal } = modalState();
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -38,8 +40,7 @@ function SignUp() {
             로그인하기
           </Link>
         </div>
-        {registerSuccess && <RegisterSuccessModal />}
-        {emailExisted && <EmailExistedModal />}
+        {openModal && <ModalBox />}
       </SignLayout>
     );
   }

@@ -1,17 +1,19 @@
-import setModals from "@/lib/zustand";
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import Image from "next/image";
 import styles from "./CreateDashboardModal.module.css";
 import { PostCreateDashboardData } from "@/api/PostCreateDashboardData";
 import useStore from "@/lib/zustand2";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
+import modalState from "@/lib/modalState";
+import dashboardIdState from "@/lib/dashboardIdState";
 
 const colorList = ["#7ac555", "#5534da", "#ffa500", "#76a5ea", "#e876ea"];
 
 const CreateDashboardModal = () => {
+  const { setSavedDashboardId } = dashboardIdState();
   const router = useRouter();
   const { setDataChange } = useStore();
-  const { closeCreateDashboardModal }: any = setModals();
+  const { setOpenModal } = modalState();
   const [clickedIndex, setClickedIndex] = useState<number>(0);
   const [dashboardTitle, setDashboardTitle] = useState<string>("");
 
@@ -28,7 +30,8 @@ const CreateDashboardModal = () => {
     setClickedIndex(index);
   };
 
-  const handleCreateDashboard = () => {
+  const handleCreateDashboard = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     createDashboardData = {
       title: dashboardTitle,
       color: colorList[clickedIndex],
@@ -43,7 +46,8 @@ const CreateDashboardModal = () => {
       try {
         const data = await PostCreateDashboardData(token, createDashboardData);
         setDataChange(data.data.id);
-        closeCreateDashboardModal();
+        setSavedDashboardId(data.data.id);
+        setOpenModal("");
         router.push(`/dashboard/${data.data.id}`);
       } catch (error) {
         console.error(error);
@@ -53,53 +57,49 @@ const CreateDashboardModal = () => {
     }
   };
 
-  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-  };
-
-  const handleClickModalOutside = () => {
-    closeCreateDashboardModal();
+  const handleCloseModal = () => {
+    setOpenModal("");
   };
 
   return (
-    <div className={styles.modalOverlay} onClick={handleClickModalOutside}>
-      <div className={styles.modal} onClick={handleModalClick}>
-        <form>
-          <div className={styles.title}>새로운 대시보드</div>
-          <div className={styles.naming}>대시보드 이름</div>
-          <input
-            placeholder="뉴프로젝트"
-            value={dashboardTitle}
-            onChange={handleTitleChange}
-          ></input>
-          <div className={styles.circleContainer}>
-            {colorList.map((color, index) => (
-              <div
-                key={index}
-                className={styles.circle}
-                style={{ backgroundColor: color }}
-                onClick={() => handleClick(index)}
-              >
-                {clickedIndex === index ? (
-                  <Image
-                    src="/images/checkIcon.svg"
-                    alt="Check Icon"
-                    width={24}
-                    height={24}
-                  />
-                ) : null}
-              </div>
-            ))}
-          </div>
-          <div className={styles.buttonContainer}>
-            <button onClick={handleClickModalOutside}>취소</button>
-            <button onClick={handleCreateDashboard} type="button">
-              생성
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <>
+      <form onSubmit={handleCreateDashboard}>
+        <div className={styles.title}>새로운 대시보드</div>
+        <div className={styles.naming}>대시보드 이름</div>
+        <input
+          className={styles.input}
+          placeholder="뉴프로젝트"
+          value={dashboardTitle}
+          onChange={handleTitleChange}
+          maxLength={10}
+        ></input>
+        <div className={styles.circleContainer}>
+          {colorList.map((color, index) => (
+            <div
+              key={index}
+              className={styles.circle}
+              style={{ backgroundColor: color }}
+              onClick={() => handleClick(index)}
+            >
+              {clickedIndex === index ? (
+                <Image
+                  src="/images/checkIcon.svg"
+                  alt="Check Icon"
+                  width={24}
+                  height={24}
+                />
+              ) : null}
+            </div>
+          ))}
+        </div>
+        <div className={styles.buttonContainer}>
+          <button onClick={handleCloseModal} type="button">
+            취소
+          </button>
+          <button type="submit">생성</button>
+        </div>
+      </form>
+    </>
   );
 };
 

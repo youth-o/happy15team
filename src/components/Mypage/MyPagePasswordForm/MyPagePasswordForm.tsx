@@ -4,16 +4,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import UserService from "@/api/UserService";
 import setModals from "@/lib/zustand";
-import SamePasswordError from "@/components/Modals/SamePasswordErrorModal/SamePasswordErrorModal";
-import SuccessChangePassword from "@/components/Modals/SuccessChangePasswordModal/SuccessChangePasswordModal";
+import modalState from "@/lib/modalState";
 
 function PasswordForm() {
-  const {
-    samePassword,
-    changePassword,
-    openSamePasswordErrorModal,
-    openSuccessChangePasswordModal,
-  }: any = setModals();
+  const { setOpenModal } = modalState();
+  const { changePassword }: any =
+    setModals();
 
   // react-hook-form, yup 라이브러리를 통해 유효성 검사
   const formSchema = yup.object({
@@ -46,11 +42,11 @@ function PasswordForm() {
     await UserService.updatePassword(
       data,
       () => {
-        openSuccessChangePasswordModal();
+        setOpenModal("openSuccessChangePasswordModal");
         reset();
       },
       () => {
-        openSamePasswordErrorModal();
+        setOpenModal("openSamePasswordErrorModal");
       }
     );
   };
@@ -102,8 +98,6 @@ function PasswordForm() {
       <button type="submit" className={styles.formBtn} disabled={!isValid}>
         변경
       </button>
-      {samePassword && <SamePasswordError />}
-      {changePassword && <SuccessChangePassword />}
     </form>
   );
 }

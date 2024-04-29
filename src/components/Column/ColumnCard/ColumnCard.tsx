@@ -8,13 +8,14 @@ import {
   getConfirmCardData,
 } from "@/api/DashboardData";
 import Participants from "@/components/Nav/Participants/Participants";
+import modalState from "@/lib/modalState";
 import moment from "moment";
 import { useRouter } from "next/router";
 
 const ColumnCard = ({ modalData, dragEnter }) => {
   const [cardData, setCardData] = useState<any>([]);
+  const { setOpenModal } = modalState();
   const {
-    openCheckCardModal,
     setConfirmCardData,
     isFetching,
     setCardLength,
@@ -35,12 +36,6 @@ const ColumnCard = ({ modalData, dragEnter }) => {
     ).padStart(2, "0")}:${String(date.getUTCMinutes()).padStart(2, "0")}`;
   };
 
-  const handleClickCard = (data: any) => {
-    setConfirmCardData(data.id);
-    setOpenedModalId(modalData);
-    openCheckCardModal();
-  };
-
   const fetchCardData = async () => {
     if (!modalData) return;
     const token = localStorage.getItem("accessToken");
@@ -50,9 +45,13 @@ const ColumnCard = ({ modalData, dragEnter }) => {
       setCardLength(cardData.totalCount);
     }
   };
+  const handleClickCard = (data: any) => {
+    setConfirmCardData(data.id);
+    setOpenedModalId(modalData);
+    setOpenModal("openCheckCardModal");
+  };
 
   const cardDragging = (data) => {
-    console.log(data);
     setDraggingCard(data);
     setOnDragging(true);
   };

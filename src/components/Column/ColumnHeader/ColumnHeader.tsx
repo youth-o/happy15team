@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react";
 import styles from "./ColumnHeader.module.css";
 import Image from "next/image";
 import setModals from "@/lib/zustand";
+import modalState from "@/lib/modalState";
 import { getCardData } from "@/api/DashboardData";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const ColumnHeader = ({ titles, columnData }) => {
-  const [totalCount, setTotalCount] = useState("");
-  const { openEditColumnModal, setOpenedModalId, isFetching }: any =
+  const { openModal, setOpenModal } = modalState();
+  const [totalCount, setTotalCount] = useState(0);
+  const { cardLength, openEditColumnModal, setOpenedModalId, isFetching }: any =
     setModals();
 
   const handleClickEdit = () => {
     setOpenedModalId(columnData);
-    openEditColumnModal();
+    setOpenModal("openEditColumnModal");
   };
 
   const fetchCardData = async () => {

@@ -1,5 +1,3 @@
-import setModals from "@/lib/zustand";
-import CreateCardModal from "../Modals/CardModals/CreateCardModal/CreateCardModal";
 import AddCardButton from "./AddCardButton/AddCardButton";
 import AddColumnButton from "./AddColumnButton/AddColumnButton";
 import styles from "./Column.module.css";

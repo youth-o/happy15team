@@ -1,18 +1,19 @@
 import { FormEvent, useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import useUpdateDashboardTitle from "@/hooks/useUpdateDashboardTitle";
 import ColorSelector from "@/components/ColorSelector/ColorSelector";
 import Button from "@/components/Buttons/Button";
 import styles from "./EditDashboardTitle.module.css";
+import setModals from "@/lib/zustand";
+import dashboardIdState from "@/lib/dashboardIdState";
+import useStore from "@/lib/zustand2";
 
 function EditDashboardTitle() {
   const [inputValue, setInputValue] = useState("");
+  const { setDataChange } = useStore();
   const [selectedColor, setSelectedColor] = useState("");
-  const router = useRouter();
-  const { boardId } = router.query;
-  const { data, mutate, isPending } = useUpdateDashboardTitle(
-    boardId as string
-  );
+  const { dashboardData }: any = setModals();
+  const { savedDashboardId } = dashboardIdState();
+  const { data, mutate, isPending } = useUpdateDashboardTitle(savedDashboardId); // savedDashboardId를 전달
 
   useEffect(() => {
     if (data) {
@@ -24,16 +25,17 @@ function EditDashboardTitle() {
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate({
-      dashboardId: boardId as string,
+      dashboardId: savedDashboardId, // mutate 함수에 dashboardId를 전달
       title: inputValue,
       color: selectedColor,
     });
+    setDataChange(1234);
   };
 
   return (
     <section className={styles.container}>
       <div className={styles.selector}>
-        <h1 className={styles.title}>{data ? data.title : "비브리지"}</h1>
+        <h1 className={styles.title}>{dashboardData.title}</h1>
         <ColorSelector
           selectedColor={selectedColor}
           setSelectedColor={setSelectedColor}

@@ -1,12 +1,14 @@
 import setModals from "@/lib/zustand";
 import styles from "./AddCardButton.module.css";
 import { useState } from "react";
+import modalState from "@/lib/modalState";
 
 const AddCardButton = ({ columnId }) => {
-  const { openCreateCardModal, setOpenedModalId }: any = setModals();
+  const { setOpenedModalId }: any = setModals();
+  const { setOpenModal } = modalState();
 
   const handleClick = () => {
-    openCreateCardModal();
+    setOpenModal("openCreateCardModal");
     setOpenedModalId(columnId);
   };
 
