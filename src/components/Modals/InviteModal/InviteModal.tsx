@@ -25,22 +25,8 @@ const InviteModal = () => {
       try {
         const data = await PostInviteMember(token, inviteMemberData);
         if (data.response) {
-          if (data.response.status === 400) {
-            alert("이메일 형식이 올바르지 않습니다.");
-            return;
-          }
-          if (data.response.status === 403) {
-            alert("대시보드 초대 권한이 없습니다.");
-            return;
-          }
-          if (data.response.status === 404) {
-            alert("대시보드가 존재하지 않습니다.");
-            return;
-          }
-          if (data.response.status === 409) {
-            alert("이미 대시보드에 초대된 멤버입니다.");
-            return;
-          }
+          alert(data.response.data.message);
+          return;
         }
         setOpenModal("");
         alert("성공적으로 초대 되었습니다.");
