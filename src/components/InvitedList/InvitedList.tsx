@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./InvitedList.module.css";
+import styles from "./invitedList.module.css";
 import EmptyInvitations from "./EmptyInvitations/EmptyInvitations";
 import ExistInvitations from "./ExistInvitations/ExistInvitations";
 import { InvitedData } from "@/api/InvitedData";
@@ -16,7 +16,6 @@ interface Item {
   };
   id: number;
 }
-
 
 const InvitedList = () => {
   const [items, setItems] = useState<Item[]>([]);

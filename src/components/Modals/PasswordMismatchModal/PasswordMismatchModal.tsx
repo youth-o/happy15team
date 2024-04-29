@@ -1,4 +1,4 @@
-import styles from "./PasswordMismatchModal.module.css";
+import styles from "./PasswordMisMatchModal.module.css";
 import modalState from "@/lib/modalState";
 
 function PasswordMismatchModal() {
