@@ -47,6 +47,7 @@ const DashboardList = ({
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, dataChange]);
 
   const handleClick = (index: number, dashboardNum: number) => {

@@ -13,7 +13,7 @@ function EditDashboardMembers() {
     reload,
     setDashboardMembers,
     dashboardMembers,
-  } = setModals();
+  }: any = setModals();
   const { savedDashboardId } = dashboardIdState();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [items, setItems] = useState([]);
@@ -41,6 +41,7 @@ function EditDashboardMembers() {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, dataChange]);
 
   const handleDeleteMember = (userId: number, createdByMe: boolean) => {
@@ -98,8 +99,8 @@ function EditDashboardMembers() {
       </div>
       <div>
         <h2 className={styles.name}>이름</h2>
-        {items.map((item, index) => (
-          <div className={styles.list}>
+        {items.map((item: any, index: any) => (
+          <div key={index} className={styles.list}>
             <span>{item.nickname}</span>
             <button
               onClick={() => handleDeleteMember(item.id, item.createdByMe)}

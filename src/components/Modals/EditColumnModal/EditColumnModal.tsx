@@ -8,7 +8,7 @@ import modalState from "@/lib/modalState";
 const EditColumnModal = () => {
   const { openedModalId, rerender, setRerender }: any = setModals();
   const { setOpenModal } = modalState();
-  const inputRef = useRef(null);
+  const inputRef = useRef<any>(null);
   const [inputValue, setInputValue] = useState("");
 
   const handleClickDelete = async () => {

@@ -32,6 +32,7 @@ const Nav = () => {
 
   useEffect(() => {
     fetchUserData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -41,6 +42,7 @@ const Nav = () => {
     } else {
       setInitialDataLoaded(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   if (!initialDataLoaded) {

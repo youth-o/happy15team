@@ -11,7 +11,7 @@ const ViewComment = () => {
     loginUserData,
     setCommentRenderDone,
     setCommentRender,
-  } = setModals();
+  }: any = setModals();
   const [comments, setComments] = useState<any>();
   const [editCommentIndex, setEditCommentIndex] = useState(-1);
   const textRef = useRef(null);
@@ -25,7 +25,7 @@ const ViewComment = () => {
     }
   };
 
-  const formattedDate = (createdAt) => {
+  const formattedDate = (createdAt: any) => {
     const date = new Date(createdAt);
     return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
       2,
@@ -35,10 +35,10 @@ const ViewComment = () => {
     ).padStart(2, "0")}:${String(date.getUTCMinutes()).padStart(2, "0")}`;
   };
 
-  const handleCommentEdit = async (id) => {
+  const handleCommentEdit = async (id: any) => {
     const token = localStorage.getItem("accessToken");
     const comment = {
-      content: textRef.current.value,
+      content: (textRef.current as any).value,
     };
     if (token) {
       await EditComment(token, comment, id);
@@ -47,7 +47,7 @@ const ViewComment = () => {
     commentRender ? setCommentRenderDone() : setCommentRender();
   };
 
-  const handleCommentDelete = async (id) => {
+  const handleCommentDelete = async (id: any) => {
     const response = confirm("해당 댓글을 삭제하시겠습니까?");
     if (!response) return;
     const token = localStorage.getItem("accessToken");
@@ -58,19 +58,20 @@ const ViewComment = () => {
     commentRender ? setCommentRenderDone() : setCommentRender();
   };
 
-  const handleEditClick = (index) => {
+  const handleEditClick = (index: any) => {
     setEditCommentIndex(index === editCommentIndex ? -1 : index);
   };
 
   useEffect(() => {
     fetchComment();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commentRender]);
 
   if (!comments) return null;
 
   return (
     <div className={styles.commentWrapper}>
-      {comments.map((comment, index) => (
+      {comments.map((comment: any, index: any) => (
         <div key={index}>
           <div className={styles.commentHeader}>
             <Participants user={comment.author} />

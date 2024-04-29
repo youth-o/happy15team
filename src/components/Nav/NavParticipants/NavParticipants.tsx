@@ -5,7 +5,7 @@ import Participants from "../Participants/Participants";
 import setModals from "@/lib/zustand";
 
 const NavParticipants = () => {
-  const { dashboardMembers } = setModals();
+  const { dashboardMembers }: any = setModals();
   const [members, setMembers] = useState<any>();
   const totalCount = members?.length;
   const slicedUsers = members?.slice(0, 4);
@@ -20,12 +20,12 @@ const NavParticipants = () => {
   return (
     <Fragment>
       {members.length <= 4
-        ? members.map((user, index) => (
+        ? members.map((user: any, index: any) => (
             <div key={index} className={styles.navParticipants}>
               <Participants user={user} />
             </div>
           ))
-        : slicedUsers.map((user, index) => (
+        : slicedUsers.map((user: any, index: any) => (
             <div key={index} className={styles.navParticipants}>
               <Participants user={user} />
             </div>

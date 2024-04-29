@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ExistInvitations.module.css";
-import { PostInviteData } from "@/api/postInviteData";
+import { PostInviteData } from "@/api/PostInviteData";
 import useStore from "@/lib/zustand2";
 
 interface Item {
@@ -70,7 +70,7 @@ const ExistInvitations = ({ items }: Props) => {
         if (invitedData.inviterId) {
           try {
             const data = await PostInviteData(token, invitedData);
-            setDataChange(data.data.id);
+            setDataChange((data as any).data.id);
           } catch (error) {
             console.error(error);
           }
@@ -81,10 +81,12 @@ const ExistInvitations = ({ items }: Props) => {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invitedData]);
 
   useEffect(() => {
     setSearchedItems(items);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
   return (

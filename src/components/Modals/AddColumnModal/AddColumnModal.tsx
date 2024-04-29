@@ -18,13 +18,13 @@ const AddColumnModal = () => {
   };
 
   const handleClickAdd = async () => {
-    if (inputRef.current.value.length < 1) {
+    if ((inputRef.current as any).value.length < 1) {
       alert("컬럼명은 1글자 이상 입력해주세요");
       return;
     }
     const token = localStorage.getItem("accessToken");
     if (token) {
-      await addColumns(token, inputRef.current.value, id);
+      await addColumns(token, (inputRef.current as any).value, id);
       setOpenModal("");
       setRerender(!rerender);
     }

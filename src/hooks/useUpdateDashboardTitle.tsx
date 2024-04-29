@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import getDashboardDetails from "@/api/getDashboardDetails";
 import putDashboardTitle from "@/api/putDashboardTitle";
 
-const useUpdateDashboardTitle = (dashboardId: number) => {
+const useUpdateDashboardTitle = (dashboardId: any) => {
   const queryClient = useQueryClient();
   const { data } = useQuery({
     queryKey: ["dashboardDetails", dashboardId],

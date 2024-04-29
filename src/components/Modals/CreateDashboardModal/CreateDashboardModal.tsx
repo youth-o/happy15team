@@ -10,10 +10,10 @@ import dashboardIdState from "@/lib/dashboardIdState";
 const colorList = ["#7ac555", "#5534da", "#ffa500", "#76a5ea", "#e876ea"];
 
 const CreateDashboardModal = () => {
-  const { setSavedDashboardId } = dashboardIdState();
+  const { setSavedDashboardId }: any = dashboardIdState();
   const router = useRouter();
-  const { setDataChange } = useStore();
-  const { setOpenModal } = modalState();
+  const { setDataChange }: any = useStore();
+  const { setOpenModal }: any = modalState();
   const [clickedIndex, setClickedIndex] = useState<number>(0);
   const [dashboardTitle, setDashboardTitle] = useState<string>("");
 
@@ -44,7 +44,10 @@ const CreateDashboardModal = () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       try {
-        const data = await PostCreateDashboardData(token, createDashboardData);
+        const data: any = await PostCreateDashboardData(
+          token,
+          createDashboardData
+        );
         setDataChange(data.data.id);
         setSavedDashboardId(data.data.id);
         setOpenModal("");

@@ -8,7 +8,7 @@ import { useState } from "react";
 const NavUserProfile = () => {
   // TODO
   // 유저데이터 받아와서 이름이랑 이미지넣을것
-  const { loginUserData } = setModals();
+  const { loginUserData }: any = setModals();
   const [viewMenu, setViewMenu] = useState(false);
 
   const router = useRouter();

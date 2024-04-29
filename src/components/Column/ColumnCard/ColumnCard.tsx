@@ -12,7 +12,7 @@ import modalState from "@/lib/modalState";
 import moment from "moment";
 import { useRouter } from "next/router";
 
-const ColumnCard = ({ modalData }) => {
+const ColumnCard = ({ modalData }: any) => {
   const [cardData, setCardData] = useState<any>([]);
   const { setOpenModal } = modalState();
   const {
@@ -27,7 +27,7 @@ const ColumnCard = ({ modalData }) => {
   }: any = setModals();
 
   // 날짜 및 시간을 원하는 형식으로 포맷합니다.
-  const formattedDate = (createdAt) => {
+  const formattedDate = (createdAt: any) => {
     const date = new Date(createdAt);
     return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
       2,
@@ -51,20 +51,21 @@ const ColumnCard = ({ modalData }) => {
     setOpenModal("openCheckCardModal");
   };
 
-  const cardDragging = (data) => {
+  const cardDragging = (data: any) => {
     setDraggingCard(data);
     setOnDragging(true);
   };
 
   useEffect(() => {
     fetchCardData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFetching, modalData]);
 
   if (!cardData) return null;
 
   return (
     <>
-      {cardData.map((data) => (
+      {cardData.map((data: any) => (
         <div
           key={data.id}
           className={`${styles.cardWrapper} ${
@@ -87,7 +88,7 @@ const ColumnCard = ({ modalData }) => {
           )}
           <div className={styles.cardTitle}>{data?.title}</div>
           <div className={styles.tagWrapper}>
-            {data.tags.map((tag, index) => (
+            {data.tags.map((tag: any, index: any) => (
               <div
                 key={index}
                 className={`${styles.cardTag} ${

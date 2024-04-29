@@ -18,15 +18,15 @@ const EditCardModal = () => {
     setIsFetching,
     isFetching,
   }: any = setModals();
-  const [viewAssignee, setViewAssignee] = useState(false);
-  const [prevCardData, setPrevCardData] = useState();
-  const [assignee, setAssignee] = useState();
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
+  const [viewAssignee, setViewAssignee] = useState<any>(false);
+  const [prevCardData, setPrevCardData] = useState<any>();
+  const [assignee, setAssignee] = useState<any>();
+  const [title, setTitle] = useState<any>();
+  const [description, setDescription] = useState<any>();
   const [selected, setSelected] = useState<Date>();
   const [tagInputValue, setTagInputValue] = useState<any>("");
-  const [tags, setTags] = useState();
-  const [viewCalender, setViewCalender] = useState(false);
+  const [tags, setTags] = useState<any>();
+  const [viewCalender, setViewCalender] = useState<any>(false);
   const [image, setImage] = useState<string | null>(null);
   const formatDate = moment(selected).format("YYYY-MM-DD hh:mm");
   const imageInput = useRef<HTMLInputElement>(null!);
@@ -36,7 +36,7 @@ const EditCardModal = () => {
     const file = imageInput.current?.files?.[0];
     if (file && token) {
       const imageUrl = URL.createObjectURL(file);
-      const id = prevCardData.columnId;
+      const id = (prevCardData as any).columnId;
       setImage(imageUrl);
       const profileImageUrl = await uploadCardImage(token, file, id);
       setCardImageUrl(profileImageUrl);
@@ -46,11 +46,13 @@ const EditCardModal = () => {
   const handleSubmit = async () => {
     const cardData = {
       assigneeUserId: assignee
-        ? Number(assignee.userId)
-        : Number(prevCardData.assignee.id),
-      columnId: Number(prevCardData.columnId),
-      title: title ? title : prevCardData.description,
-      description: description ? description : prevCardData.description,
+        ? Number((assignee as any).userId)
+        : Number((prevCardData as any).assignee.id),
+      columnId: Number((prevCardData as any).columnId),
+      title: title ? title : (prevCardData as any).description,
+      description: description
+        ? description
+        : (prevCardData as any).description,
       dueDate: formatDate,
       tags: tags,
       imageUrl: cardImageUrl,
@@ -58,11 +60,13 @@ const EditCardModal = () => {
 
     const noImgCardData = {
       assigneeUserId: assignee
-        ? Number(assignee.userId)
-        : Number(prevCardData.assignee.id),
-      columnId: Number(prevCardData.columnId),
-      title: title ? title : prevCardData.description,
-      description: description ? description : prevCardData.description,
+        ? Number((assignee as any).userId)
+        : Number((prevCardData as any).assignee.id),
+      columnId: Number((prevCardData as any).columnId),
+      title: title ? title : (prevCardData as any).description,
+      description: description
+        ? description
+        : (prevCardData as any).description,
       dueDate: formatDate,
       tags: tags,
     };
@@ -88,14 +92,14 @@ const EditCardModal = () => {
       return;
     }
     if (e.key === "Enter") {
-      setTags((prev) => [...prev, tagInputValue]);
+      setTags((prev: any) => [...prev, tagInputValue]);
       setTagInputValue("");
     }
   };
 
-  const handleTagClick = (indexToRemove) => {
-    setTags((prevTags) =>
-      prevTags.filter((_, index) => index !== indexToRemove)
+  const handleTagClick = (indexToRemove: any) => {
+    setTags((prevTags: any) =>
+      prevTags.filter((_: any, index: any) => index !== indexToRemove)
     );
   };
 
@@ -107,6 +111,7 @@ const EditCardModal = () => {
     setPrevCardData(openedCardData);
     setTags(openedCardData.tags);
     setImage(openedCardData.imageUrl ? openedCardData.imageUrl : "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!prevCardData) return null;
@@ -132,7 +137,7 @@ const EditCardModal = () => {
                 className={styles.dropDownImage}
               />
               {viewAssignee &&
-                dashboardMembers?.map((member, index) => (
+                dashboardMembers?.map((member: any, index: any) => (
                   <div key={index} className={styles.assigneeWrapper}>
                     <div
                       onClick={() => {
@@ -154,7 +159,7 @@ const EditCardModal = () => {
         <input
           className={styles.titleInput}
           placeholder={openedCardData.title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => setTitle((e.target as any).value)}
         />
         <label>
           설명 <span className={styles.essentialTag}>*</span>
@@ -162,7 +167,7 @@ const EditCardModal = () => {
         <textarea
           placeholder="변경사항 입력"
           className={styles.descriptionInput}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => setDescription((e.target as any).value)}
         />
         <label>마감일 </label>
 
@@ -208,7 +213,7 @@ const EditCardModal = () => {
         />
         {tags && (
           <div className={styles.tags}>
-            {tags.map((tag, index) => (
+            {tags.map((tag: any, index: any) => (
               <div
                 key={index}
                 className={`${styles.tag} ${

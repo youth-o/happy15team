@@ -26,7 +26,7 @@ interface ModalName {
 const ModalBox = () => {
   const router = useRouter();
   const { openModal, setOpenModal } = modalState();
-  const { setCardImageUrl } = setModals();
+  const { setCardImageUrl }: any = setModals();
 
   const modalName: ModalName = {
     openCreateDashboardModal: <CreateDashboardModal />,

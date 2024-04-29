@@ -73,6 +73,7 @@ function SignUpForm() {
     formState: { errors, isValid },
   } = useForm({
     mode: "onBlur",
+    // @ts-ignore
     resolver: yupResolver(formSchema) as Resolver<UserData, any>,
   });
 

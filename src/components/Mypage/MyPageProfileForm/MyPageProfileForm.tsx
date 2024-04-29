@@ -37,6 +37,7 @@ function ProfileForm() {
 
   useEffect(() => {
     fetchUserData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataChange]);
 
   // 파일이 선택되었을 때 호출되는 함수

@@ -52,7 +52,7 @@ const MyDashboard = () => {
               <div
                 className={`${styles.clickIcon} ${isHovered && styles.hovered}`}
               >
-                <img
+                <Image
                   onClick={handleOpenModal}
                   onMouseEnter={handleMouseIn}
                   onMouseLeave={handleMouseOut}
@@ -68,6 +68,7 @@ const MyDashboard = () => {
                   alt="Empty Icon"
                   width={130}
                   height={130}
+                  priority
                 />
                 <div>현재 속한 대시보드가 없어요</div>
               </div>

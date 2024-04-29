@@ -6,7 +6,7 @@ import { getCardData } from "@/api/DashboardData";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-const ColumnHeader = ({ titles, columnData }) => {
+const ColumnHeader = ({ titles, columnData }: any) => {
   const { openModal, setOpenModal } = modalState();
   const [totalCount, setTotalCount] = useState(0);
   const { dashboardData, setOpenedModalId, isFetching, rerender }: any =
@@ -30,6 +30,7 @@ const ColumnHeader = ({ titles, columnData }) => {
 
   useEffect(() => {
     fetchCardData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFetching, id]);
 
   return (
@@ -37,7 +38,7 @@ const ColumnHeader = ({ titles, columnData }) => {
       <div className={styles.titleWrapper}>
         <div className={styles.titleTag}>
           <div className={styles.tagCircle}></div>
-          {titles.map((title: any, index) => (
+          {titles.map((title: any, index: any) => (
             <div key={index} className={styles.columnTitle}>
               {title}
             </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import getDashboardMembers from "@/api/getDashboardMembers";
+import { getDashboardMembers } from "@/api/getDashboardMembers";
 import deleteDashboardMember from "@/api/deleteDashboardMember";
 import { PAGENATION_SIZE } from "@/constants/pagenation";
 
@@ -13,7 +13,7 @@ export const usePaginationDashboardMembers = () => {
   const [allPage, setAllPage] = useState(1);
   const [nowPage, setNowPage] = useState(1);
   const queryClient = useQueryClient();
-
+  const token = localStorage.getItem("accessToken");
   const router = useRouter();
   const { boardId } = router.query;
 
@@ -22,11 +22,11 @@ export const usePaginationDashboardMembers = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["dashboardMembers", boardIdString, nowPage],
     queryFn: () =>
-      getDashboardMembers(
-        boardIdString,
-        nowPage,
-        PAGENATION_SIZE.DASHBOARD.MEMBERS
-      ),
+      getDashboardMembers(token, {
+        dashboardId: Number(boardIdString),
+        page: nowPage,
+        size: PAGENATION_SIZE.DASHBOARD.MEMBERS,
+      }),
   });
 
   const { mutate } = useMutation({

@@ -11,7 +11,7 @@ import setModals from "@/lib/zustand";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const dashboard = () => {
+const Dashboard = () => {
   const { setDashboardData, setDashboardMembers, reload }: any = setModals();
 
   const router = useRouter();
@@ -35,6 +35,7 @@ const dashboard = () => {
 
   useEffect(() => {
     fetchDashboardData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, reload]);
   return (
     <>
@@ -47,4 +48,4 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default Dashboard;

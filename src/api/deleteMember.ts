@@ -8,8 +8,6 @@ async function deleteMember(
     const response = await instance.delete(
       `/members/${memberId}`,
       {
-      },
-      {
         headers: {
           Authorization: `Bearer ${token}`,
         },

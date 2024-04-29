@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./Participants.module.css";
 import Image from "next/image";
 
-const Participants = ({ user }) => {
+const Participants = ({ user }: any) => {
   const [userColor, setUserColor] = useState("blue");
 
   const handleUserColor = () => {
@@ -24,6 +24,7 @@ const Participants = ({ user }) => {
 
   useEffect(() => {
     handleUserColor();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!user) return null;

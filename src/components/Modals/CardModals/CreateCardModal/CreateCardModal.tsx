@@ -23,7 +23,7 @@ const CreateCardModal = () => {
   const [image, setImage] = useState<string | null>(null);
   const [viewAssignee, setViewAssignee] = useState(false);
   const [viewCalender, setViewCalender] = useState(false);
-  const [manager, setManager] = useState();
+  const [manager, setManager] = useState<any>();
   const imageInput = useRef<HTMLInputElement>(null!);
 
   const [selected, setSelected] = useState<Date>();
@@ -65,7 +65,7 @@ const CreateCardModal = () => {
 
   const handleSubmit = async () => {
     const cardData = {
-      assigneeUserId: manager.userId,
+      assigneeUserId: (manager as any).userId,
       dashboardId: dashboardData.id,
       columnId: openedModalId,
       title: cardInfo.title,
@@ -76,7 +76,7 @@ const CreateCardModal = () => {
     };
 
     const noImgCardData = {
-      assigneeUserId: manager.userId,
+      assigneeUserId: (manager as any).userId,
       dashboardId: dashboardData.id,
       columnId: openedModalId,
       title: cardInfo.title,
@@ -108,7 +108,7 @@ const CreateCardModal = () => {
     }
   };
 
-  const handleTagClick = (indexToRemove) => {
+  const handleTagClick = (indexToRemove: any) => {
     setTags((prevTags) =>
       prevTags.filter((_, index) => index !== indexToRemove)
     );
@@ -121,11 +121,12 @@ const CreateCardModal = () => {
 
   useEffect(() => {
     const currentDate = new Date();
-    if (selected < currentDate) {
+    if ((selected as any) < currentDate) {
       alert("이미 지난 날짜입니다.");
       currentDate.setMinutes(currentDate.getMinutes() + 1);
       setSelected(currentDate);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
   return (
     <div className={styles.modalWrapper}>
@@ -159,8 +160,8 @@ const CreateCardModal = () => {
             className={styles.dropDownImage}
           />
           {viewAssignee &&
-            dashboardMembers.map((member) => (
-              <div className={styles.assigneeWrapper}>
+            dashboardMembers.map((member: any, index: any) => (
+              <div key={index} className={styles.assigneeWrapper}>
                 <div
                   onClick={() => {
                     setManager(member);

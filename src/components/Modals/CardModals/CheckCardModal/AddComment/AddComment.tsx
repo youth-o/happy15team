@@ -5,14 +5,14 @@ import { getComment, postComment } from "@/api/DashboardData";
 import { useRouter } from "next/router";
 
 const AddComment = () => {
-  const commentRef = useRef(null);
+  const commentRef = useRef<any>(null);
   const {
     openedModalId,
     confirmCardData,
     setCommentRender,
     setCommentRenderDone,
     commentRender,
-  } = setModals();
+  }: any = setModals();
   const router = useRouter();
   const { id }: any = router.query;
   const handlePostComment = async () => {

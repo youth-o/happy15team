@@ -9,7 +9,7 @@ import modalState from "@/lib/modalState";
 function EditDashboardMembers() {
   const { savedDashboardId } = dashboardIdState();
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<any>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
   const { dataChange, setDataChange } = useStore();
   const { setOpenModal } = modalState();
@@ -33,6 +33,7 @@ function EditDashboardMembers() {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, dataChange]);
 
   const handleCancelInvite = (userId: number) => {
@@ -93,8 +94,8 @@ function EditDashboardMembers() {
       </div>
       <div>
         <h2 className={styles.name}>이메일</h2>
-        {items.map((item, index) => (
-          <div className={styles.list}>
+        {items.map((item: any, index: any) => (
+          <div key={index} className={styles.list}>
             <span>{item.invitee.email}</span>
             <button onClick={() => handleCancelInvite(item.id)}>취소</button>
           </div>

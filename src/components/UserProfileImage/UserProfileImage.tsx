@@ -4,7 +4,7 @@ import setModals from "@/lib/zustand";
 import Image from "next/image";
 
 const UserProfileImage = () => {
-  const { loginUserData } = setModals();
+  const { loginUserData }: any = setModals();
   const [userColor, setUserColor] = useState("");
   const handleUserColor = () => {
     switch (loginUserData.id % 4) {
@@ -25,6 +25,7 @@ const UserProfileImage = () => {
 
   useEffect(() => {
     handleUserColor();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

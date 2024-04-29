@@ -3,7 +3,7 @@ import styles from "./AddCardButton.module.css";
 import { useState } from "react";
 import modalState from "@/lib/modalState";
 
-const AddCardButton = ({ columnId }) => {
+const AddCardButton = ({ columnId }: any) => {
   const { setOpenedModalId }: any = setModals();
   const { setOpenModal } = modalState();
 

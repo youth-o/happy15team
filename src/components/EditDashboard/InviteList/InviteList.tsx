@@ -11,8 +11,8 @@ function InviteList({ invitations, handleDeleteButtonClick }: InviteListProps) {
   return (
     <div>
       {invitations?.map((invitation, index) => (
-        <div>
-          <div key={invitation.id} className={styles.innerContainer}>
+        <div key={index}>
+          <div className={styles.innerContainer}>
             <span>{invitation.invitee.email}</span>
 
             <Button

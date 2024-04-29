@@ -16,7 +16,7 @@ const Column = () => {
     onDragging,
     setOnDragging,
     rerender,
-  } = setModals();
+  }: any = setModals();
   const [columnData, setColumnData] = useState<any>([]);
   const [draggingColumnId, setDraggingColumnId] = useState();
   const [dragEnter, setDragEnter] = useState(false);
@@ -57,7 +57,7 @@ const Column = () => {
     }
   };
 
-  const handleDragEnter = (id) => {
+  const handleDragEnter = (id: any) => {
     setDraggingColumnId(id);
     setDragEnter(true);
   };
@@ -73,6 +73,7 @@ const Column = () => {
 
   useEffect(() => {
     fetchColumnData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dashboardData.id, rerender]);
 
   if (!columnData) return null;
@@ -80,7 +81,7 @@ const Column = () => {
   return (
     <>
       <div className={styles.columnWrapper}>
-        {columnData.map((data, index) => (
+        {columnData.map((data: any, index: any) => (
           <div
             key={index}
             className={styles.columnTemplate}

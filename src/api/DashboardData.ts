@@ -97,7 +97,7 @@ const  uploadCardImage= async(token:string, file: File, id:string) => {
     }
 }
   
-const  postComment= async(token:string, formData) => {
+const  postComment= async(token:string, formData:any) => {
     try {
         const response = await instance.post(`/comments`, formData, {
           headers: {
@@ -111,7 +111,7 @@ const  postComment= async(token:string, formData) => {
     }
 }
 
-const  EditComment= async(token:string, content, id ) => {
+const  EditComment= async(token:string, content:any, id:any ) => {
     try {
         const response = await instance.put(`/comments/${id}`, content, {
           headers: {
@@ -125,7 +125,7 @@ const  EditComment= async(token:string, content, id ) => {
     }
 }
 
-const addColumns = async (token: string, title, dashboardId) => {
+const addColumns = async (token: string, title:any, dashboardId:any) => {
   const data = {
     "title": title,
   "dashboardId": Number(dashboardId)
@@ -142,7 +142,7 @@ const addColumns = async (token: string, title, dashboardId) => {
     }
 }
   
-const getComment= async(token:string, cardId) => {
+const getComment= async(token:string, cardId:any) => {
     try {
         const response = await instance.get(`/comments?cardId=${cardId}`, {
           headers: {
@@ -158,7 +158,7 @@ const getComment= async(token:string, cardId) => {
 
 
   
-const deleteColumn= async(token:string, columnId) => {
+const deleteColumn= async(token:string, columnId:any) => {
     try {
         await instance.delete(`/columns/${columnId}`, {
           headers: {
@@ -171,7 +171,7 @@ const deleteColumn= async(token:string, columnId) => {
     }
 }
   
-const reNameColumn = async (token: string, columnId, name) => {
+const reNameColumn = async (token: string, columnId:any, name:any) => {
   const title = {
     "title":name
   }
@@ -187,7 +187,7 @@ const reNameColumn = async (token: string, columnId, name) => {
     }
 }
   
-const putEditCard = async (token: string, data, cardId) => {
+const putEditCard = async (token: string, data:any, cardId:any) => {
     try {
         await instance.put(`/cards/${cardId}`, data, {
           headers: {
@@ -200,7 +200,7 @@ const putEditCard = async (token: string, data, cardId) => {
     }
 }
   
-const deleteCard= async(token:string, cardId) => {
+const deleteCard= async(token:string, cardId:any) => {
     try {
         await instance.delete(`/cards/${cardId}`, {
           headers: {
@@ -213,7 +213,7 @@ const deleteCard= async(token:string, cardId) => {
     }
 }
 
-const deleteComment= async(token:string, Id) => {
+const deleteComment= async(token:string, Id:any) => {
     try {
         await instance.delete(`/comments/${Id}`, {
           headers: {

@@ -23,7 +23,7 @@ const InviteModal = () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       try {
-        const data = await PostInviteMember(token, inviteMemberData);
+        const data: any = await PostInviteMember(token, inviteMemberData);
         if (data.response) {
           alert(data.response.data.message);
           return;

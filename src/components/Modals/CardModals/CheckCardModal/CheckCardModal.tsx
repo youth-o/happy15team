@@ -64,6 +64,7 @@ const CheckCardModal = () => {
       }
     };
     fetchCardData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmCardData]);
 
   if (!cardData) return null;
@@ -75,8 +76,10 @@ const CheckCardModal = () => {
         <div className={styles.cardTags}>
           <span className={styles.columnTitle}>{openedModalId.title}</span>
           <div className={styles.vr} />
-          {cardData?.tags?.map((tag) => (
-            <span className={styles.tags}>{tag}</span>
+          {cardData?.tags?.map((tag: any, index: any) => (
+            <span key={index} className={styles.tags}>
+              {tag}
+            </span>
           ))}
         </div>
         <p className={styles.cardDescription}>{cardData.description}</p>
