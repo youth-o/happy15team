@@ -1,21 +1,26 @@
 import styles from "./NavParticipants.module.css";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import UserProfileImage from "@/components/UserProfileImage/UserProfileImage";
 import Participants from "../Participants/Participants";
 import setModals from "@/lib/zustand";
 
 const NavParticipants = () => {
   const { dashboardMembers } = setModals();
-  const totalCount = dashboardMembers?.length;
-  const slicedUsers = dashboardMembers?.slice(0, 4);
+  const [members, setMembers] = useState<any>();
+  const totalCount = members?.length;
+  const slicedUsers = members?.slice(0, 4);
   const restUser = totalCount - 4;
 
-  if (!dashboardMembers) return null;
+  useEffect(() => {
+    setMembers(dashboardMembers);
+  }, [dashboardMembers]);
+
+  if (!members) return null;
 
   return (
     <Fragment>
-      {dashboardMembers.length <= 4
-        ? dashboardMembers.map((user, index) => (
+      {members.length <= 4
+        ? members.map((user, index) => (
             <div key={index} className={styles.navParticipants}>
               <Participants user={user} />
             </div>
@@ -25,9 +30,7 @@ const NavParticipants = () => {
               <Participants user={user} />
             </div>
           ))}
-      {dashboardMembers.length > 4 && (
-        <div className={styles.restUser}>+{restUser}</div>
-      )}
+      {members.length > 4 && <div className={styles.restUser}>+{restUser}</div>}
     </Fragment>
   );
 };

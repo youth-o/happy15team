@@ -7,7 +7,13 @@ import { deleteMember } from "@/api/deleteMember";
 import setModals from "@/lib/zustand";
 
 function EditDashboardMembers() {
-  const { setRerender, rerender } = setModals();
+  const {
+    setRerender,
+    setReload,
+    reload,
+    setDashboardMembers,
+    dashboardMembers,
+  } = setModals();
   const { savedDashboardId } = dashboardIdState();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [items, setItems] = useState([]);
@@ -28,6 +34,7 @@ function EditDashboardMembers() {
         const Members = await getDashboardMembers(token, dataForMember);
         setItems(Members.members);
         setTotalCount(Members.totalCount);
+        setDashboardMembers(Members.members);
       } catch (error) {
         console.error(error);
       }
@@ -49,7 +56,6 @@ function EditDashboardMembers() {
       }
     };
     fetchData();
-    setRerender(!rerender);
   };
 
   const handleNextPage = () => {

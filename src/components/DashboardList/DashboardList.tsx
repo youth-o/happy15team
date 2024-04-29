@@ -92,6 +92,7 @@ const DashboardList = ({
                   alt="Crown Icon"
                   width={17.5}
                   height={14}
+                  priority
                 />
               )}
             </div>

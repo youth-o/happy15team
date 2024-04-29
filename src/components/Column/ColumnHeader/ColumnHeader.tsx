@@ -4,6 +4,7 @@ import setModals from "@/lib/zustand";
 import modalState from "@/lib/modalState";
 import { getCardData } from "@/api/DashboardData";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const ColumnHeader = ({ titles, columnData }) => {
   const { openModal, setOpenModal } = modalState();
@@ -16,28 +17,32 @@ const ColumnHeader = ({ titles, columnData }) => {
     setOpenModal("openEditColumnModal");
   };
 
+  const router = useRouter();
+  const { id } = router.query;
+
   const fetchCardData = async () => {
     const token = localStorage.getItem("accessToken");
-    if (token && columnData.dashboardId === dashboardData.id) {
+    if (token) {
       const cardData = await getCardData(token, columnData.id);
       setTotalCount(cardData.cards.length);
     }
   };
 
   useEffect(() => {
-    // totalCount 값을 가져오는 비동기 함수 실행
     fetchCardData();
-  }, [isFetching, dashboardData.id]); // isFetching 및 dashboardData.id 변경 시 실행
+  }, [isFetching, id]);
 
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.titleWrapper}>
         <div className={styles.titleTag}>
           <div className={styles.tagCircle}></div>
-          {titles.map((title: any) => (
-            <div className={styles.columnTitle}>{title}</div>
+          {titles.map((title: any, index) => (
+            <div key={index} className={styles.columnTitle}>
+              {title}
+            </div>
           ))}
-          <div className={styles.cardCounts}>{totalCount}</div>
+          {/* <div className={styles.cardCounts}>{totalCount}</div> */}
         </div>
         <button onClick={handleClickEdit} className={styles.columnSetting}>
           <Image
