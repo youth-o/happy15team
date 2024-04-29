@@ -5,11 +5,12 @@ import modalState from "@/lib/modalState";
 import { getCardData } from "@/api/DashboardData";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import dashboard from "@/pages/dashboard/[id]";
 
 const ColumnHeader = ({ titles, columnData }) => {
   const { openModal, setOpenModal } = modalState();
   const [totalCount, setTotalCount] = useState(0);
-  const { cardLength, openEditColumnModal, setOpenedModalId, isFetching }: any =
+  const { dashboardData, setOpenedModalId, isFetching, rerender }: any =
     setModals();
 
   const handleClickEdit = () => {
@@ -18,20 +19,20 @@ const ColumnHeader = ({ titles, columnData }) => {
   };
 
   const fetchCardData = async () => {
-    if (!columnData) return;
     const token = localStorage.getItem("accessToken");
     if (token) {
       const cardData = await getCardData(token, columnData.id);
 
-      setTotalCount(cardData.totalCount);
+      setTotalCount(cardData.cards.length);
     }
   };
 
-  const router = useRouter();
-  const { id }: any = router.query;
+  console.log(totalCount);
+
   useEffect(() => {
     fetchCardData();
-  }, [isFetching, id]);
+  }, [isFetching, dashboardData.id]);
+
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.titleWrapper}>

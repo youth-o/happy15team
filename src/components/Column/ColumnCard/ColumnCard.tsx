@@ -12,17 +12,17 @@ import modalState from "@/lib/modalState";
 import moment from "moment";
 import { useRouter } from "next/router";
 
-const ColumnCard = ({ modalData, dragEnter }) => {
+const ColumnCard = ({ modalData }) => {
   const [cardData, setCardData] = useState<any>([]);
   const { setOpenModal } = modalState();
   const {
     setConfirmCardData,
     isFetching,
-    setCardLength,
     setOpenedModalId,
     setDraggingCard,
     setOnDragging,
     onDragging,
+    dashboardId,
   }: any = setModals();
 
   // 날짜 및 시간을 원하는 형식으로 포맷합니다.
@@ -42,7 +42,6 @@ const ColumnCard = ({ modalData, dragEnter }) => {
     if (token) {
       const cardData = await getCardData(token, modalData.id);
       setCardData(cardData.cards);
-      setCardLength(cardData.totalCount);
     }
   };
   const handleClickCard = (data: any) => {
@@ -56,12 +55,9 @@ const ColumnCard = ({ modalData, dragEnter }) => {
     setOnDragging(true);
   };
 
-  const router = useRouter();
-  const { id }: any = router.query;
-
   useEffect(() => {
     fetchCardData();
-  }, [isFetching, id]);
+  }, [isFetching, modalData]);
 
   if (!cardData) return null;
 

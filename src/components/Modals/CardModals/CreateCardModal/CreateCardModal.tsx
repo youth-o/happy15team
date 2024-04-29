@@ -19,7 +19,6 @@ const CreateCardModal = () => {
     setCardImageUrl,
     setIsFetching,
     isFetching,
-    closeCreateCardModal,
   }: any = setModals();
   const [image, setImage] = useState<string | null>(null);
   const [viewAssignee, setViewAssignee] = useState(false);
@@ -90,6 +89,7 @@ const CreateCardModal = () => {
       await postAddCard(token, cardImageUrl ? cardData : noImgCardData);
       setIsFetching(!isFetching);
       setOpenModal("");
+      setCardImageUrl("");
     }
   };
 
@@ -116,6 +116,7 @@ const CreateCardModal = () => {
 
   const handleCloseModal = () => {
     setOpenModal("");
+    setCardImageUrl("");
   };
 
   useEffect(() => {

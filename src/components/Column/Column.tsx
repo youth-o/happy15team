@@ -1,14 +1,23 @@
+import setModals from "@/lib/zustand";
 import AddCardButton from "./AddCardButton/AddCardButton";
 import AddColumnButton from "./AddColumnButton/AddColumnButton";
 import styles from "./Column.module.css";
 import ColumnCard from "./ColumnCard/ColumnCard";
 import ColumnHeader from "./ColumnHeader/ColumnHeader";
-import { putEditCard } from "@/api/DashboardData";
-import { useState } from "react";
+import { getColumnData, putEditCard } from "@/api/DashboardData";
+import { useEffect, useState } from "react";
 
-const Column = ({ columnData }) => {
-  const { draggingCard, setIsFetching, isFetching, onDragging, setOnDragging } =
-    setModals();
+const Column = () => {
+  const {
+    dashboardData,
+    draggingCard,
+    setIsFetching,
+    isFetching,
+    onDragging,
+    setOnDragging,
+    rerender,
+  } = setModals();
+  const [columnData, setColumnData] = useState<any>([]);
   const [draggingColumnId, setDraggingColumnId] = useState();
   const [dragEnter, setDragEnter] = useState(false);
 
@@ -36,6 +45,7 @@ const Column = ({ columnData }) => {
 
     const cardId = draggingCard.id;
     const token = localStorage.getItem("accessToken");
+
     if (token) {
       await putEditCard(
         token,
@@ -51,6 +61,19 @@ const Column = ({ columnData }) => {
     setDraggingColumnId(id);
     setDragEnter(true);
   };
+
+  const fetchColumnData = async () => {
+    if (!dashboardData.id) return null;
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      const columnData = await getColumnData(token, dashboardData.id);
+      setColumnData(columnData);
+    }
+  };
+
+  useEffect(() => {
+    fetchColumnData();
+  }, [dashboardData.id, rerender]);
 
   if (!columnData) return null;
 
@@ -72,7 +95,7 @@ const Column = ({ columnData }) => {
                 onDragging ? styles.droppable : ""
               }`}
             >
-              <ColumnCard key={index} modalData={data} dragEnter={dragEnter} />
+              <ColumnCard key={index} modalData={data} />
             </div>
           </div>
         ))}

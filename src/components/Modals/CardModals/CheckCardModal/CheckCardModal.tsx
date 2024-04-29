@@ -11,7 +11,6 @@ import modalState from "@/lib/modalState";
 const CheckCardModal = () => {
   const { setOpenModal } = modalState();
   const {
-    openEditCardModal,
     confirmCardData,
     openedModalId,
     setOpenedCardData,
@@ -32,12 +31,6 @@ const CheckCardModal = () => {
     setKebab(true);
   };
 
-  // const handleModalClose = (e: MouseEvent) => {
-  //   if (kebab && (e.target as HTMLDivElement).id !== "kebab") {
-  //     setKebab(false);
-  //   }
-  // };
-
   const openEditModal = () => {
     setOpenModal("openEditCardModal");
   };
@@ -51,21 +44,14 @@ const CheckCardModal = () => {
       await deleteCard(token, cardId);
     }
 
-<<<<<<< HEAD
     setIsFetching(!isFetching);
-    closeCheckCardModal();
-=======
-    setRerender(!rerender);
     setOpenModal("");
   };
 
   const handleCloseModal = () => {
     setOpenModal("");
->>>>>>> master
+    setIsFetching(!isFetching);
   };
-
-  console.log(cardData);
-  console.log(confirmCardData);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");

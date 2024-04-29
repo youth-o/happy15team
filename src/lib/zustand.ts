@@ -22,13 +22,13 @@ const setModals = create((set) => ({
   cardImageUrl: "",
   rerender: "",
 
-  columnState: "",
+
   
   draggingCard : "",
   dashboardMembers: [{
      userId: "" 
   }],
-  cardLength: "",
+  dashboardId: 0,
   onDragging:false,
 
   openedModalId: "",
@@ -39,12 +39,11 @@ const setModals = create((set) => ({
   setOnDragging:(data)=>set({onDragging : data}),
   setDraggingCard:(data)=>set({draggingCard : data}),
   setOpenedCardData:(data) => set({ openedCardData: data }),
-  setColumnState:(data) => set({ columnState: data }),
   setRerender:(state) => set({ rerender: state }),
   setRerenderDone: () => set({ rerender: false }),
   setCommentRenderDone: () => set({ commentRender: false }),
   setCommentRender: () => set({ commentRender: true }),
-  setCardLength: (length: number) => set({ cardLength: length }),
+  setDashboardId: (id: number) => set({ dashboardId: id }),
   setCardImageUrl: (data: string) => set({ cardImageUrl: data }),
   setIsFetching: (data) => set({ isFetching: data }),
   setConfirmCardData: (data: any) => set({ confirmCardData: data }),
