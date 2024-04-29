@@ -137,7 +137,7 @@ function ProfileForm() {
             <label htmlFor="email">이메일</label>
             <input
               className={styles.emailInput}
-              type="text"
+              type="email"
               id="email"
               readOnly
               placeholder={formData.email}

@@ -58,7 +58,7 @@
   margin-right: 0.5rem;
 }
 
-.checkBox p {
+.checkBox label {
   color: var(--Black-20);
   font-size: 16px;
   font-weight: 400;

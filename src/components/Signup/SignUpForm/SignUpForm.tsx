@@ -7,7 +7,6 @@ import Image from "next/image";
 import * as yup from "yup";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import setModals from "@/lib/zustand";
 import UserService from "@/api/UserService";
 import modalState from "@/lib/modalState";
 
@@ -60,7 +59,7 @@ function SignUpForm() {
       .required("8자 이상 입력해 주세요.")
       .min(8, "8자 이상 입력해 주세요.")
       .matches(
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/,
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/,
         "비밀번호는 영문, 숫자 조합 8자 이상 입력해 주세요."
       ),
     confirmPassword: yup
@@ -174,11 +173,13 @@ function SignUpForm() {
         )}
       </div>
       <div className={styles.checkBox}>
-        <input
-          type="checkbox"
-          onChange={(e) => setAgreeTerms(e.target.checked)}
-        />
-        <p>이용약관에 동의합니다.</p>
+        <label>
+          <input
+            type="checkbox"
+            onChange={(e) => setAgreeTerms(e.target.checked)}
+          />
+          이용약관에 동의합니다.
+        </label>
       </div>
       <button
         className={styles.registerBtn}
