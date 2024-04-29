@@ -14,7 +14,6 @@ function EditDashboardMembers() {
 
   useEffect(() => {
     console.log(savedDashboardId);
-    const dashId = savedDashboardId;
     const fetchData = async () => {
       const token = localStorage.getItem("accessToken");
       try {
