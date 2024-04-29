@@ -1,12 +1,14 @@
 import styles from "./InviteModal.module.css";
 import modalState from "@/lib/modalState";
 import { PostInviteMember } from "@/api/postInviteMember";
-import { useRouter } from "next/router";
+import dashboardIdState from "@/lib/dashboardIdState";
 import { useState } from "react";
+import useStore from "@/lib/zustand2";
 
 const InviteModal = () => {
+  const { dataChange, setDataChange } = useStore();
   const { setOpenModal } = modalState();
-  const router = useRouter();
+  const { savedDashboardId } = dashboardIdState();
   const [email, setEmail] = useState("");
 
   const handleCloseModal = () => {
@@ -15,7 +17,7 @@ const InviteModal = () => {
 
   const handleInviteMember = async () => {
     const inviteMemberData = {
-      dashboardId: router.query.id,
+      dashboardId: savedDashboardId,
       email: email,
     };
     const token = localStorage.getItem("accessToken");
@@ -42,6 +44,7 @@ const InviteModal = () => {
         }
         setOpenModal("");
         alert("성공적으로 초대 되었습니다.");
+        setDataChange(dataChange + 1);
         return;
       } catch (error) {
         console.error(error);

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 62rem;
-  height: 35.5rem;
+  max-height: 35.5rem;
   padding: 3.2rem 2.8rem;
   margin-left: 32rem;
   margin-top: 2.5rem;
@@ -19,9 +19,8 @@
   flex-shrink: 0;
 }
 
-.grouptext {
+.groupText {
   color: var(--black-black_333236, #333236);
-  font-family: Pretendard;
   font-size: 2.4rem;
   font-style: normal;
   font-weight: 700;
@@ -70,7 +69,23 @@
 
 .list {
   margin: 1.5rem;
-  font-size: 2rem;
+  font-size: 1.8rem;
   background-color: var(--White);
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list button {
+  display: flex;
+  width: 10rem;
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-20);
+  background: var(--White);
+  color: var(--Violet-20);
+  font-size: 1.6rem;
+  font-weight: 500;
 }
