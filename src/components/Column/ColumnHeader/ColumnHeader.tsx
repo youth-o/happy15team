@@ -2,16 +2,36 @@ import styles from "./ColumnHeader.module.css";
 import Image from "next/image";
 import setModals from "@/lib/zustand";
 import modalState from "@/lib/modalState";
+import { getCardData } from "@/api/DashboardData";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import dashboard from "@/pages/dashboard/[id]";
 
 const ColumnHeader = ({ titles, columnData }) => {
   const { openModal, setOpenModal } = modalState();
-  const { cardLength, setOpenedModalId }: any =
+  const [totalCount, setTotalCount] = useState(0);
+  const { dashboardData, setOpenedModalId, isFetching, rerender }: any =
     setModals();
 
   const handleClickEdit = () => {
     setOpenedModalId(columnData);
     setOpenModal("openEditColumnModal");
   };
+
+  const fetchCardData = async () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      const cardData = await getCardData(token, columnData.id);
+
+      setTotalCount(cardData.cards.length);
+    }
+  };
+
+  console.log(totalCount);
+
+  useEffect(() => {
+    fetchCardData();
+  }, [isFetching, dashboardData.id]);
 
   return (
     <div className={styles.headerWrapper}>
@@ -21,7 +41,7 @@ const ColumnHeader = ({ titles, columnData }) => {
           {titles.map((title: any) => (
             <div className={styles.columnTitle}>{title}</div>
           ))}
-          <div className={styles.cardCounts}>{cardLength}</div>
+          <div className={styles.cardCounts}>{totalCount}</div>
         </div>
         <button onClick={handleClickEdit} className={styles.columnSetting}>
           <Image

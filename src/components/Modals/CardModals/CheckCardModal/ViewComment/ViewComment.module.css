@@ -1,7 +1,7 @@
 .commentWrapper {
   display: flex;
   flex-direction: column;
-  gap: 1.3rem;
+  gap: 1.7rem;
   overflow-y: scroll;
 }
 
@@ -48,6 +48,8 @@
   font-size: 1.3rem;
   padding-left: 3rem;
   width: 90%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .commentFooter {
@@ -82,12 +84,16 @@
   height: 4rem;
 }
 
+.noEdit {
+  display: none;
+}
+
 .editTool {
   display: flex;
   gap: 0.5rem;
   justify-content: end;
-  margin-right: 3rem;
-  margin-top: -1rem;
+  margin-right: 3.3rem;
+  margin-top: -2.7rem;
 }
 
 .editTool button {
@@ -96,4 +102,12 @@
   border: 1px solid var(--Gray-20);
   border-radius: 6px;
   padding: 0.2rem 0.5rem;
+}
+
+.editComment p {
+  display: none;
+}
+
+.Edit {
+  display: block;
 }

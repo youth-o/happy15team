@@ -4,8 +4,10 @@ import useStore from "@/lib/zustand2";
 import { getDashboardMembers } from "@/api/getDashboardMembers";
 import dashboardIdState from "@/lib/dashboardIdState";
 import { deleteMember } from "@/api/deleteMember";
+import setModals from "@/lib/zustand";
 
 function EditDashboardMembers() {
+  const { setRerender, rerender } = setModals();
   const { savedDashboardId } = dashboardIdState();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [items, setItems] = useState([]);
@@ -41,12 +43,13 @@ function EditDashboardMembers() {
       const token = localStorage.getItem("accessToken");
       try {
         await deleteMember(token, userId);
-        setDataChange(dataChange+1);
+        setDataChange(dataChange + 1);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
+    setRerender(!rerender);
   };
 
   const handleNextPage = () => {
@@ -88,9 +91,7 @@ function EditDashboardMembers() {
         {items.map((item, index) => (
           <div className={styles.list}>
             <span>{item.nickname}</span>
-            <button onClick={() => handleDeleteMember(item.id)}>
-              삭제
-            </button>
+            <button onClick={() => handleDeleteMember(item.id)}>삭제</button>
           </div>
         ))}
       </div>

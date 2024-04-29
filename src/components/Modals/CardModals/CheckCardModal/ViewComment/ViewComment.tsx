@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styles from "./ViewComment.module.css";
 import setModals from "@/lib/zustand";
 import { useEffect, useRef, useState } from "react";
@@ -15,6 +14,7 @@ const ViewComment = () => {
   } = setModals();
   const [comments, setComments] = useState<any>();
   const [editComment, setEditComment] = useState(false);
+  const [thisComment, setThisComment] = useState(0);
   const textRef = useRef(null);
   const fetchComment = async () => {
     const cardId = confirmCardData;
@@ -23,6 +23,16 @@ const ViewComment = () => {
       const commentData = await getComment(token, cardId);
       setComments(commentData);
     }
+  };
+
+  const formattedDate = (createdAt) => {
+    const date = new Date(createdAt);
+    return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(date.getUTCDate()).padStart(2, "0")} ${String(
+      date.getUTCHours()
+    ).padStart(2, "0")}:${String(date.getUTCMinutes()).padStart(2, "0")}`;
   };
 
   const handleCommentEdit = async (id) => {
@@ -48,6 +58,11 @@ const ViewComment = () => {
     commentRender ? setCommentRenderDone() : setCommentRender();
   };
 
+  const handleEditClick = (index) => {
+    setEditComment(!editComment);
+    setThisComment(index);
+  };
+
   useEffect(() => {
     fetchComment();
   }, [commentRender]);
@@ -57,27 +72,43 @@ const ViewComment = () => {
   return (
     <div className={styles.commentWrapper}>
       {comments?.map((comment, index) => (
-        <>
-          <div key={index} className={styles.commentHeader}>
+        <div key={index}>
+          <div className={styles.commentHeader}>
             <Participants user={comment.author} />
             <h2>{comment.author?.nickname}</h2>
-            <p>{comment.createdAt}</p>
+            <p>{formattedDate(comment.createdAt)}</p>
           </div>
-          {!editComment ? (
-            <div className={styles.commentBody}>{comment.content}</div>
-          ) : (
-            <div className={styles.commentBody}>
-              <textarea
-                className={styles.textarea}
-                placeholder={comment.content}
-                ref={textRef}
-              />
+          <div className={styles.commentBody}>
+            <p
+              className={
+                editComment && thisComment === index
+                  ? styles.noEdit
+                  : styles.Edit
+              }
+            >
+              {comment.content}
+            </p>
+            <textarea
+              className={
+                editComment && thisComment === index
+                  ? styles.textarea
+                  : styles.noEdit
+              }
+              placeholder={comment.content}
+              ref={textRef}
+            />
+          </div>
+
+          {comment.author.id === loginUserData.id && (
+            <div className={styles.commentFooter}>
+              <span onClick={() => setEditComment(!editComment)}>수정</span>
+              <span onClick={() => handleCommentDelete(comment.id)}>삭제</span>
             </div>
           )}
           {editComment && (
             <div className={styles.editTool}>
               <button
-                onClick={() => setEditComment(!editComment)}
+                onClick={() => handleEditClick(index)}
                 className={styles.submit}
               >
                 취소
@@ -90,13 +121,7 @@ const ViewComment = () => {
               </button>
             </div>
           )}
-          {comment.author.id === loginUserData.id && (
-            <div className={styles.commentFooter}>
-              <span onClick={() => setEditComment(!editComment)}>수정</span>
-              <span onClick={() => handleCommentDelete(comment.id)}>삭제</span>
-            </div>
-          )}
-        </>
+        </div>
       ))}
     </div>
   );

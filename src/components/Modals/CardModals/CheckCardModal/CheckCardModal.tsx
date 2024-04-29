@@ -11,12 +11,13 @@ import modalState from "@/lib/modalState";
 const CheckCardModal = () => {
   const { setOpenModal } = modalState();
   const {
-    openEditCardModal,
     confirmCardData,
     openedModalId,
     setOpenedCardData,
     rerender,
     setRerender,
+    setIsFetching,
+    isFetching,
   }: any = setModals();
 
   const [kebab, setKebab] = useState(false);
@@ -29,12 +30,6 @@ const CheckCardModal = () => {
     }
     setKebab(true);
   };
-
-  // const handleModalClose = (e: MouseEvent) => {
-  //   if (kebab && (e.target as HTMLDivElement).id !== "kebab") {
-  //     setKebab(false);
-  //   }
-  // };
 
   const openEditModal = () => {
     setOpenModal("openEditCardModal");
@@ -49,12 +44,13 @@ const CheckCardModal = () => {
       await deleteCard(token, cardId);
     }
 
-    setRerender(!rerender);
+    setIsFetching(!isFetching);
     setOpenModal("");
   };
 
   const handleCloseModal = () => {
     setOpenModal("");
+    setIsFetching(!isFetching);
   };
 
   useEffect(() => {

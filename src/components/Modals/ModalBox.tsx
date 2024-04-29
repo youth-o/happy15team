@@ -17,6 +17,7 @@ import SuccessChangePasswordModal from "./SuccessChangePasswordModal/SuccessChan
 import { useRouter } from "next/router";
 import EditCardModal from "./CardModals/EditCardModal/EditCardModal";
 import EditColumnModal from "./EditColumnModal/EditColumnModal";
+import setModals from "@/lib/zustand";
 
 interface ModalName {
   [key: string]: React.ReactNode;
@@ -25,6 +26,7 @@ interface ModalName {
 const ModalBox = () => {
   const router = useRouter();
   const { openModal, setOpenModal } = modalState();
+  const { setCardImageUrl } = setModals();
 
   const modalName: ModalName = {
     openCreateDashboardModal: <CreateDashboardModal />,
@@ -53,11 +55,17 @@ const ModalBox = () => {
       router.push("/signin");
     }
     setOpenModal("");
+    setCardImageUrl("");
   };
 
   return (
     <div className={styles.modalOverlay} onClick={handleClickModalOutside}>
-      <div className={`${openModal === "openCheckCardModal" ? "" : styles.modalWrapper}`} onClick={handleModalClick}>
+      <div
+        className={`${
+          openModal === "openCheckCardModal" ? "" : styles.modalWrapper
+        }`}
+        onClick={handleModalClick}
+      >
         {modalName[openModal]}
       </div>
     </div>

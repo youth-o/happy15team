@@ -10,16 +10,6 @@
   align-items: center;
 }
 
-.textarea {
-  width: 100%;
-  padding: 1rem;
-  margin-top: 1rem;
-  border-color: var(--Gray-20);
-  border-radius: 6px;
-  resize: none;
-  height: 10rem;
-}
-
 .inputHeader {
   display: flex;
   justify-content: space-between;
@@ -37,4 +27,14 @@
 
 .textarea::placeholder {
   color: var(--Gray-20);
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-color: var(--Gray-20);
+  border-radius: 6px;
+  resize: none;
+  height: 4rem;
 }

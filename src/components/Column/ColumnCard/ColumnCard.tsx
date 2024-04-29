@@ -9,6 +9,8 @@ import {
 } from "@/api/DashboardData";
 import Participants from "@/components/Nav/Participants/Participants";
 import modalState from "@/lib/modalState";
+import moment from "moment";
+import { useRouter } from "next/router";
 
 const ColumnCard = ({ modalData }) => {
   const [cardData, setCardData] = useState<any>([]);
@@ -16,20 +18,31 @@ const ColumnCard = ({ modalData }) => {
   const {
     setConfirmCardData,
     isFetching,
-    setIsFetched,
-    setCardLength,
     setOpenedModalId,
-    rerender,
+    setDraggingCard,
+    setOnDragging,
+    onDragging,
+    dashboardId,
   }: any = setModals();
 
+  // 날짜 및 시간을 원하는 형식으로 포맷합니다.
+  const formattedDate = (createdAt) => {
+    const date = new Date(createdAt);
+    return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(date.getUTCDate()).padStart(2, "0")} ${String(
+      date.getUTCHours()
+    ).padStart(2, "0")}:${String(date.getUTCMinutes()).padStart(2, "0")}`;
+  };
+
   const fetchCardData = async () => {
+    if (!modalData) return;
     const token = localStorage.getItem("accessToken");
     if (token) {
       const cardData = await getCardData(token, modalData.id);
       setCardData(cardData.cards);
-      setCardLength(cardData.totalCount);
     }
-    setIsFetched();
   };
   const handleClickCard = (data: any) => {
     setConfirmCardData(data.id);
@@ -37,10 +50,14 @@ const ColumnCard = ({ modalData }) => {
     setOpenModal("openCheckCardModal");
   };
 
+  const cardDragging = (data) => {
+    setDraggingCard(data);
+    setOnDragging(true);
+  };
+
   useEffect(() => {
     fetchCardData();
-    setCardLength(cardData.length);
-  }, [isFetching, rerender]);
+  }, [isFetching, modalData]);
 
   if (!cardData) return null;
 
@@ -49,9 +66,13 @@ const ColumnCard = ({ modalData }) => {
       {cardData.map((data) => (
         <div
           key={data.id}
-          className={styles.cardWrapper}
+          className={`${styles.cardWrapper} ${
+            onDragging ? styles.dragging : ""
+          }`}
           onClick={() => handleClickCard(data)}
           id={data.id}
+          draggable
+          onDragStart={() => cardDragging(data)}
         >
           {data.imageUrl && (
             <div className={styles.cardrImage}>
@@ -85,7 +106,9 @@ const ColumnCard = ({ modalData }) => {
             ))}
           </div>
           <div className={styles.cardFooter}>
-            <div className={styles.createdAt}>{data.createdAt}</div>
+            <div className={styles.createdAt}>
+              {formattedDate(data.createdAt)}
+            </div>
             <div className={styles.manager}>
               <Participants user={data.assignee} />
             </div>

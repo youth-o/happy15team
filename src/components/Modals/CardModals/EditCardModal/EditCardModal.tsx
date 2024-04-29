@@ -12,11 +12,11 @@ const EditCardModal = () => {
   const { setOpenModal } = modalState();
   const {
     openedCardData,
-    openedModalId,
-    columnState,
     dashboardMembers,
     cardImageUrl,
     setCardImageUrl,
+    setIsFetching,
+    isFetching,
   }: any = setModals();
   const [viewAssignee, setViewAssignee] = useState(false);
   const [prevCardData, setPrevCardData] = useState();
@@ -75,6 +75,7 @@ const EditCardModal = () => {
       await putEditCard(token, cardImageUrl ? cardData : noImgCardData, cardId);
       setOpenModal("openCheckCardModal");
     }
+    setIsFetching(!isFetching);
   };
 
   const addTags = (e: React.KeyboardEvent) => {
@@ -100,7 +101,7 @@ const EditCardModal = () => {
 
   const handleCloseModal = () => {
     setOpenModal("");
-  }
+  };
 
   useEffect(() => {
     setPrevCardData(openedCardData);

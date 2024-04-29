@@ -13,22 +13,7 @@ const Home = () => {
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (token) {
-      const fetchDashboardData = async () => {
-        try {
-          const dashboardData = await getMyDashboardData(token, 1, 1);
-          const firstDashboardId = dashboardData.dashboards[0].id;
-          if (firstDashboardId) {
-            router.push(`/dashboard/${firstDashboardId}`);
-          }
-        } catch (error) {
-          console.error("Error fetching dashboard data:", error);
-          router.push("/mydashboard");
-        } finally {
-          setInitialDataLoaded(true);
-        }
-      };
-
-      fetchDashboardData();
+      router.push("/mydashboard");
     } else {
       setInitialDataLoaded(true);
     }

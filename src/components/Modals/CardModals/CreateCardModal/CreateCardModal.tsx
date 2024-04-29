@@ -15,9 +15,10 @@ const CreateCardModal = () => {
     dashboardMembers,
     dashboardData,
     openedModalId,
-    setIsFetching,
     cardImageUrl,
     setCardImageUrl,
+    setIsFetching,
+    isFetching,
   }: any = setModals();
   const [image, setImage] = useState<string | null>(null);
   const [viewAssignee, setViewAssignee] = useState(false);
@@ -62,21 +63,6 @@ const CreateCardModal = () => {
     }));
   };
 
-  const addTags = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && tagInputValue.length < 1) {
-      alert("태그는 1글자 이상 작성바랍니다");
-      return;
-    }
-    if (e.key === "Enter" && tags.length >= 4) {
-      alert("태그는 최대 4개까지 생성 가능합니다");
-      return;
-    }
-    if (e.key === "Enter") {
-      setTags((prev) => [...prev, tagInputValue]);
-      setTagInputValue("");
-    }
-  };
-
   const handleSubmit = async () => {
     const cardData = {
       assigneeUserId: manager.userId,
@@ -101,8 +87,24 @@ const CreateCardModal = () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       await postAddCard(token, cardImageUrl ? cardData : noImgCardData);
-      setIsFetching();
+      setIsFetching(!isFetching);
       setOpenModal("");
+      setCardImageUrl("");
+    }
+  };
+
+  const addTags = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && tagInputValue.length < 1) {
+      alert("태그는 1글자 이상 작성바랍니다");
+      return;
+    }
+    if (e.key === "Enter" && tags.length >= 4) {
+      alert("태그는 최대 4개까지 생성 가능합니다");
+      return;
+    }
+    if (e.key === "Enter") {
+      setTags((prev) => [...prev, tagInputValue]);
+      setTagInputValue("");
     }
   };
 
@@ -114,6 +116,7 @@ const CreateCardModal = () => {
 
   const handleCloseModal = () => {
     setOpenModal("");
+    setCardImageUrl("");
   };
 
   useEffect(() => {

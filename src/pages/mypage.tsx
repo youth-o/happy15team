@@ -1,3 +1,4 @@
+import DashboardLayout from "@/components/DashboardLayout/DashboardLayout";
 import BackButton from "@/components/Mypage/MyPageBackBtn/MyPageBackBtn";
 import PasswordForm from "@/components/Mypage/MyPagePasswordForm/MyPagePasswordForm";
 import ProfileForm from "@/components/Mypage/MyPageProfileForm/MyPageProfileForm";
@@ -20,9 +21,11 @@ function MyPage() {
     <>
       <Nav />
       <Sidebar />
-      <BackButton />
-      <ProfileForm />
-      <PasswordForm />
+      <DashboardLayout>
+        <BackButton />
+        <ProfileForm />
+        <PasswordForm />
+      </DashboardLayout>
     </>
   );
 }

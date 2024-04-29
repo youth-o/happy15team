@@ -26,9 +26,6 @@ const Participants = ({ user }) => {
     handleUserColor();
   }, []);
 
-
-  useEffect(() => {}, []);
-
   if (!user) return null;
 
   return (
