@@ -173,11 +173,13 @@ function SignUpForm() {
         )}
       </div>
       <div className={styles.checkBox}>
-        <input
-          type="checkbox"
-          onChange={(e) => setAgreeTerms(e.target.checked)}
-        />
-        <p>이용약관에 동의합니다.</p>
+        <label>
+          <input
+            type="checkbox"
+            onChange={(e) => setAgreeTerms(e.target.checked)}
+          />
+          이용약관에 동의합니다.
+        </label>
       </div>
       <button
         className={styles.registerBtn}
