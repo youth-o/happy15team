@@ -41,7 +41,7 @@ function EditDashboardMembers() {
       const token = localStorage.getItem("accessToken");
       try {
         await deleteMember(token, userId);
-        setDataChange(dataChange+1);
+        setDataChange(dataChange + 1);
       } catch (error) {
         console.error(error);
       }
@@ -88,9 +88,7 @@ function EditDashboardMembers() {
         {items.map((item, index) => (
           <div className={styles.list}>
             <span>{item.nickname}</span>
-            <button onClick={() => handleDeleteMember(item.id)}>
-              삭제
-            </button>
+            <button onClick={() => handleDeleteMember(item.id)}>삭제</button>
           </div>
         ))}
       </div>

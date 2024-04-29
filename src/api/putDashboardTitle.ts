@@ -2,11 +2,11 @@ import axios from "@/lib/axios";
 import { Dashboard } from "@/types/interface";
 
 const putDashboardTitle = async (
-  dashboardId: string | undefined,
+  dashboardId: number,
   title: string,
   color: string
-) => {
-  const { data } = await axios.put<Dashboard>(`/dashboards/${dashboardId}`, {
+): Promise<any> => {
+  const { data } = await axios.put(`/dashboards/${dashboardId}`, {
     title,
     color,
   });

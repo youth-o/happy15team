@@ -62,7 +62,6 @@ function SignInForm() {
       if (error instanceof AxiosError) {
         // AxiosError인 경우, 에러 응답을 확인
         if (error.response && error.response.data) {
-
           if (error.response && error.response.status === 404) {
             setOpenModal("openNonExistedUserModal");
           } else if (error.response && error.response.status === 400) {
