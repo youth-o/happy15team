@@ -58,12 +58,12 @@ const EditColumnModal = () => {
             ref={inputRef}
           />
         </div>
-      </div>
-      <div className={styles.modalButtons}>
-        <button onClick={() => setOpenModal("")}>취소</button>
-        <button onClick={handleClickRename} className={styles.inviteButton}>
-          변경
-        </button>
+        <div className={styles.modalButtons}>
+          <button onClick={() => setOpenModal("")}>취소</button>
+          <button onClick={handleClickRename} className={styles.inviteButton}>
+            변경
+          </button>
+        </div>
       </div>
     </>
   );

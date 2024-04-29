@@ -24,16 +24,21 @@ const modalName = [
 
 function testt() {
   const { setOpenModal } = modalState();
-  const handle = () => {
-    setOpenModal(modalName[k]);
-    k++;
+  const handleButtonClick = (modal:string) => {
+    setOpenModal(modal);
   };
 
   return (
     <>
       <Sidebar />
-      <div className={styles.div}>
-        <button onClick={handle}>버튼</button>
+      <div className={styles.center}>
+      {modalName.map((modal, index) => (
+        <div key={index}>
+          <button onClick={() => handleButtonClick(modal)}>
+            모달이름 {modal}
+          </button>
+        </div>
+      ))}
       </div>
     </>
   );
