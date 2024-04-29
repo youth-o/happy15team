@@ -58,7 +58,7 @@ function PasswordForm() {
           <label htmlFor="password">현재 비밀번호</label>
           <input
             className={styles.nowPasswordInput}
-            type="text"
+            type="password"
             placeholder="현재 비밀번호 입력"
             {...register("password")}
           />
@@ -67,7 +67,7 @@ function PasswordForm() {
           <label htmlFor="newPassword">새 비밀번호</label>
           <input
             className={errors.newPassword ? styles.errorFocus : styles.notError}
-            type="text"
+            type="password"
             placeholder="새 비밀번호 입력"
             {...register("newPassword")}
           />
@@ -83,7 +83,7 @@ function PasswordForm() {
             className={
               errors.confirmNewPassword ? styles.errorFocus : styles.notError
             }
-            type="text"
+            type="password"
             placeholder="새 비밀번호 입력"
             {...register("confirmNewPassword")}
           />

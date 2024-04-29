@@ -7,7 +7,6 @@ import Image from "next/image";
 import * as yup from "yup";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import setModals from "@/lib/zustand";
 import UserService from "@/api/UserService";
 import modalState from "@/lib/modalState";
 
