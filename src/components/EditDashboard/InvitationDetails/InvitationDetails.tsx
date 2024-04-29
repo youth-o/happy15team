@@ -96,7 +96,7 @@ function EditDashboardMembers() {
         <h2 className={styles.name}>이메일</h2>
         {items.map((item, index) => (
           <div className={styles.list}>
-            <span>{item.invitee.email}</span>
+            <span>{item.invite.email}</span>
             <button onClick={() => handleCancelInvite(item.id)}>취소</button>
           </div>
         ))}
