@@ -22,6 +22,7 @@ const Sidebar = () => {
             width={109}
             height={33}
             className={styles.logo}
+            priority
           />
         </Link>
         <div className={styles.title}>

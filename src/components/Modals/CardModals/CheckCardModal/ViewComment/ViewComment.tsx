@@ -13,9 +13,9 @@ const ViewComment = () => {
     setCommentRender,
   } = setModals();
   const [comments, setComments] = useState<any>();
-  const [editComment, setEditComment] = useState(false);
-  const [thisComment, setThisComment] = useState(0);
+  const [editCommentIndex, setEditCommentIndex] = useState(-1);
   const textRef = useRef(null);
+
   const fetchComment = async () => {
     const cardId = confirmCardData;
     const token = localStorage.getItem("accessToken");
@@ -43,7 +43,7 @@ const ViewComment = () => {
     if (token) {
       await EditComment(token, comment, id);
     }
-    setEditComment(!editComment);
+    setEditCommentIndex(-1);
     commentRender ? setCommentRenderDone() : setCommentRender();
   };
 
@@ -59,8 +59,7 @@ const ViewComment = () => {
   };
 
   const handleEditClick = (index) => {
-    setEditComment(!editComment);
-    setThisComment(index);
+    setEditCommentIndex(index === editCommentIndex ? -1 : index);
   };
 
   useEffect(() => {
@@ -71,7 +70,7 @@ const ViewComment = () => {
 
   return (
     <div className={styles.commentWrapper}>
-      {comments?.map((comment, index) => (
+      {comments.map((comment, index) => (
         <div key={index}>
           <div className={styles.commentHeader}>
             <Participants user={comment.author} />
@@ -79,33 +78,24 @@ const ViewComment = () => {
             <p>{formattedDate(comment.createdAt)}</p>
           </div>
           <div className={styles.commentBody}>
-            <p
-              className={
-                editComment && thisComment === index
-                  ? styles.noEdit
-                  : styles.Edit
-              }
-            >
-              {comment.content}
-            </p>
-            <textarea
-              className={
-                editComment && thisComment === index
-                  ? styles.textarea
-                  : styles.noEdit
-              }
-              placeholder={comment.content}
-              ref={textRef}
-            />
+            {editCommentIndex !== index ? (
+              <p className={styles.Edit}>{comment.content}</p>
+            ) : (
+              <textarea
+                className={styles.textarea}
+                placeholder={comment.content}
+                ref={textRef}
+              />
+            )}
           </div>
 
           {comment.author.id === loginUserData.id && (
             <div className={styles.commentFooter}>
-              <span onClick={() => setEditComment(!editComment)}>수정</span>
+              <span onClick={() => handleEditClick(index)}>수정</span>
               <span onClick={() => handleCommentDelete(comment.id)}>삭제</span>
             </div>
           )}
-          {editComment && (
+          {editCommentIndex === index && (
             <div className={styles.editTool}>
               <button
                 onClick={() => handleEditClick(index)}

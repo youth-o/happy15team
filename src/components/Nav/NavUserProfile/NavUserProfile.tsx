@@ -33,12 +33,6 @@ const NavUserProfile = () => {
           >
             마이페이지
           </span>
-          <span
-            onClick={() => router.push("/mydashboard")}
-            className={styles.assignee}
-          >
-            내 대쉬보드
-          </span>
           <span onClick={onClick} className={styles.assignee}>
             로그아웃
           </span>

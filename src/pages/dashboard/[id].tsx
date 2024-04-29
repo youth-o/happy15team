@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const dashboard = () => {
-  const { setDashboardData, setDashboardMembers }: any = setModals();
+  const { setDashboardData, setDashboardMembers, reload }: any = setModals();
 
   const router = useRouter();
   const { id }: any = router.query;
@@ -35,7 +35,7 @@ const dashboard = () => {
 
   useEffect(() => {
     fetchDashboardData();
-  }, [id]);
+  }, [id, reload]);
   return (
     <>
       <Nav />

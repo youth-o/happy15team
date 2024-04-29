@@ -39,6 +39,7 @@
   font-size: 1.6rem;
   font-weight: 700;
   background-color: var(--White);
+  text-align: center;
 }
 
 .assignee:hover {

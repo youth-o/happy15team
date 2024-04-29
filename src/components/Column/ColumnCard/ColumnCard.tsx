@@ -22,7 +22,8 @@ const ColumnCard = ({ modalData }) => {
     setDraggingCard,
     setOnDragging,
     onDragging,
-    dashboardId,
+    setCardLength,
+    cardLength,
   }: any = setModals();
 
   // 날짜 및 시간을 원하는 형식으로 포맷합니다.
