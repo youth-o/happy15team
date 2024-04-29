@@ -1,4 +1,4 @@
-import { MouseEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./EditColumnModal.module.css";
 import setModals from "@/lib/zustand";
 import Image from "next/image";
