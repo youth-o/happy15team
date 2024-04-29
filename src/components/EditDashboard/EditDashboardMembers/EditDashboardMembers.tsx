@@ -36,7 +36,11 @@ function EditDashboardMembers() {
     fetchData();
   }, [currentPage, dataChange]);
 
-  const handleDeleteMember = (userId: number) => {
+  const handleDeleteMember = (userId: number, createdByMe: boolean) => {
+    if (!createdByMe) {
+      alert("본인은 삭제할 수 없습니다");
+      return;
+    }
     const response = confirm("정말로 삭제 하시겠습니까?");
     if (!response) return;
     const fetchData = async () => {
@@ -91,7 +95,11 @@ function EditDashboardMembers() {
         {items.map((item, index) => (
           <div className={styles.list}>
             <span>{item.nickname}</span>
-            <button onClick={() => handleDeleteMember(item.id)}>삭제</button>
+            <button
+              onClick={() => handleDeleteMember(item.id, item.createdByMe)}
+            >
+              삭제
+            </button>
           </div>
         ))}
       </div>

@@ -50,7 +50,7 @@
   justify-content: end;
 }
 
-.modalWrapper button {
+.modalButtons button {
   display: flex;
   width: 12rem;
   height: 4.8rem;
@@ -64,7 +64,7 @@
   font-weight: 500;
 }
 
-.modalWrapper button:last-child {
+.modalButtons button:last-child {
   background: var(--Violet-20);
   color: var(--White);
 }
