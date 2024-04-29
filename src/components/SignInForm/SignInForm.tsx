@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "react-query";
@@ -31,6 +31,7 @@ const formSchema = yup.object({
 
 function SignInForm() {
   const [seePassword, setSeePassword] = useState<boolean>(false);
+  const [initialDataLoaded, setInitialDataLoaded] = useState(false);
   const router = useRouter();
   const { openPasswordMismatchModal, openNonExistedUserModal }: any =
     setModal(); // zustand 스토어에서 함수 불러오기
@@ -85,65 +86,82 @@ function SignInForm() {
     mutate(data);
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.inputContainer}>
-        <label htmlFor="email">이메일</label>
-        <input
-          id="email"
-          type="email"
-          placeholder="이메일을 입력해 주세요"
-          {...register("email")}
-          className={errors.email ? styles.errorFocus : styles.notError}
-        />
-        {errors.email && (
-          <div className={styles.error}>{errors.email.message}</div>
-        )}
-      </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="password">비밀번호</label>
-        <div className={styles.passwordContainer}>
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      router.push("/mydashboard");
+    } else {
+      setInitialDataLoaded(true);
+    }
+  }, [router]);
+
+  if (!initialDataLoaded) {
+    return null;
+  }
+
+  if (!localStorage.getItem("accessToken")) {
+    return (
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.inputContainer}>
+          <label htmlFor="email">이메일</label>
           <input
-            id="password"
-            type={seePassword ? "text" : "password"}
-            placeholder="비밀번호를 입력해 주세요"
-            {...register("password")}
-            className={errors.password ? styles.errorFocus : styles.notError}
+            id="email"
+            type="email"
+            placeholder="이메일을 입력해 주세요"
+            {...register("email")}
+            className={errors.email ? styles.errorFocus : styles.notError}
           />
-          <button
-            type="button"
-            className={styles.eye}
-            onClick={seePasswordHandler}
-          >
-            {!seePassword ? (
-              <Image
-                src="/images/eye-on.svg"
-                width={15}
-                height={15}
-                alt="eyeOn"
-              />
-            ) : (
-              <Image
-                src="/images/eye-off.svg"
-                width={15}
-                height={15}
-                alt="eyeOff"
-              />
-            )}
-          </button>
+          {errors.email && (
+            <div className={styles.error}>{errors.email.message}</div>
+          )}
         </div>
-        {errors.password && (
-          <div className={styles.error}>{errors.password.message}</div>
-        )}
-      </div>
-      <div className={styles.errorMessage}>
-        {errorMessage && <div className={styles.error}>{errorMessage}</div>}
-      </div>
-      <button type="submit" className={styles.loginBtn}>
-        로그인
-      </button>
-    </form>
-  );
+        <div className={styles.inputContainer}>
+          <label htmlFor="password">비밀번호</label>
+          <div className={styles.passwordContainer}>
+            <input
+              id="password"
+              type={seePassword ? "text" : "password"}
+              placeholder="비밀번호를 입력해 주세요"
+              {...register("password")}
+              className={errors.password ? styles.errorFocus : styles.notError}
+            />
+            <button
+              type="button"
+              className={styles.eye}
+              onClick={seePasswordHandler}
+            >
+              {!seePassword ? (
+                <Image
+                  src="/images/eye-on.svg"
+                  width={15}
+                  height={15}
+                  alt="eyeOn"
+                />
+              ) : (
+                <Image
+                  src="/images/eye-off.svg"
+                  width={15}
+                  height={15}
+                  alt="eyeOff"
+                />
+              )}
+            </button>
+          </div>
+          {errors.password && (
+            <div className={styles.error}>{errors.password.message}</div>
+          )}
+        </div>
+        <div className={styles.errorMessage}>
+          {errorMessage && <div className={styles.error}>{errorMessage}</div>}
+        </div>
+        <button type="submit" className={styles.loginBtn}>
+          로그인
+        </button>
+      </form>
+    );
+  }
+
+  return <MyDashboard />;
 }
 
 export default SignInForm;

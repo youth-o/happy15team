@@ -9,8 +9,9 @@ import {
 } from "@/api/DashboardData";
 import Participants from "@/components/Nav/Participants/Participants";
 import moment from "moment";
+import { useRouter } from "next/router";
 
-const ColumnCard = ({ modalData }) => {
+const ColumnCard = ({ modalData, dragEnter }) => {
   const [cardData, setCardData] = useState<any>([]);
   const {
     openCheckCardModal,
@@ -18,9 +19,21 @@ const ColumnCard = ({ modalData }) => {
     isFetching,
     setCardLength,
     setOpenedModalId,
+    setDraggingCard,
+    setOnDragging,
+    onDragging,
   }: any = setModals();
 
-  const formatDate = moment(cardData.createdAt).format("YYYY-MM-DD hh:mm");
+  // 날짜 및 시간을 원하는 형식으로 포맷합니다.
+  const formattedDate = (createdAt) => {
+    const date = new Date(createdAt);
+    return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(date.getUTCDate()).padStart(2, "0")} ${String(
+      date.getUTCHours()
+    ).padStart(2, "0")}:${String(date.getUTCMinutes()).padStart(2, "0")}`;
+  };
 
   const handleClickCard = (data: any) => {
     setConfirmCardData(data.id);
@@ -38,11 +51,18 @@ const ColumnCard = ({ modalData }) => {
     }
   };
 
+  const cardDragging = (data) => {
+    console.log(data);
+    setDraggingCard(data);
+    setOnDragging(true);
+  };
+
+  const router = useRouter();
+  const { id }: any = router.query;
+
   useEffect(() => {
     fetchCardData();
-  }, [isFetching]);
-
-  console.log(cardData);
+  }, [isFetching, id]);
 
   if (!cardData) return null;
 
@@ -51,9 +71,13 @@ const ColumnCard = ({ modalData }) => {
       {cardData.map((data) => (
         <div
           key={data.id}
-          className={styles.cardWrapper}
+          className={`${styles.cardWrapper} ${
+            onDragging ? styles.dragging : ""
+          }`}
           onClick={() => handleClickCard(data)}
           id={data.id}
+          draggable
+          onDragStart={() => cardDragging(data)}
         >
           {data.imageUrl && (
             <div className={styles.cardrImage}>
@@ -87,7 +111,9 @@ const ColumnCard = ({ modalData }) => {
             ))}
           </div>
           <div className={styles.cardFooter}>
-            <div className={styles.createdAt}>{formatDate}</div>
+            <div className={styles.createdAt}>
+              {formattedDate(data.createdAt)}
+            </div>
             <div className={styles.manager}>
               <Participants user={data.assignee} />
             </div>

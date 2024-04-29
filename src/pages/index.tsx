@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { getMyDashboardData } from "@/api/getMyDashboardData";
 import MyDashboard from "./mydashboard/index";
-
 const Home = () => {
   const router = useRouter();
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
@@ -14,21 +13,8 @@ const Home = () => {
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (token) {
-      // const fetchDashboardData = async () => {
-      //   try {
-      //     const dashboardData = await getMyDashboardData(token, 1, 1);
-      //     const firstDashboardId = dashboardData.dashboards[0].id;
-      //     if (firstDashboardId) {
-      //       router.push(`/dashboard/${firstDashboardId}`);
-      //     }
-      //   } catch (error) {
-      //     console.error("Error fetching dashboard data:", error);
-      //     router.push("/mydashboard");
-      //   } finally {
-
-      //   }
-      // };
-      // fetchDashboardData();
+      router.push("/mydashboard");
+    } else {
       setInitialDataLoaded(true);
     }
   }, [router]);
@@ -37,23 +23,17 @@ const Home = () => {
     return null;
   }
 
-  if (typeof window !== "undefined") {
-    const token = localStorage.getItem("accessToken");
-
-    if (token)
-      return (
-        <>
-          <MyDashboard />
-        </>
-      );
+  if (!localStorage.getItem("accessToken")) {
+    return (
+      <>
+        <MainHeader />
+        <MainSection />
+        <MainFooter />
+      </>
+    );
   }
-  return (
-    <>
-      <MainHeader />
-      <MainSection />
-      <MainFooter />
-    </>
-  );
+
+  return <MyDashboard />;
 };
 
 export default Home;

@@ -3,6 +3,7 @@ import styles from "./ColumnHeader.module.css";
 import Image from "next/image";
 import setModals from "@/lib/zustand";
 import { getCardData } from "@/api/DashboardData";
+import { useRouter } from "next/router";
 
 const ColumnHeader = ({ titles, columnData }) => {
   const [totalCount, setTotalCount] = useState("");
@@ -24,9 +25,11 @@ const ColumnHeader = ({ titles, columnData }) => {
     }
   };
 
+  const router = useRouter();
+  const { id }: any = router.query;
   useEffect(() => {
     fetchCardData();
-  }, [isFetching]);
+  }, [isFetching, id]);
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.titleWrapper}>

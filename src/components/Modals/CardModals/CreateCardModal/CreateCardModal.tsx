@@ -7,10 +7,10 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import moment from "moment";
 import { postAddCard, uploadCardImage } from "@/api/DashboardData";
+// import modalState from "@/lib/modalState";
 
 const CreateCardModal = () => {
   const {
-    closeCreateCardModal,
     dashboardMembers,
     dashboardData,
     openedModalId,
@@ -18,6 +18,7 @@ const CreateCardModal = () => {
     setCardImageUrl,
     setIsFetching,
     isFetching,
+    closeCreateCardModal,
   }: any = setModals();
   const [image, setImage] = useState<string | null>(null);
   const [viewAssignee, setViewAssignee] = useState(false);
@@ -51,14 +52,6 @@ const CreateCardModal = () => {
   if (!manager?.userId || !cardInfo.title || !cardInfo.description) {
     fulfilled = true;
   }
-
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  const handleClickModalOutside = (e: MouseEvent) => {
-    if (modalRef.current === e.target) {
-      closeCreateCardModal(); //모달 바깥쪽 클릭했을 때 닫히는 로직 (후에 inputValue값 같이 초기화 시키기)
-    }
-  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -129,11 +122,7 @@ const CreateCardModal = () => {
     }
   }, [selected]);
   return (
-    <div
-      className={styles.modalOverlay}
-      onClick={handleClickModalOutside}
-      ref={modalRef}
-    >
+    <div className={styles.modalOverlay}>
       <div className={styles.modalWrapper}>
         <h1 className={styles.modalTitle}>할 일 생성</h1>
         <h2>
@@ -293,7 +282,7 @@ const CreateCardModal = () => {
           </div>
         </form>
         <div className={styles.modalButtons}>
-          <button onClick={closeCreateCardModal}>취소</button>
+          <button onClick={closeCreateCardModal()}>취소</button>
           <button
             disabled={fulfilled}
             onClick={handleSubmit}

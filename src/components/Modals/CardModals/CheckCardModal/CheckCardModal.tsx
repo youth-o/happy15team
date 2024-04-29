@@ -60,6 +60,9 @@ const CheckCardModal = () => {
     closeCheckCardModal();
   };
 
+  console.log(cardData);
+  console.log(confirmCardData);
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const cardId = confirmCardData;

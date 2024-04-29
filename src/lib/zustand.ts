@@ -38,17 +38,20 @@ const setModals = create((set) => ({
 
   columnState: "",
   
-
+  draggingCard : "",
   dashboardMembers: [{
      userId: "" 
   }],
-  cardLength:"",
+  cardLength: "",
+  onDragging:false,
 
   openedModalId: "",
   confirmCardData: [],
   openedCardData : "",
   isFetching: false,
   commentRender: false,
+  setOnDragging:(data)=>set({onDragging : data}),
+  setDraggingCard:(data)=>set({draggingCard : data}),
   setOpenedCardData:(data) => set({ openedCardData: data }),
   setColumnState:(data) => set({ columnState: data }),
   setRerender:(state) => set({ rerender: state }),

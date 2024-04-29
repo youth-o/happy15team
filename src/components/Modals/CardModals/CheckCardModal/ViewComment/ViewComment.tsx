@@ -25,6 +25,16 @@ const ViewComment = () => {
     }
   };
 
+  const formattedDate = (createdAt) => {
+    const date = new Date(createdAt);
+    return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(date.getUTCDate()).padStart(2, "0")} ${String(
+      date.getUTCHours()
+    ).padStart(2, "0")}:${String(date.getUTCMinutes()).padStart(2, "0")}`;
+  };
+
   const handleCommentEdit = async (id) => {
     const token = localStorage.getItem("accessToken");
     const comment = {
@@ -61,7 +71,7 @@ const ViewComment = () => {
           <div key={index} className={styles.commentHeader}>
             <Participants user={comment.author} />
             <h2>{comment.author?.nickname}</h2>
-            <p>{comment.createdAt}</p>
+            <p>{formattedDate(comment.createdAt)}</p>
           </div>
           {!editComment ? (
             <div className={styles.commentBody}>{comment.content}</div>

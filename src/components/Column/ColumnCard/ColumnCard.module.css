@@ -11,6 +11,19 @@
   border-radius: 6px;
 }
 
+.dragEnter {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+
+  background-color: var(--Gray-20);
+  border: 1px solid var(--Gray-20);
+  border-radius: 6px;
+}
+
 .cardWrapper:hover {
   cursor: pointer;
   transform: scale(1.1);
@@ -19,6 +32,12 @@
 .cardTitle {
   font-size: 1.6rem;
   font-weight: 700;
+}
+
+.dragging {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  cursor: move;
 }
 
 .cardTag {

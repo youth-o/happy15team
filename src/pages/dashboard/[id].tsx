@@ -56,6 +56,8 @@ const dashboard = () => {
     }
   };
 
+  console.log(createCardModal);
+
   useEffect(() => {
     fetchDashboardData();
   }, [id, rerender]);
