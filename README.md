@@ -3,10 +3,10 @@
 > 코드잇 스프린트 FE 4기 Part3 - 15팀
 >
 > 개발 기간: 2024.4.15 ~ 5.1
->
-> URL: https://taskify15team.netlify.app/
 
-## 🛠️ Installing
+URL: https://taskify15team.netlify.app/
+
+## ⚙️ Installing
 
 ```
 npm install
@@ -18,7 +18,9 @@ npm start
 ### 모든 것을 한 곳에서!
 일정 등록, 우선순위 설정, 팀원 초대까지 간편하게 관리하세요.
 
-![GIFMaker_me](https://github.com/user-attachments/assets/64d4a267-b899-4d4f-a379-3efb4fe0839c)
+<div style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/2f9f7907-f437-4629-bcc4-896aba3357ba" width="100%" height="100%">
+</div>
 
 - `나의 대시보드`
   - 내 대시보드와 초대받은 대시보드를 관리할 수 있으며, 페이지네이션 및 무한 스크롤을 지원해요.
@@ -37,28 +39,37 @@ npm start
 - `계정 관리`
   - 프로필 이미지 및 닉네임을 수정하고, 비밀번호 변경 및 유효성 검증 기능을 제공해요.
 
-### 💡 팀원 소개
+## 💡 팀원 소개
 
 <table>
   <tbody>
     <tr>
-      <td align="center"><a href="https://github.com/kimtaejin3">
+      <td align="center"><a href="https://github.com/parkwoohyeok">
+      <img width=200px src="https://github.com/user-attachments/assets/fe620557-6cdd-45f8-9f30-f44ab2667da4" alt=""/><br />
       <sub><b>[FE] 박우혁</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/dtc03003">
+      <td align="center"><a href="https://github.com/SeungAAA">
+      <img width=170px height=200px src="https://github.com/user-attachments/assets/48896de5-8312-4270-b8f9-d2338bdfe8f0" alt=""/><br />
       <sub><b>[FE] 백승아</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/changmin6362">
+      <td align="center"><a href="https://github.com/seungcar">
+      <img width=200px src="https://github.com/user-attachments/assets/bf3435b2-df64-47db-8680-d8b0f4ec2422" alt=""/><br />
       <sub><b>[FE] 유승재</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/youth-o">
+      <img width=200px src="https://github.com/user-attachments/assets/33d360fe-deea-4dff-a033-f8d997485ce8" alt=""/><br />
       <sub><b>[FE] 이유승</b></sub></a><br /></td>
     </tr>
   </tbody>
 </table>
 
-## Authors
+### 팀원 역할 및 담당 업무
 
-* **박우혁** - *Initial work* - [YourUsername](https://github.com/YourUsername)
+| 이름      | 역할              | 주요 담당 업무                                                                                   |
+| --------- | ----------------- | ----------------------------------------------------------------------------------------------- |
+| **박우혁** | FE 개발 & 배포          | - 대시보드 상세 페이지 구현<br>- 드로그 앤 드랍 기능 구현<br>- 할 일 관련 모달 구현<br>- Netlify 배포 환경 설정         |
+| **백승아** | FE 개발           | - 로그인 페이지 구현 구현<br>- 대시보드 수정 페이지 구현    |
+| **유승재** | FE 개발           | - 사이드바 구현<br>- 나의 대시보드 페이지 구현<br>- 초대 기능 구현<br>- 공통 컴포넌트로 리팩토링 |
+| **이유승** | FE 개발     | - 랜딩 페이지 구현<br>- 회원가입 페이지 구현<br>- 계정 관리 페이지 구현<br>- 로그인/회원가입 관련 모달 구현<br>- 유효성 검사 기능 구현           |
 
-## 💡 기술 스택
+## 🛠️ 기술 스택
 
 #### Development
 
